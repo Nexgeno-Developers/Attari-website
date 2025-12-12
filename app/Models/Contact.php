@@ -21,6 +21,8 @@ class Contact extends Model
         'description',
         'url',
         'ref_url',
+        'source_url',
+        'source',
         'ip_data',
         'section',
         'cv',

@@ -28,6 +28,10 @@
         <form id="getsyllabus2" action="{{url(route('getsyllabusonwhatsapp'))}}" method="post" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="ref_url" value="{{ url()->previous() }}" data-aos-once="true" data-aos="fade-up" />
+
+            <input type="hidden" name="source_url" value="{{ session('source_url') ?? '-' }}" data-aos-once="true" data-aos="fade-up" />
+            <input type="hidden" name="source" value="{{ session('source') ?? '-' }}" data-aos-once="true" data-aos="fade-up" />
+
             <input type="hidden" name="url" value="{{ request()->fullUrl() }}" data-aos-once="true" data-aos="fade-up" />
                          <input type="hidden" name="course" value="{{isset($courseInputName) ? $courseInputName : session('course_name')}}">
                         <input type="hidden" name="enquiry_id" value="">                
