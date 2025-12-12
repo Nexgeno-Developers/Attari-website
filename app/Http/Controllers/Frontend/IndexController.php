@@ -301,6 +301,11 @@ class IndexController extends Controller
         //----- new ip --------
         $contactData['ip_data'] = $ip_data;
         //----- new ip --------
+
+
+        // set source_url and source from session
+        $contactData['source_url'] = session('source_url') ?? '-';
+        $contactData['source'] = session('source') ?? '-';
         
         // Create the contact record
         $contact = Contact::create($contactData);
@@ -357,6 +362,10 @@ class IndexController extends Controller
                 '</td></tr>' . "\n";
                 
         $body .= '<tr><td style="width: 150px;"><strong>Referrer URL :</strong></td><td>' . $ref_url . '</td></tr>' . "\n";
+        
+        $body .= '<tr><td style="width: 150px;"><strong>Source URL :</strong></td><td<|fim_middle|>-aos-once="true" data-aos="fade-up" />' . (session('source_url') ?? '-') . '</td></tr>' . "\n";
+        $body .= '<tr><td style="width: 150px;"><strong>Source :</strong></td><td>' . (session('source') ?? '-') . '</td></tr>' . "\n";
+
         $body .= '<tr><td style="width: 150px;"><strong>Submitted Data :</strong></td><td>' . date('Y-m-d') . '</td></tr>' . "\n";
         $body .= '</table>';
 

@@ -38,6 +38,9 @@ enctype="multipart/form-data">
 
     <input type="hidden" name="ref_url" value="{{ url()->previous() }}" data-aos-once="true" data-aos="fade-up" />
 
+    <input type="hidden" name="source_url" value="{{ session('source_url') ?? '-' }}" data-aos-once="true" data-aos="fade-up" />
+    <input type="hidden" name="source" value="{{ session('source') ?? '-' }}" data-aos-once="true" data-aos="fade-up" />
+
     <div class="form-group text-center">
         <button type="submit" class="btn btn-primary">Send</button>
     </div>

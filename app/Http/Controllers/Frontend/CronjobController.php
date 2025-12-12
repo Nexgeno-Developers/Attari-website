@@ -49,6 +49,10 @@ class CronjobController extends Controller
                 $cvPath = $contact->cv ?? '';
                 $ip = $contact->ip ?? '';
                 $ref_url = $contact->ref_url ?? '';
+
+                $source_url = $contact->source_url ?? '-';
+                $source = $contact->source ?? '-';
+
                 $w_countrycode = $contact->w_countrycode ?? '';
                 $w_phone = $contact->w_phone ?? '';
                 $w_syllabus = ($contact->w_syllabus == 1) ? "Sent" : "Failed";
@@ -173,6 +177,18 @@ class CronjobController extends Controller
                         if (!empty($ref_url)) {
                         $body .= '<tr><td style="width: 150px;"><strong>Referrer URL :</strong></td><td>' . $ref_url . '</td></tr>' . "\n";
                         } 
+
+
+                        //source url
+                        if (!empty($source_url)) {
+                        $body .= '<tr><td style="width: 150px;"><strong>Source URL :</strong></td><td>' . $source_url . '</td></tr>' . "\n";
+                        } 
+
+                        //source
+                        if (!empty($source)) {
+                        $body .= '<tr><td style="width: 150px;"><strong>Source :</strong></td><td>' . $source . '</td></tr>' . "\n";
+                        } 
+
                         
                         //ip
                         $body .= '<tr><td style="width: 150px;"><strong>Ip :</strong></td><td>' . $ip . '</td></tr>' . "\n";

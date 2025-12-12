@@ -19,8 +19,11 @@ class MarketingController extends Controller
         $course = $request->course;
         $ip_info = ip_info();
         $userIpData = json_decode($ip_info, true);
-        $ip = $userIpData['ip'] ?? null;        
+        $ip = $userIpData['ip'] ?? null; 
         
+        $source_url = session('source_url') ?? '-';
+        $source = session('source') ?? '-';
+
         // If course_name is empty, retrieve the value from pagecourse
         if(empty($course)){
             $course = session('pagecourse');
@@ -97,6 +100,10 @@ class MarketingController extends Controller
                 'section' => 'Get Syllabus on WhatsApp - Course Page',
                 'url' => $request->url,
                 'ref_url' => $request->ref_url,
+
+                'source_url' => $source_url,
+                'source' => $source,
+
                 'ip_data' => $ip_info,
                 'services' => $course,
                 'ip' => $ip,
