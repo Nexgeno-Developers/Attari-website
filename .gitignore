@@ -26,3 +26,5 @@ yarn-error.log
 *.zip
 *.sql
 *.log
+
+app/Helpers/CommonHelper.php
