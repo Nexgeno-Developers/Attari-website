@@ -30,15 +30,17 @@
 
                                 <div class="col-sm-12">
                                     <div class="form-group mb-3">
-                                        <label>Title<span class="red">*</span></label>
+                                        {{-- <label>Title<span class="red">*</span></label> --}}
+                                        <label>Title</label>
                                         <input maxlength="255" type="text" class="form-control" name="title"
-                                            value="{{ $seo_additional->seo_label }}" required>
+                                            value="{{ $seo_additional->seo_label }}">
                                     </div>
                                 </div>
 
                                 <div class="col-sm-12">
                                     <div class="form-group mb-3">
-                                        <label>Description <span class="red">*</span></label>
+                                        {{-- <label>Description <span class="red">*</span></label> --}}
+                                        <label>Description</label>
                                         <textarea class="form-control trumbowyg" name="description" rows="4" placeholder="Enter description here...">{{ $seo_additional->seo_description }}</textarea>
                                     </div>
                                 </div>

@@ -25,19 +25,79 @@ if (!function_exists('getcmsCourses')) {
     {
         $cmscacheKey = 'cms_courses';
 
+        // return Cache::rememberForever($cmscacheKey, function () {
+        //     return DB::table('cms')->where('status', 1)->where('zone', 0)->get(['menu_title', 'slug', 'status']);
+        // });
+
         return Cache::rememberForever($cmscacheKey, function () {
-            return DB::table('cms')->where('status', 1)->where('zone', 0)->get(['menu_title', 'slug', 'status']);
+            $courses = DB::table('cms')
+                ->where('status', 1)
+                ->where('zone', 0)
+                ->get(['course_id', 'menu_title', 'slug', 'status'])
+                ->toArray(); // Convert to array to manipulate indexes
+
+            // Initialize indexes
+            $index_9 = null;
+            $index_11 = null;
+
+            // Find indices of course_id 9 and 11
+            foreach ($courses as $index => $course) {
+                if ($course->course_id == 9) {
+                    $index_9 = $index;
+                }
+                if ($course->course_id == 11) {
+                    $index_11 = $index;
+                }
+            }
+
+            // Swap the two if both exist
+            if ($index_9 !== null && $index_11 !== null) {
+                $temp = $courses[$index_9];
+                $courses[$index_9] = $courses[$index_11];
+                $courses[$index_11] = $temp;
+            }
+
+            return $courses;
         });
     }
 }
+
 if (!function_exists('getCourses')) {
     function getCourses()
     {
         $coursecacheKey = 'courses';
 
+        // return Cache::rememberForever($coursecacheKey, function () {
+        //     return DB::table('courses')->get();
+        // });
+
         return Cache::rememberForever($coursecacheKey, function () {
-            return DB::table('courses')->get();
+            $courses = DB::table('courses')->get()->toArray(); // Convert to array
+
+            // Initialize indexes
+            $index_9 = null;
+            $index_11 = null;
+
+            // Find indices of course_id 9 and 11
+            foreach ($courses as $index => $course) {
+                if ($course->id == 9) {
+                    $index_9 = $index;
+                }
+                if ($course->id == 11) {
+                    $index_11 = $index;
+                }
+            }
+
+            // Swap the two if both are found
+            if ($index_9 !== null && $index_11 !== null) {
+                $temp = $courses[$index_9];
+                $courses[$index_9] = $courses[$index_11];
+                $courses[$index_11] = $temp;
+            }
+
+            return $courses;
         });
+
     }
 }
 

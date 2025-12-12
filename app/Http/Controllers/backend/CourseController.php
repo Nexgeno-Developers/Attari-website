@@ -363,8 +363,8 @@ class CourseController extends Controller
     public function seo_update(Request $request) {
         // Validate form data
         $validator = Validator::make($request->all(), [
-            'title' => 'required',
-            'description' => 'required',
+            'title' => 'nullable|max:255',
+            'description' => 'nullable',
         ]);
 
         if ($validator->fails()) {
@@ -378,8 +378,8 @@ class CourseController extends Controller
         $id = $request->input('id');
         $course = Course::find($id);
 
-        $course->seo_label = $request->input('title');
-        $course->seo_description = $request->input('description');
+        $course->seo_label = !empty($request->input('title')) ? $request->input('title') : null;
+        $course->seo_description = !empty($request->input('description')) ? $request->input('description') : null;
 
         $course->save();
 

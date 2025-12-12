@@ -822,6 +822,33 @@
     @endif
 
 
+
+
+    @if(!empty($detail->seo_label) && !empty($detail->seo_description))
+        <section class="page-section overview py-5">
+                <div class="row">
+
+                        @php 
+                            $seo_label = ReplaceKeyword($detail->seo_label, $cms->replace_keyword); 
+                            $seo_description = ReplaceKeyword($detail->seo_description, $cms->replace_keyword);
+                        @endphp
+                        <div class="location_box text-center">
+                            <h2 id="seoHeading" style="cursor: pointer; display: inline-block;">
+                                {{ $seo_label }}
+                            </h2>
+                            <div id="seoDescription" class="d-none mt-3" style="display: inline-block; text-align: left;">
+                                @php echo html_entity_decode($seo_description) @endphp
+                            </div>
+                        </div>
+
+
+                </div>
+
+        </section>
+    @endif
+
+
+
     <!--Faq section-->
 
         <section id="faqs" class="page-section overview py-5">
@@ -955,6 +982,10 @@
             ->where('cms.zone', 0)
             ->where('cms.id', '!=', $cms->id)
             ->get(['cms.course_id', 'cms.slug', 'courses.thumbnail']);
+
+        // Find and move course_id = 5 to position 8 (index 7)
+        $course_wsh  = $cms_courses->firstWhere('course_id', 5);
+
     @endphp
     
     <section class="other_courses light_gray_bg pt-5 pb-5">
@@ -965,6 +996,10 @@
                     <div class="owl-carousel owl-theme other_courses_slider">
     
                         @foreach ($cms_courses as $row)
+                            @php 
+                                $row = $row->course_id == 9 && $course_wsh ? $course_wsh : $row;
+                                var_dump($row);
+                            @endphp
                             <div class="item">
                                 <div class="other_crs_box">
                                     <a href="{{ url(route('course.detail', ['slug' => $row->slug] )) }}">
@@ -1054,27 +1089,6 @@
                                 
                             @endif
                         @endif
-                    </div>
-
-
-                    <div class="row" >
-
-                        @if(!empty($detail->seo_label) && !empty($detail->seo_description))
-                            @php 
-                                $seo_label = ReplaceKeyword($detail->seo_label, $cms->replace_keyword); 
-                                $seo_description = ReplaceKeyword($detail->seo_description, $cms->replace_keyword);
-                            @endphp
-                            <div class="location_box text-center">
-                                <h2 id="seoHeading" style="cursor: pointer; display: inline-block;">
-                                    {{ $seo_label }}
-                                </h2>
-                                <div id="seoDescription" class="d-none mt-3" style="display: inline-block; text-align: left;">
-                                    @php echo html_entity_decode($seo_description) @endphp
-                                </div>
-                            </div>
-                        @endif
-
-
                     </div>
 
                 </div>

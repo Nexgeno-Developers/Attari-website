@@ -66,9 +66,14 @@ section#testimonials {
                         <li class="menu-item">
                             <a class="menu-item-link" href="{{request()->url()}}/#azure-batch-traning" data-href="#azure-batch-traning">Azure Training Batch Schedule</a>
                         </li>
-                        <li class="menu-item">
+                        
+                        {{-- <li class="menu-item">
                             <a class="menu-item-link" href="{{request()->url()}}/#mcse-batch-traning" data-href="#mcse-batch-traning">MCSE Training Batch Schedule</a>
+                        </li> --}}
+                        <li class="menu-item">
+                            <a class="menu-item-link" href="{{request()->url()}}/#windows-server-hybrid-training" data-href="#windows-server-hybrid-training">Windows Server Hybrid Training</a>
                         </li>
+
                         <li class="menu-item">
                             <a class="menu-item-link" href="{{request()->url()}}/#ccna-batch-traning" data-href="#ccna-batch-traning">CCNA Training Batch Schedule</a>
                         </li>

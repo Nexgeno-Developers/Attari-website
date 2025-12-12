@@ -123,7 +123,7 @@
         <div class="col-sm-12">
             <div class="form-group mb-3">
                 <label>Youtube Video URL<span class="red">*</span></label>
-                <input type="url" class="form-control" name="youtube_url" value="{{$learning->youtube_url}}" required>
+                <input type="url" class="form-control" name="youtube_url" value="{{$learning->youtube_url}}">
             </div>
         </div>
 
