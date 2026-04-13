@@ -101,8 +101,10 @@ class MarketingController extends Controller
                 'url' => $request->url,
                 'ref_url' => $request->ref_url,
 
-                'source_url' => $source_url,
-                'source' => $source,
+                'source_url' => $source_url ?? '-',
+                'source' => $source ?? '-',
+                
+                'medium' => $request->medium ?? '-',
 
                 'ip_data' => $ip_info,
                 'services' => $course,

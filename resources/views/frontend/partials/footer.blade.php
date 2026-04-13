@@ -273,7 +273,7 @@
 	</div>
 </div>
 
-
+{{-- 
 // <script>
 //   // Get current query parameters from URL
 //   // const queryParams = window.location.search; // includes '?'
@@ -344,10 +344,11 @@
 //   // Set the href dynamically
 //   document.getElementById('whatsapp-link').href = whatsappURL_desktop;
 //   document.getElementById('whatsapp-link-mobile').href = whatsappURL_mobile;
-// </script>
+// </script> --}}
 
 
 
+{{--
 <script>
   // Mapping of original keys to replacement letters
   const keyMap = {
@@ -402,6 +403,32 @@
   const whatsappURL_mobile = `https://api.whatsapp.com/send?phone=${phone}&text=${encodedMessage_mobile}`; 
 
   // Set the href values only (no innerHTML, no injection)
+  document.getElementById('whatsapp-link').setAttribute('href', whatsappURL_desktop);
+  document.getElementById('whatsapp-link-mobile').setAttribute('href', whatsappURL_mobile);
+</script>
+--}}
+
+@php
+  $medium = session('medium') ?? '';
+@endphp
+<script>
+  const medium = @json($medium);
+  const customQuery = medium ? `?medium=${encodeURIComponent(medium)}` : '';
+
+  let baseMessage_desktop = `Hi, I am contacting you through your website from desktop view https://attariclasses.in/${customQuery}`;
+  let baseMessage_mobile = `Hi, I am contacting you through your website from mobile view https://attariclasses.in/${customQuery}`;
+
+  const stripHtml = (str) => str.replace(/<\/?[^>]+(>|$)/g, '');
+  baseMessage_desktop = stripHtml(baseMessage_desktop);
+  baseMessage_mobile = stripHtml(baseMessage_mobile);
+
+  const encodedMessage_desktop = encodeURIComponent(baseMessage_desktop);
+  const encodedMessage_mobile = encodeURIComponent(baseMessage_mobile);
+
+  const phone = '+917738375431';
+  const whatsappURL_desktop = `https://api.whatsapp.com/send?phone=${phone}&text=${encodedMessage_desktop}`;
+  const whatsappURL_mobile = `https://api.whatsapp.com/send?phone=${phone}&text=${encodedMessage_mobile}`; 
+
   document.getElementById('whatsapp-link').setAttribute('href', whatsappURL_desktop);
   document.getElementById('whatsapp-link-mobile').setAttribute('href', whatsappURL_mobile);
 </script>

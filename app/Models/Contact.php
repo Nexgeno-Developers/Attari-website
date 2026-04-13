@@ -23,6 +23,7 @@ class Contact extends Model
         'ref_url',
         'source_url',
         'source',
+        'medium',
         'ip_data',
         'section',
         'cv',
