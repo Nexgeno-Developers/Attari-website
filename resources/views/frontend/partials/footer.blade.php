@@ -409,10 +409,10 @@
 --}}
 
 @php
-  $medium = session('medium') ?? '';
+  $mediumKey = get_medium('key') ?? '';
 @endphp
 <script>
-  const medium = @json($medium);
+  const medium = @json($mediumKey);
   const customQuery = medium ? `?medium=${encodeURIComponent(medium)}` : '';
 
   let baseMessage_desktop = `Hi, I am contacting you through your website from desktop view https://attariclasses.in/${customQuery}`;

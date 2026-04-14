@@ -53,7 +53,7 @@ $session_data = json_decode(session('user_ip'), true);
                     {{-- <input type="hidden" name="source_url" value="{{ session('source_url') ?? '-' }}" data-aos-once="true" data-aos="fade-up" />
                     <input type="hidden" name="source" value="{{ session('source') ?? '-' }}" data-aos-once="true" data-aos="fade-up" /> --}}
 
-                    <input type="hidden" name="medium" value="{{ session('medium') ?? '-' }}" data-aos-once="true" data-aos="fade-up" />
+                    <input type="hidden" name="medium" value="{{ get_medium('value') ?? '-' }}" data-aos-once="true" data-aos="fade-up" />
 
                     <div class="form-group text-center">
                         <input class="btn btn-primary submit_button" type="submit" value="send" />

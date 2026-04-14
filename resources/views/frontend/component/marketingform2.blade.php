@@ -32,7 +32,7 @@
             {{-- <input type="hidden" name="source_url" value="{{ session('source_url') ?? '-' }}" data-aos-once="true" data-aos="fade-up" />
             <input type="hidden" name="source" value="{{ session('source') ?? '-' }}" data-aos-once="true" data-aos="fade-up" /> --}}
 
-            <input type="hidden" name="medium" value="{{ session('medium') ?? '-' }}" data-aos-once="true" data-aos="fade-up" />
+            <input type="hidden" name="medium" value="{{ get_medium('value') ?? '-' }}" data-aos-once="true" data-aos="fade-up" />
 
             <input type="hidden" name="url" value="{{ request()->fullUrl() }}" data-aos-once="true" data-aos="fade-up" />
                          <input type="hidden" name="course" value="{{isset($courseInputName) ? $courseInputName : session('course_name')}}">

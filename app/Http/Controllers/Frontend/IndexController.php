@@ -366,7 +366,7 @@ class IndexController extends Controller
         // $body .= '<tr><td style="width: 150px;"><strong>Source URL :</strong></td><td<|fim_middle|>-aos-once="true" data-aos="fade-up" />' . (session('source_url') ?? '-') . '</td></tr>' . "\n";
         // $body .= '<tr><td style="width: 150px;"><strong>Source :</strong></td><td>' . (session('source') ?? '-') . '</td></tr>' . "\n";
 
-        $body .= '<tr><td style="width: 150px;"><strong>Medium :</strong></td><td>' . (session('medium') ?? '-') . '</td></tr>' . "\n";
+        $body .= '<tr><td style="width: 150px;"><strong>Medium :</strong></td><td>' . (get_medium('value') ?? '-') . '</td></tr>' . "\n";
 
         $body .= '<tr><td style="width: 150px;"><strong>Submitted Data :</strong></td><td>' . date('Y-m-d') . '</td></tr>' . "\n";
         $body .= '</table>';

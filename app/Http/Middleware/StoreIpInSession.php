@@ -73,38 +73,54 @@ class StoreIpInSession
         // Store Medium in session based on current URL and referrer
         if (!Session::has('medium') || $this->isMediumExpired()) {
             $currentUrl = strtolower($request->fullUrl());
-            $medium = null;
+            $mediumKey = null;
+            $mediumValue = null;
 
             if (str_contains($currentUrl, 'gclid')) {
-                $medium = 'GA';
+                $mediumKey = 'GA';
+                $mediumValue = 'Google Ads (GA)';
             } elseif (str_contains($currentUrl, 'linkedin_organic')) {
-                $medium = 'LO';
+                $mediumKey = 'LO';
+                $mediumValue = 'Linkedin Organic (LO)';
             } elseif (str_contains($currentUrl, 'youtube_organic')) {
-                $medium = 'YO';
+                $mediumKey = 'YO';
+                $mediumValue = 'Youtube Organic (YO)';
             } elseif (str_contains($currentUrl, 'facebook_organic')) {
-                $medium = 'FO';
+                $mediumKey = 'FO';
+                $mediumValue = 'Facebook Organic (FO)';
             } elseif (str_contains($currentUrl, 'fb_paid')) {
-                $medium = 'FA';
+                $mediumKey = 'FA';
+                $mediumValue = 'Facebook Ads (FA)';
             } elseif (str_contains($currentUrl, 'fbclid')) {
-                $medium = 'FO';
+                $mediumKey = 'FO';
+                $mediumValue = 'Facebook Organic (FO)';
             } elseif (str_contains($currentUrl, 'gmb_organic')) {
-                $medium = 'GMB';
+                $mediumKey = 'GMB';
+                $mediumValue = 'GMB (GMB)';
             } elseif (str_contains($currentUrl, 'wati_mktg')) {
-                $medium = 'W';
+                $mediumKey = 'W';
+                $mediumValue = 'WATI (W)';
             } elseif (str_contains($currentUrl, 'wa_channel')) {
-                $medium = 'WC';
+                $mediumKey = 'WC';
+                $mediumValue = 'WhatsApp Channel (WC)';
             } elseif (str_contains($currentUrl, 'sms_mktg')) {
-                $medium = 'S';
+                $mediumKey = 'S';
+                $mediumValue = 'SMS (S)';
             } elseif (str_contains($currentUrl, 'rcs_mktg')) {
-                $medium = 'R';
+                $mediumKey = 'R';
+                $mediumValue = 'RCS (R)';
             } elseif (str_contains($currentUrl, 'email_replied')) {
-                $medium = 'E';
+                $mediumKey = 'E';
+                $mediumValue = 'EMAIL (E)';
             } elseif (str_contains($currentUrl, 'sbenrolled')) {
-                $medium = 'EM';
+                $mediumKey = 'EM';
+                $mediumValue = 'Email Marketing (EM)';
             } elseif (str_contains($currentUrl, 'insta_organic')) {
-                $medium = 'IO';
+                $mediumKey = 'IO';
+                $mediumValue = 'Instagram Organic (IO)';
             } elseif (str_contains($currentUrl, 'blog')) {
-                $medium = 'B';
+                $mediumKey = 'B';
+                $mediumValue = 'blog (B)';
             } else {
                 $referrerUrl = $request->headers->get('referer');
                 $appDomain = parse_url(env('APP_URL'), PHP_URL_HOST);
@@ -120,15 +136,20 @@ class StoreIpInSession
                 }
 
                 if (!empty($referrerDomain)) {
-                    $medium = $this->rootDomainLabel($referrerDomain);
+                    $mediumKey = $this->rootDomainLabel($referrerDomain);
+                    $mediumValue = $mediumKey;
                 }
             }
 
-            if (empty($medium)) {
-                $medium = 'Direct';
+            if (empty($mediumKey)) {
+                $mediumKey = 'Direct';
+                $mediumValue = 'Direct';
             }
 
-            Session::put('medium', $medium);
+            Session::put('medium', [
+                'key' => $mediumKey,
+                'value' => $mediumValue,
+            ]);
             Session::put('medium_expires_at', time() + (30 * 60));
         }
 
