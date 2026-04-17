@@ -74,7 +74,7 @@ class StoreIpInSession
         if (!Session::has('medium') || is_medium_expired()) {
             $medium = resolve_medium_from_request($request);
             Session::put('medium', $medium);
-            Session::put('medium_expires_at', time() + (30 * 60));
+            Session::put('medium_expires_at', time() + (15 * 60));
         }
 
         
