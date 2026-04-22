@@ -74,8 +74,10 @@ class StoreIpInSession
         if (!Session::has('medium') || is_medium_expired()) {
             $medium = resolve_medium_from_request($request);
             Session::put('medium', $medium);
-            Session::put('medium_expires_at', time() + (15 * 60));
         }
+
+        // Sliding expiry: refresh on every request so active users keep the same medium.
+        Session::put('medium_expires_at', time() + (15 * 60));
 
         
         return $next($request);
