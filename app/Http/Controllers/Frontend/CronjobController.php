@@ -180,9 +180,9 @@ class CronjobController extends Controller
 
 
                         //source url
-                        // if (!empty($source_url)) {
-                        // $body .= '<tr><td style="width: 150px;"><strong>Source URL :</strong></td><td>' . $source_url . '</td></tr>' . "\n";
-                        // } 
+                        if (!empty($source_url)) {
+                        $body .= '<tr><td style="width: 150px;"><strong>Source URL :</strong></td><td>' . $source_url . '</td></tr>' . "\n";
+                        } 
 
                         // //source
                         // if (!empty($source)) {
