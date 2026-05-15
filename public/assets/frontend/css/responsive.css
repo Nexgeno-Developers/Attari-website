@@ -76,7 +76,7 @@ form#getsyllabus2 .form-row.row {
 form#getsyllabus .form-row.row {
   width: 100%;
 }
-.course_buttom_form .form-group:nth-child(11) {
+.course_buttom_form .form-group {
     width: 100%;
     float: left;
     margin-right: 0px !important;
@@ -89,11 +89,7 @@ form#getsyllabus .form-row.row {
     line-height: 35px;
     font-size: 20px;
 }
-.course_buttom_form .form-group:nth-child(12) {
-    width: 100%;
-    margin-right: 0px !important;
-    margin-left: 0px;
-}
+
     .header .menu>ul>li .sub_menu {
         margin: 0;
         padding: 0px !important;
@@ -1123,10 +1119,10 @@ form#getsyllabus h5.text-center {
     .boxtop_box i {
         margin-bottom: 10px;
     }
-
+.post_box .text_box_post p {
+    padding-top: 3px !important;
+}
     body .text_box_post {
-        padding-left: 20px !important;
-        padding-right: 20px !important;
         padding-top: 15px !important;
         padding-bottom: 20px !important;
     }
@@ -1143,9 +1139,10 @@ form#getsyllabus h5.text-center {
     }
 
     .post_box iframe {
-        width: auto;
-        height: auto;
+        width: 100%;
         margin-top: 20px;
+        min-height: 170px;
+        height: 100%;
     }
 
     .post_box .bookfreedemo_button {

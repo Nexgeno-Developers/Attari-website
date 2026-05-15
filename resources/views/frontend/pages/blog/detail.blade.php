@@ -30,6 +30,16 @@ $i = 1;
 @section('page.schema')
 <!--------------------------- Page Schema --------------------------------->
 
+<style>
+    .bookdemofreeform_course.blue_gradianbg.blogdt_from p.text-center.color_white {
+    color: #fff;
+    font-size: 20px !important;
+}
+    .succes_page_form p.text-center.color_white {
+    color: #fff;
+    font-size: 20px !important;
+}
+</style>
 <script type="application/ld+json">
 {
     "@context": "https://schema.org/",
@@ -183,7 +193,7 @@ $i = 1;
                     <div class="container">
                         <div class="row">
                             <div class="col-12">
-                            <h4 class="section_heading pb-3 text-center"> <b>{{ ucfirst($course->alias) }} Training Schedule</b></h4>
+                            <h2 class="section_heading pb-3 text-center"> <b>{{ ucfirst($course->alias) }} Training Schedule</b></h2>
                             </div>
 
                             @if(!empty($batch))
@@ -260,9 +270,9 @@ $i = 1;
 
                                     <div class="col-md-3">
                                         <div class="button_main getin_touch_bx">
-                                            <h5>Get In Touch to Avail <span>{{ $batch->off_percentage }}
+                                            <p class="gettouch">Get In Touch to Avail <span>{{ $batch->off_percentage }}
                                                     OFF</span>
-                                            </h5>
+                                            </p>
 
                                             <button type="button" onclick="formModal('{{ url(route('component.form')) }}?section=Batch Section - Blog Detail Page&title=Book a FREE Demo&current_page={{ urlencode(url()->current()) }}')"
                                              class="btn bookfreedemo_button"> Book a Demo</button>
@@ -300,7 +310,7 @@ $i = 1;
                             <section id="testimonials" class="testiminilas_sec gradiant_bg pt-5 pb-5 dot_clr_white">
 
                                 <div class="container">
-                                    <h3 class="heading_title text-center pddtop_0 pb-3 textcolor_wht ">{{ ucfirst($course->alias) }} Training Testimonials</h3>
+                                    <h2 class="heading_title text-center pddtop_0 pb-3 textcolor_wht ">{{ ucfirst($course->alias) }} Training Testimonials</h2>
 
                                     @if($detail->video_testimonial === 1)
                                         <!-----------============= video testimonials ===============---------------------------------->
@@ -462,7 +472,7 @@ $i = 1;
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h4 class="section_heading pb-3 text-left"> Related Articles</h4>
+                <h2 class="section_heading pb-3 text-left"> Related Articles</h2>
             </div>
 
             @foreach ($blog as $row)
@@ -472,9 +482,9 @@ $i = 1;
                         <img src="{{ asset('storage/' . $row->main_image) }}" alt="" class="blog_img" />
                     </div>
                     <div class="related_content">
-                        <h5>
+                      
                             <a target="_blank" href="{{ url(route('blog.detail', ['category' => $url, 'slug' => strtolower(str_replace(' ', '-',$row->slug))] )) }}">{{ $row->title }}</a>
-                        </h5>
+                        
                     </div>
 
                     <div class="related_updated">
@@ -495,21 +505,29 @@ $i = 1;
 
 
 @php
-    $learning = DB::table('cms')->where('status', 1)->where('zone', 0)->get(['course_id','slug']);
+    $learning = DB::table('cms')
+    ->join('courses', 'cms.course_id', '=', 'courses.id')
+    ->where('cms.status', 1)
+    ->where('cms.zone', 0)
+    ->get([
+        'cms.course_id',
+        'cms.slug',
+        'courses.thumbnail'
+    ]);
 @endphp
 
 <section class="bggray1 other_courses pt-5 pb-5">
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h4 class="section_heading pb-3 text-left"> Courses we offer </h4>
+                <h2 class="section_heading pb-3 text-left"> Courses we offer </h2>
                 <div class="owl-carousel owl-theme trending_course">
 
                     @php $filtered1 = $learning->where('course_id', 5)->first(); @endphp
                     @if($filtered1)
                         <div class="item">
                             <div class="other_crs_box">
-                                <a href="{{ url(route('course.detail', ['slug' => $filtered1->slug] )) }}"><img src="/assets/frontend/images/vmware_course1.jpg" /></a>
+                                <a href="{{ url(route('course.detail', ['slug' => $filtered1->slug] )) }}"><img src="{{ asset('storage/' . $filtered1->thumbnail) }}" /></a>
                             </div>
                         </div>
                     @endif
@@ -518,7 +536,7 @@ $i = 1;
                     @if($filtered2)
                         <div class="item">
                             <div class="other_crs_box">
-                                <a href="{{ url(route('course.detail', ['slug' => $filtered2->slug] )) }}"><img src="/assets/frontend/images/aws.jpg" /></a>
+                                <a href="{{ url(route('course.detail', ['slug' => $filtered2->slug] )) }}"><img src="{{ asset('storage/' . $filtered2->thumbnail) }}" /></a>
                             </div>
                         </div>
                     @endif
@@ -527,16 +545,16 @@ $i = 1;
                     @if($filtered3)
                         <div class="item">
                             <div class="other_crs_box">
-                                <a href="{{ url(route('course.detail', ['slug' => $filtered3->slug] )) }}"><img src="/assets/frontend/images/azure.jpg" /></a>
+                                <a href="{{ url(route('course.detail', ['slug' => $filtered3->slug] )) }}"><img src="{{ asset('storage/' . $filtered3->thumbnail) }}" /></a>
                             </div>
                         </div>
                     @endif    
 
-                    @php $filtered4 = $learning->where('course_id', 9)->first(); @endphp
+                    @php $filtered4 = $learning->where('course_id', 11)->first(); @endphp
                     @if($filtered4)
                         <div class="item">
                             <div class="other_crs_box">
-                                <a href="{{ url(route('course.detail', ['slug' => $filtered4->slug] )) }}"><img src="/assets/frontend/images/microsft.jpg" /></a>
+                                <a href="{{ url(route('course.detail', ['slug' => $filtered4->slug] )) }}"><img src="{{ asset('storage/' . $filtered4->thumbnail) }}" /></a>
                             </div>
                         </div>
                     @endif
@@ -545,7 +563,7 @@ $i = 1;
                     @if($filtered5)
                         <div class="item">
                             <div class="other_crs_box">
-                                <a href="{{ url(route('course.detail', ['slug' => $filtered5->slug] )) }}"><img src="/assets/frontend/images/ccna.jpg" /></a>
+                                <a href="{{ url(route('course.detail', ['slug' => $filtered5->slug] )) }}"><img src="{{ asset('storage/' . $filtered5->thumbnail) }}" /></a>
                             </div>
                         </div>
                     @endif

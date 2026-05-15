@@ -268,14 +268,14 @@
 
     <section id="testimonials" class="testiminilas_sec pt-5 pb-5 gray_bgg1">
         <div class="container">
-            <h3 class="heading_title text-center pddtop_0 pb-3 ">MCSE Google Reviews</h3>
+            <h3 class="heading_title text-center pddtop_0 pb-3 ">Windows Server Hybrid Google Reviews</h3>
             <div class="large-12 columns">
                 <div class="owl-carousel owl-theme slider_content_dots">
 
                     @php
-                        $text_mcse_review = DB::table('text_reviews')->where('status', 1)->where('course_id','9')->where('type', '!=', 'facebook')->get();
+                        $text_mcse_review = DB::table('text_reviews')->where('status', 1)->where('course_id','11')->where('type', '!=', 'facebook')->get();
                         
-                        $course_schema_mcse = DB::table('courses')->where('status', 1)->where('id','9')->get(['testimonials_section_schema'])->first();
+                        $course_schema_mcse = DB::table('courses')->where('status', 1)->where('id','11')->get(['testimonials_section_schema'])->first();
                     @endphp
 
                     @if(!empty($text_mcse_review))

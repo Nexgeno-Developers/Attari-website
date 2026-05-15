@@ -7,6 +7,91 @@
 
 @section('page.type', 'website')
 
+
+@section('page.schema')
+
+<!-- Attari Classes - EducationalOrganization + LocalBusiness Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": ["EducationalOrganization", "LocalBusiness"],
+  "@id": "https://attariclasses.in/#organization",
+  "name": "Attari Classes",
+  "url": "https://attariclasses.in/",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://attariclasses.in/assets/frontend/images/cropped-header-logo-1.webp"
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://attariclasses.in/assets/frontend/images/cropped-header-logo-1.webp"
+  },
+  "description": "Attari Classes is an IT training institute offering VMware vSphere, AWS Cloud, Microsoft Azure, Windows Server Hybrid, CCNA, MCSE, live online training, classroom training in Mumbai, and self-paced LMS video courses.",
+  "email": "info@attariclasses.in",
+  "telephone": "+91-7738375431",
+  "hasMap": "https://www.google.com/maps?cid=18202218376659524362",
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 19.07594004083397,
+    "longitude": 72.87757885814574
+  },
+  "areaServed": [
+    { "@type": "Country", "name": "India" },
+    { "@type": "Country", "name": "United Arab Emirates" },
+    { "@type": "Country", "name": "United States" },
+    { "@type": "Country", "name": "United Kingdom" },
+    { "@type": "Country", "name": "Singapore" },
+    { "@type": "Country", "name": "New Zealand" },
+    { "@type": "Country", "name": "Australia" },
+    { "@type": "Country", "name": "Nigeria" },
+    { "@type": "Country", "name": "Saudi Arabia" },
+    { "@type": "Country", "name": "Kuwait" },
+    { "@type": "Country", "name": "Qatar" },
+    { "@type": "Country", "name": "Oman" },
+    { "@type": "Country", "name": "Bahrain" }
+  ],
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "opens": "09:30",
+      "closes": "18:30"
+    }
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Kanakia Zillion, F wing, 4th Floor, 438, LBS Marg-CST Road Junction Kurla (West)",
+    "addressLocality": "Mumbai",
+    "addressRegion": "Maharashtra",
+    "postalCode": "400070",
+    "addressCountry": "IN"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+91-7738375431",
+    "contactType": "customer service",
+    "areaServed": ["IN", "AE", "US", "GB", "SG", "NZ", "AU", "NG", "SA", "KW", "QA", "OM", "BH"],
+    "availableLanguage": ["en"]
+  },
+  "sameAs": [
+    "https://www.facebook.com/AttariClass",
+    "https://www.instagram.com/attari.classes/",
+    "https://www.linkedin.com/company/attari-classes-vmware-aws-azure-mcsa-ccna-training-in-mumbai/"
+  ]
+}
+</script>
+
+@endsection
+
+
 @section('page.content')
 
     <!----------========== contact start ===============-------------------->

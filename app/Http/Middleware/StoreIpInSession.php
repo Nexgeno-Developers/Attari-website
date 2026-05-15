@@ -17,15 +17,86 @@ class StoreIpInSession
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // IP tracking handled elsewhere; keep existing behavior for now.
+        
+        //------------------------------- Privious code ------------------------------------------------
+        
+        // $ipAddress = $request->ip();
+
+        // if (!Session::has('user_ip')) {
+        //     $user_ip = ip_info();
+     
+        //     $session_data = json_decode($user_ip, true);
+
+        //     if (!isset($session_data["ip"])) {
+                
+        //         $user_ip = '{ "ip": "none", "city": "none", "region": "none", "country": "none", "loc": "none", "postal": "none", "timezone": "none", "readme": "none" }';
+        //         Session::put('user_ip', $user_ip);
+        //     } else {
+        //         Session::put('user_ip', $user_ip);
+        //     }
+        // } else {
+            
+        //     $session_data = json_decode(session('user_ip'), true);
+        //     if (!isset($session_data["ip"])) {
+                
+        //         $user_ip = '{ "ip": "none", "city": "none", "region": "none", "country": "none", "loc": "none", "postal": "none", "timezone": "none", "readme": "none" }';
+        //         Session::put('user_ip', $user_ip);
+        //     }
+           
+        // } 
+        
+        //------------------------------- Privious code ------------------------------------------------
+        
         $user_ip = '{ "ip": "none", "city": "none", "region": "none", "country": "none", "loc": "none", "postal": "none", "timezone": "none", "readme": "none" }';
         Session::put('user_ip', $user_ip);
+        
+        
+        // // Store the previous URL and source in session if not from the same domain
+        // $previousUrl = url()->previous(); // Get previous URL
+        // $appUrl = env('APP_URL'); // Get the APP_URL from .env
 
+        // // Parse the URLs to extract the domain (host)
+        // $previousDomain = parse_url($previousUrl, PHP_URL_HOST);
+        // $appDomain = parse_url($appUrl, PHP_URL_HOST);
+
+        // // If the previous URL is not from the same domain as the APP_URL
+        // if ($previousDomain !== $appDomain) {
+        //     // Check if the session does not already have the 'source_url' and 'source'
+        //     if (!Session::has('source_url') || !Session::has('source')) {
+        //         // Store the previous URL and source (e.g., 'referrer')
+                
+                
+        //         // Extract the parts of the domain (split by '.')
+        //         $domainParts = explode('.', $previousDomain);
+
+        //         // If the domain has more than two parts (e.g., "www.google.com")
+        //         if (count($domainParts) > 2) {
+        //             // Extract the second part (e.g., "google" from "www.google.com")
+        //             $source = $domainParts[1]; 
+        //         } else {
+        //             // If the domain has just one or two parts (e.g., "xyz.com"), use the first part
+        //             $source = $domainParts[0];
+        //         }
+                
+        //         Session::put('source_url', $previousUrl, 180); // 180 minutes = 3 hours
+        //         Session::put('source', $source, 180); // Adjust the source as needed
+        //     }
+        // }
+        // // // Store the previous URL and source in session if not from the same domain
+        
+        // // Store Medium in session based on current URL and referrer
+        // if (!Session::has('medium') || is_medium_expired()) {
+        //     $medium = resolve_medium_from_request($request);
+        //     Session::put('medium', $medium);
+        // }
+
+        // // Sliding expiry: refresh on every request so active users keep the same medium.
+        // Session::put('medium_expires_at', time() + (15 * 60));      
+        
+        
         // Medium + source tracking (2-hour sliding expiry inside a 2.5-hour Laravel session)
         ensure_marketing_tracking($request);
 
-        
         return $next($request);
     }
-
 }

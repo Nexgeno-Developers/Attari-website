@@ -301,8 +301,8 @@ class IndexController extends Controller
         //----- new ip --------
         $contactData['ip_data'] = $ip_data;
         //----- new ip --------
-
-
+        
+        
         // set source_url and source from session
         $contactData['source_url'] = session('source_url') ?? '-';
         $contactData['source'] = session('source') ?? '-';
@@ -328,6 +328,8 @@ class IndexController extends Controller
             $subject = "MCSE Course Enquiry";
         } elseif($services == "CCNA" || $services == "CCNA Training" || stripos(strtolower($services), "ccna") !== false) {
             $subject = "CCNA Course Enquiry";
+        } elseif($services == "Windows Server Hybrid" || $services == "Windows Server Hybrid Training" || stripos(strtolower($services), "Windows Server Hybrid Training") !== false) {
+            $subject = "Windows Server Hybrid Course Enquiry";
         } else {
             $subject = "Lead Enquiry";
         }
@@ -363,11 +365,16 @@ class IndexController extends Controller
                 
         $body .= '<tr><td style="width: 150px;"><strong>Referrer URL :</strong></td><td>' . $ref_url . '</td></tr>' . "\n";
         
-        $body .= '<tr><td style="width: 150px;"><strong>Source URL :</strong></td><td>' . (session('source_url') ?? '-') . '</td></tr>' . "\n";
+        // $body .= '<tr><td style="width: 150px;"><strong>Source URL :</strong></td><td<|fim_middle|>-aos-once="true" data-aos="fade-up" />' . (session('source_url') ?? '-') . '</td></tr>' . "\n";
         // $body .= '<tr><td style="width: 150px;"><strong>Source :</strong></td><td>' . (session('source') ?? '-') . '</td></tr>' . "\n";
 
-        $body .= '<tr><td style="width: 150px;"><strong>Medium :</strong></td><td>' . (get_medium('value') ?? '-') . '</td></tr>' . "\n";
+        $body .= '<tr>
+            <td style="width: 150px;"><strong>Source URL :</strong></td>
+            <td data-aos-once="true" data-aos="fade-up">' . (session('source_url') ?? '-') . '</td>
+        </tr>' . "\n";
 
+        $body .= '<tr><td style="width: 150px;"><strong>Medium :</strong></td><td>' . (get_medium('value') ?? '-') . '</td></tr>' . "\n";
+        
         $body .= '<tr><td style="width: 150px;"><strong>Submitted Data :</strong></td><td>' . date('Y-m-d') . '</td></tr>' . "\n";
         $body .= '</table>';
 

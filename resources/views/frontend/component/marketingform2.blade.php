@@ -28,18 +28,18 @@
         <form id="getsyllabus2" action="{{url(route('getsyllabusonwhatsapp'))}}" method="post" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="ref_url" value="{{ url()->previous() }}" data-aos-once="true" data-aos="fade-up" />
-
-            {{-- <input type="hidden" name="source_url" value="{{ session('source_url') ?? '-' }}" data-aos-once="true" data-aos="fade-up" />
-            <input type="hidden" name="source" value="{{ session('source') ?? '-' }}" data-aos-once="true" data-aos="fade-up" /> --}}
+            
+            <input type="hidden" name="source_url" value="{{ session('source_url') ?? '-' }}" data-aos-once="true" data-aos="fade-up" />
+            {{-- <input type="hidden" name="source" value="{{ session('source') ?? '-' }}" data-aos-once="true" data-aos="fade-up" /> --}}
 
             <input type="hidden" name="medium" value="{{ get_medium('value') ?? '-' }}" data-aos-once="true" data-aos="fade-up" />
-
+            
             <input type="hidden" name="url" value="{{ request()->fullUrl() }}" data-aos-once="true" data-aos="fade-up" />
                          <input type="hidden" name="course" value="{{isset($courseInputName) ? $courseInputName : session('course_name')}}">
                         <input type="hidden" name="enquiry_id" value="">                
             
-                                <h5 class="text-center">Get Syllabus and Fee Detail <br> on <i class="fab fa-whatsapp get_whatsapp" aria-hidden="true"></i>
-<span style="color: #07d353;">WhatsApp</span> Now</h5>
+                                <p class="text-center">Get Syllabus and Fee Detail <br> on <i class="fab fa-whatsapp get_whatsapp" aria-hidden="true"></i>
+<span style="color: #07d353;">WhatsApp</span> Now</p>
             @php
                 $countries_json_path = public_path('/assets/frontend/country.json');
                 $countries_json = file_get_contents($countries_json_path);

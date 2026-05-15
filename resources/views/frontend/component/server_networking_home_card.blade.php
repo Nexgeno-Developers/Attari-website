@@ -1,6 +1,6 @@
 @php
   
-  $mcseCourse = DB::table('courses')->where('id', 9)->first();
+  $mcseCourse = DB::table('courses')->where('id', 11)->first();
   $ccnaCourse = DB::table('courses')->where('id', 10)->first();
 
 @endphp

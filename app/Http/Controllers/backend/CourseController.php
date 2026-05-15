@@ -359,7 +359,6 @@ class CourseController extends Controller
 
 
     // ------------------------- Aditional Seo Section ------------------------- //
-
     public function seo_update(Request $request) {
         // Validate form data
         $validator = Validator::make($request->all(), [
@@ -391,10 +390,7 @@ class CourseController extends Controller
         ];
     
         return response()->json($response);
-    }   
-        
-
-
+    }
 
 
 

@@ -1,6 +1,6 @@
 @php
 
-$title = !empty(trim($__env->yieldContent('page.title'))) ? str_replace(['&nbsp;', '&amp;', '&amp;amp;'], ['&amp;', '&', '&'], htmlspecialchars_decode($__env->yieldContent('page.title'))) : 'VMware, AWS, Azure, MCSE & CCNA Training Institute, Book Free DEMO - Attari Classes';
+$title = !empty(trim($__env->yieldContent('page.title'))) ? str_replace(['&nbsp;', '&amp;', '&amp;amp;'], ['&amp;', '&', '&'], htmlspecialchars_decode($__env->yieldContent('page.title'))) : 'VMware vSphere, AWS Cloud, Azure Cloud, Windows Server Hybrid and CCNA Training Institute, Book Free DEMO - Attari Classes';
 
 $description = !empty(trim($__env->yieldContent('page.description'))) ? str_replace(['&nbsp;', '&amp;', '&amp;amp;'], ['&amp;', '&', '&'], htmlspecialchars_decode($__env->yieldContent('page.description'))) :
 'Attari Classes provides Hands-on Practical Training, Book FREE DEMO, Topic wise Recorded Lectures on LMS, Online & Classroom Training options'; 
@@ -27,6 +27,10 @@ $url = url()->current();
     }
 @endphp
 
+{{--
+@if (strpos(request()->path(), 'windows-server-hybrid-training-') !== false)
+<meta name="robots" content="noindex, follow">
+@endif --}}
 <title>@php echo htmlspecialchars_decode($title) @endphp</title>
 <meta name="theme-color" content="#000000">
 <meta charset="UTF-8" />

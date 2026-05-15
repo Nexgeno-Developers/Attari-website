@@ -69,8 +69,7 @@
                             alt="Footer Logo" />
                     </a>
                 </div>
-                <p class="footer_para">Attari Classes is an IT training institute for VMware, AWS, AZURE,
-                    MCSE & CCNA courses. We provide Instructor led Live Online
+                <p class="footer_para">Attari Classes is an IT training institute for VMware vSphere, AWS Cloud, Azure Cloud, Windows Server Hybrid and CCNA course. We provide Instructor led Live Online
                     training to candidates across the globe & Classroom Training in
                     Mumbai, we also have self paced training options (Video Learning)
                     <!--<a class="footer_read" href="about-us">Read More</a>-->
@@ -85,8 +84,8 @@
                 </div>
             </div>
             <div class="col-lg-2 col-md-3 col-6">
-                <h6 class="footer_links_heading"><b>Courses</b></h6>
-                <ul class="footer_links">
+                <div class="footer_links_heading"><b>Courses</b></div>
+                {{-- <ul class="footer_links">
                     <li><a href="/vmware-training-certification-online/">VMware</a></li>
                     <li><a href="/aws-certification-training-online/">AWS Cloud</a></li>
                     <li><a href="/microsoft-azure-certification-training-online/">Azure
@@ -94,10 +93,32 @@
                     <li><a href="/mcsa-mcse-windows-server-training-online/">MCSE</a></li>
                     <li><a href="/ccna-training-certification-online/">CCNA</a></li>
                     <li><a target="_blank" href="https://lms.attariclasses.in/">Self Paced Video (LMS)</a></li>
+                </ul> --}}
+                <ul class="footer_links">
+                    @php
+                    $course = getcmsCourses();
+                    
+                    @endphp
+                    @foreach ($course as $item)
+                        @php
+                            $slug = $item->slug === 'mcsa-mcse-windows-server-training-online' 
+                                ? 'windows-server-hybrid-training-certification-online' 
+                                : $item->slug;
+                        @endphp
+                        <li><a href="{{ url(route('course.detail', ['slug' => $slug] )) }}">{{ $item->menu_title }}</a></li>
+                    @endforeach
+                    {{-- <li><a href="/vmware-training-certification-online/">VMware</a></li>
+                    <li><a href="/aws-certification-training-online/">AWS Cloud</a></li>
+                    <li><a href="/microsoft-azure-certification-training-online/">Azure
+                            Cloud</a></li>
+                    <li><a href="/mcsa-mcse-windows-server-training-online/">MCSE</a></li>
+                    <li><a href="/ccna-training-certification-online/">CCNA</a></li> --}}
+
+                    <li><a target="_blank" href="https://lms.attariclasses.in/">Self Paced Video (LMS)</a></li>
                 </ul>
             </div>
             <div class="col-lg-2 col-md-3 col-6">
-                <h6 class="footer_links_heading"><b>Quick Links</b></h6>
+                <div class="footer_links_heading"><b>Quick Links</b></div>
                 <ul class="footer_links">
                     <li><a href="{{ url(route('training-option')) }}">Training</a></li>
                     <li><a href="{{ url(route('batch')) }}">Batch Schedule</a></li>
@@ -115,7 +136,7 @@
                         <i class="fa fa-map-marker" aria-hidden="true"></i>
                     </div>
                     <div class="footer_info_text">
-                        <h6><b>Address:</b></h6>
+                        <div><b>Address:</b></div>
                         <p>
                             Attari Classes, Kanakia Zillion, F wing, 4th Floor, 438, LBS
                             Marg-CST Road Junction Kurla (West), Mumbai-400070 (Entry from
@@ -129,7 +150,7 @@
 
                     </div>
                     <div class="footer_info_text">
-                        <h6><b>Mobile:</b></h6>
+                        <div><b>Mobile:</b></div>
                         <!--<p class="mb-0"><a href="tel:+91 7304287233">+91 7304287233</a></p>-->
                         <p class="mb-0"><a href="tel:+91 7738375431">+91 7738375431</a></p>
                         <p><a href="tel:+91 9987088551"> +91 9987088551</a></p>
@@ -141,7 +162,7 @@
 
                     </div>
                     <div class="footer_info_text">
-                        <h6><b>Email:</b></h6>
+                        <div><b>Email:</b></div>
                         <p><a href="mailto:info@attariclasses.in">info@attariclasses.in</a></p>
                     </div>
                 </div>
@@ -149,7 +170,9 @@
         </div>
         <div class="row">
             <div class="col-lg-6 col-md-5">
-                <p class="copyright">© 2023 Attari Class. All Rights Reserved</p>
+                <p class="copyright">
+    © {{ date('Y') }} Attari Classes. All Rights Reserved
+</p>
             </div>
             <div class="col-lg-6 col-md-7 text-end footer_privacy">
                 <ul>
@@ -190,16 +213,16 @@
             <!--    <div class="join-whatsap-channel"><a target="_blank" href="https://whatsapp.com/channel/0029Va9JnmaHAdNWUTJFhc2O ">Join our channel on <i aria-hidden="true" class="fab fa-whatsapp"></i></a></div>-->
             <!--</div>-->
             <div class="col-9 text-center py-2">
-                <h4>
+                <p>
                     For Career Assistance : <img src="/assets/frontend/images/inr.png" width="15" height="10"
                         alt="INR" />
                     +91
                     7738375431
-                </h4>
+                </p>
             </div>
             <div class="col-3 query">
                 <div class="query_heading d-flex justify-content-between align-items-center">
-                    <h5>Drop a Query</h5>
+                    <p>Drop a Query</p>
                     <i class="fas fa-chevron-up"></i>
                 </div>
 
@@ -273,7 +296,62 @@
 	</div>
 </div>
 
-{{-- 
+
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const openButtons = document.querySelectorAll(".trainer-btn");
+        const modals = document.querySelectorAll(".trainer-modal-overlay");
+        const closeButtons = document.querySelectorAll(".trainer-modal-close");
+
+        openButtons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                const modalId = button.getAttribute("data-modal");
+                const modal = document.getElementById(modalId);
+
+                if (modal) {
+                    modal.classList.add("active");
+                    document.body.classList.add("modal-open");
+                }
+            });
+        });
+
+        closeButtons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                closeModal(button.closest(".trainer-modal-overlay"));
+            });
+        });
+
+        modals.forEach(function (modal) {
+            modal.addEventListener("click", function (event) {
+                if (event.target === modal) {
+                    closeModal(modal);
+                }
+            });
+        });
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape") {
+                const activeModal = document.querySelector(".trainer-modal-overlay.active");
+                if (activeModal) {
+                    closeModal(activeModal);
+                }
+            }
+        });
+
+        function closeModal(modal) {
+            if (modal) {
+                modal.classList.remove("active");
+                document.body.classList.remove("modal-open");
+            }
+        }
+    });
+</script>
+
+
+
 // <script>
 //   // Get current query parameters from URL
 //   // const queryParams = window.location.search; // includes '?'
@@ -344,69 +422,69 @@
 //   // Set the href dynamically
 //   document.getElementById('whatsapp-link').href = whatsappURL_desktop;
 //   document.getElementById('whatsapp-link-mobile').href = whatsappURL_mobile;
-// </script> --}}
-
+// </script>
 
 
 {{--
-<script>
-  // Mapping of original keys to replacement letters
-  const keyMap = {
-    gclid: 'G',
-    gbraid: 'G',
-    gad: 'G',
-    fbclid: 'F',
-    ig: 'I',
-    linkedin: 'L',
-    chatgpt: 'C'
-  };
+// <script>
+// Mapping of original keys to replacement letters
+//   const keyMap = {
+//     gclid: 'G',
+//     gbraid: 'G',
+//     gad: 'G',
+//     fbclid: 'F',
+//     ig: 'I',
+//     linkedin: 'L',
+//     chatgpt: 'C'
+//   };
 
-  const urlParams = new URLSearchParams(window.location.search);
-  const finalKeys = new Set(); // To avoid duplicates
+//   const urlParams = new URLSearchParams(window.location.search);
+//   const finalKeys = new Set(); // To avoid duplicates
 
-  // Step 1: Handle direct key matches
-  urlParams.forEach((value, key) => {
-    if (keyMap[key]) {
-      finalKeys.add(keyMap[key]);
-    }
+//   // Step 1: Handle direct key matches
+//   urlParams.forEach((value, key) => {
+//     if (keyMap[key]) {
+//       finalKeys.add(keyMap[key]);
+//     }
 
-    // Step 2: Special handling for utm_source
-    if (key === 'utm_source') {
-      const lowerVal = value.toLowerCase();
-      if (lowerVal.includes('linkedin')) finalKeys.add('L');
-      if (lowerVal.includes('chatgpt.com')) finalKeys.add('C');
-    }
-  });
+//     // Step 2: Special handling for utm_source
+//     if (key === 'utm_source') {
+//       const lowerVal = value.toLowerCase();
+//       if (lowerVal.includes('linkedin')) finalKeys.add('L');
+//       if (lowerVal.includes('chatgpt.com')) finalKeys.add('C');
+//     }
+//   });
 
-  // Build query string: ?G&F&L etc.
-  const customQuery = finalKeys.size ? '?' + [...finalKeys].join('&') : '';
+//   // Build query string: ?G&F&L etc.
+//   const customQuery = finalKeys.size ? '?' + [...finalKeys].join('&') : '';
 
-  // Prepare clean base messages (no HTML, no tag injection)
-  let baseMessage_desktop = `Hi, I am contacting you through your website from desktop view https://attariclasses.in/${customQuery}`;
-  let baseMessage_mobile = `Hi, I am contacting you through your website from mobile view https://attariclasses.in/${customQuery}`;
+//   // Prepare clean base messages (no HTML, no tag injection)
+//   let baseMessage_desktop = `Hi, I am contacting you through your website from desktop view https://attariclasses.in/${customQuery}`;
+//   let baseMessage_mobile = `Hi, I am contacting you through your website from mobile view https://attariclasses.in/${customQuery}`;
 
-  // Step: Strip any accidental HTML (just in case)
-  const stripHtml = (str) => str.replace(/<\/?[^>]+(>|$)/g, '');
+//   // Step: Strip any accidental HTML (just in case)
+//   const stripHtml = (str) => str.replace(/<\/?[^>]+(>|$)/g, '');
   
-  baseMessage_desktop = stripHtml(baseMessage_desktop);
-  baseMessage_mobile = stripHtml(baseMessage_mobile);
+//   baseMessage_desktop = stripHtml(baseMessage_desktop);
+//   baseMessage_mobile = stripHtml(baseMessage_mobile);
 
-  // Encode the messages
-  const encodedMessage_desktop = encodeURIComponent(baseMessage_desktop);
-  const encodedMessage_mobile = encodeURIComponent(baseMessage_mobile);
+//   // Encode the messages
+//   const encodedMessage_desktop = encodeURIComponent(baseMessage_desktop);
+//   const encodedMessage_mobile = encodeURIComponent(baseMessage_mobile);
 
-  // Set phone number
-  const phone = '+917738375431';
+//   // Set phone number
+//   const phone = '+917738375431';
 
-  // Build final WhatsApp URLs
-  const whatsappURL_desktop = `https://api.whatsapp.com/send?phone=${phone}&text=${encodedMessage_desktop}`;
-  const whatsappURL_mobile = `https://api.whatsapp.com/send?phone=${phone}&text=${encodedMessage_mobile}`; 
+//   // Build final WhatsApp URLs
+//   const whatsappURL_desktop = `https://api.whatsapp.com/send?phone=${phone}&text=${encodedMessage_desktop}`;
+//   const whatsappURL_mobile = `https://api.whatsapp.com/send?phone=${phone}&text=${encodedMessage_mobile}`; 
 
-  // Set the href values only (no innerHTML, no injection)
-  document.getElementById('whatsapp-link').setAttribute('href', whatsappURL_desktop);
-  document.getElementById('whatsapp-link-mobile').setAttribute('href', whatsappURL_mobile);
-</script>
+//   // Set the href values only (no innerHTML, no injection)
+//   document.getElementById('whatsapp-link').setAttribute('href', whatsappURL_desktop);
+//   document.getElementById('whatsapp-link-mobile').setAttribute('href', whatsappURL_mobile);
+// </script>
 --}}
+
 
 @php
   $mediumKey = get_medium('key') ?? '';
@@ -432,3 +510,4 @@
   document.getElementById('whatsapp-link').setAttribute('href', whatsappURL_desktop);
   document.getElementById('whatsapp-link-mobile').setAttribute('href', whatsappURL_mobile);
 </script>
+

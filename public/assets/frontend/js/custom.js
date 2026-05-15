@@ -221,6 +221,24 @@ $("li.accordion1 span").click(function() {
 		$(this).parent().addClass("open")
 	}
 });
+
+$(".accordionone h3").click(function () {
+
+    if ($(this).parent().hasClass("open")) {
+
+        $(".accordionone").removeClass("open");
+        $(".accordionone .contentsillabus_div1").slideUp();
+    } else {
+
+        $(".accordionone .contentsillabus_div1").slideUp();
+        $(".accordionone").removeClass("open");
+
+        $(this).parent().children(".contentsillabus_div1").slideDown();
+        $(this).parent().addClass("open");
+    }
+});
+
+
 window.onscroll = function() {};
 var navbar = document.getElementById("vm_nav");
 $(".video_testiminials").owlCarousel({

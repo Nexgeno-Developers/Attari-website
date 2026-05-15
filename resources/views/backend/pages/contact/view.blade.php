@@ -40,4 +40,13 @@
     @elseif ($contact->w_syllabus == '0')
     <p><strong>Syllabus Status:</strong> <span class="badge bg-danger">SYLLABUS NOT SENT</span></p>
     @endif
+    
+    @if($contact->source_url)
+    <p><strong>Source URL:</strong> <a target="_blank" href="{{$contact->source_url}}">{{$contact->source_url}}</a></p>
+    {{-- <p><strong>Source:</strong> {{$contact->source}}</p> --}}
+    @endif
+    
+    @if($contact->medium)
+    <p><strong>medium :</strong> {{$contact->medium}}</p>
+    @endif
 </div>

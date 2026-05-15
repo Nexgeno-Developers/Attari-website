@@ -7,6 +7,7 @@
     $page_description = ReplaceKeyword($detail->meta_description, $cms->replace_keyword);  
     $courseInputName  = $detail->alias2;  
     $courseAlias  = $detail->alias;  
+    $cId  = $detail->id;  
 @endphp
 
 @php
@@ -96,7 +97,7 @@
                         </div>
                     </div>
                     <button type="button" class="btn coursepg_enquiryform" onclick="formModal('{{ url(route('component.form')) }}?section=Enquire Form Top - course Page&title=Enquire Now&current_page={{ urlencode(url()->current()) }}&course_name={{$courseInputName}}')"> Enquire Now </button>
-                    <div class="check_carriculam"><a href="#syllabuse" class="check_curriculum"> Check Curriculum </a></div>
+                    <div class="check_carriculam"><a href="#syllabus" class="check_curriculum"> Check Curriculum </a></div>
                 </div>
                 <div class="show_desktopview col-3 width30 imagebox d-flex align-items-center justify-content-center">
 
@@ -137,12 +138,12 @@
                         </li>
                         
                         <li class="menu-item">
-                            <a class="menu-item-link" href="{{request()->url()}}/#syllabuse" data-href="#syllabuse">Course Content</a>
+                            <a class="menu-item-link" href="{{request()->url()}}/#syllabus" data-href="#syllabus">Course Content</a>
                         </li>
                         
                         
                         <li class="menu-item">
-                            <a class="menu-item-link" href="{{request()->url()}}/#project_cover" data-href="#project_cover">Project</a>
+                            <a class="menu-item-link" href="{{request()->url()}}/#projects_covered" data-href="#projects_covered">Project</a>
                         </li>
                         <li class="menu-item">
                             <a class="menu-item-link" href="{{request()->url()}}/#certificate_section" data-href="#certificate_section">Certificate</a>
@@ -174,9 +175,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h4 class="section_heading pb-lg-3 pb-0 text-center textcolor_blck mb-3">{{ $detail->key_title }} Key
+                        <h2 class="section_heading pb-lg-3 pb-0 text-center textcolor_blck mb-3">{{ $detail->key_title }} Key
                             Features
-                        </h4>
+                        </h2>
                     </div>
                     <div class="col-lg-3 col-md-6 col-6 mb-md-2">
                         <div class="key_boxes">
@@ -252,9 +253,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-9 width70">
-                        <h4 class="section_heading pb-3 text-center textcolor_blck">
+                        <h2 class="section_heading pb-3 text-center textcolor_blck">
                             {{ $detail->overview_section_heading }}
-                        </h4>
+                        </h2>
                         <div>
                             @php echo ReplaceKeyword($detail->course_overview, $cms->replace_keyword) @endphp
                         </div>
@@ -307,20 +308,77 @@
     <!---------===================== syllabas section ==================-------------------------------->
 
 
-        <section id="syllabuse" class="page-section syllabus_section gradiant_bg pt-5 pb-5 position_relative zindex_11111">
+        <section id="syllabus" class="page-section syllabus_section gradiant_bg pt-5 pb-5 position_relative zindex_11111">
             <div class="container">
                 <div class="row">
                     <div class="col-md-9 width70">
-                        <h4 class="section_heading pb-3 textcolor_wht float_left"> {{ $detail->syllabus_section_heading }}
-                        </h4>
+                        <h2 class="section_heading pb-3 textcolor_wht float_left"> {{ $detail->syllabus_section_heading }}
+                        </h2>
                         
-                        @if(!empty($detail->curriculum_pdf))
-                           @php
+                     @if(request()->is('aws-certification-training-online'))
+                        <style>
+                            .online_css {
+                                display: inline-block;
+                                width: 530px;
+                                color: #fff;
+                                margin-top: -15px;
+                                padding-bottom: 0px;
+                            }
+                    
+                            @media (max-width: 767px) {
+                                .online_css {
+                                    width: 100%;
+                                    text-align: center;
+                                }
+                            }
+                        </style>
+                    
+                        <p class="online_css">
+                            Looking for the latest SAA-C03 detailed syllabus? You can view the full curriculum below or download the complete AWS Solution Architect syllabus PDF for offline reference.
+                        </p>
+                    @endif
+                    
+                    
+                    @if(request()->is('vmware-training-certification-online'))
+                        <style>
+                            .online_css {
+                                display: inline-block;
+                                width: 530px;
+                                color: #fff;
+                                margin-top: -15px;
+                                padding-bottom: 0px;
+                            }
+                    
+                            @media (max-width: 767px) {
+                                .online_css {
+                                    width: 100%;
+                                    text-align: center;
+                                }
+                            }
+                        </style>
+                    
+                        <p class="online_css">
+                           Looking for the latest VMware vSphere detailed syllabus or VCP certification syllabus? You can view the complete module-wise VMware course content below or download the VMware syllabus PDF for offline reference.
+                        </p>
+                    @endif
+                    
+                        
+                       @if(!empty($detail->curriculum_pdf))
+
+                            @php
                                 session()->put('pagecourse', $cms->breadcrumb_title);
                             @endphp
-                            <div class="download_carricullam float_right"><a id="showFormBtnCurriculum2"> Get Syllabus on WhatsApp <i class="fab fa-whatsapp get_whatsapp" aria-hidden="true" style="color:#07d353"></i>
-</a>
+                        
+                            <div class="download_carricullam float_right">
+                                <a id="showFormBtnCurriculum2">
+                        
+                                   {{ explode(' ', trim($cms->menu_title ?? $cms->breadcrumb_title))[0] }} Syllabus on WhatsApp
+                        
+                                    <i class="fab fa-whatsapp get_whatsapp" aria-hidden="true" style="color:#07d353;"></i>
+                        
+                                </a>
                             </div>
+                        
                         @endif
                         
                         
@@ -481,7 +539,7 @@
 
                     <div class="col-md-3 width30 position_sticky">
                         <div class="bookdemofreeform_course gray_bgg1 margin-top55">
-                            <h4 class="text-center">Book a <b>FREE</b> Demo</h4>
+                            <p class="text-center fs-24">Book a <b>FREE</b> Demo</p>
 
                             @include('frontend.component.common_form', [
                                 'section' => 'Book a FREE Demo - Course Page',
@@ -501,11 +559,11 @@
 
         <!--Projects Covered section -->
         @if (!empty($project_covered))
-            <section id="project_cover" class="page-section prje_cove_section light_gray_bg pt-5 pb-5 position_relative zindex_1111">
+            <section id="projects_covered" class="page-section prje_cove_section light_gray_bg pt-5 pb-5 position_relative zindex_1111">
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
-                            <h4 class="section_heading pb-3 text-center">{{ $detail->project_section_heading }}</h4>
+                            <h2 class="section_heading pb-3 text-center">{{ $detail->project_section_heading }}</h2>
                             <div class="owl-carousel owl-theme projects-covered">
 
                                 @foreach ($project_covered as $row)
@@ -550,7 +608,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
-                            <h4 class="section_heading pb-3 text-center">{{ $detail->certificate_section_heading }}</h4>
+                            <h2 class="section_heading pb-3 text-center">{{ $detail->certificate_section_heading }}</h2>
                             <div class="owl-carousel owl-theme professional_students">
 
                                 @foreach ($certificate as $row)
@@ -575,9 +633,9 @@
 
         <section id="testimonials" class="page-section testiminilas_sec gradiant_bg pt-5 pb-5 dot_clr_white position_relative zindex_11">
             <div class="container">
-                <h3 class="heading_title text-center pddtop_0 pb-3 textcolor_wht">
+                <h2 class="heading_title text-center pddtop_0 pb-3 textcolor_wht">
                     {{ $detail->testimonials_section_heading }}
-                </h3>
+                </h2>
 
                 @if (!empty($video_review))
                     <div class="large-12 columns">
@@ -681,13 +739,13 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
-                            <h4 class="section_heading pb-3 text-center"> {{ $detail->batch_section_heading }}</h4>
+                            <h2 class="section_heading pb-3 text-center"> {{ $detail->batch_section_heading }}</h2>
                         </div>
 
                         <div class="batch_shedule_box">
                             <div class="row align-items-center">
                                 <div class="col-md-9">
-                                    <h5 class="batch_subhed">{{ $batch->paced_title }}</h5>
+                                    <h3 class="batch_subhed">{{ $batch->paced_title }}</h3>
                                     @php $paced_pointer = json_decode($batch->paced_pointer_list) @endphp
                                     <ul>
                                         @foreach ($paced_pointer as $row)
@@ -708,8 +766,8 @@
                         <div class="batch_shedule_box">
                             <div class="row align-items-center">
                                 <div class="col-md-9">
-                                    <h5 class="batch_subhed">{{ $batch->oc_title }} <spam>Preferred</spam>
-                                    </h5>
+                                    <h3 class="batch_subhed">{{ $batch->oc_title }} <span>Preferred</span>
+                                    </h3>
                                     @php $oc_pointer = json_decode($batch->oc_pointer_list) @endphp
                                     <ul>
                                         @foreach ($oc_pointer as $row)
@@ -776,7 +834,7 @@
 
                                 <div class="col-md-3">
                                     <div class="button_main getin_touch_bx">
-                                        <h5 class="pb-2">Get In Touch to Avail <span>{{ $batch->off_percentage }} OFF</span></h5>
+                                        <p class="pb-2">Get In Touch to Avail <span>{{ $batch->off_percentage }} OFF</span></p>
 
                                         <a onclick="formModal('{{ url(route('component.form')) }}?section=Online / Classroom - course Page&title=Book a Demo&current_page={{ urlencode(url()->current()) }}&course_name={{$courseInputName}}')">Book a Demo</a>
                                      
@@ -788,7 +846,7 @@
                         <div class="batch_shedule_box">
                             <div class="row align-items-center">
                                 <div class="col-md-9">
-                                    <h5 class="batch_subhed">{{ $batch->corp_title }}</h5>
+                                    <h3 class="batch_subhed">{{ $batch->corp_title }}</h3>
                                     @php $corp_pointer = json_decode($batch->corp_pointer_list) @endphp
                                     <ul>
                                         @foreach ($corp_pointer as $row)
@@ -823,31 +881,374 @@
 
 
 
+@php
+    $trainerHeading = 'Meet Our Expert Trainer';
+    $trainerDesc = 'Learn from Industry Expert Trainer';
 
-    @if(!empty($detail->seo_label) && !empty($detail->seo_description))
-        <section class="page-section overview py-5">
-                <div class="row">
+    if ($cId == 5) {
+        $trainerHeading = 'VMware';
+        $trainerDesc = 'Learn VMware vSphere Server Virtualization from Industry Expert Trainer';
+    } elseif ($cId == 7) {
+        $trainerHeading = 'AWS';
+        $trainerDesc = 'Learn AWS Cloud Computing from Industry Expert Trainer';
+    } elseif ($cId == 8) {
+        $trainerHeading = 'Azure';
+        $trainerDesc = 'Learn Microsoft Azure Cloud Computing from Industry Expert Trainer';
+    } elseif ($cId == 11) {
+        $trainerHeading = 'Windows Server';
+        $trainerDesc = 'Learn Windows Server Hybrid Administration from Industry Expert Trainer';
+    } elseif ($cId == 10) {
+        $trainerHeading = 'CCNA';
+        $trainerDesc = 'Learn CCNA Networking from Industry Expert Trainer';
+    } elseif ($cId == 9) {
+        $trainerHeading = 'Windows Server';
+        $trainerDesc = 'Learn Windows Server Hybrid Administration from Industry Expert Trainer';
+    }
+@endphp
 
-                        @php 
-                            $seo_label = ReplaceKeyword($detail->seo_label, $cms->replace_keyword); 
-                            $seo_description = ReplaceKeyword($detail->seo_description, $cms->replace_keyword);
-                        @endphp
-                        <div class="location_box text-center">
-                            <h2 id="seoHeading" style="cursor: pointer; display: inline-block;">
-                                {{ $seo_label }}
-                            </h2>
-                            <div id="seoDescription" class="d-none mt-3" style="display: inline-block; text-align: left;">
-                                @php echo html_entity_decode($seo_description) @endphp
+
+
+@if(in_array($cId, [5, 7]))
+                    
+                    <section class="nx_trainer_section gradiant_bg">
+                          <div class="container">
+                            <!-- Heading -->
+                            <div class="text-center">
+                            
+                              <h2 class="nx_trainer_heading"> Meet Our <span>Expert Trainer</span>
+                              </h2>
+                              <p class="nx_trainer_desc"> {{ $trainerDesc }} </p>
                             </div>
-                        </div>
+                            <!-- Trainer Card -->
+                            <div class="nx_trainer_box d-lg-block d-none">
+                              <!-- Top -->
+                               <div class="nx_trainer_top">
+                              <div class="row align-items-center">
+                                  <div class="col-md-8">
+                                      
+                                        <h3 class="nx_trainer_name"> Mr. Maqsood Sheikha </h3>
+                                        <div class="nx_trainer_role"> VMware & AWS Cloud Trainer </div>
+                                      
+                                  </div>
+                                  <div class="col-md-4">
+                                      <div class="nx_trainer_btn_wrap">
+                                     
+                                      <button type="button" class="trainer-btn nx_trainer_btn" data-modal="maqsoodModal"> View Full Profile </button>
+                                    </div>
+                                  </div>
+                              </div>
+                              </div>
+                             
+                              <!-- Content -->
+                              <div class="nx_trainer_content">
+                                <div class="row align-items-center">
+                                  <!-- Left -->
+                                  <div class="col-lg-12">
+                                    <ul class="nx_trainer_points">
+                                      <li> Training Since 2011 </li>
+                                      <li> 10,000+ Students Trained </li>
+                                      <li> VMware vSphere & AWS Cloud Specialist </li>
+                                      <li> Enterprise IT Infrastructure Project Experience </li>
+                                      <li> Students Across India, Gulf Countries & North America </li>
+                                      <li> Hands-on Real Time Project Training </li>
+                                    </ul>
+                                  </div>
+                                  <!-- Right -->
+                                 
+                                </div>
+                              </div>
+                            </div>
+                            
+                            <div class="trainer-grid d-lg-none d-block">
+                                   <!-- Trainer 1 -->
+                                   <div class="trainer-card">
+                                     <div class="trainer-label-box">
+                                       <div class="mobile_tr_name">Mr. Maqsood Sheikha</div>
+                                       <p class="trainer-designation"> VMware & AWS Cloud Trainer </p>
+                                     </div>
+                                     <div class="trainer-content">
+                                       <ul>
+                                         <li>Training Since 2011</li>
+                                         <li>10,000+ Students Trained</li>
+                                         <li>VMware vSphere & AWS Cloud Specialist</li>
+                                         <li>Enterprise IT Infrastructure Project Experience</li>
+                                         <li>Students Across India, Gulf Countries & North America</li>
+                                       </ul>
+                                       <button type="button" class="trainer-btn" data-modal="maqsoodModal"> View Full Profile </button>
+                                     </div>
+                                   </div>
+                                 </div>
+                                 
+                                 
+                          </div>
+                        </section>
 
+                          <!-- Mr. Maqsood Sheikha - Person Schema -->
+                            <script type="application/ld+json">
+                                {
+                                    "@context": "https://schema.org",
+                                    "@type": "Person",
+                                    "@id": "https://attariclasses.in/#maqsood-sheikha",
+                                    "name": "Maqsood Sheikha",
+                                    "jobTitle": "VMware & AWS Cloud Trainer",
+                                    "worksFor": {
+                                    "@id": "https://attariclasses.in/#organization"
+                                },
+                                    "memberOf": {
+                                    "@id": "https://attariclasses.in/#organization"
+                                },
+                                    "alumniOf": {
+                                    "@type": "CollegeOrUniversity",
+                                    "name": "Saboo Siddik College of Engineering"
+                                },
+                                    "description": "Experienced VMware and AWS Cloud trainer with real-time enterprise infrastructure and virtualization expertise. Training students since 2011 with practical hands-on lab sessions.",
+                                    "knowsAbout": [
+                                    "VMware vSphere",
+                                    "VMware Virtualization",
+                                    "AWS Cloud Computing",
+                                    "Cloud Computing",
+                                    "Virtualization",
+                                    "Data Center Technologies",
+                                    "Enterprise Infrastructure"
+                                ],
+                                    "hasOccupation": {
+                                    "@type": "Occupation",
+                                    "name": "VMware & AWS Cloud Computing Trainer"
+                                },
+                                    "sameAs": [
+                                    "https://www.linkedin.com/in/maqsood-sheikha/"
+                                ]
+                            }
+                            </script> 
+                                 
+                                    <!-- Maqsood Modal -->
+<div class="trainer-modal-overlay" id="maqsoodModal">
+    <div class="trainer-modal">
+        <div class="trainer-modal-header">
+            <button type="button" class="trainer-modal-close">&times;</button>
 
+            <div class="trainer-modal-profile">
+               
+                <div>
+                    <div class="header-title">Mr. Maqsood Sheikha</div>
+                    <p>VMware & AWS Cloud Trainer</p>
                 </div>
+            </div>
+        </div>
 
-        </section>
-    @endif
+        <div class="trainer-modal-body">
+          
+            <p>
+                Mr. Maqsood Sheikha completed his engineering graduation from Saboo Siddik College
+                of Engineering in 2006 and started his professional journey in the IT industry.
+                Over the years, he has worked on multiple enterprise IT infrastructure and cloud projects
+                for reputed organizations through professional deployments and consulting assignments.
+            </p>
+
+            <p>
+                He has served projects associated with companies including JPMorgan Chase & Co.,
+                Nomura Holdings, Air India, Dmart, Kotak Life Insurance, Wipro Infotech,
+                Allied Digital, and CMC, a Tata Group subsidiary.
+            </p>
+
+            <p>
+                Since 2011, he has been actively involved in the IT training industry and has successfully
+                trained more than 10,000 students from India and across the world. Students from Mumbai,
+                Delhi, Bangalore, Hyderabad, Chennai, Pune, and other major cities of India, along with
+                students from Gulf countries including Dubai and Saudi Arabia, and learners from North America
+                and the USA have attended his training programs.
+            </p>
+
+            <div class="expertise">His Expertise Includes</div>
+
+            <ul>
+                <li>VMware vSphere Virtualization</li>
+                <li>AWS Cloud Computing</li>
+                <li>Data Center Virtualization</li>
+                <li>Cloud Infrastructure Training</li>
+                <li>AWS Solutions Architecture</li>
+            </ul>
+
+            <p>
+                Students appreciate his practical teaching style, real-time scenario-based explanations,
+                interview preparation guidance, and beginner-friendly approach.
+            </p>
+        </div>
+    </div>
+</div>
+                             
+                             @else 
+                             
+                           
+                         <section class="nx_trainer_section gradiant_bg">
+                          <div class="container">
+                            <!-- Heading -->
+                            <div class="text-center">
+                            
+                              <h2 class="nx_trainer_heading"> Meet Our <span>Expert Trainer</span>
+                              </h2>
+                              <p class="nx_trainer_desc"> {{ $trainerDesc }} </p>
+                            </div>
+                            <!-- Trainer Card -->
+                            <div class="nx_trainer_box d-lg-block d-none">
+                              <!-- Top -->
+                               <div class="nx_trainer_top">
+                              <div class="row align-items-center">
+                                  <div class="col-md-8">
+                                      
+                                        <h3 class="nx_trainer_name"> Mr. Zameer Momin</h3>
+                                        <div class="nx_trainer_role">Microsoft Azure, Windows Server Hybrid & Networking Trainer </div>
+                                      
+                                  </div>
+                                  <div class="col-md-4">
+                                      <div class="nx_trainer_btn_wrap">
+                                     
+                                      <button type="button" class="trainer-btn nx_trainer_btn" data-modal="zamirModal"> View Full Profile </button>
+                                    </div>
+                                  </div>
+                              </div>
+                              </div>
+                             
+                              <!-- Content -->
+                              <div class="nx_trainer_content">
+                                <div class="row align-items-center">
+                                  <!-- Left -->
+                                  <div class="col-lg-12">
+                                    <ul class="nx_trainer_points">
+                                      <li>Training Since 2017</li>
+                                         <li>8,000+ Students Trained</li>
+                                         <li>Azure, Windows Server Hybrid & CCNA Networking</li>
+                                         <li>Enterprise Infrastructure Experience</li>
+                                         <li>Students Across India, Gulf Countries & North America</li>
+                                    </ul>
+                                  </div>
+                                  <!-- Right -->
+                                 
+                                </div>
+                              </div>
+                            </div>
+                            
+                            <div class="trainer-grid d-lg-none d-block">
+                                   <!-- Trainer 1 -->
+                                   <div class="trainer-card">
+                                     <div class="trainer-label-box">
+                                       <div class="mobile_tr_name"> Mr. Zameer Momin</div>
+                                       <p class="trainer-designation"> Microsoft Azure, Windows Server Hybrid & CCNA  </p>
+                                     </div>
+                                     <div class="trainer-content">
+                                       <ul>
+                                         <li>Training Since 2017</li>
+                                         <li>8,000+ Students Trained</li>
+                                         <li>Azure, Windows Server Hybrid & CCNA Networking</li>
+                                         <li>Enterprise Infrastructure Experience</li>
+                                         <li>Students Across India, Gulf Countries & North America</li>
+                                       </ul>
+                                       <button type="button" class="trainer-btn" data-modal="zamirModal"> View Full Profile </button>
+                                     </div>
+                                   </div>
+                                 </div>
+                                 
+                                 
+                          </div>
+                        </section>
+
+                        <!-- Mr. Zameer Momin - Person Schema -->
+                            <script type="application/ld+json">
+                            {
+                              "@context": "https://schema.org",
+                              "@type": "Person",
+                              "@id": "https://attariclasses.in/#zameer-momin",
+                              "name": "Zameer Momin",
+                              "jobTitle": "Microsoft Azure, Windows Server Hybrid & CCNA Trainer",
+                              "worksFor": {
+                                "@id": "https://attariclasses.in/#organization"
+                              },
+                              "memberOf": {
+                                "@id": "https://attariclasses.in/#organization"
+                              },
+                              "alumniOf": {
+                                "@type": "CollegeOrUniversity",
+                                "name": "K. J. Somaiya College"
+                              },
+                              "description": "Experienced Microsoft Azure, Windows Server Hybrid, and CCNA Networking trainer with practical enterprise infrastructure expertise. Associated with IT training since 2017.",
+                              "knowsAbout": [
+                                "Microsoft Azure",
+                                "Windows Server Hybrid",
+                                "CCNA Networking",
+                                "Cloud Computing",
+                                "Enterprise Infrastructure",
+                                "Networking"
+                              ],
+                              "hasOccupation": {
+                                "@type": "Occupation",
+                                "name": "Azure Cloud, Windows Server Hybrid & CCNA Networking Trainer"
+                              }
+                            }
+                            </script>
+                                
+                                
+                                <!-- Zameer Modal -->
+<div class="trainer-modal-overlay" id="zamirModal">
+    <div class="trainer-modal">
+        <div class="trainer-modal-header">
+            <button type="button" class="trainer-modal-close">&times;</button>
+
+            <div class="trainer-modal-profile">
+              
+                <div>
+                    <div class="header-title">Mr. Zameer Momin</div>
+                    <p>Microsoft Azure, Windows Server Hybrid & Networking Trainer </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="trainer-modal-body">
+            
+            <p>
+                Mr. Zameer Momin is an experienced IT infrastructure and cloud trainer specializing in Microsoft Azure Cloud, Windows Server Hybrid Administration, Networking, and Enterprise IT technologies.
+
+            </p>
+
+            <p>
+                After completing his Computer Engineering degree in 2008 from K.J Somaiya College, he started his professional career in the IT industry with a strong focus on networking technologies. With certifications including CCNA and CCNP, he built strong expertise in enterprise networking before gradually moving into Microsoft Azure Cloud and Windows Server Hybrid technologies.
+
+            </p>
+
+            <p>
+               He has served projects associated with companies including NIIT Technologies, Eclerx, First Source, HCL Comnet, Holcim and Patni Computers
+
+            </p>
+
+            <p>
+               Since 2017, he has been actively associated with Attari Classes as a trainer and mentor, helping students and working professionals build successful careers in cloud computing and infrastructure administration.
+
+            </p>
+
+            <p>
+                He has successfully trained more than 8,000 students from India and across the world. Students from Mumbai, Delhi, Bangalore, Hyderabad, Chennai, Pune, and other major cities of India, along with students from Gulf countries including Dubai and Saudi Arabia, and learners from North America and the USA have attended his training programs.
+
+            </p>
+
+            <div class="expertise">His expertise includes:</div>
+
+            <ul>
+                <li>Microsoft Azure Cloud Administration</li>
+                <li>Windows Server Hybrid Infrastructure</li>
+                <li>CCNA Networking</li>
+            </ul>
+
+            <p>
+                Students appreciate his simplified teaching style, practical implementation approach, troubleshooting guidance, and strong focus on real-world concepts
+            </p>
+        </div>
+    </div>
+</div>
 
 
+
+
+                    @endif
+                    
 
     <!--Faq section-->
 
@@ -860,21 +1261,25 @@
                     @endif
   
                         @if (!empty($faq))
-                            <div class="accordion--container accordion_style">
-
+                            <div class="accordion--container accordion_style_one">
+                            
                                 @foreach ($faq as $row)
-                                    <li class="accordion">
-                                        <span> @php echo ReplaceKeyword($row->question, $cms->replace_keyword) @endphp <i class="fa fa-angle-up"></i>
-                                        </span>
-                                        <ul>
+                                    <div class="accordionone">
+                            
+                                        <h3>
+                                            @php echo ReplaceKeyword($row->question, $cms->replace_keyword) @endphp
+                                            <i class="fa fa-angle-up"></i>
+                                        </h3>
+                            
+                                        <div class="contentsillabus_div1">
                                             <div class="txt">
                                                 @php echo ReplaceKeyword($row->answer, $cms->replace_keyword) @endphp
                                             </div>
-                                        </ul>
-                                    </li>
+                                        </div>
+                            
+                                    </div>
                                 @endforeach
-
-
+                            
                             </div>
                     <!----================== Faq Schema ==================------------------->
                             @php
@@ -912,7 +1317,7 @@
                         @endif
 
                         <div class="gradiant_bg bookdemofreeform_course course_buttom_form mt-4">
-                            <h4 class="text-center textcolor_wht pb-2">Book a <b>FREE</b> Demo</h4>
+                            <p class="text-center textcolor_wht pb-2 fs-24">Book a <b>FREE</b> Demo</p>
                             @include('frontend.component.common_form', [
                                 'section' => 'Book a FREE Demo - Course Page',
                                 'title'  => '',  
@@ -952,7 +1357,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h4 class="section_heading pb-3 text-center"> Other Courses <strong>We Offer</strong></h4>
+                    <h2 class="section_heading pb-3 text-center"> Other Courses <strong>We Offer</strong></h2>
                     <div class="owl-carousel owl-theme other_courses_slider">
 
                         @foreach ($cms_course as $row)
@@ -982,23 +1387,33 @@
             ->where('cms.zone', 0)
             ->where('cms.id', '!=', $cms->id)
             ->get(['cms.course_id', 'cms.slug', 'courses.thumbnail']);
-
-        // Find and move course_id = 5 to position 8 (index 7)
-        $course_wsh  = $cms_courses->firstWhere('course_id', 5);
-
+            
+        $course_wsh  = $cms_courses->firstWhere('course_id', 11);
+        
+        if (!$course_wsh) {
+            // If not found, fetch course_id = 11 directly
+            $cms_courses_temp = DB::table('cms')
+                ->join('courses', 'cms.course_id', '=', 'courses.id')
+                ->where('cms.status', 1)
+                ->where('cms.zone', 0)
+                ->where('cms.course_id', 11)
+                ->get(['cms.course_id', 'cms.slug', 'courses.thumbnail']);
+        
+            $course_wsh = $cms_courses_temp->first();
+        }
+        
     @endphp
     
     <section class="other_courses light_gray_bg pt-5 pb-5">
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h4 class="section_heading pb-3 text-center"> Other Courses <strong>We Offer</strong></h4>
+                    <h2 class="section_heading pb-3 text-center"> Other Courses <strong>We Offer</strong></h2>
                     <div class="owl-carousel owl-theme other_courses_slider">
     
                         @foreach ($cms_courses as $row)
                             @php 
                                 $row = $row->course_id == 9 && $course_wsh ? $course_wsh : $row;
-                                var_dump($row);
                             @endphp
                             <div class="item">
                                 <div class="other_crs_box">
@@ -1020,7 +1435,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
+ @php
+ $course_name = $courseInputName;
+                session()->put('course_name', $course_name);
+            @endphp
 
+            <h2>Find {{ $course_name }} by Location</h2>
                     <div class="location_box">
                         @php
 
@@ -1040,9 +1460,9 @@
                             session()->put('course_name', $course_name);
                         @endphp
 
-                        <h2>
-                            Find {{ $course_name }} Certification Training Course in other Cities:
-                        </h2>
+                        <h3>
+                        {{ $course_name }} in other Cities
+                        </h3>
 
                         @php
                             $cms_alias_city = DB::table('cms')->where('status', 1)->where('zone', 1)->where('course_id', $cms->course_id)->whereNot('id', $cms->id)->get(['alias', 'slug']);
@@ -1072,9 +1492,9 @@
 
                             @if($cms_alias_country->isNotEmpty())
                                 <div class="location_box">
-                                    <h2>
-                                        Find {{ $course_name }} Certification Training Course in other Country:
-                                    </h2>
+                                    <h3>
+                                      {{ $course_name }} in other Countries
+                                    </h3>
                                     <ul class="elementor-icon-list-items list-container">
                                         @foreach ($cms_alias_country as $index => $row)
                                             <li class="list-item" data-index="{{ $index }}">
@@ -1090,6 +1510,39 @@
                             @endif
                         @endif
                     </div>
+                    
+                    
+                 <div class="row">
+
+    @if(!empty($detail->seo_label) && !empty($detail->seo_description))
+        @php 
+            $seo_label = ReplaceKeyword($detail->seo_label, $cms->replace_keyword); 
+            $seo_description = ReplaceKeyword($detail->seo_description, $cms->replace_keyword);
+        @endphp
+
+        <div class="location_box text-center">
+
+            <h2 
+                class="course-info-heading"
+                role="button"
+                tabindex="0"
+                aria-expanded="false"
+                aria-controls="courseInfoContent"
+            >
+                <span>{{ $seo_label }}</span>
+                <span class="course-info-icon">+</span>
+            </h2>
+
+            <div id="courseInfoContent" class="course-info-content">
+                <div class="course-info-inner">
+                    @php echo html_entity_decode($seo_description) @endphp
+                </div>
+            </div>
+
+        </div>
+    @endif
+
+</div>
 
                 </div>
             </div>
@@ -1097,6 +1550,32 @@
     </section>
 
     <style>
+    .course-info-heading {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.course-info-icon {
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.course-info-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+    text-align: left;
+}
+
+.course-info-inner {
+    padding-top: 15px;
+}
+
 	.hidden_classes {
 		display: none;
 	}
@@ -1118,7 +1597,40 @@
 </style>
 
     <!-------------=============== courses end =============== --------------------> 
-    
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const headings = document.querySelectorAll(".course-info-heading");
+
+    headings.forEach(function (heading) {
+        function toggleAccordion() {
+            const contentId = heading.getAttribute("aria-controls");
+            const content = document.getElementById(contentId);
+            const icon = heading.querySelector(".course-info-icon");
+            const isOpen = heading.getAttribute("aria-expanded") === "true";
+
+            if (isOpen) {
+                content.style.maxHeight = "0px";
+                heading.setAttribute("aria-expanded", "false");
+                icon.textContent = "+";
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+                heading.setAttribute("aria-expanded", "true");
+                icon.textContent = "−";
+            }
+        }
+
+        heading.addEventListener("click", toggleAccordion);
+
+        heading.addEventListener("keydown", function (event) {
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                toggleAccordion();
+            }
+        });
+    });
+});
+</script>
+
     <script>
     document.addEventListener("DOMContentLoaded", function () {
         function updateVisibleItems() {
@@ -1259,6 +1771,8 @@ window.scrollTo(0, 0);
                 top: targetPosition,
                 behavior: 'smooth'
               });
+              const currentPageUrl = window.location.origin + window.location.pathname.replace(/\/?$/, '/');
+              history.pushState(null, '', currentPageUrl + '#' + targetId);
             }));
         
             window.addEventListener("scroll", () => {
@@ -1278,7 +1792,8 @@ window.scrollTo(0, 0);
         }
     });
   </script>  
-        
+  
+  
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const heading = document.getElementById("seoHeading");
@@ -1291,5 +1806,5 @@ window.scrollTo(0, 0);
             }
         });
     </script>
-
+    
 @endsection

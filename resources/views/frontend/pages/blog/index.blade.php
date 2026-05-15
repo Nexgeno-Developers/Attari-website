@@ -9,6 +9,24 @@
 
 @section('page.content')
 
+
+<style>
+    .post_box .text_box_post p {
+     margin-bottom: 0;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    padding-bottom: 4px;
+    padding-top: 0px !important;
+    padding-right: 0px;
+    font-size:13px !important;
+}
+
+.text_box_post {
+    height: 128px;
+}
+</style>
     <!----------------=============== blog start ================------------->
     <section class="blog_banner pb-md-5 pb-3">
         <div class="container">
@@ -63,11 +81,11 @@
                             
                             
                             <div class="col-md-2">
-                                <a href="{{ route('blog-course-view', ['course' => 'MCSE']) }}">
+                                <a href="{{ route('blog-course-view', ['course' => 'Windows Server Hybrid']) }}">
                                     <div class="boxtop_box">
                                         
                                             <i aria-hidden="true" class="fab fa-windows"></i>
-                                            <p>Windows Server(MCSE)</p>
+                                            <p>Windows Server Hybrid</p>
                                     </div>
                                  </a>
                             </div>
@@ -96,25 +114,29 @@
             
             <div class="col-md-9">
                 <h3 class="pb-2">Recent Posts</h3>
+                 <div class="row">
                 @foreach($blog as $blogs)
-                <div class="col-md-12 mb-4">
+               
+                <div class="col-md-4 mb-4">
                     <div class="post_box">
                         <div class="row align-items-center">
-                            <div class="col-md-3 img">
+                            <div class="col-md-12 img">
                                 <a href="{{ url(route('blog.detail', ['category' =>'blog','slug' => $blogs->slug] )) }}"><img src="{{ asset('storage/' . $blogs->main_image) }}" alt="" /></a>
                             </div>
-                            <div class="col-md-9 text_box_post">
+                            <div class="col-md-12 text_box_post">
                                 <h6><a href="{{ url(route('blog.detail', ['category' =>'blog','slug' => $blogs->slug] )) }}">{{ $blogs->title }}</a></h6>
-                                <p>{{ $blogs->short_description }}</p>
+                                <p class="d-none">{{ $blogs->short_description }}</p>
                                 <p class="pt-3"><strong>Last Update:</strong> {{ $blogs->updated_at->format('F j, Y') }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
+                
                 @endforeach
                 <div class="pagination">
                     {{ $blog->links('pagination::newbootstrap-5') }}
                 </div> 
+                </div>
             </div>
             
             <div class="col-md-3 col-12 d-none d-md-block">
@@ -133,7 +155,15 @@
 </section>
 
 @php
-    $learning = DB::table('cms')->where('status', 1)->where('zone', 0)->get(['course_id','slug']);
+    $learning = DB::table('cms')
+    ->join('courses', 'cms.course_id', '=', 'courses.id')
+    ->where('cms.status', 1)
+    ->where('cms.zone', 0)
+    ->get([
+        'cms.course_id',
+        'cms.slug',
+        'courses.thumbnail'
+    ]);
 @endphp
     <section class="other_courses pt-5 pb-5">
         <div class="container">
@@ -146,7 +176,7 @@
                         @if($filtered1)
                             <div class="item">
                                 <div class="other_crs_box">
-                                    <a href="{{ url(route('course.detail', ['slug' => $filtered1->slug] )) }}"><img src="/assets/frontend/images/vmware_course1.jpg" /></a>
+                                    <a href="{{ url(route('course.detail', ['slug' => $filtered1->slug] )) }}"><img src="{{ asset('storage/' . $filtered1->thumbnail) }}" /></a>
                                 </div>
                             </div>
                         @endif
@@ -155,7 +185,7 @@
                         @if($filtered2)
                             <div class="item">
                                 <div class="other_crs_box">
-                                    <a href="{{ url(route('course.detail', ['slug' => $filtered2->slug] )) }}"><img src="/assets/frontend/images/aws.jpg" /></a>
+                                    <a href="{{ url(route('course.detail', ['slug' => $filtered2->slug] )) }}"><img src="{{ asset('storage/' . $filtered2->thumbnail) }}" /></a>
                                 </div>
                             </div>
                         @endif
@@ -164,16 +194,16 @@
                         @if($filtered3)
                             <div class="item">
                                 <div class="other_crs_box">
-                                    <a href="{{ url(route('course.detail', ['slug' => $filtered3->slug] )) }}"><img src="/assets/frontend/images/azure.jpg" /></a>
+                                    <a href="{{ url(route('course.detail', ['slug' => $filtered3->slug] )) }}"><img src="{{ asset('storage/' . $filtered3->thumbnail) }}" /></a>
                                 </div>
                             </div>
                         @endif    
 
-                        @php $filtered4 = $learning->where('course_id', 9)->first(); @endphp
+                        @php $filtered4 = $learning->where('course_id', 11)->first(); @endphp
                         @if($filtered4)
                             <div class="item">
                                 <div class="other_crs_box">
-                                    <a href="{{ url(route('course.detail', ['slug' => $filtered4->slug] )) }}"><img src="/assets/frontend/images/microsft.jpg" /></a>
+                                    <a href="{{ url(route('course.detail', ['slug' => $filtered4->slug] )) }}"><img src="{{ asset('storage/' . $filtered4->thumbnail) }}" /></a>
                                 </div>
                             </div>
                         @endif
@@ -182,7 +212,7 @@
                         @if($filtered5)
                             <div class="item">
                                 <div class="other_crs_box">
-                                    <a href="{{ url(route('course.detail', ['slug' => $filtered5->slug] )) }}"><img src="/assets/frontend/images/ccna.jpg" /></a>
+                                    <a href="{{ url(route('course.detail', ['slug' => $filtered5->slug] )) }}"><img src="{{ asset('storage/' . $filtered5->thumbnail) }}" /></a>
                                 </div>
                             </div>
                         @endif

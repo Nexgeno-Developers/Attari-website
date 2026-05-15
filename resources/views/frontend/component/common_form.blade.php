@@ -16,16 +16,15 @@ $class = "form_" . $value;
 <form class="{{$class}}" action="{{url(route('contact.create'))}}" method="post" enctype="multipart/form-data">
     @csrf
 
-    <h5 class="text-center {{ isset($Headingclassname) ? $Headingclassname : '' }}">{!! isset($title) ? $title : '' !!}</h5>
+    <p class="text-center {{ isset($Headingclassname) ? $Headingclassname : '' }}">{!! isset($title) ? $title : '' !!}</p>
 
     <input type="hidden" name="section" value="{{$section}}" data-aos-once="true" data-aos="fade-up" />
     <input type="hidden" name="url" value="{{ request()->fullUrl() }}" data-aos-once="true" data-aos="fade-up" />
     <input type="hidden" name="ip" value="{{ $session_data['ip'] }}" data-aos-once="true" data-aos="fade-up" />
-    <input type="hidden" name="ref_url" value="{{ url()->previous() }}" data-aos-once="true" data-aos="fade-up" />
-
+    <input type="hidden" name="ref_url" value="{{ url()->previous() }}" data-aos-once="true" data-aos="fade-up" />  
+    
     <input type="hidden" name="source_url" value="{{ session('source_url') ?? '-' }}" data-aos-once="true" data-aos="fade-up" />
-    {{--
-    <input type="hidden" name="source" value="{{ session('source') ?? '-' }}" data-aos-once="true" data-aos="fade-up" /> --}}
+    {{-- <input type="hidden" name="source" value="{{ session('source') ?? '-' }}" data-aos-once="true" data-aos="fade-up" /> --}}
 
     <input type="hidden" name="medium" value="{{ get_medium('value') ?? '-' }}" data-aos-once="true" data-aos="fade-up" />
 

@@ -49,10 +49,10 @@ class CronjobController extends Controller
                 $cvPath = $contact->cv ?? '';
                 $ip = $contact->ip ?? '';
                 $ref_url = $contact->ref_url ?? '';
-
+                
                 $source_url = $contact->source_url ?? '-';
                 $source = $contact->source ?? '-';
-
+                
                 $w_countrycode = $contact->w_countrycode ?? '';
                 $w_phone = $contact->w_phone ?? '';
                 $w_syllabus = ($contact->w_syllabus == 1) ? "Sent" : "Failed";
@@ -76,6 +76,9 @@ class CronjobController extends Controller
                             break;
                         case stripos($services, 'ccna') !== false:
                             $subject = "CCNA Course Enquiry";
+                            break;
+                        case stripos($services, 'Windows Server Hybrid Training') !== false:
+                            $subject = "Windows Server Hybrid Course Enquiry";
                             break;
                         default:
                             $subject = "Lead Enquiry";
@@ -171,14 +174,13 @@ class CronjobController extends Controller
                         //url
                         if (!empty($url)) {
                         $body .= '<tr><td style="width: 150px;"><strong>Page URL :</strong></td><td>' . $url . '</td></tr>' . "\n\n";
-                        }    
+                        }
                         
                         //ref url
                         if (!empty($ref_url)) {
                         $body .= '<tr><td style="width: 150px;"><strong>Referrer URL :</strong></td><td>' . $ref_url . '</td></tr>' . "\n";
-                        } 
-
-
+                        }
+                        
                         //source url
                         if (!empty($source_url)) {
                         $body .= '<tr><td style="width: 150px;"><strong>Source URL :</strong></td><td>' . $source_url . '</td></tr>' . "\n";

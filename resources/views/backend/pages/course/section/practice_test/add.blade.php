@@ -68,6 +68,32 @@
 
 
                         </div>
+<!-------==========================================================-------------------->
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 class="header-title"><b>Video Section</b></h4>
+                                <hr>
+                            </div>
+                    
+                            <div class="col-sm-12">
+                                <div class="form-group mb-3">
+                                    <label>Statement <!--<span class="red">*</span>--></label>
+                                    <textarea class="form-control trumbowyg" name="statement" rows="4" placeholder="Enter statement here..."></textarea>
+                                </div>
+                            </div>
+                                    
+                    
+                            <div class="col-sm-12">
+                                <div class="form-group mb-3">
+                                    <label>Youtube Video URL<!--<span class="red">*</span>--></label>
+                                    <input type="url" class="form-control" name="youtube_url">
+                                </div>
+                            </div>
+                    
+                        </div>
+
+<!-------==========================================================-------------------->
 
 <!-------==========================================================-------------------->
 

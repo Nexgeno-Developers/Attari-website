@@ -40,9 +40,6 @@ class Course extends Model
         'meta_title',
         'meta_description',
 
-        'seo_label',
-        'seo_description',
-
         'status'
     ];
 }

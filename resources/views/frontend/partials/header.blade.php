@@ -76,8 +76,13 @@ $course = getcmsCourses();
                                         <div class="sub_menu single_column_menu">
                                             <ul>
                                                 @foreach ($course as $row)
+                                                        @php
+                                                            $slug = $row->slug === 'mcsa-mcse-windows-server-training-online' 
+                                                                ? 'windows-server-hybrid-training-certification-online' 
+                                                                : $row->slug;
+                                                        @endphp
                                                     <li>
-                                                        <a href="{{ url(route('course.detail', ['slug' => $row->slug] )) }}">
+                                                        <a href="{{ url(route('course.detail', ['slug' => $slug] )) }}">
                                                             <span class="icon_text">
                                                                 <i class="fa
                                                                 @switch(strtolower($row->menu_title))

@@ -306,8 +306,7 @@ Route::group(['prefix' => 'course'], function () {
     Route::get('/status/{id}/{status}', [CourseController::class, 'status'])->name('course.status');
 
     Route::post('/update/schema', [CourseController::class, 'update_schema'])->name('course.update_schema');
-
-    // Route::get('/additional-seo', [CourseController::class, 'seo_edit'])->name('course.seo_edit');
+    
     Route::post('/update/seo', [CourseController::class, 'seo_update'])->name('course.seo_update');
 });
 

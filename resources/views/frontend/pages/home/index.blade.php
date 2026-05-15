@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('page.title', 'VMware, AWS, Azure, MCSE & CCNA Training Institute, Book Free DEMO -Attari Classes')
+@section('page.title', 'VMware vSphere, AWS Cloud, Azure Cloud, Windows Server Hybrid and CCNA Training Institute, Book Free DEMO -Attari Classes')
 
 @section('page.description',
     'Attari Classes provides Hands-on Practical Training, Book FREE DEMO, Topic wise Recorded Lectures on LMS, Online & Classroom Training options')
@@ -9,41 +9,87 @@
 
 
 @section('page.schema')
-<!--------------------------- Page Schema --------------------------------->
 
+<!-- Attari Classes - EducationalOrganization + LocalBusiness Schema -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": ["EducationalOrganization", "LocalBusiness"],
+  "@id": "https://attariclasses.in/#organization",
   "name": "Attari Classes",
   "url": "https://attariclasses.in/",
-  "logo": "/assets/frontend/images/cropped-header-logo-1.webp",
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "telephone": "7738375431",
-    "contactType": "customer service",
-    "contactOption": "TollFree",
-    "areaServed": "IN",
-    "availableLanguage": ["en","Hindi"]
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://attariclasses.in/assets/frontend/images/cropped-header-logo-1.webp"
   },
-"address": {
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://attariclasses.in/assets/frontend/images/cropped-header-logo-1.webp"
+  },
+  "description": "Attari Classes is an IT training institute offering VMware vSphere, AWS Cloud, Microsoft Azure, Windows Server Hybrid, CCNA, MCSE, live online training, classroom training in Mumbai, and self-paced LMS video courses.",
+  "email": "info@attariclasses.in",
+  "telephone": "+91-7738375431",
+  "hasMap": "https://www.google.com/maps?cid=18202218376659524362",
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 19.07594004083397,
+    "longitude": 72.87757885814574
+  },
+  "areaServed": [
+    { "@type": "Country", "name": "India" },
+    { "@type": "Country", "name": "United Arab Emirates" },
+    { "@type": "Country", "name": "United States" },
+    { "@type": "Country", "name": "United Kingdom" },
+    { "@type": "Country", "name": "Singapore" },
+    { "@type": "Country", "name": "New Zealand" },
+    { "@type": "Country", "name": "Australia" },
+    { "@type": "Country", "name": "Nigeria" },
+    { "@type": "Country", "name": "Saudi Arabia" },
+    { "@type": "Country", "name": "Kuwait" },
+    { "@type": "Country", "name": "Qatar" },
+    { "@type": "Country", "name": "Oman" },
+    { "@type": "Country", "name": "Bahrain" }
+  ],
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "opens": "09:30",
+      "closes": "18:30"
+    }
+  ],
+  "address": {
     "@type": "PostalAddress",
-    "streetAddress": "Attari Classes, Kanakia Zillion, F wing, 4th Floor, 438, LBS Marg-CST Road Junction Kurla (West)",
+    "streetAddress": "Kanakia Zillion, F wing, 4th Floor, 438, LBS Marg-CST Road Junction Kurla (West)",
     "addressLocality": "Mumbai",
+    "addressRegion": "Maharashtra",
     "postalCode": "400070",
     "addressCountry": "IN"
-  },  
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+91-7738375431",
+    "contactType": "customer service",
+    "areaServed": ["IN", "AE", "US", "GB", "SG", "NZ", "AU", "NG", "SA", "KW", "QA", "OM", "BH"],
+    "availableLanguage": ["en"]
+  },
   "sameAs": [
-    "https://attariclasses.in/",
     "https://www.facebook.com/AttariClass",
-    "https://twitter.com/AttariClasses",
     "https://www.instagram.com/attari.classes/",
     "https://www.linkedin.com/company/attari-classes-vmware-aws-azure-mcsa-ccna-training-in-mumbai/"
   ]
 }
 </script>
 
-<!--------------------------- Page Schema end--------------------------------->
+
 @endsection
 
 
@@ -338,6 +384,273 @@
     </section>
 
     <!--DropDown-->
+    
+    
+    
+    
+     <section class="trainer-section">
+    <div class="container">
+
+        <div class="trainer-header">
+           
+           
+  <h2 class="main_heads text-center mb-4">
+                Meet Our  <strong>Expert Trainers</strong>
+            </h2>
+            <p>
+               Practical IT Training in VMware vSphere, AWS Cloud, Microsoft Azure Cloud, Windows Server Hybrid & Networking by Industry Expert Trainers.
+
+            </p>
+        </div>
+
+        <div class="trainer-grid">
+
+            <!-- Trainer 1 -->
+            <div class="trainer-card">
+                <div class="trainer-label-box">
+                     <h3>Mr. Maqsood Sheikha</h3>
+                    <p class="trainer-designation">
+                        VMware & AWS Cloud Trainer
+                    </p>
+                </div>
+
+                <div class="trainer-content">
+                   
+
+                    <ul>
+                        <li>Training Since 2011</li>
+                        <li>10,000+ Students Trained</li>
+                        <li>VMware vSphere & AWS Cloud Specialist</li>
+                        <li>Enterprise IT Infrastructure Project Experience</li>
+                        <li>Students Across India, Gulf Countries & North America</li>
+                    </ul>
+
+                    <button type="button" class="trainer-btn" data-modal="maqsoodModal">
+                        View Full Profile
+                    </button>
+                </div>
+            </div>
+
+            <!-- Trainer 2 -->
+            <div class="trainer-card">
+                <div class="trainer-label-box">
+                    <h3>Mr. Zameer Momin</h3>
+
+                    <p class="trainer-designation">
+                        Microsoft Azure, Windows Server Hybrid & Networking Trainer
+                    </p>
+                </div>
+
+                <div class="trainer-content">
+                   
+
+                    <ul>
+                        <li>Training Since 2017</li>
+                        <li>8,000+ Students Trained</li>
+                        <li>Azure, Windows Server Hybrid & CCNA Networking</li>
+                        <li>Enterprise Infrastructure Experience</li>
+                        <li>Students Across India, Gulf Countries & North America</li>
+                    </ul>
+
+                    <button type="button" class="trainer-btn" data-modal="zamirModal">
+                        View Full Profile
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+            <!-- Mr. Maqsood Sheikha - Person Schema -->
+            <script type="application/ld+json">
+                {
+                    "@context": "https://schema.org",
+                    "@type": "Person",
+                    "@id": "https://attariclasses.in/#maqsood-sheikha",
+                    "name": "Maqsood Sheikha",
+                    "jobTitle": "VMware & AWS Cloud Trainer",
+                    "worksFor": {
+                    "@id": "https://attariclasses.in/#organization"
+                },
+                    "memberOf": {
+                    "@id": "https://attariclasses.in/#organization"
+                },
+                    "alumniOf": {
+                    "@type": "CollegeOrUniversity",
+                    "name": "Saboo Siddik College of Engineering"
+                },
+                    "description": "Experienced VMware and AWS Cloud trainer with real-time enterprise infrastructure and virtualization expertise. Training students since 2011 with practical hands-on lab sessions.",
+                    "knowsAbout": [
+                    "VMware vSphere",
+                    "VMware Virtualization",
+                    "AWS Cloud Computing",
+                    "Cloud Computing",
+                    "Virtualization",
+                    "Data Center Technologies",
+                    "Enterprise Infrastructure"
+                ],
+                    "hasOccupation": {
+                    "@type": "Occupation",
+                    "name": "VMware & AWS Cloud Computing Trainer"
+                },
+                    "sameAs": [
+                    "https://www.linkedin.com/in/maqsood-sheikha/"
+                ]
+            }
+            </script> 
+
+            
+            
+           <!-- Mr. Zameer Momin - Person Schema -->
+            <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "@id": "https://attariclasses.in/#zameer-momin",
+              "name": "Zameer Momin",
+              "jobTitle": "Microsoft Azure, Windows Server Hybrid & CCNA Trainer",
+              "worksFor": {
+                "@id": "https://attariclasses.in/#organization"
+              },
+              "memberOf": {
+                "@id": "https://attariclasses.in/#organization"
+              },
+              "alumniOf": {
+                "@type": "CollegeOrUniversity",
+                "name": "K. J. Somaiya College"
+              },
+              "description": "Experienced Microsoft Azure, Windows Server Hybrid, and CCNA Networking trainer with practical enterprise infrastructure expertise. Associated with IT training since 2017.",
+              "knowsAbout": [
+                "Microsoft Azure",
+                "Windows Server Hybrid",
+                "CCNA Networking",
+                "Cloud Computing",
+                "Enterprise Infrastructure",
+                "Networking"
+              ],
+              "hasOccupation": {
+                "@type": "Occupation",
+                "name": "Azure Cloud, Windows Server Hybrid & CCNA Networking Trainer"
+              }
+            }
+            </script>
+
+
+            
+            <!-- Maqsood Modal -->
+<div class="trainer-modal-overlay" id="maqsoodModal">
+    <div class="trainer-modal">
+        <div class="trainer-modal-header">
+            <button type="button" class="trainer-modal-close">&times;</button>
+
+            <div class="trainer-modal-profile">
+               
+                <div>
+                    <div class="header-title">Mr. Maqsood Sheikha</div>
+                    <p>VMware & AWS Cloud Trainer</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="trainer-modal-body">
+          
+            <p>
+                Mr. Maqsood Sheikha completed his engineering graduation from Saboo Siddik College
+                of Engineering in 2006 and started his professional journey in the IT industry.
+                Over the years, he has worked on multiple enterprise IT infrastructure and cloud projects
+                for reputed organizations through professional deployments and consulting assignments.
+            </p>
+
+            <p>
+                He has served projects associated with companies including JPMorgan Chase & Co.,
+                Nomura Holdings, Air India, Dmart, Kotak Life Insurance, Wipro Infotech,
+                Allied Digital, and CMC, a Tata Group subsidiary.
+            </p>
+
+            <p>
+                Since 2011, he has been actively involved in the IT training industry and has successfully
+                trained more than 10,000 students from India and across the world. Students from Mumbai,
+                Delhi, Bangalore, Hyderabad, Chennai, Pune, and other major cities of India, along with
+                students from Gulf countries including Dubai and Saudi Arabia, and learners from North America
+                and the USA have attended his training programs.
+            </p>
+
+            <div class="expertise">His Expertise Includes</div>
+
+            <ul>
+                <li>VMware vSphere Virtualization</li>
+                <li>AWS Cloud Computing</li>
+                <li>Data Center Virtualization</li>
+                <li>Cloud Infrastructure Training</li>
+                <li>AWS Solutions Architecture</li>
+            </ul>
+
+            <p>
+                Students appreciate his practical teaching style, real-time scenario-based explanations,
+                interview preparation guidance, and beginner-friendly approach.
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Zameer Modal -->
+<div class="trainer-modal-overlay" id="zamirModal">
+    <div class="trainer-modal">
+        <div class="trainer-modal-header">
+            <button type="button" class="trainer-modal-close">&times;</button>
+
+            <div class="trainer-modal-profile">
+              
+                <div>
+                    <div class="header-title">Mr. Zameer Momin</div>
+                    <p>Microsoft Azure, Windows Server Hybrid & Networking Trainer </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="trainer-modal-body">
+            
+            <p>
+                Mr. Zameer Momin is an experienced IT infrastructure and cloud trainer specializing in Microsoft Azure Cloud, Windows Server Hybrid Administration, Networking, and Enterprise IT technologies.
+
+            </p>
+
+            <p>
+                After completing his Computer Engineering degree in 2008 from K.J Somaiya College, he started his professional career in the IT industry with a strong focus on networking technologies. With certifications including CCNA and CCNP, he built strong expertise in enterprise networking before gradually moving into Microsoft Azure Cloud and Windows Server Hybrid technologies.
+
+            </p>
+
+            <p>
+               He has served projects associated with companies including NIIT Technologies, Eclerx, First Source, HCL Comnet, Holcim and Patni Computers
+
+            </p>
+
+            <p>
+               Since 2017, he has been actively associated with Attari Classes as a trainer and mentor, helping students and working professionals build successful careers in cloud computing and infrastructure administration.
+
+            </p>
+
+            <p>
+                He has successfully trained more than 8,000 students from India and across the world. Students from Mumbai, Delhi, Bangalore, Hyderabad, Chennai, Pune, and other major cities of India, along with students from Gulf countries including Dubai and Saudi Arabia, and learners from North America and the USA have attended his training programs.
+
+            </p>
+
+            <div class="expertise">His expertise includes:</div>
+
+            <ul>
+                <li>Microsoft Azure Cloud Administration</li>
+                <li>Windows Server Hybrid Infrastructure</li>
+                <li>CCNA Networking</li>
+            </ul>
+
+            <p>
+                Students appreciate his simplified teaching style, practical implementation approach, troubleshooting guidance, and strong focus on real-world concepts
+            </p>
+        </div>
+    </div>
+</div>
 
     <section class="faq pt-md-5 mt-4 best-institue">
         <div class="container">

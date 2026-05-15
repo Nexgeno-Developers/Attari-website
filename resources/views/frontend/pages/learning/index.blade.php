@@ -132,7 +132,7 @@
         </div>
     </section>
 
-    @php $filtered4 = $learning->whereIn('course_id', ['9','10']); @endphp
+    @php $filtered4 = $learning->whereIn('course_id', ['11','10']); @endphp
     <!----------------Server & Networking------------------  -->
 
     @if(count($filtered4) > 0)
@@ -143,14 +143,14 @@
                         <h1 class="services_headign">Server & Networking</h1>
                     </div>
 
-                    @php $filtered5 = $learning->where('course_id', 9); @endphp
+                    @php $filtered5 = $learning->where('course_id', 11); @endphp
 
                     @if(count($filtered5) > 0)
                         <div class="col-lg-4 col-md-6 box_services">
                             <img src="/assets/frontend/images/vmvare_coursimg.jpg" alt="" />
                             <div class="text_box">
                                 <h5 class="text_services_heading">
-                                    <a href=""> Microsoft Windows Server MCSE </a>
+                                    <a href=""> Windows Server Hybrid </a>
                                 </h5>
                                 <div class="course_button">
                                     @php

@@ -40,7 +40,7 @@
                 <div class="row align-items-center">
                     <div class="col-md-6">
                         <h2 class="aboutpg_hed"> Attari <span class="dark">Classes</span> </h2>
-                        <p> Attari Classes is an IT training institute for VMware, AWS, AZURE, MCSE & CCNA courses </p>
+                        <p> Attari Classes is an IT training institute for VMware vSphere, AWS Cloud, Azure Cloud, Windows Server Hybrid and CCNA course </p>
                         <p> We provide Instructor led Live Online training to candidates across the globe & Classroom
                             Training in Mumbai, we also have self paced training options (Video Learning) </p>
                         <p> The world class training at Attari Classes is offered through several innovative learning

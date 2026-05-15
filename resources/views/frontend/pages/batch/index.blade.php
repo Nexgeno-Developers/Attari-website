@@ -66,14 +66,12 @@ section#testimonials {
                         <li class="menu-item">
                             <a class="menu-item-link" href="{{request()->url()}}/#azure-batch-traning" data-href="#azure-batch-traning">Azure Training Batch Schedule</a>
                         </li>
-                        
                         {{-- <li class="menu-item">
                             <a class="menu-item-link" href="{{request()->url()}}/#mcse-batch-traning" data-href="#mcse-batch-traning">MCSE Training Batch Schedule</a>
                         </li> --}}
                         <li class="menu-item">
                             <a class="menu-item-link" href="{{request()->url()}}/#windows-server-hybrid-training" data-href="#windows-server-hybrid-training">Windows Server Hybrid Training</a>
                         </li>
-
                         <li class="menu-item">
                             <a class="menu-item-link" href="{{request()->url()}}/#ccna-batch-traning" data-href="#ccna-batch-traning">CCNA Training Batch Schedule</a>
                         </li>
@@ -856,21 +854,21 @@ section#testimonials {
 
 
 
-<!-------================================== MCSE =============================----------------------------------->
+<!-------================================== WHI =============================----------------------------------->
 
     <!------------------========================== schedule ===============================-------------------->
     
-    <div id="mcse-batch-traning">
+    <div id="windows-server-hybrid-training">
     <section id="mcse_batch" class="page-section prje_cove_section light_gray_bg pt-5 pb-5 ">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-12">
-                    <h4 class="section_heading pb-3 text-center"> <b>MCSE Training Schedule</b></h4>
+                    <h4 class="section_heading pb-3 text-center"> <b>Windows Server Hybrid Training Schedule</b></h4>
                 </div>
 
                 @php   
                                 
-                    $mcse_batch = DB::table('batches')->where('status', 1)->where('course_id','9')->get(['oc_pointer_list', 'batch_detail', 'off_percentage', 'status','course_id'])->first();
+                    $mcse_batch = DB::table('batches')->where('status', 1)->where('course_id','11')->get(['oc_pointer_list', 'batch_detail', 'off_percentage', 'status','course_id'])->first();
                     $oc_mcse_pointer = json_decode($mcse_batch->oc_pointer_list);
                     $batch_mcse_detail = json_decode($mcse_batch->batch_detail, true);
 
@@ -897,7 +895,7 @@ section#testimonials {
                     $batch_mcse_end_date = !empty($batch_mcse_start_date) ? date('Y-m-d', strtotime($batch_mcse_start_date . ' +6 weeks')) : null;
                     $batch_mcse_end_date2 = !empty($batch_mcse_start_date2) ? date('Y-m-d', strtotime($batch_mcse_start_date2 . ' +6 weeks')) : null;
 
-                    $course_schema_mcse = DB::table('courses')->where('status', 1)->where('id','9')->get(['batch_section_schema','video_section_schema','testimonials_section_schema'])->first();
+                    $course_schema_mcse = DB::table('courses')->where('status', 1)->where('id','11')->get(['batch_section_schema','video_section_schema','testimonials_section_schema'])->first();
 
                 @endphp
 
@@ -960,7 +958,7 @@ section#testimonials {
                                     class="btn bookfreedemo_button"> Book a Demo</button>
 
                                     <a class="view_coursebtn"
-                                        href="{{ url('mcsa-mcse-windows-server-training-online') }}"
+                                        href="{{ url('windows-server-hybrid-training-certification-online') }}"
                                         target="_blank">View Course Details <i aria-hidden="true"
                                             class="far fa-arrow-alt-circle-right"></i></a>
                                 </div>
@@ -973,7 +971,7 @@ section#testimonials {
 
     @php 
         echo str_replace(['[{meta_title}]','[{meta_desc}]','[{current_url}]','[{start_date1}]','[{start_date2}]','[{end_date1}]','[{end_date2}]','[{start_time1}]','[{end_time1}]','[{start_time2}]','[{end_time2}]'],
-        ["MCSE Training Schedule", "Best Training & Certification institute for MCSE/MCSA in Mumbai & across India. Online & Classroom Training options", $meta_url, $batch_mcse_start_date, $batch_mcse_start_date2, $batch_mcse_end_date, $batch_mcse_end_date2, $batch_mcse_startTime1, $batch_mcse_endTime1, $batch_mcse_startTime2, $batch_mcse_endTime2], html_entity_decode($course_schema_mcse->batch_section_schema));
+        ["Windows Server Hybrid Training Schedule", "Best Training & Certification institute for Windows Server Hybrid in Mumbai & across India. Online & Classroom Training options", $meta_url, $batch_mcse_start_date, $batch_mcse_start_date2, $batch_mcse_end_date, $batch_mcse_end_date2, $batch_mcse_startTime1, $batch_mcse_endTime1, $batch_mcse_startTime2, $batch_mcse_endTime2], html_entity_decode($course_schema_mcse->batch_section_schema));
     @endphp
 
 <!-----------------================== Batch mcse Schema =========================------------------------------>
@@ -989,12 +987,12 @@ section#testimonials {
 
     <section id="testimonials" class="testiminilas_sec gradiant_bg pt-5 pb-5 dot_clr_white position_relative">
         <div class="container">
-            <h3 class="heading_title text-center pddtop_0 pb-3 textcolor_wht ">MCSE Cloud Training Testimonials</h3>
+            <h3 class="heading_title text-center pddtop_0 pb-3 textcolor_wht ">Windows Server Hybrid Training Testimonials</h3>
     
     <!-----------============= video testimonials ===============---------------------------------->
 
     @php
-        $video_mcse_review = DB::table('video_reviews')->where('status', 1)->where('course_id','9')->get();
+        $video_mcse_review = DB::table('video_reviews')->where('status', 1)->where('course_id','11')->get();
     @endphp
     
             @if(!empty($video_mcse_review))
@@ -1032,7 +1030,7 @@ section#testimonials {
     <!--------------------- video mcse Review schema -------------------------------------->
 
                 @php 
-                    echo str_replace(['[{meta_title}]','[{meta_desc}]','[{current_url}]'],["MCSE Cloud Training Testimonials",$meta_description,$meta_url], html_entity_decode($course_schema_mcse->video_section_schema));
+                    echo str_replace(['[{meta_title}]','[{meta_desc}]','[{current_url}]'],["Windows Server Hybrid Training Testimonials",$meta_description,$meta_url], html_entity_decode($course_schema_mcse->video_section_schema));
                 @endphp
 
     <!--------------------- video mcse Review schema -------------------------------------->
@@ -1044,7 +1042,7 @@ section#testimonials {
 
     <!-----------============= video testimonials ===============---------------------------------->
     @php
-        $text_mcse_review = DB::table('text_reviews')->where('status', 1)->where('course_id','9')->whereIn('type', ['google', 'google_mcse'])->get();
+        $text_mcse_review = DB::table('text_reviews')->where('status', 1)->where('course_id','11')->whereIn('type', ['google', 'google_mcse'])->get();
         
     @endphp
     
@@ -1091,7 +1089,7 @@ section#testimonials {
     <!--------------------- Text mcse Review -------------------------------------->
 
         @php 
-            echo str_replace(['[{meta_title}]','[{meta_desc}]','[{current_url}]'],["MCSE Cloud Training Testimonials",$meta_description,$meta_url], html_entity_decode($course_schema_mcse->testimonials_section_schema));
+            echo str_replace(['[{meta_title}]','[{meta_desc}]','[{current_url}]'],["Windows Server Hybrid Training Testimonials",$meta_description,$meta_url], html_entity_decode($course_schema_mcse->testimonials_section_schema));
         @endphp
 
     <!--------------------- Text mcse Review -------------------------------------->
@@ -1243,7 +1241,7 @@ section#testimonials {
 
     <section id="testimonials" class="testiminilas_sec gradiant_bg pt-5 pb-5 dot_clr_white">
         <div class="container">
-            <h3 class="heading_title text-center pddtop_0 pb-3 textcolor_wht ">CCNA Cloud Training Testimonials</h3>
+            <h3 class="heading_title text-center pddtop_0 pb-3 textcolor_wht ">CCNA Training Testimonials</h3>
     
     <!-----------============= video testimonials ===============---------------------------------->
 

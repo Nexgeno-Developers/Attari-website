@@ -19,11 +19,11 @@ class MarketingController extends Controller
         $course = $request->course;
         $ip_info = ip_info();
         $userIpData = json_decode($ip_info, true);
-        $ip = $userIpData['ip'] ?? null; 
+        $ip = $userIpData['ip'] ?? null;
         
         $source_url = session('source_url') ?? '-';
         $source = session('source') ?? '-';
-
+        
         // If course_name is empty, retrieve the value from pagecourse
         if(empty($course)){
             $course = session('pagecourse');
@@ -56,10 +56,14 @@ class MarketingController extends Controller
                 $template_name = "azure_plocal_"; //"azure_plocal";
             } elseif (strpos($course, "MCSE") !== false) {
                 $courseId = 9;
-                $template_name = "mcse_plocal";
+                //$template_name = "mcse_plocal";
+                $template_name = "windows_plocal";
             } elseif (strpos($course, "CCNA") !== false) {
                 $courseId = 10;
                 $template_name = "ccna_plocal";
+            }elseif (strpos($course, "Windows Server Hybrid") !== false) {
+                $courseId = 11;
+                $template_name = "windows_plocal";
             }
         } else {
             if (strpos($course, "VMware") !== false) {
@@ -73,10 +77,14 @@ class MarketingController extends Controller
                 $template_name = "azure_pintern";
             } elseif (strpos($course, "MCSE") !== false) {
                 $courseId = 9;
-                $template_name = "mcse_pintern";
+                // $template_name = "mcse_pintern";
+                $template_name = "windows_pintern";
             } elseif (strpos($course, "CCNA") !== false) {
                 $courseId = 10;
                 $template_name = "ccna_pintern";
+            }elseif (strpos($course, "Windows Server Hybrid") !== false) {
+                $courseId = 11;
+                $template_name = "windows_pintern";
             }
         }
         
@@ -100,12 +108,12 @@ class MarketingController extends Controller
                 'section' => 'Get Syllabus on WhatsApp - Course Page',
                 'url' => $request->url,
                 'ref_url' => $request->ref_url,
-
-                'source_url' => $source_url ?? '-',
-                'source' => $source ?? '-',
+                
+                'source_url' => $source_url,
+                'source' => $source,
                 
                 'medium' => $request->medium ?? '-',
-
+                
                 'ip_data' => $ip_info,
                 'services' => $course,
                 'ip' => $ip,

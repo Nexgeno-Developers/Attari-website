@@ -114,7 +114,7 @@
 
         <div class="col-sm-12">
             <div class="form-group mb-3">
-                <label>Statement <span class="red">*</span></label>
+                <label>Statement <!--<span class="red">*</span>--></label>
                 <textarea class="form-control trumbowyg" name="statement" rows="4" placeholder="Enter statement here...">{{$learning->statement}}</textarea>
             </div>
         </div>
@@ -122,7 +122,7 @@
 
         <div class="col-sm-12">
             <div class="form-group mb-3">
-                <label>Youtube Video URL<span class="red">*</span></label>
+                <label>Youtube Video URL<!--<span class="red">*</span>--></label>
                 <input type="url" class="form-control" name="youtube_url" value="{{$learning->youtube_url}}">
             </div>
         </div>

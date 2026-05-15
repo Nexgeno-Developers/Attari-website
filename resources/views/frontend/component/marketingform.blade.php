@@ -29,7 +29,7 @@
             @csrf
     <input type="hidden" name="course" value="">
     <input type="hidden" name="enquiry_id" value="">            
-                                <h5 class="text-center">Get Syllabus and Fee Detail <br> on <i class="fab fa-whatsapp get_whatsapp" aria-hidden="true"></i><span style="color: #07d353;">WhatsApp</span> Now</h5>
+                                <p class="text-center">Get Syllabus and Fee Detail <br> on <i class="fab fa-whatsapp get_whatsapp" aria-hidden="true"></i><span style="color: #07d353;">WhatsApp</span> Now</p>
             @php
                 $countries_json_path = public_path('/assets/frontend/country.json');
                 $countries_json = file_get_contents($countries_json_path);

@@ -14,7 +14,7 @@
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="largeModal-label">Loading...</h5>
+        <p class="modal-title" id="largeModal-label">Loading...</p>
         <button type="button" class="btn-close" onclick="closeModel();" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -28,7 +28,7 @@
   <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="smallModal-label">Loading...</h5>
+        <p class="modal-title" id="smallModal-label">Loading...</p>
         <button type="button" class="btn-close" onclick="closeModel();" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
