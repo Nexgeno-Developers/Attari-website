@@ -417,7 +417,21 @@
 
 
          @php
-            $s = 1;    
+            $syllabusSections = [];
+            if (!empty($syllabus)) {
+                $s = 1;
+                foreach ($syllabus as $row) {
+                    $title = ReplaceKeyword($row->title, $cms->replace_keyword);
+                    $descRaw = schema_ReplaceKeyword($row->description, $cms->replace_keyword);
+                    $descText = trim(preg_replace('/\s+/', ' ', strip_tags(html_entity_decode($descRaw))));
+
+                    $syllabusSections[] = [
+                        'name' => "Module {$s}: {$title}",
+                        'description' => $descText,
+                    ];
+                    $s++;
+                }
+            }
         @endphp
         
         <script type="application/ld+json">
@@ -473,17 +487,7 @@
                     "ratingCount": {{ $detail->total_review }},
                     "bestRating": 5
                 },
-                    "syllabusSections": [
-                            @foreach ($syllabus as $row)
-                                @if($s <= 5)
-                                    {
-                                        "name": "Module {{ $s }}: {{ addslashes(ReplaceKeyword($row->title, $cms->replace_keyword)) }}",
-                                        "description": "{{ schema_ReplaceKeyword($row->description, $cms->replace_keyword) }}"
-                                    }@if($s < 5),@endif
-                                    @php $s++; @endphp
-                                @endif
-                            @endforeach
-                        ]
+                    "syllabusSections": {!! json_encode($syllabusSections, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
             }
          </script>
          
@@ -1283,32 +1287,32 @@
                             </div>
                     <!----================== Faq Schema ==================------------------->
                             @php
-                                $f = 1;
+                                $faqEntities = [];
+                                if (!empty($faq)) {
+                                    foreach ($faq as $row) {
+                                        $questionRaw = ReplaceKeyword($row->question, $cms->replace_keyword);
+                                        $answerRaw = ReplaceKeyword($row->answer, $cms->replace_keyword);
+
+                                        $questionText = trim(preg_replace('/\s+/', ' ', strip_tags(html_entity_decode($questionRaw))));
+                                        $answerText = trim(preg_replace('/\s+/', ' ', strip_tags(html_entity_decode($answerRaw))));
+
+                                        $faqEntities[] = [
+                                            '@type' => 'Question',
+                                            'name' => $questionText,
+                                            'acceptedAnswer' => [
+                                                '@type' => 'Answer',
+                                                'text' => $answerText,
+                                            ],
+                                        ];
+                                    }
+                                }
                             @endphp
                             
                             <script type="application/ld+json">
                             {
                                 "@context": "https://schema.org",
                                 "@type": "FAQPage",
-                                "mainEntity": [
-                                    @foreach ($faq as $row)
-                                        @if ($f <= 5)
-                                            {
-                                                "@type": "Question",
-                                                "name": "@php echo ReplaceKeyword($row->question, $cms->replace_keyword) @endphp",
-                                                "acceptedAnswer": {
-                                                    "@type": "Answer",
-                                                    "text": "@php echo ReplaceKeyword($row->answer, $cms->replace_keyword) @endphp"
-                                                }
-                                            }
-                                            @if ($f < 5),
-                                            @endif
-                                        @endif
-                                        @php
-                                            $f++;
-                                        @endphp
-                                    @endforeach
-                                ]
+                                "mainEntity": {!! json_encode($faqEntities, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
                             }
                             </script>
 
