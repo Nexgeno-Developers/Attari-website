@@ -116,6 +116,13 @@ class CourseController extends Controller
 
     public function edit($id) {
         $course = Course::find($id);
+
+        if (request('section') === 'faq' && $course) {
+            $course->load(['faqs' => function ($query) {
+                $query->orderBy('title_no')->orderBy('id');
+            }]);
+        }
+
         return view('backend.pages.course.edit', compact('course'));
     }
         

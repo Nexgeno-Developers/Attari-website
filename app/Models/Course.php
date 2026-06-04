@@ -42,7 +42,11 @@ class Course extends Model
 
         'status'
     ];
-}
 
+    public function faqs()
+    {
+        return $this->hasMany(Faq::class, 'course_id');
+    }
+}
 
 

@@ -21,7 +21,7 @@
             <div class="col-sm-4">
                 <div class="form-group mb-3">
                     <label>Zone</label>
-                    <select class="form-select" name="zone" id="typeSelect" onclick="toggleInput1();" required>
+                    <select class="form-select" name="zone" required>
                         <option value="0" @if($faq->zone == "0") selected @endif>Main</option>
                         <option value="1" @if($faq->zone == "1") selected @endif>City/Country</option>
                     </select> 
@@ -55,7 +55,11 @@
         });
 
         var responseHandler = function(response) {
-            location.reload();
+            if (window.courseFaqSection) {
+                window.courseFaqSection.onUpdated(response);
+            } else {
+                location.reload();
+            }
         }
     </script>
 

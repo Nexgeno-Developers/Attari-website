@@ -346,6 +346,7 @@ Route::group(['prefix' => 'videoreviews'], function () {
 
 //faq
 Route::group(['prefix' => 'faq'], function () {
+    Route::get('/course/{course}/list', [FaqController::class, 'list'])->name('faq.list');
     Route::get('/edit/{id}', [FaqController::class, 'edit'])->name('faq.edit');
     Route::post('/create', [FaqController::class, 'create'])->name('faq.create');
     Route::post('/update', [FaqController::class, 'update'])->name('faq.update');

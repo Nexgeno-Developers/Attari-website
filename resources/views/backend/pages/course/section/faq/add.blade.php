@@ -46,7 +46,7 @@
             <div class="col-sm-3">
                 <div class="form-group mb-3">
                     <label>Zone</label>
-                    <select class="form-select" name="zone" id="typeSelect" onclick="toggleInput();" required>
+                    <select class="form-select" name="zone" required>
                         <option value="0">Main</option>
                         <option value="1">City/Country</option>
                     </select> 
@@ -67,27 +67,4 @@
     </form>
 </section>
 
-@section('component.scripts')
-    <script>
-        $(document).ready(function() {
-            initValidate('#add_faq_form');
-            initValidate('#updating_heading_form');
-            initTrumbowyg('.trumbowyg');
-        });
-
-        $("#add_faq_form").submit(function(e) {
-            var form = $(this);
-            ajaxSubmit(e, form, responseHandler);
-        });
-
-        $("#updating_heading_form").submit(function(e) {
-            var form = $(this);
-            ajaxSubmit(e, form, responseHandler);
-        });
-
-        var responseHandler = function(response) {
-            location.reload();
-        }
-    </script>
-@endsection
 <!----------======================Text Add Form =============================----------------->
