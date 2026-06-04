@@ -143,6 +143,7 @@
             function confirmDelete(url) {
                 confirmModal(url, function(response) {
                     if (response.deleted_id) {
+                        closeConfirmModel();
                         refreshList(false);
                     }
                 });
