@@ -61,29 +61,7 @@ class CronjobController extends Controller
                 
                  // Determine email subject
                 if (!empty($email)) {
-                    switch (true) {
-                        case stripos($services, 'vmware') !== false:
-                            $subject = "VMware Course Enquiry";
-                            break;
-                        case stripos($services, 'aws') !== false:
-                            $subject = "AWS Cloud Course Enquiry";
-                            break;
-                        case stripos($services, 'azure') !== false:
-                            $subject = "Azure Cloud Course Enquiry";
-                            break;
-                        case stripos($services, 'mcse') !== false:
-                            $subject = "MCSE Course Enquiry";
-                            break;
-                        case stripos($services, 'ccna') !== false:
-                            $subject = "CCNA Course Enquiry";
-                            break;
-                        case stripos($services, 'Windows Server Hybrid Training') !== false:
-                            $subject = "Windows Server Hybrid Course Enquiry";
-                            break;
-                        default:
-                            $subject = "Lead Enquiry";
-                            break;
-                    }
+                    $subject = ($services ?? ' - '). "Course Enquiry";
                 }else {
                     $subject = "WhatsApp Enquiry - " . ($services ?? ' - ');
                 }

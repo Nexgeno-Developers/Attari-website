@@ -246,7 +246,6 @@ class IndexController extends Controller
     public function contact_save(Request $request)
     {
         $rules = [
-            'cv' => 'nullable|mimetypes:application/pdf,application/msword',
             'phone' => 'required|regex:/^[0-9\s\+]{7,}$/',
             'description' => 'nullable|regex:/^[a-zA-Z0-9\s,&-’.@]+$/',
         ];
@@ -266,35 +265,21 @@ class IndexController extends Controller
         $user_ip = json_decode($ip, true);
         //----- new ip --------
         
-    
-        if ($request->hasFile('cv')) {
-            $cvPath = $request->file('cv')->store('assets/image/pdf', 'public');
-        } else {
-            $cvPath = null; // Set to null if 'cv' is not provided
-        }
-    
         // Create the contact record, including 'cv' if provided
         $contactData = $request->all();
         
         //----- new ip --------
         $contactData['ip'] = isset($user_ip["ip"]) ? $user_ip["ip"] : ' - ';
         //----- new ip --------
-        
-        $contactData['cv'] = $cvPath;
 
-        $name = isset($contactData["name"]) ? $contactData["name"] : ' - ';
         $email = isset($contactData["email"]) ? $contactData["email"] : ' - ';
-        $country = isset($contactData["country"]) ? $contactData["country"] : ' - ';
-        $phone = isset($contactData["phone"]) ? $contactData["phone"] : ' - ';
+
         $services = isset($contactData["services"]) ? $contactData["services"] : ' - ';
-        $description = isset($contactData["description"]) ? $contactData["description"] : ' - ';
-        $ip = isset($user_ip["ip"]) ? $user_ip["ip"] : ' - ';
-        $section = isset($contactData["section"]) ? $contactData["section"] : ' - ';
+
         $ref_url = isset($contactData["ref_url"]) ? $contactData["ref_url"] : ' - ';
-        $url = isset($contactData["url"]) ? $contactData["url"] : ' - ';
-        $qualification = isset($contactData["qualification"]) ? $contactData["qualification"] : ' - ';
-        
-        $course_name = $request->session()->put('course_name', $services);
+
+
+        $request->session()->put('course_name', $services);
         
         $contactData['ref_url'] = $ref_url;
         
@@ -311,101 +296,9 @@ class IndexController extends Controller
         $contact = Contact::create($contactData);
         $insertId = $contact->id;
         $request->session()->put('enquiry_id', $insertId);
-        
-        //----- new ip --------
-        $user_data = $user_ip;
-        //----- new ip --------
-
-        // Send email if $cvPath is not null
-
-        if($services == "VMware" || $services == "VMware Training" || stripos(strtolower($services), "vmware") !== false){
-            $subject = "VMware Course Enquiry";
-        } elseif($services == "AWS Cloud" || $services == "AWS Training" || stripos(strtolower($services), "aws") !== false) {
-            $subject = "AWS Cloud Course Enquiry";
-        } elseif($services == "Azure Cloud" || $services == "Microsoft Azure Training" || stripos(strtolower($services), "azure") !== false) {
-            $subject = "Azure Cloud Course Enquiry";
-        } elseif($services == "MCSE" || $services == "MCSE / MCSA Training" || stripos(strtolower($services), "mcse") !== false) {
-            $subject = "MCSE Course Enquiry";
-        } elseif($services == "CCNA" || $services == "CCNA Training" || stripos(strtolower($services), "ccna") !== false) {
-            $subject = "CCNA Course Enquiry";
-        } elseif($services == "Windows Server Hybrid" || $services == "Windows Server Hybrid Training" || stripos(strtolower($services), "Windows Server Hybrid Training") !== false) {
-            $subject = "Windows Server Hybrid Course Enquiry";
-        } else {
-            $subject = "Lead Enquiry";
-        }
-       
-        $recipient = ''.get_settings('recive_email').''; // Replace with the actual recipient email
-        $subject  =  $subject;
-     
-
-        $body = '<table>';
-        $body .= '<tr><td style="width: 150px;"><strong>From :</strong></td><td>' . $name . ' ' . $email . '</td></tr>' . "\n";
-        $body .= '<tr><td style="width: 150px;"><strong>Form Name :</strong></td><td>' . $section . '</td></tr>' . "\n";
-        $body .= '<tr><td style="width: 150px;"><strong>Page URL :</strong></td><td>' . $url . '</td></tr>' . "\n\n";
-        
-        $body .= '<tr><td style="width: 150px;"><strong>Full Name :</strong></td><td>' . $name . '</td></tr>' . "\n";
-        $body .= '<tr><td style="width: 150px;"><strong>Email Address :</strong></td><td>' . $email . '</td></tr>' . "\n";
-        $body .= '<tr><td style="width: 150px;"><strong>Country :</strong></td><td>' . $country . '</td></tr>' . "\n";
-        $body .= '<tr><td style="width: 150px;"><strong>Phone Number :</strong></td><td>' . $phone . '</td></tr>' . "\n";
-        
-        if (isset($contactData["description"]) || isset($contactData["services"])) {
-            $body .= '<tr><td style="width: 150px;"><strong>Course Requested :</strong></td><td>' . ($services ?? 'Not provided') . '</td></tr>' . "\n";
-            $body .= '<tr><td style="width: 150px;"><strong>Message :</strong></td><td>' . ($description ?? 'Not provided') . '</td></tr>' . "\n\n";
-        } else {
-            $body .= '<tr><td style="width: 150px;"><strong>Course Requested :</strong></td><td>' . ($services ?? 'Not provided') . '</td></tr>' . "\n";
-            $body .= '<tr><td style="width: 150px;"><strong>Message :</strong></td><td>' . ($description ?? 'Not provided') . '</td></tr>' . "\n\n";
-        }
-        
-        $body .= '<tr><td style="width: 150px;"><strong>Ip :</strong></td><td>' . $ip . '</td></tr>' . "\n";
-        $body .= '<tr><td style="width: 150px;"><strong>User Location :</strong></td><td>' . 
-                    ($user_data['city'] ?? 'null') . ' ' . 
-                    ($user_data['region'] ?? 'null') . ' ' . 
-                    ($user_data['country'] ?? 'null') . 
-                '</td></tr>' . "\n";
-                
-        $body .= '<tr><td style="width: 150px;"><strong>Referrer URL :</strong></td><td>' . $ref_url . '</td></tr>' . "\n";
-        
-        // $body .= '<tr><td style="width: 150px;"><strong>Source URL :</strong></td><td<|fim_middle|>-aos-once="true" data-aos="fade-up" />' . (session('source_url') ?? '-') . '</td></tr>' . "\n";
-        // $body .= '<tr><td style="width: 150px;"><strong>Source :</strong></td><td>' . (session('source') ?? '-') . '</td></tr>' . "\n";
-
-        $body .= '<tr>
-            <td style="width: 150px;"><strong>Source URL :</strong></td>
-            <td data-aos-once="true" data-aos="fade-up">' . (session('source_url') ?? '-') . '</td>
-        </tr>' . "\n";
-
-        $body .= '<tr><td style="width: 150px;"><strong>Medium :</strong></td><td>' . (get_medium('value') ?? '-') . '</td></tr>' . "\n";
-        
-        $body .= '<tr><td style="width: 150px;"><strong>Submitted Data :</strong></td><td>' . date('Y-m-d') . '</td></tr>' . "\n";
-        $body .= '</table>';
-
-
-        $replyToEmail = $email;
 
         SendinBlueContact_lead($email);
 
-
-        if ($cvPath !== null) {
-             // Optional attachments
-            $attachments = [
-                [
-                    'path' => storage_path("app/public/$cvPath"), // Replace with the actual path
-                    'name' => ''.$name.'.pdf', // Replace with the desired attachment name
-                ],
-                // Add more attachments if needed
-            ];
-
-            // Send the email
-            //sendEmail($recipient, $subject, $body, $replyToEmail, $attachments);
-
-            //sendEmail($recipient, $subject, $body, $replyToEmail);
-
-        } else {
-            //sendEmail($recipient, $subject, $body, $replyToEmail);
-        }
-
-        
-
-    
         $response = [
             'status' => true,
             'notification' => 'Thank you, Attari Classes support desk will get in touch with you',

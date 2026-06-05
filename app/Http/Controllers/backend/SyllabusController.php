@@ -132,6 +132,9 @@ class SyllabusController extends Controller
         $course = Course::where('id', $courseId)->first();
         // $all_courses = Course::all(); 
         $all_courses = getCourses();
+
+
+
         $courseSyllabus = Syllabus::where('course_id', $courseId)->where('status', 1)->orderBy('title_no', 'ASC')->get();
         
         // Initialize mPDF
@@ -224,6 +227,11 @@ class SyllabusController extends Controller
             <div class="courses margin30">
                 <h1 style="color:#154360; font-size:30px; font-style: italic; text-align:center;padding-top:95px;">We Offer Following Courses :</h1>';
         foreach ($all_courses as $index => $courseItem) {
+
+            if($courseItem->id == 9){
+                continue; // Skip the course mcse
+            }
+
             $imagePath = asset('storage/' . $courseItem->thumbnail_2);
             $bgColor = ($index === 3) ? '' : '';
             $marginStyle = ($index === 3) ? 'margin-left:19%;' : 'margin-left:25px; margin-right:25px;';
@@ -236,7 +244,9 @@ class SyllabusController extends Controller
                     ' <br><p style="margin-top:5px; color:#555; font-weight:regular; font-size:16px;"><img src="https://i.ibb.co/Fq7Tgjh/clock-img.png" alt="Attari Classes Logo" style="position:relative; top:40px; width:15px;" > 40+ Hours</p>
                 </h3>
             </div>';
+
         }
+
         $html .= '</div>
         <div style="width:90%; margin-left:auto; margin-right:auto; background-color:#78d692; height:5x; border-radius:10px; margin-bottom:0%;"></div>
             <div class="margin:0px 20px; display:flex; gap:20px;">

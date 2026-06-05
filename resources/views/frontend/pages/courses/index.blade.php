@@ -5,7 +5,8 @@
 @php 
     $page_title = ReplaceKeyword($detail->meta_title, $cms->replace_keyword);
     $page_description = ReplaceKeyword($detail->meta_description, $cms->replace_keyword);  
-    $courseInputName  = $detail->alias2;  
+    // $courseInputName  = $detail->alias2;  
+    $courseInputName  = $cms->menu_title;
     $courseAlias  = $detail->alias;  
     $cId  = $detail->id;  
 @endphp

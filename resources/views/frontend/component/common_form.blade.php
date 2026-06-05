@@ -56,7 +56,7 @@ $class = "form_" . $value;
                   $coursesData = getCourses();
                 @endphp
                 @foreach($coursesData as $row)
-                <option value="{{$row->alias2}}">{{$row->alias3}}</option>
+                <option value="{{$row->menu_title}}">{{$row->menu_title}}</option>
                 @endforeach
             </select>
         </div>
