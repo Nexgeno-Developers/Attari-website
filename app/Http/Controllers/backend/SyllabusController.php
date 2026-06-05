@@ -130,7 +130,8 @@ class SyllabusController extends Controller
     {
         //return true;
         $course = Course::where('id', $courseId)->first();
-        $all_courses = Course::all(); 
+        // $all_courses = Course::all(); 
+        $all_courses = getCourses();
         $courseSyllabus = Syllabus::where('course_id', $courseId)->where('status', 1)->orderBy('title_no', 'ASC')->get();
         
         // Initialize mPDF
