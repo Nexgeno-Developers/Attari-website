@@ -275,7 +275,7 @@ class IndexController extends Controller
         $rules = [
             'name' => ['required', 'string', 'min:1', 'max:50', 'regex:/^[\pL\s\.\'\-]+$/u'],
             'email' => ['required', 'email:rfc', 'max:50'],
-            'country' => ['required', 'string', 'min:2', 'max:50', 'regex:/^[\pL\s\.\'\-]+$/u'],
+            'country' => ['required', 'string', 'min:2', 'max:50',  'regex:/^[\pL\d\s\.\'\-]+$/u'],
             'services' => ['required', Rule::in($allowedServices)],
             'phone' => ['required', 'string', 'min:7', 'max:20', 'regex:/^\+?[0-9][0-9\s\-\(\)]{6,19}$/'],
             'description' => ['nullable', 'string', 'max:200'],
