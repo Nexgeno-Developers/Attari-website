@@ -14,6 +14,7 @@ use App\Models\Contact;
 use App\Models\BlogComment;
 
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Validation\Rule;
 
 use App\Models\Newsletter;
 use App\Models\Cms;
@@ -245,12 +246,55 @@ class IndexController extends Controller
 
     public function contact_save(Request $request)
     {
+        $appHost = parse_url(config('app.url') ?: url('/'), PHP_URL_HOST);
+        $appHost = strtolower((string) preg_replace('/^www\./', '', (string) $appHost));
+
+        $originHost = parse_url((string) $request->headers->get('origin'), PHP_URL_HOST);
+        $originHost = strtolower((string) preg_replace('/^www\./', '', (string) $originHost));
+
+        $refererHost = parse_url((string) $request->headers->get('referer'), PHP_URL_HOST);
+        $refererHost = strtolower((string) preg_replace('/^www\./', '', (string) $refererHost));
+
+        if (empty($appHost) || (($originHost && $originHost !== $appHost) || ($refererHost && $refererHost !== $appHost)) || (!$originHost && !$refererHost)) {
+            return response()->json([
+                'status' => false,
+                'notification' => [
+                    'request' => ['Invalid request source.'],
+                ],
+            ], 403);
+        }
+
+        $allowedServices = collect(getCourses())
+            ->pluck('menu_title')
+            ->filter()
+            ->map(fn ($service) => trim((string) $service))
+            ->unique()
+            ->values()
+            ->all();
+
         $rules = [
-            'phone' => 'required|regex:/^[0-9\s\+]{7,}$/',
-            'description' => 'nullable|regex:/^[a-zA-Z0-9\s,&-’.@]+$/',
+            'name' => ['required', 'string', 'min:1', 'max:50', 'regex:/^[\pL\s\.\'\-]+$/u'],
+            'email' => ['required', 'email:rfc', 'max:50'],
+            'country' => ['required', 'string', 'min:2', 'max:50', 'regex:/^[\pL\s\.\'\-]+$/u'],
+            'services' => ['required', Rule::in($allowedServices)],
+            'phone' => ['required', 'string', 'min:7', 'max:20', 'regex:/^\+?[0-9][0-9\s\-\(\)]{6,19}$/'],
+            'description' => ['nullable', 'string', 'max:200'],
         ];
     
-        $validator = Validator::make($request->all(), $rules); // Pass $request->all() as the first argument
+        $validator = Validator::make($request->all(), $rules, [
+            'name.regex' => 'The full name format is invalid.',
+            'country.regex' => 'The country name format is invalid.',
+            'services.required' => 'Please select a course.',
+            'services.in' => 'Please select a valid course.',
+            'phone.regex' => 'Please enter a valid mobile number with country code.',
+        ], [
+            'name' => 'full name',
+            'email' => 'email address',
+            'country' => 'country',
+            'phone' => 'mobile number',
+            'services' => 'course',
+            'description' => 'message',
+        ]);
     
         if ($validator->fails()) {
             return response()->json([

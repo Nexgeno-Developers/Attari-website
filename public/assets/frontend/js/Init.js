@@ -132,9 +132,17 @@ function ajaxSubmit(e, form, callBackFunction) {
                 } else {
                     if (typeof response.notification === "object") {
                         var errors = "";
+                        var count = 1;
                         $.each(response.notification, function (key, msg) {
-                            errors +=
-                                "<div>" + (key + 1) + ". " + msg + "</div>";
+                            if (Array.isArray(msg)) {
+                                $.each(msg, function (_, item) {
+                                    errors += "<div>" + count + ". " + item + "</div>";
+                                    count++;
+                                });
+                            } else {
+                                errors += "<div>" + count + ". " + msg + "</div>";
+                                count++;
+                            }
                         });
                         Command: toastr.error(errors, "Alert");
                     } else {
@@ -225,4 +233,3 @@ $(document).ready(function () {
         dataLayerWEB('WebSubSubmit', 'web_enquiry', 'form successfully submit'); 
     };
 });
-

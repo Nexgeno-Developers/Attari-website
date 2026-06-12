@@ -29,19 +29,19 @@ $class = "form_" . $value;
     <input type="hidden" name="medium" value="{{ get_medium('value') ?? '-' }}" data-aos-once="true" data-aos="fade-up" />
 
     <div class="form-group">
-        <input type="text" class="form-control" name="name" placeholder="Enter Name *"  autocomplete="on" required />
+        <input type="text" class="form-control" name="name" placeholder="Enter Name *" autocomplete="off" maxlength="50" aria-label="Full Name" required />
     </div>
 
     <div class="form-group">
-        <input type="email" class="form-control" name="email" placeholder="Enter Email *"  autocomplete="on" required />
+        <input type="email" class="form-control" name="email" placeholder="Enter Email *" autocomplete="off" maxlength="50" aria-label="Email Address" required />
     </div>
 
     <div class="form-group">
-        <input type="text" class="form-control" name="country" placeholder="Your Country *"  autocomplete="on" required />
+        <input type="text" class="form-control" name="country" placeholder="Your Country *" autocomplete="off" maxlength="50" aria-label="Country" required />
     </div>
 
     <div class="form-group">
-        <input type="tel" class="form-control" name="phone" placeholder="Mobile no with country code *"  autocomplete="on" required />
+        <input type="tel" class="form-control" name="phone" placeholder="Mobile no with country code *" autocomplete="off" maxlength="20" pattern="^\+?[0-9][0-9\s\-\(\)]{6,19}$" aria-label="Mobile Number" required />
     </div>
 
     @if(!empty($course_name))
@@ -50,7 +50,7 @@ $class = "form_" . $value;
         </div>
     @else
         <div class="form-group">
-            <select aria-label="services"  name="services" class="form-select form-control"  autocomplete="on" required>
+            <select aria-label="services"  name="services" class="form-select form-control"  autocomplete="off" required>
                 <option value="">--Select Course-</option>
                 @php
                   $coursesData = getCourses();
@@ -63,7 +63,7 @@ $class = "form_" . $value;
     @endif
 
         <div class="form-group">
-            <textarea aria-labelledby="Message" name="description" class="form-control" placeholder="Message" autocomplete="on"></textarea>
+            <textarea aria-label="Message" name="description" class="form-control" placeholder="Message" autocomplete="off" maxlength="200"></textarea>
         </div>
 
     <div class="form-group text-center">
