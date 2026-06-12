@@ -16,7 +16,7 @@ class MarketingController extends Controller
     public function getsyllabusonwhatsapp(Request $request) {
         
         $enquiry_id = $request->enquiry_id;
-        $course = $request->course;
+        $course = trim((string) $request->course);
         $ip_info = ip_info();
         $userIpData = json_decode($ip_info, true);
         $ip = $userIpData['ip'] ?? null;
@@ -43,63 +43,62 @@ class MarketingController extends Controller
         $countryCode = $request->input('countrycode') ;
         $phoneNumber = $request->input('countryphone') ;
         
+        $courseId = null;
         $template_name = "";
         if ($countryCode == '+91') {
-            if (strpos($course, "VMware") !== false) {
+            if (stripos($course, "VMware") !== false) {
                 $courseId = 5;
                 $template_name = "vmware_plocal";
-            } elseif (strpos($course, "AWS") !== false) {
+            } elseif (stripos($course, "AWS") !== false) {
                 $courseId = 7;
                 $template_name = "aws_plocal1_"; //"aws_plocal1";
-            } elseif (strpos($course, "Azure") !== false) {
+            } elseif (stripos($course, "Azure") !== false) {
                 $courseId = 8;
                 $template_name = "azure_plocal_"; //"azure_plocal";
-            } elseif (strpos($course, "MCSE") !== false) {
+            } elseif (stripos($course, "MCSE") !== false) {
                 $courseId = 9;
                 //$template_name = "mcse_plocal";
                 $template_name = "windows_plocal";
-            } elseif (strpos($course, "CCNA") !== false) {
+            } elseif (stripos($course, "CCNA") !== false) {
                 $courseId = 10;
                 $template_name = "ccna_plocal";
-            }elseif (strpos($course, "Windows Server Hybrid") !== false) {
+            }elseif (stripos($course, "Windows Server Hybrid") !== false) {
                 $courseId = 11;
                 $template_name = "windows_plocal";
             }
         } else {
-            if (strpos($course, "VMware") !== false) {
+            if (stripos($course, "VMware") !== false) {
                 $courseId = 5;
                 $template_name = "vmware_pintern";
-            } elseif (strpos($course, "AWS") !== false) {
+            } elseif (stripos($course, "AWS") !== false) {
                 $courseId = 7;
                 $template_name = "aws_pintern4";
-            } elseif (strpos($course, "Azure") !== false) {
+            } elseif (stripos($course, "Azure") !== false) {
                 $courseId = 8;
                 $template_name = "azure_pintern";
-            } elseif (strpos($course, "MCSE") !== false) {
+            } elseif (stripos($course, "MCSE") !== false) {
                 $courseId = 9;
                 // $template_name = "mcse_pintern";
                 $template_name = "windows_pintern";
-            } elseif (strpos($course, "CCNA") !== false) {
+            } elseif (stripos($course, "CCNA") !== false) {
                 $courseId = 10;
                 $template_name = "ccna_pintern";
-            }elseif (strpos($course, "Windows Server Hybrid") !== false) {
+            }elseif (stripos($course, "Windows Server Hybrid") !== false) {
                 $courseId = 11;
                 $template_name = "windows_pintern";
             }
         }
+
+        if (!$courseId || empty($template_name)) {
+            return response()->json([
+                'status' => false,
+                'notification' => 'Please select a valid course.',
+                'course' => $course,
+            ], 422);
+        }
         
         $courseNameTechnical = str_replace(" ", "-", DB::table("courses")->where("id", $courseId)->first()->alias4);
         $courseSyllabus      = DB::table('courses')->where('id', $courseId)->value('curriculum_pdf');
-        
-        if(empty($template_name)){
-            $response = [
-                'status' => false,
-                'notification' => 'Something went wrong!',
-                'course' => $course,
-            ];
-        
-            return response()->json($response);            
-        }
         
         /*store record initially*/
         if(empty($enquiry_id)) {
