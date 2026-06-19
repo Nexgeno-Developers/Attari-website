@@ -243,6 +243,11 @@ Route::group(['prefix' => 'setting'], function () {
     Route::post('/update', [BusinessSettingController::class, 'update'])->name('setting.update');
 });
 
+Route::group(['prefix' => 'website-setting'], function () {
+    Route::get('/wati-templet', [BusinessSettingController::class, 'wati_templet'])->name('website_setting.wati_templet');
+    Route::post('/wati-templet/update', [BusinessSettingController::class, 'update_wati_templet'])->name('website_setting.wati_templet.update');
+});
+
 
 //Contact Page setting
 Route::group(['prefix' => 'contact/page'], function () {

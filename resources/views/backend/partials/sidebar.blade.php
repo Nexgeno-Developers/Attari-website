@@ -240,6 +240,23 @@
                                 </div>
                             </li>
                         @endif
+
+                        @if(in_array(auth()->user()->role_id, [1, 2]))
+                            <li class="side-nav-item">
+                                <a data-bs-toggle="collapse" href="{{ url('#sidebarWebsiteSetting') }}" aria-expanded="false" aria-controls="sidebarWebsiteSetting" class="side-nav-link">
+                                    <i class="ri-settings-3-line"></i>
+                                    <span> Website Setting </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="sidebarWebsiteSetting">
+                                    <ul class="side-nav-second-level">
+                                        <li>
+                                            <a href="{{ route('website_setting.wati_templet') }}">WATI Templet</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        @endif
                         
                         
                         @if(auth()->user()->role_id == 1)

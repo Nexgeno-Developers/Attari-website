@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cms;
+use App\Models\Course;
+use App\Models\MktWatiTemplate;
+use App\Models\Wati;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Wati;
-use GuzzleHttp\Client;
-use Carbon\Carbon;
-use DB;
 
 class MarketingController extends Controller
 {
@@ -43,53 +44,12 @@ class MarketingController extends Controller
         $countryCode = $request->input('countrycode') ;
         $phoneNumber = $request->input('countryphone') ;
         
-        $courseId = null;
-        $template_name = "";
-        if ($countryCode == '+91') {
-            if (stripos($course, "VMware") !== false) {
-                $courseId = 5;
-                $template_name = "vmware_plocal";
-            } elseif (stripos($course, "AWS") !== false) {
-                $courseId = 7;
-                $template_name = "aws_plocal1_"; //"aws_plocal1";
-            } elseif (stripos($course, "Azure") !== false) {
-                $courseId = 8;
-                $template_name = "azure_plocal_"; //"azure_plocal";
-            } elseif (stripos($course, "MCSE") !== false) {
-                $courseId = 9;
-                //$template_name = "mcse_plocal";
-                $template_name = "windows_plocal";
-            } elseif (stripos($course, "CCNA") !== false) {
-                $courseId = 10;
-                $template_name = "ccna_plocal";
-            }elseif (stripos($course, "Windows Server Hybrid") !== false) {
-                $courseId = 11;
-                $template_name = "windows_plocal";
-            }
-        } else {
-            if (stripos($course, "VMware") !== false) {
-                $courseId = 5;
-                $template_name = "vmware_pintern";
-            } elseif (stripos($course, "AWS") !== false) {
-                $courseId = 7;
-                $template_name = "aws_pintern4";
-            } elseif (stripos($course, "Azure") !== false) {
-                $courseId = 8;
-                $template_name = "azure_pintern";
-            } elseif (stripos($course, "MCSE") !== false) {
-                $courseId = 9;
-                // $template_name = "mcse_pintern";
-                $template_name = "windows_pintern";
-            } elseif (stripos($course, "CCNA") !== false) {
-                $courseId = 10;
-                $template_name = "ccna_pintern";
-            }elseif (stripos($course, "Windows Server Hybrid") !== false) {
-                $courseId = 11;
-                $template_name = "windows_pintern";
-            }
-        }
+        $courseDetails = $this->resolveWatiCourseDetails($course, $countryCode);
+        $courseId = $courseDetails['course_id'];
+        $template_name = $courseDetails['template_name'];
+        $courseModel = $courseDetails['course'];
 
-        if (!$courseId || empty($template_name)) {
+        if (!$courseId || !$courseModel || empty($template_name)) {
             return response()->json([
                 'status' => false,
                 'notification' => 'Please select a valid course.',
@@ -97,8 +57,8 @@ class MarketingController extends Controller
             ], 422);
         }
         
-        $courseNameTechnical = str_replace(" ", "-", DB::table("courses")->where("id", $courseId)->first()->alias4);
-        $courseSyllabus      = DB::table('courses')->where('id', $courseId)->value('curriculum_pdf');
+        $courseNameTechnical = str_replace(" ", "-", (string) $courseModel->alias4);
+        $courseSyllabus = $courseModel->curriculum_pdf;
         
         /*store record initially*/
         if(empty($enquiry_id)) {
@@ -237,6 +197,71 @@ class MarketingController extends Controller
         $response = curl_exec($curl);
         curl_close($curl);     
         return $response;
+    }
+
+    private function resolveWatiCourseDetails(string $course, string $countryCode): array
+    {
+        $cms = Cms::query()
+            ->where('status', 1)
+            ->where('zone', 0)
+            ->where(function ($query) use ($course) {
+                $query->where('menu_title', $course);
+                    // ->orWhere('menu_title', 'like', $course)
+                    // ->orWhere('menu_title', 'like', '%' . $course . '%');
+            })
+            ->select('course_id', 'menu_title')
+            ->first();
+
+        if (!$cms) {
+            $cmsCourses = collect(getcmsCourses());
+
+            $cms = $cmsCourses->first(function ($row) use ($course) {
+                return isset($row->menu_title) && strcasecmp(trim((string) $row->menu_title), trim($course)) === 0;
+            });
+        }
+
+        $courseId = $cms->course_id ?? null;
+
+        if (!$courseId) {
+            return [
+                'course_id' => null,
+                'template_name' => null,
+                'course' => null,
+            ];
+        }
+
+        $courseModel = Course::find($courseId);
+        $templateName = $this->resolveWatiTemplateName((int) $courseId, $countryCode);
+
+        return [
+            'course_id' => (int) $courseId,
+            'template_name' => $templateName,
+            'course' => $courseModel,
+        ];
+    }
+
+    private function resolveWatiTemplateName(int $courseId, string $countryCode): ?string
+    {
+        $template = MktWatiTemplate::where('course_id', $courseId)->first();
+
+        if (!$template) {
+            return null;
+        }
+
+        $config = $template->config;
+
+        if (is_string($config) && $config !== '') {
+            $config = json_decode($config, true);
+        }
+
+        if (!is_array($config)) {
+            return null;
+        }
+
+        $key = $countryCode === '+91' ? 'local' : 'international';
+        $value = trim((string) ($config[$key] ?? ''));
+
+        return $value !== '' ? $value : null;
     }     
 
 }
