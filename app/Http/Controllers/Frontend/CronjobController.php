@@ -61,7 +61,7 @@ class CronjobController extends Controller
                 
                  // Determine email subject
                 if (!empty($email)) {
-                    $subject = ($services ?? ' - '). "Course Enquiry";
+                    $subject = ($services ?? ' - '). " Course Enquiry";
                 }else {
                     $subject = "WhatsApp Enquiry - " . ($services ?? ' - ');
                 }

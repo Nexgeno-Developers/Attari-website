@@ -1030,15 +1030,30 @@ class IndexController extends Controller
 // =================--------------------- NEW ---------------------=========================
 
     public function course_detail($slug){
+        $cms = Cms::where('slug', $slug)
+            ->where('status', 1)
+            ->first();
 
-        $cms = Cms::where('slug', $slug)->where('status', 1)->first();
+        if (!$cms) {
+            return redirect()->route('error_page');
+        }
 
-        $detail = Course::where('id', $cms->course_id)->where('status', 1)->first();
+        $detail = Course::where('id', $cms->course_id)
+            ->where('status', 1)
+            ->first();
+
+        if (!$detail) {
+            return redirect()->route('error_page');
+        }
+
+        $cms->menu_title = Cms::where('course_id', $cms->course_id)
+            ->where('zone', 0)
+            ->value('menu_title');
 
         $batch = Batch::where('course_id', $cms->course_id)->where('status', 1)->first();
-        $text_review = TextReview::where('course_id', $cms->course_id)->where('status', 1)->orderBy('id', 'DESC')->limit('10')->get();
+        $text_review = TextReview::where('course_id', $cms->course_id)->where('status', 1)->orderBy('id', 'DESC')->limit(10)->get();
         //$image_review= ImagesReview::where('course_id', $cms->course_id)->where('status', 1)->get();
-        $video_review = VideoReview::where('course_id', $cms->course_id)->where('status', 1)->orderBy('id', 'DESC')->limit('8')->get();
+        $video_review = VideoReview::where('course_id', $cms->course_id)->where('status', 1)->orderBy('id', 'DESC')->limit(8)->get();
         
         $faq = Faq::where('course_id', $cms->course_id)
         ->where('status', 1)
