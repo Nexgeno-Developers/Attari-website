@@ -67,10 +67,10 @@
                 </div>
 
                 <div class="border rounded p-3 bg-light mb-3">
-                    <div class="fw-semibold mb-2">Selected CMS Data</div>
-                    <div class="small text-muted">Menu Title</div>
+                    <div class="fw-semibold mb-2">Selected Course Data</div>
+                    <div class="small text-muted">Course</div>
                     <div id="selected-menu-title" class="mb-2">-</div>
-                    <div class="small text-muted">Breadcrumb Title</div>
+                    <div class="small text-muted">Title</div>
                     <div id="selected-breadcrumb-title">-</div>
                 </div>
 
