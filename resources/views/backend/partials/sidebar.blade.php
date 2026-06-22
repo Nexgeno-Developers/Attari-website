@@ -253,6 +253,9 @@
                                         <li>
                                             <a href="{{ route('website_setting.wati_templet') }}">WATI Templet</a>
                                         </li>
+                                        <li>
+                                            <a href="{{ route('website_setting.email_templet') }}">Email Templet</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>

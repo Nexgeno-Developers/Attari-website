@@ -246,6 +246,8 @@ Route::group(['prefix' => 'setting'], function () {
 Route::group(['prefix' => 'website-setting'], function () {
     Route::get('/wati-templet', [BusinessSettingController::class, 'wati_templet'])->name('website_setting.wati_templet');
     Route::post('/wati-templet/update', [BusinessSettingController::class, 'update_wati_templet'])->name('website_setting.wati_templet.update');
+    Route::get('/email-templet', [BusinessSettingController::class, 'email_templet'])->name('website_setting.email_templet');
+    Route::post('/email-templet/generate', [BusinessSettingController::class, 'generate_email_templet'])->name('website_setting.email_templet.generate');
 });
 
 

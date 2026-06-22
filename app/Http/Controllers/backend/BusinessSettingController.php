@@ -4,9 +4,11 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\BusinessSetting;
+use App\Models\Cms;
 use App\Models\MktWatiTemplate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class BusinessSettingController extends Controller
@@ -34,6 +36,42 @@ class BusinessSettingController extends Controller
             ->keyBy('course_id');
 
         return view('backend.pages.website_setting.wati_templet', compact('courses', 'templates'));
+    }
+
+    public function email_templet(Request $request)
+    {
+        $courses = Cms::query()
+            ->where('zone', 0)
+            ->where('status', 1)
+            ->where('course_id', '!=', 9)
+            ->orderBy('course_id', 'asc')
+            ->get(['course_id', 'menu_title', 'breadcrumb_title']);
+
+        $selectedCourseId = old('course_id', $request->query('course_id'));
+        $selectedType = old('type', $request->query('type'));
+        $selectedWebsiteUrl = old('website_url', $request->query('website_url'));
+        $selectedYoutubeUrl = old('youtube_url', $request->query('youtube_url'));
+        $previewHtml = null;
+
+        if ($selectedCourseId && $selectedType) {
+            $previewHtml = $this->buildDynamicEmailPreview(
+                (int) $selectedCourseId,
+                (string) $selectedType,
+                [
+                    'website_url' => $selectedWebsiteUrl,
+                    'youtube_url' => $selectedYoutubeUrl,
+                ]
+            );
+        }
+
+        return view('backend.pages.website_setting.email_templet', compact(
+            'courses',
+            'selectedCourseId',
+            'selectedType',
+            'selectedWebsiteUrl',
+            'selectedYoutubeUrl',
+            'previewHtml'
+        ));
     }
       
     public function update(Request $request) {
@@ -175,6 +213,67 @@ class BusinessSettingController extends Controller
         }
     }
 
+    public function generate_email_templet(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'course_id' => 'required|integer',
+            'type' => 'required|in:local,international',
+            'website_url' => 'required|url',
+            'youtube_url' => 'required|url',
+            'image' => 'nullable|image|max:5120',
+        ]);
+
+        $cms = Cms::query()
+            ->where('zone', 0)
+            ->where('status', 1)
+            ->where('course_id', $request->input('course_id'))
+            ->first(['course_id', 'menu_title', 'breadcrumb_title']);
+
+        if (!$cms) {
+            $validator->after(function ($validator) {
+                $validator->errors()->add('course_id', 'Selected course is not available in CMS zone 0.');
+            });
+        }
+
+        if ($validator->fails()) {
+            return redirect()
+                ->route('website_setting.email_templet')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $courseId = (int) $request->input('course_id');
+        $type = (string) $request->input('type');
+
+        if ($request->hasFile('image')) {
+            $this->replaceDynamicEmailImage($courseId, $type, $request->file('image'));
+        }
+
+        $previewHtml = $this->buildDynamicEmailPreview($courseId, $type, [
+            'website_url' => (string) $request->input('website_url'),
+            'youtube_url' => (string) $request->input('youtube_url'),
+            'menu_title' => (string) $cms->menu_title,
+            'breadcrumb_title' => (string) $cms->breadcrumb_title,
+        ]);
+
+        $courses = Cms::query()
+            ->where('zone', 0)
+            ->where('status', 1)
+            ->where('course_id', '!=', 9)
+            ->orderBy('course_id', 'asc')
+            ->get(['course_id', 'menu_title', 'breadcrumb_title']);
+
+        return view('backend.pages.website_setting.email_templet', [
+            'courses' => $courses,
+            'selectedCourseId' => $courseId,
+            'selectedType' => $type,
+            'selectedWebsiteUrl' => (string) $request->input('website_url'),
+            'selectedYoutubeUrl' => (string) $request->input('youtube_url'),
+            'previewHtml' => $previewHtml,
+            'generated' => true,
+        ])->with('success', 'Email template generated successfully.');
+    }
+
     private function normalizeWatiConfig($config): array
     {
         if (is_string($config) && $config !== '') {
@@ -190,5 +289,50 @@ class BusinessSettingController extends Controller
             'local' => (string) ($config['local'] ?? ''),
             'international' => (string) ($config['international'] ?? ''),
         ];
+    }
+
+    private function replaceDynamicEmailImage(int $courseId, string $type, $image): void
+    {
+        $disk = Storage::disk('public');
+        $prefix = 'dynamic_email/' . $courseId . '-' . $type;
+
+        foreach ($disk->files('dynamic_email') as $file) {
+            if (str_starts_with($file, $prefix . '.')) {
+                $disk->delete($file);
+            }
+        }
+
+        $extension = strtolower($image->getClientOriginalExtension() ?: $image->extension() ?: 'png');
+        $image->storeAs('dynamic_email', $courseId . '-' . $type . '.' . $extension, 'public');
+    }
+
+    private function buildDynamicEmailPreview(int $courseId, string $type, array $overrides = []): ?string
+    {
+        $cms = Cms::query()
+            ->where('zone', 0)
+            ->where('status', 1)
+            ->where('course_id', $courseId)
+            ->first(['course_id', 'menu_title', 'breadcrumb_title']);
+
+        if (!$cms) {
+            return null;
+        }
+
+        $viewName = 'frontend.dynamic_email.' . $courseId . '-' . $type;
+
+        if (!view()->exists($viewName)) {
+            return null;
+        }
+
+        $emailTemplateData = [
+            'course_id' => $courseId,
+            'type' => $type,
+            'menu_title' => $overrides['menu_title'] ?? (string) $cms->menu_title,
+            'breadcrumb_title' => $overrides['breadcrumb_title'] ?? (string) $cms->breadcrumb_title,
+            'website_url' => $overrides['website_url'] ?? '',
+            'youtube_url' => $overrides['youtube_url'] ?? '',
+        ];
+
+        return view($viewName, compact('emailTemplateData'))->render();
     }
 }
