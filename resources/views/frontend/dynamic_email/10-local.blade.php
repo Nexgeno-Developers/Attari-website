@@ -22,7 +22,7 @@
                     <tr>
                         <td align="center" style="padding:24px;">
                             <a href="https://attariclasses.in/ccna-training-certification-online/e" target="_blank">
-                                <img src="{{ $uploadedHeroImageUrl ?: $fallbackHeroImage }}" alt="Attari Classes Logo" width="196" style="display:block; border:0;">
+                                <img src="https://attariclasses.in/email-image/attari_logo.png" alt="Attari Classes Logo" width="196" style="display:block; border:0;">
                             </a>
                         </td>
                     </tr>
@@ -55,7 +55,7 @@
                     <tr>
                         <td align="center" style="padding:0 32px 24px 32px; ">
                             <a href="https://api.whatsapp.com/send/?phone=917738375431&text=Hi,+I+am+contacting+you+through+your+email" target="_blank">
-                                <img src="https://attariclasses.in/email-image/CCNAlocal.png" alt="Windows Server Hybrid Training Banner" width="460" style=" border:1px solid #cccccc69;width:100%; max-width:460px; border-radius:30px; display:block;">
+                                <img src="{{ $uploadedHeroImageUrl ?: $fallbackHeroImage }}" alt="Windows Server Hybrid Training Banner" width="460" style="width:100%; max-width:460px; border-radius:8px; display:block;">
                             </a>
                         </td>
                     </tr>

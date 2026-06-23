@@ -241,7 +241,7 @@
                             </li>
                         @endif
 
-                        @if(in_array(auth()->user()->role_id, [1, 2]))
+                        @if(in_array(auth()->user()->role_id, [1, 2, 3]))
                             <li class="side-nav-item">
                                 <a data-bs-toggle="collapse" href="{{ url('#sidebarWebsiteSetting') }}" aria-expanded="false" aria-controls="sidebarWebsiteSetting" class="side-nav-link">
                                     <i class="ri-settings-3-line"></i>
