@@ -25,7 +25,7 @@
                 @csrf
 
                 <div class="mb-3 form-group">
-                    <label class="form-label">Course</label>
+                    <label class="form-label">Course *</label>
                     <select class="form-select select2" name="course_id" required>
                         <option value="">Select course</option>
                         @foreach($courses as $course)
@@ -42,7 +42,7 @@
                 </div>
 
                 <div class="mb-3 form-group">
-                    <label class="form-label">Type</label>
+                    <label class="form-label">Type *</label>
                     <select class="form-select" name="type" required>
                         <option value="">Select type</option>
                         <option value="local" {{ old('type', $selectedType) === 'local' ? 'selected' : '' }}>Local</option>
@@ -51,22 +51,22 @@
                 </div>
 
                 <div class="mb-3 form-group">
-                    <label class="form-label">Visit Website URL</label>
+                    <label class="form-label">Visit Website URL *</label>
                     <input type="url" class="form-control" name="website_url" value="{{ old('website_url', $selectedWebsiteUrl ?? '') }}" placeholder="https://attariclasses.in/..." required>
                 </div>
 
                 <div class="mb-3 form-group">
-                    <label class="form-label">Main Image Upload</label>
-                    <input type="file" class="form-control" name="image" accept="image/*">
+                    <label class="form-label">Main Image Upload *</label>
+                    <input type="file" class="form-control" name="image" accept="image/*" required>
                     <small class="text-muted">New upload replaces the old image for the selected course and type.</small>
                 </div>
 
                 <div class="mb-3 form-group">
-                    <label class="form-label">YouTube URL</label>
+                    <label class="form-label">YouTube URL *</label>
                     <input type="url" class="form-control" name="youtube_url" value="{{ old('youtube_url', $selectedYoutubeUrl ?? '') }}" placeholder="https://www.youtube.com/watch?v=..." required>
                 </div>
 
-                <div class="border rounded p-3 bg-light mb-3">
+                <div class="border rounded p-3 bg-light mb-3 d-none">
                     <div class="fw-semibold mb-2">Selected Course Data</div>
                     <div class="small text-muted">Course</div>
                     <div id="selected-menu-title" class="mb-2">-</div>
