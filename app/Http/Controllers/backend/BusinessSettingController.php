@@ -221,6 +221,7 @@ class BusinessSettingController extends Controller
             'website_url' => 'required|url',
             'youtube_url' => 'required|url',
             'image' => 'nullable|image|max:5120',
+            'youtube_image' => 'nullable|image|max:5120',
         ]);
 
         $cms = Cms::query()
@@ -246,7 +247,11 @@ class BusinessSettingController extends Controller
         $type = (string) $request->input('type');
 
         if ($request->hasFile('image')) {
-            $this->replaceDynamicEmailImage($courseId, $type, $request->file('image'));
+            $this->replaceDynamicEmailAsset($courseId, $type, 'hero', $request->file('image'));
+        }
+
+        if ($request->hasFile('youtube_image')) {
+            $this->replaceDynamicEmailAsset($courseId, $type, 'youtube', $request->file('youtube_image'));
         }
 
         $previewHtml = $this->buildDynamicEmailPreview($courseId, $type, [
@@ -291,10 +296,10 @@ class BusinessSettingController extends Controller
         ];
     }
 
-    private function replaceDynamicEmailImage(int $courseId, string $type, $image): void
+    private function replaceDynamicEmailAsset(int $courseId, string $type, string $assetType, $image): void
     {
         $disk = Storage::disk('public');
-        $prefix = 'dynamic_email/' . $courseId . '-' . $type;
+        $prefix = $this->dynamicEmailAssetPrefix($courseId, $type, $assetType);
 
         foreach ($disk->files('dynamic_email') as $file) {
             if (str_starts_with($file, $prefix . '.')) {
@@ -303,7 +308,16 @@ class BusinessSettingController extends Controller
         }
 
         $extension = strtolower($image->getClientOriginalExtension() ?: $image->extension() ?: 'png');
-        $image->storeAs('dynamic_email', $courseId . '-' . $type . '.' . $extension, 'public');
+        $image->storeAs('dynamic_email', basename($prefix) . '.' . $extension, 'public');
+    }
+
+    private function dynamicEmailAssetPrefix(int $courseId, string $type, string $assetType): string
+    {
+        if ($assetType === 'youtube') {
+            return 'dynamic_email/' . $courseId . '-' . $type . '-youtube';
+        }
+
+        return 'dynamic_email/' . $courseId . '-' . $type;
     }
 
     private function buildDynamicEmailPreview(int $courseId, string $type, array $overrides = []): ?string

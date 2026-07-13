@@ -19,7 +19,7 @@
     <div class="card">
         <div class="card-body">
             <h4 class="mb-1">Email Templet Generator</h4>
-            <p class="text-muted mb-4">Select course and type, upload the main banner, then generate the rendered Blade email preview.</p>
+            <p class="text-muted mb-4">Select course and type, upload or replace the main banner and YouTube thumbnail, then generate the rendered Blade email preview.</p>
 
             <form id="email-template-form" action="{{ route('website_setting.email_templet.generate') }}" method="post" enctype="multipart/form-data">
                 @csrf
@@ -59,6 +59,12 @@
                     <label class="form-label">Main Image Upload *</label>
                     <input type="file" class="form-control" name="image" accept="image/*" required>
                     <small class="text-muted">New upload replaces the old image for the selected course and type.</small>
+                </div>
+
+                <div class="mb-3 form-group">
+                    <label class="form-label">YouTube Image Upload *</label>
+                    <input type="file" class="form-control" name="youtube_image" accept="image/*" required>
+                    <small class="text-muted">New upload replaces the old YouTube thumbnail for the selected course and type.</small>
                 </div>
 
                 <div class="mb-3 form-group">
