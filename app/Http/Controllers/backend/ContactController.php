@@ -71,44 +71,42 @@ class ContactController extends Controller
             fwrite($handle, "\xEF\xBB\xBF");
 
             fputcsv($handle, [
-                'ID',
-                'IP',
                 'Name',
                 'Email',
                 'Phone No',
                 'Course',
-                'Source',
                 'Medium',
-                'gad_campaignid',
-                'gclid',
+                'Source',
                 'Page',
                 'Section',
+                'gad_campaignid',
+                'gclid',
                 'Country Code',
                 'Country Phone',
                 'Syllabus Status',
                 'Email Status',
-                'Created At',
+                'IP',
+                'Date',
             ]);
 
             foreach ($this->buildFilteredQuery($filters)->orderByDesc('created_at')->cursor() as $contact) {
                 fputcsv($handle, [
-                    $contact->id,
-                    $contact->ip,
                     $contact->name,
                     $contact->email,
                     $contact->phone,
                     $contact->services,
-                    $contact->source,
                     $contact->medium,
-                    $contact->gad_campaign_id,
-                    $contact->gclid,
+                    $contact->source,
                     $contact->url,
                     $contact->section,
+                    $contact->gad_campaign_id,
+                    $contact->gclid,
                     $contact->w_countrycode,
                     $contact->w_phone,
                     (string) $contact->w_syllabus === '1' ? 'SENT' : 'FAILED',
                     (int) $contact->email_sent === 1 ? 'SENT' : 'PENDING',
-                    optional($contact->created_at)->format('Y-m-d H:i:s'),
+                    $contact->ip,
+                    optional($contact->created_at)->format('d M Y h:iA'),
                 ]);
             }
 

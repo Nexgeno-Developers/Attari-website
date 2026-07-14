@@ -28,6 +28,7 @@
 
     .contact-filter-panel .select2-container {
         width: 100% !important;
+        display: block;
     }
 
     .contact-filter-panel .select2-container--default .select2-selection--single {
@@ -46,6 +47,25 @@
     .contact-filter-panel .select2-container--default .select2-selection--single .select2-selection__arrow {
         height: 40px;
         right: 8px;
+    }
+
+    .contact-filter-panel .select2-dropdown {
+        border-color: #d9e2ec;
+    }
+
+    .contact-filter-panel .select2-search--dropdown {
+        padding: 8px;
+    }
+
+    .contact-filter-panel .select2-search--dropdown .select2-search__field {
+        border: 1px solid #d9e2ec;
+        border-radius: 0.375rem;
+        height: 38px;
+        padding: 8px 12px;
+    }
+
+    .contact-filter-panel .select2-results__options {
+        max-height: 240px;
     }
 
     .contact-filter-actions {
@@ -121,34 +141,34 @@
                 <div class="row g-3 align-items-end">
                     <div class="col-12 col-md-6 col-xl-3">
                         <label>Course</label>
-                        <select name="course" class="form-control select2">
+                        <select name="course" class="form-control contact-filter-select">
                             <option value="">-- Select --</option>
                             @foreach($uniqueCourses as $alias)
-                                <option value="{{ $alias }}" @if(request('course') == $alias) selected @endif>{{ $alias }}</option>
+                                <option value="{{ $alias }}" @if(request('course') == $alias) selected @endif>{{ ucwords(strtolower($alias)) }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="col-12 col-md-6 col-xl-3">
                         <label>Source</label>
-                        <select name="source" class="form-control select2">
+                        <select name="source" class="form-control contact-filter-select">
                             <option value="">-- Select --</option>
                             @foreach($sources as $source)
-                                <option value="{{ $source }}" @if(request('source') == $source) selected @endif>{{ $source }}</option>
+                                <option value="{{ $source }}" @if(request('source') == $source) selected @endif>{{ ucwords(strtolower($source)) }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="col-12 col-md-6 col-xl-3">
                         <label>Medium</label>
-                        <select name="medium" class="form-control select2">
+                        <select name="medium" class="form-control contact-filter-select">
                             <option value="">-- Select --</option>
                             @foreach($media as $medium)
-                                <option value="{{ $medium }}" @if(request('medium') == $medium) selected @endif>{{ $medium }}</option>
+                                <option value="{{ $medium }}" @if(request('medium') == $medium) selected @endif>{{ ucwords(strtolower($medium)) }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="col-12 col-md-6 col-xl-3">
                         <label>Records</label>
-                        <select name="per_page" class="form-control">
+                        <select name="per_page" class="form-control contact-filter-select">
                             @foreach([10, 25, 50, 100, 250, 500, 1000] as $size)
                                 <option value="{{ $size }}" @if((int) request('per_page', $perPage) === $size) selected @endif>{{ $size }}</option>
                             @endforeach
@@ -178,25 +198,21 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>IP</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone No</th>
                         <th>Course</th>
-                        <th>Source</th>
                         <th>Medium</th>
-                        <th>gad_campaignid</th>
-                        <th>gclid</th>
-                        {{--<th>Description</th>
-                        <th>Other Info</th>
-                        <th>Qualification</th>
-                        <th>CV</th>--}}
+                        <th>Source</th>
                         <th>Page</th>
                         <th>Section</th>
+                        <th>gad_campaignid</th>
+                        <th>gclid</th>
                         <th>Country Code</th>
                         <th>Country Phone</th>
                         <th>Syllabus Status</th>
                         <th>Email Status</th>
+                        <th>IP</th>
                         <th>Date</th>
                         <th>Action</th>
                     </tr>
@@ -208,31 +224,20 @@
                     @foreach($contacts as $row)
                     <tr>
                         <td>{{ $start++ }}</td>
-                        <td>{{ $row->ip }}</td>
                         <td>{{$row->name}}</td>
                         <td>{{$row->email}}</td>
                         <td>{{$row->phone}}</td>
                         <td>{{$row->services}}</td>
-                        <td>{{ $row->source ?: '-' }}</td>
                         <td>{{ $row->medium ?: '-' }}</td>
-                        <td>{{ $row->gad_campaign_id ?: '-' }}</td>
-                        <td>{{ $row->gclid ?: '-' }}</td>
-                        {{--<td>{{$row->description}}</td>
-                        <td>{{$row->other_info}}</td>
-                        <td>{{$row->qualification}}</td>
-                        <td>
-                            @if($row->cv)
-                            <a target="_blank" href="{{ asset('storage/' . $row->cv) }}">
-                                View
-                            </a>
-                            @endif
-                        </td>--}}
+                        <td>{{ $row->source ?: '-' }}</td>
                         <td>
                             <a target="_blank" href="{{$row->url}}">
                                 {{$row->url}}
                             </a>
                         </td>
                         <td>{{$row->section}}</td>
+                        <td>{{ $row->gad_campaign_id ?: '-' }}</td>
+                        <td>{{ $row->gclid ?: '-' }}</td>
                         <td>{{$row->w_countrycode}}</td>
                         <td>{{$row->w_phone}}</td>
                         <td>
@@ -249,7 +254,8 @@
                             <span class="badge bg-danger">PENDING</span>
                             @endif
                         </td>
-                        <td>{{datetimeFormatter($row->created_at)}}</td>
+                        <td>{{ $row->ip ?: '-' }}</td>
+                        <td>{{ optional($row->created_at)->format('d M Y h:iA') }}</td>
                         <td>
                             <a href="javascript:void(0);" class="action-icon" onclick="largeModal('{{ url(route('contact.view',['id' => $row->id])) }}', 'View')"> <i class="mdi mdi-account-eye"></i></a>
                             {{--<a href="javascript:void(0);" class="action-icon" onclick="confirmModal('{{ url(route('contact.delete', $row->id)) }}', responseHandler)"><i class="mdi mdi-delete"></i></a>--}}
@@ -274,6 +280,23 @@
 <script>
     var responseHandler = function(response) {
         location.reload();
-    }
+    };
+
+    $(document).ready(function () {
+        $('.contact-filter-select').each(function () {
+            const $select = $(this);
+            const $panel = $select.closest('.contact-filter-panel');
+
+            if ($select.hasClass('select2-hidden-accessible')) {
+                $select.select2('destroy');
+            }
+
+            $select.select2({
+                width: '100%',
+                dropdownParent: $panel,
+                minimumResultsForSearch: 0
+            });
+        });
+    });
 </script>
 @endsection
