@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Contact;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ContactController extends Controller
 {
@@ -16,46 +16,106 @@ class ContactController extends Controller
         return view('backend.pages.contact.index', compact('contacts'));
     }*/ 
     
+    private const PER_PAGE_OPTIONS = [10, 25, 50, 100, 250, 500, 1000];
+
     public function index(Request $request)
     {
-        $query = Contact::query();
-        
-        if ($request->filled('course')) {
-            $query->where('services', 'like', '%' . $request->course . '%');
-        }        
-    
-        // Handle date range filtering based on 'created_at' or 'updated_at'
-        if ($request->filled('from_date') || $request->filled('to_date')) {
-    
-            if ($request->filled('from_date') && $request->filled('to_date')) {
-                $fromDate = $request->from_date.date(' 00:00:00');
-                $toDate = $request->to_date.date(' 23:59:59') ?: now(); // Use current date if 'to_date' is empty
-                $query->whereBetween('created_at', [$fromDate, $toDate]);
-            } 
-            elseif ($request->filled('to_date')) {
-                $toDate = $request->to_date.' 23:59:59';
-                $query->where('created_at', '<=', $toDate);
+        $filters = $this->validatedFilters($request);
+        $perPage = $this->resolvePerPage($request->input('per_page'));
+
+        $contacts = $this->buildFilteredQuery($filters)
+            ->orderByDesc('created_at')
+            ->paginate($perPage)
+            ->appends($request->query());
+
+        $uniqueCourses = Contact::query()
+            ->select('services')
+            ->whereNotNull('services')
+            ->where('services', '!=', '')
+            ->distinct()
+            ->orderBy('services')
+            ->pluck('services');
+
+        $sources = Contact::query()
+            ->select('source')
+            ->whereNotNull('source')
+            ->where('source', '!=', '')
+            ->distinct()
+            ->orderBy('source')
+            ->pluck('source');
+
+        $media = Contact::query()
+            ->select('medium')
+            ->whereNotNull('medium')
+            ->where('medium', '!=', '')
+            ->distinct()
+            ->orderBy('medium')
+            ->pluck('medium');
+
+        return view('backend.pages.contact.index', compact(
+            'contacts',
+            'uniqueCourses',
+            'sources',
+            'media',
+            'perPage'
+        ));
+    }
+
+    public function export(Request $request): StreamedResponse
+    {
+        $filters = $this->validatedFilters($request);
+        $fileName = 'contacts-' . now()->format('Y-m-d-His') . '.csv';
+
+        return response()->streamDownload(function () use ($filters) {
+            $handle = fopen('php://output', 'w');
+            fwrite($handle, "\xEF\xBB\xBF");
+
+            fputcsv($handle, [
+                'ID',
+                'IP',
+                'Name',
+                'Email',
+                'Phone No',
+                'Course',
+                'Source',
+                'Medium',
+                'gad_campaignid',
+                'gclid',
+                'Page',
+                'Section',
+                'Country Code',
+                'Country Phone',
+                'Syllabus Status',
+                'Email Status',
+                'Created At',
+            ]);
+
+            foreach ($this->buildFilteredQuery($filters)->orderByDesc('created_at')->cursor() as $contact) {
+                fputcsv($handle, [
+                    $contact->id,
+                    $contact->ip,
+                    $contact->name,
+                    $contact->email,
+                    $contact->phone,
+                    $contact->services,
+                    $contact->source,
+                    $contact->medium,
+                    $contact->gad_campaign_id,
+                    $contact->gclid,
+                    $contact->url,
+                    $contact->section,
+                    $contact->w_countrycode,
+                    $contact->w_phone,
+                    (string) $contact->w_syllabus === '1' ? 'SENT' : 'FAILED',
+                    (int) $contact->email_sent === 1 ? 'SENT' : 'PENDING',
+                    optional($contact->created_at)->format('Y-m-d H:i:s'),
+                ]);
             }
-            elseif ($request->filled('from_date')) {
-                $fromDate = $request->from_date.date(' 00:00:00');
-                $query->where('created_at', '>=', $fromDate);
-            }
-        }
-    
-        // Order by 'created_at' and paginate
-        $contacts = $query->orderBy('created_at', 'desc')->paginate(10);
-        
-    $uniqueCourses = \App\Models\Contact::select('services')
-        ->whereNotNull('services')
-        ->distinct()
-        ->orderBy('services', 'desc')
-        ->pluck('services');
-        
-        $uniqueCourses = DB::table('courses')
-    ->distinct()
-    ->pluck('alias');
-                
-        return view('backend.pages.contact.index', compact('contacts', 'uniqueCourses'));
+
+            fclose($handle);
+        }, $fileName, [
+            'Content-Type' => 'text/csv; charset=UTF-8',
+        ]);
     }
     
 
@@ -82,7 +142,45 @@ class ContactController extends Controller
         ];
 
         return response()->json($response);
-    }  
+    }
+
+    private function buildFilteredQuery(array $filters)
+    {
+        return Contact::query()
+            ->when($filters['course'] ?? null, function ($query, $course) {
+                $query->where('services', 'like', '%' . $course . '%');
+            })
+            ->when($filters['source'] ?? null, function ($query, $source) {
+                $query->where('source', $source);
+            })
+            ->when($filters['medium'] ?? null, function ($query, $medium) {
+                $query->where('medium', $medium);
+            })
+            ->when($filters['from_date'] ?? null, function ($query, $fromDate) {
+                $query->whereDate('created_at', '>=', $fromDate);
+            })
+            ->when($filters['to_date'] ?? null, function ($query, $toDate) {
+                $query->whereDate('created_at', '<=', $toDate);
+            });
+    }
+
+    private function validatedFilters(Request $request): array
+    {
+        return $request->validate([
+            'course' => ['nullable', 'string', 'max:255'],
+            'source' => ['nullable', 'string', 'max:255'],
+            'medium' => ['nullable', 'string', 'max:255'],
+            'from_date' => ['nullable', 'date'],
+            'to_date' => ['nullable', 'date', 'after_or_equal:from_date'],
+        ]);
+    }
+
+    private function resolvePerPage($perPage): int
+    {
+        $perPage = (int) $perPage;
+
+        return in_array($perPage, self::PER_PAGE_OPTIONS, true) ? $perPage : 10;
+    }
     /*
     public function status($id, $status) { 
         $contact = Contact::find($id);

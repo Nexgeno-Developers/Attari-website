@@ -7,75 +7,171 @@
 @include('backend.pages.contact.manage_email')
 
 <style>
+    .contact-filter-panel {
+        border: 1px solid #eef2f7;
+        border-radius: 12px;
+        padding: 18px;
+        margin-bottom: 22px;
+        background: #fbfcfe;
+    }
+
+    .contact-filter-panel label {
+        font-weight: 600;
+        margin-bottom: 6px;
+        color: #4f5d75;
+    }
+
+    .contact-filter-panel .form-control,
+    .contact-filter-panel .select2-container .select2-selection--single {
+        min-height: 42px;
+    }
+
+    .contact-filter-panel .select2-container {
+        width: 100% !important;
+    }
+
+    .contact-filter-panel .select2-container--default .select2-selection--single {
+        border: 1px solid #d9e2ec;
+        border-radius: 0.375rem;
+        display: flex;
+        align-items: center;
+    }
+
+    .contact-filter-panel .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 40px;
+        padding-left: 12px;
+        padding-right: 28px;
+    }
+
+    .contact-filter-panel .select2-container--default .select2-selection--single .select2-selection__arrow {
+        height: 40px;
+        right: 8px;
+    }
+
+    .contact-filter-actions {
+        display: flex;
+        align-items: end;
+        justify-content: flex-end;
+        gap: 12px;
+        height: 100%;
+    }
+
+    .contact-filter-actions .btn {
+        min-width: 110px;
+    }
+
+    .contact-filter-actions .btn-reset {
+        min-width: 46px;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
     .leads-contact1 .justify-content-sm-between {
-    display: block !important;
-}
+        display: block !important;
+    }
 
-.leads-contact1 .mt-4 {
-    margin-top: 15px !important;
-}
+    .leads-contact1 .mt-4 {
+        margin-top: 15px !important;
+    }
 
-.leads-contact1 .col-md-8 ul {
-    float: right !important;
-}
+    .leads-contact1 .col-md-8 ul {
+        float: right !important;
+    }
 
-.leads-contact1 .col-md-8 ul a.page-link {
-    border-radius: 100px;
-    margin-right: 4px;
-    text-align: center;
-}
-.leads-contact1 .col-md-8 ul span {
-    border-radius: 100px;
-    margin-right: 4px;
-    text-align: center;
-}
+    .leads-contact1 .col-md-8 ul a.page-link {
+        border-radius: 100px;
+        margin-right: 4px;
+        text-align: center;
+    }
 
-@media(max-width:767px)
-{
-    body .leads-contact1 .justify-content-sm-between {
-    display: none !important;
-}
-.leads-contact1 .justify-content-sm-between {
-    display: flex !important;
-}
-}
+    .leads-contact1 .col-md-8 ul span {
+        border-radius: 100px;
+        margin-right: 4px;
+        text-align: center;
+    }
+
+    @media(max-width:767px) {
+        body .leads-contact1 .justify-content-sm-between {
+            display: none !important;
+        }
+
+        .leads-contact1 .justify-content-sm-between {
+            display: flex !important;
+        }
+
+        .contact-filter-panel {
+            padding: 14px;
+        }
+
+        .contact-filter-actions {
+            justify-content: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .contact-filter-actions .btn {
+            min-width: unset;
+        }
+    }
 </style>
 
 <div class="card">
     <div class="card-body">
-        <div class="row mb-2">
-            <div class="col-md-12">
-      <form method="GET" action="{{ url(route('contact.index')) }}">
-         <div class="row mb-2">
-            <div class="col-md-4">
-                <label>Course</label>
-                <select name="course" class="form-control select2">
-                    <option value="">-- Select --</option>
-                    @foreach($uniqueCourses as $alias)
-                        <option value="{{ $alias }}" @if(request('course') == $alias) selected @endif>{{ $alias }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="col-md-3">
-                <label>From</label>
-               <input type="date" name="from_date" class="form-control" value="{{ request('from_date') }}">
-            </div>
-            <div class="col-md-3">
-                <label>To</label>
-               <input type="date" name="to_date" class="form-control" value="{{ request('to_date') }}">
-            </div>
-            <div class="col-md-2 d-flex justify-content-start align-items-end">
-                <div class="float-end d-flex gap-3">
-                    <button type="submit" class="btn btn-primary">Filter</button>
-                    <a href="{{ url(route('contact.index')) }}" class="text-center btn btn-danger" title="Reset"><i class="mdi mdi-reload"></i></a>
+        <form method="GET" action="{{ url(route('contact.index')) }}">
+            <div class="contact-filter-panel">
+                <div class="row g-3 align-items-end">
+                    <div class="col-12 col-md-6 col-xl-3">
+                        <label>Course</label>
+                        <select name="course" class="form-control select2">
+                            <option value="">-- Select --</option>
+                            @foreach($uniqueCourses as $alias)
+                                <option value="{{ $alias }}" @if(request('course') == $alias) selected @endif>{{ $alias }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-6 col-xl-3">
+                        <label>Source</label>
+                        <select name="source" class="form-control select2">
+                            <option value="">-- Select --</option>
+                            @foreach($sources as $source)
+                                <option value="{{ $source }}" @if(request('source') == $source) selected @endif>{{ $source }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-6 col-xl-3">
+                        <label>Medium</label>
+                        <select name="medium" class="form-control select2">
+                            <option value="">-- Select --</option>
+                            @foreach($media as $medium)
+                                <option value="{{ $medium }}" @if(request('medium') == $medium) selected @endif>{{ $medium }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-6 col-xl-3">
+                        <label>Records</label>
+                        <select name="per_page" class="form-control">
+                            @foreach([10, 25, 50, 100, 250, 500, 1000] as $size)
+                                <option value="{{ $size }}" @if((int) request('per_page', $perPage) === $size) selected @endif>{{ $size }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-6 col-xl-3">
+                        <label>From</label>
+                        <input type="date" name="from_date" class="form-control" value="{{ request('from_date') }}">
+                    </div>
+                    <div class="col-12 col-md-6 col-xl-3">
+                        <label>To</label>
+                        <input type="date" name="to_date" class="form-control" value="{{ request('to_date') }}">
+                    </div>
+                    <div class="col-12 col-xl-6">
+                        <div class="contact-filter-actions">
+                            <button type="submit" class="btn btn-primary">Filter</button>
+                            <a href="{{ url(route('contact.export', request()->query())) }}" class="text-center btn btn-success">Export CSV</a>
+                            <a href="{{ url(route('contact.index')) }}" class="text-center btn btn-danger btn-reset" title="Reset"><i class="mdi mdi-reload"></i></a>
+                        </div>
+                    </div>
                 </div>
             </div>
-         </div>
-      </form>                
-
-            </div>
-
-        </div>
+        </form>
 
         <div class="table-responsive">
             <table id="basic-datatable-with-laravel-pagination" class="table dt-responsive nowrap w-100">
@@ -87,6 +183,10 @@
                         <th>Email</th>
                         <th>Phone No</th>
                         <th>Course</th>
+                        <th>Source</th>
+                        <th>Medium</th>
+                        <th>gad_campaignid</th>
+                        <th>gclid</th>
                         {{--<th>Description</th>
                         <th>Other Info</th>
                         <th>Qualification</th>
@@ -113,6 +213,10 @@
                         <td>{{$row->email}}</td>
                         <td>{{$row->phone}}</td>
                         <td>{{$row->services}}</td>
+                        <td>{{ $row->source ?: '-' }}</td>
+                        <td>{{ $row->medium ?: '-' }}</td>
+                        <td>{{ $row->gad_campaign_id ?: '-' }}</td>
+                        <td>{{ $row->gclid ?: '-' }}</td>
                         {{--<td>{{$row->description}}</td>
                         <td>{{$row->other_info}}</td>
                         <td>{{$row->qualification}}</td>

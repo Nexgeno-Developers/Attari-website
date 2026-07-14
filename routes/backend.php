@@ -220,6 +220,7 @@ Route::group(['prefix' => 'publication'], function () {
 //Contact
 Route::group(['prefix' => 'contact'], function () {
     Route::get('/index', [ContactController::class, 'index'])->name('contact.index');
+    Route::get('/export', [ContactController::class, 'export'])->name('contact.export');
     Route::get('/view/{id}', [ContactController::class, 'view'])->name('contact.view');
     Route::post('/delete/{id}', [ContactController::class, 'delete'])->name('contact.delete');
 });
