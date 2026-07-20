@@ -330,6 +330,15 @@ class IndexController extends Controller
         //----- new ip --------
         $contactData['ip_data'] = $ip_data;
         //----- new ip --------
+
+        $honeypotFieldName = trim((string) $request->input('honeypot_field_name', ''));
+        $honeypotValue = '';
+
+        if ($honeypotFieldName !== '') {
+            $honeypotValue = trim((string) $request->input($honeypotFieldName, ''));
+        }
+
+        $contactData['honeypot_value'] = $honeypotValue !== '' ? $honeypotValue : null;
         
         
         // set source_url and source from session

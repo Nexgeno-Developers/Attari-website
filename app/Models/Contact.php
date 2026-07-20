@@ -30,6 +30,7 @@ class Contact extends Model
         'cv',
         'country',
         'ip',
+        'honeypot_value',
     ];
 
     protected function gadCampaignId(): Attribute

@@ -6,12 +6,25 @@ $amount = 1; // Change this to your desired amount
 // Increment a session value by a specific amount and dump it
 $value = Session()->increment('key', $amount);
 $class = "form_" . $value;
+$honeypotFieldName = 'website_' . strtolower(\Illuminate\Support\Str::random(12));
 
     // Clear the session data
     session()->forget('enquiry_id');
     session()->forget('course_name');
 
 @endphp
+
+<style>
+    .honeypot-trap {
+        position: absolute !important;
+        left: -9999px !important;
+        width: 1px !important;
+        height: 1px !important;
+        overflow: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
+</style>
 
 <form class="{{$class}}" action="{{url(route('contact.create'))}}" method="post" enctype="multipart/form-data">
     @csrf
@@ -27,6 +40,19 @@ $class = "form_" . $value;
     {{-- <input type="hidden" name="source" value="{{ session('source') ?? '-' }}" data-aos-once="true" data-aos="fade-up" /> --}}
 
     <input type="hidden" name="medium" value="{{ get_medium('value') ?? '-' }}" data-aos-once="true" data-aos="fade-up" />
+    <input type="hidden" name="honeypot_field_name" value="{{ $honeypotFieldName }}" />
+
+    <div class="honeypot-trap" aria-hidden="true">
+        <label for="{{ $honeypotFieldName }}">Enquiry</label>
+        <input
+            type="text"
+            id="{{ $honeypotFieldName }}"
+            name="{{ $honeypotFieldName }}"
+            value=""
+            tabindex="-1"
+            autocomplete="off"
+        />
+    </div>
 
     <div class="form-group">
         <input type="text" class="form-control" name="name" placeholder="Enter Name *" autocomplete="off" maxlength="50" aria-label="Full Name" required />
