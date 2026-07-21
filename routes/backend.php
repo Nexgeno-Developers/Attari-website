@@ -47,6 +47,7 @@ use App\Http\Controllers\backend\LogController;
 
 use App\Http\Controllers\backend\LearningsController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -221,6 +222,7 @@ Route::group(['prefix' => 'publication'], function () {
 Route::group(['prefix' => 'contact'], function () {
     Route::get('/index', [ContactController::class, 'index'])->name('contact.index');
     Route::get('/export', [ContactController::class, 'export'])->name('contact.export');
+    Route::get('/rebuild-source-medium', [ContactController::class, 'rebuildSourceMedium'])->name('contact.rebuild_source_medium');
     Route::get('/view/{id}', [ContactController::class, 'view'])->name('contact.view');
     Route::post('/delete/{id}', [ContactController::class, 'delete'])->name('contact.delete');
 });
