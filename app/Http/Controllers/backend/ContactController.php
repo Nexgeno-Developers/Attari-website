@@ -104,6 +104,7 @@ class ContactController extends Controller
                     $contact->source,
                     $contact->url,
                     $contact->ref_url,
+                    $contact->source_url,
                     $contact->section,
                     $contact->gad_campaign_id,
                     $contact->gclid,
