@@ -5,7 +5,6 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 
@@ -265,38 +264,18 @@ class ContactController extends Controller
             'ref_url' => $this->normalizeAttributionUrl($contact->ref_url),
             'source_url' => $this->normalizeAttributionUrl($contact->source_url),
         ];
-
-        foreach (['url', 'ref_url', 'source_url'] as $field) {
-            $candidate = $candidates[$field];
-
-            if ($candidate === null) {
-                continue;
-            }
-
-            $resolved = resolve_medium_from_url_old_data($candidate);
-            $mediumValue = trim((string) ($resolved['value'] ?? 'Direct'));
-
-            if ($mediumValue !== '' && strcasecmp($mediumValue, 'Direct') !== 0) {
-                return [
-                    'medium' => $mediumValue,
-                    'source' => $this->deriveSourceFromMediumValue($mediumValue),
-                    'matched_from' => $field,
-                ];
-            }
-        }
-
-        if ($candidates['source_url'] !== null) {
-            return [
-                'medium' => 'Direct',
-                'source' => $this->deriveSourceFromUrl($candidates['source_url']),
-                'matched_from' => 'source_url',
-            ];
-        }
+        $source = $this->deriveSourceFromRefUrl($contact->ref_url);
+        $resolved = resolve_medium_from_url_old_data(
+            $candidates['url'],
+            $candidates['ref_url'],
+            $candidates['source_url']
+        );
+        $mediumValue = trim((string) ($resolved['value'] ?? 'Direct'));
 
         return [
-            'medium' => 'Direct',
-            'source' => 'Direct',
-            'matched_from' => 'none',
+            'medium' => $mediumValue !== '' ? $mediumValue : 'Direct',
+            'source' => $source,
+            'matched_from' => $this->resolveMatchedFromField($candidates, $mediumValue, $source),
         ];
     }
 
@@ -311,54 +290,18 @@ class ContactController extends Controller
         return $url !== '' ? $url : null;
     }
 
-    private function deriveSourceFromMediumValue(?string $mediumValue): string
+    private function deriveSourceFromRefUrl($refUrl): string
     {
-        $mediumValue = trim((string) $mediumValue);
-
-        if ($mediumValue === '' || strcasecmp($mediumValue, 'Direct') === 0) {
+        if (! is_scalar($refUrl)) {
             return 'Direct';
         }
 
-        if (preg_match('/^Other search \(([^)]+)\)$/i', $mediumValue, $matches) === 1) {
-            return Str::title(trim($matches[1]));
-        }
-
-        $baseValue = preg_replace('/\s*\([^)]+\)\s*$/', '', $mediumValue) ?? $mediumValue;
-        $sourceToken = Str::of($baseValue)
-            ->replaceMatches('/[^A-Za-z0-9 ]+/', ' ')
-            ->trim()
-            ->explode(' ')
-            ->filter()
-            ->first();
-
-        if ($sourceToken === null || $sourceToken === '') {
+        $externalReferrerUrl = resolve_external_referrer_url(trim((string) $refUrl), env('APP_URL'));
+        if ($externalReferrerUrl === null || $externalReferrerUrl === '') {
             return 'Direct';
         }
 
-        $normalizedSources = [
-            'blog' => 'Blog',
-            'chatgpt' => 'ChatGPT',
-            'email' => 'Email',
-            'facebook' => 'Facebook',
-            'gmb' => 'GMB',
-            'google' => 'Google',
-            'instagram' => 'Instagram',
-            'linkedin' => 'Linkedin',
-            'rcs' => 'RCS',
-            'sms' => 'SMS',
-            'wati' => 'WATI',
-            'whatsapp' => 'WhatsApp',
-            'youtube' => 'Youtube',
-        ];
-
-        $normalizedKey = strtolower((string) $sourceToken);
-
-        return $normalizedSources[$normalizedKey] ?? Str::title((string) $sourceToken);
-    }
-
-    private function deriveSourceFromUrl(string $url): string
-    {
-        $host = parse_url($url, PHP_URL_HOST);
+        $host = parse_url($externalReferrerUrl, PHP_URL_HOST);
 
         if (! is_string($host) || trim($host) === '') {
             return 'Direct';
@@ -366,7 +309,31 @@ class ContactController extends Controller
 
         $label = medium_root_domain_label($host);
 
-        return $label ? Str::title($label) : 'Direct';
+        return $label ?: 'Direct';
+    }
+
+    private function resolveMatchedFromField(array $candidates, string $mediumValue, string $source): string
+    {
+        foreach (['url', 'ref_url', 'source_url'] as $field) {
+            $candidate = $candidates[$field] ?? null;
+
+            if ($candidate === null) {
+                continue;
+            }
+
+            $resolved = resolve_medium_from_url_old_data($candidate);
+            $candidateMedium = trim((string) ($resolved['value'] ?? 'Direct'));
+
+            if ($candidateMedium !== '' && strcasecmp($candidateMedium, $mediumValue) === 0) {
+                return $field;
+            }
+        }
+
+        if (strcasecmp($mediumValue, 'Direct') !== 0) {
+            return 'combined';
+        }
+
+        return $source !== 'Direct' ? 'ref_url' : 'none';
     }
 
     private function renderRebuildSourceMediumResponse(

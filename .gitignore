@@ -28,3 +28,4 @@ yarn-error.log
 *.log
 
 app/Helpers/CommonHelper.php
+app/Helpers/helper_xy_xy.php
