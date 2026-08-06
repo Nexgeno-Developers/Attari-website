@@ -25,6 +25,7 @@ class Contact extends Model
         'source_url',
         'source',
         'medium',
+        'utm_term',
         'ip_data',
         'section',
         'cv',

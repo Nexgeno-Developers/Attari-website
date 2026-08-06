@@ -79,6 +79,7 @@ class ContactController extends Controller
                 'Course',
                 'Medium',
                 'Source',
+                'utm_term',
                 'Page',
                 'Referral URL',
                 'source_url',
@@ -101,6 +102,7 @@ class ContactController extends Controller
                     $contact->services,
                     $contact->medium,
                     $contact->source,
+                    $contact->utm_term,
                     $contact->url,
                     $contact->ref_url,
                     $contact->source_url,
@@ -161,7 +163,7 @@ class ContactController extends Controller
         $autoContinue = (bool) ($validated['auto_continue'] ?? false);
 
         $contacts = Contact::query()
-            ->select(['id', 'url', 'ref_url', 'source_url', 'source', 'medium'])
+            ->select(['id', 'url', 'ref_url', 'source_url', 'source', 'medium', 'utm_term'])
             ->where('id', '>', $afterId)
             ->orderBy('id')
             ->limit($limit)
@@ -185,6 +187,9 @@ class ContactController extends Controller
             if ((string) $contact->source !== $resolved['source']) {
                 $payload['source'] = $resolved['source'];
             }
+            if ((string) ($contact->utm_term ?? '') !== $resolved['utm_term']) {
+                $payload['utm_term'] = $resolved['utm_term'];
+            }
 
             if ($payload !== []) {
                 Contact::query()->whereKey($contact->id)->update($payload);
@@ -196,6 +201,7 @@ class ContactController extends Controller
                 'matched_from' => $resolved['matched_from'],
                 'medium' => $resolved['medium'],
                 'source' => $resolved['source'],
+                'utm_term' => $resolved['utm_term'],
                 'updated' => $payload !== [],
             ];
         }
@@ -271,11 +277,13 @@ class ContactController extends Controller
             $candidates['source_url']
         );
         $mediumValue = trim((string) ($resolved['value'] ?? 'Direct'));
+        $matchedFrom = $this->resolveMatchedFromField($candidates, $mediumValue, $source);
 
         return [
             'medium' => $mediumValue !== '' ? $mediumValue : 'Direct',
             'source' => $source,
-            'matched_from' => $this->resolveMatchedFromField($candidates, $mediumValue, $source),
+            'utm_term' => $this->resolveUtmTermForMedium($candidates, $matchedFrom, $mediumValue),
+            'matched_from' => $matchedFrom,
         ];
     }
 
@@ -336,6 +344,69 @@ class ContactController extends Controller
         return $source !== 'Direct' ? 'ref_url' : 'none';
     }
 
+    private function resolveUtmTermForMedium(array $candidates, string $matchedFrom, string $mediumValue): string
+    {
+        if ($matchedFrom !== 'combined' && isset($candidates[$matchedFrom])) {
+            return $this->extractQueryValue($candidates[$matchedFrom], 'utm_term') ?? '';
+        }
+
+        foreach (['url', 'ref_url', 'source_url'] as $field) {
+            $candidate = $candidates[$field] ?? null;
+
+            if ($candidate === null) {
+                continue;
+            }
+
+            $resolved = resolve_medium_from_url_old_data($candidate);
+            $candidateMedium = trim((string) ($resolved['value'] ?? 'Direct'));
+
+            if ($candidateMedium !== '' && strcasecmp($candidateMedium, $mediumValue) === 0) {
+                $utmTerm = $this->extractQueryValue($candidate, 'utm_term');
+
+                if ($utmTerm !== null) {
+                    return $utmTerm;
+                }
+            }
+        }
+
+        foreach (['url', 'ref_url', 'source_url'] as $field) {
+            $utmTerm = $this->extractQueryValue($candidates[$field] ?? null, 'utm_term');
+
+            if ($utmTerm !== null) {
+                return $utmTerm;
+            }
+        }
+
+        return '';
+    }
+
+    private function extractQueryValue($url, string $key): ?string
+    {
+        if (! is_scalar($url)) {
+            return null;
+        }
+
+        $url = trim((string) $url);
+
+        if ($url === '') {
+            return null;
+        }
+
+        $query = parse_url($url, PHP_URL_QUERY);
+
+        if (! is_string($query) || $query === '') {
+            return null;
+        }
+
+        parse_str($query, $parameters);
+
+        $value = $parameters[$key] ?? null;
+
+        return is_scalar($value) && trim((string) $value) !== ''
+            ? trim((string) $value)
+            : null;
+    }
+
     private function renderRebuildSourceMediumResponse(
         array $rows,
         int $afterId,
@@ -358,11 +429,12 @@ class ContactController extends Controller
 
         foreach ($rows as $row) {
             $lines[] = sprintf(
-                '#%d | matched_from=%s | medium=%s | source=%s | updated=%s',
+                '#%d | matched_from=%s | medium=%s | source=%s | utm_term=%s | updated=%s',
                 $row['id'],
                 $row['matched_from'],
                 $row['medium'],
                 $row['source'],
+                $row['utm_term'] !== '' ? $row['utm_term'] : '-',
                 $row['updated'] ? 'yes' : 'no'
             );
         }
