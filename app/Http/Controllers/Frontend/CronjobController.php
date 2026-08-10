@@ -52,6 +52,7 @@ class CronjobController extends Controller
                 
                 $source_url = $contact->source_url ?? '-';
                 $source = $contact->source ?? '-';
+                $utm_term = $contact->utm_term ?? '-';
                 $honeypotValue = trim((string) ($contact->honeypot_value ?? ''));
                 
                 $w_countrycode = $contact->w_countrycode ?? '';
@@ -173,6 +174,10 @@ class CronjobController extends Controller
                         //medium
                         if (!empty($contact->medium)) {
                         $body .= '<tr><td style="width: 150px;"><strong>Medium :</strong></td><td>' . $contact->medium . '</td></tr>' . "\n";
+                        }
+
+                        if (!empty($utm_term) && $utm_term !== '-') {
+                        $body .= '<tr><td style="width: 150px;"><strong>Search term :</strong></td><td>' . $utm_term . '</td></tr>' . "\n";
                         }
 
                         if ($honeypotValue !== '') {

@@ -204,6 +204,7 @@
                         <th>Course</th>
                         <th>Medium</th>
                         <th>Source</th>
+                        <th>Search term</th>
                         <th>Page</th>
                         <th>Section</th>
                         <th>gad_campaignid</th>
@@ -230,6 +231,7 @@
                         <td>{{$row->services}}</td>
                         <td>{{ $row->medium ?: '-' }}</td>
                         <td>{{ $row->source ?: '-' }}</td>
+                        <td>{{ $row->utm_term ?: '-' }}</td>
                         <td>
                             <a target="_blank" href="{{$row->url}}">
                                 {{$row->url}}

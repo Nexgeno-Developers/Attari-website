@@ -79,7 +79,7 @@ class ContactController extends Controller
                 'Course',
                 'Medium',
                 'Source',
-                'utm_term',
+                'Search term',
                 'Page',
                 'Referral URL',
                 'source_url',

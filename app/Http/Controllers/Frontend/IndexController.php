@@ -344,6 +344,7 @@ class IndexController extends Controller
         // set source_url and source from session
         $contactData['source_url'] = session('source_url') ?? '-';
         $contactData['source'] = session('source') ?? '-';
+        $contactData['utm_term'] = session('utm_term') ?? '-';
         
         // Create the contact record
         $contact = Contact::create($contactData);
