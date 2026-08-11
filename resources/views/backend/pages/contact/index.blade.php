@@ -140,6 +140,16 @@
             <div class="contact-filter-panel">
                 <div class="row g-3 align-items-end">
                     <div class="col-12 col-md-6 col-xl-3">
+                        <label>Universal Search</label>
+                        <input
+                            type="text"
+                            name="search"
+                            class="form-control"
+                            value="{{ request('search') }}"
+                            placeholder="Name, email, phone, page URL, source URL..."
+                        >
+                    </div>
+                    <div class="col-12 col-md-6 col-xl-3">
                         <label>Course</label>
                         <select name="course" class="form-control contact-filter-select">
                             <option value="">-- Select --</option>
@@ -163,6 +173,15 @@
                             <option value="">-- Select --</option>
                             @foreach($media as $medium)
                                 <option value="{{ $medium }}" @if(request('medium') == $medium) selected @endif>{{ ucwords(strtolower($medium)) }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-6 col-xl-3">
+                        <label>Search term</label>
+                        <select name="utm_term" class="form-control contact-filter-select">
+                            <option value="">-- Select --</option>
+                            @foreach($utmTerms as $utmTerm)
+                                <option value="{{ $utmTerm }}" @if(request('utm_term') == $utmTerm) selected @endif>{{ $utmTerm }}</option>
                             @endforeach
                         </select>
                     </div>

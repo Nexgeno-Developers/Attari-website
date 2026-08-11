@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 
@@ -30,35 +31,53 @@ class ContactController extends Controller
             ->paginate($perPage)
             ->appends($request->query());
 
-        $uniqueCourses = Contact::query()
-            ->select('services')
-            ->whereNotNull('services')
-            ->where('services', '!=', '')
-            ->distinct()
-            ->orderBy('services')
-            ->pluck('services');
+        $uniqueCourses = Cache::remember('contact_filters_services', now()->addMinutes(10), function () {
+            return Contact::query()
+                ->select('services')
+                ->whereNotNull('services')
+                ->where('services', '!=', '')
+                ->distinct()
+                ->orderBy('services')
+                ->pluck('services');
+        });
 
-        $sources = Contact::query()
-            ->select('source')
-            ->whereNotNull('source')
-            ->where('source', '!=', '')
-            ->distinct()
-            ->orderBy('source')
-            ->pluck('source');
+        $sources = Cache::remember('contact_filters_sources', now()->addMinutes(10), function () {
+            return Contact::query()
+                ->select('source')
+                ->whereNotNull('source')
+                ->where('source', '!=', '')
+                ->distinct()
+                ->orderBy('source')
+                ->pluck('source');
+        });
 
-        $media = Contact::query()
-            ->select('medium')
-            ->whereNotNull('medium')
-            ->where('medium', '!=', '')
-            ->distinct()
-            ->orderBy('medium')
-            ->pluck('medium');
+        $media = Cache::remember('contact_filters_media', now()->addMinutes(10), function () {
+            return Contact::query()
+                ->select('medium')
+                ->whereNotNull('medium')
+                ->where('medium', '!=', '')
+                ->distinct()
+                ->orderBy('medium')
+                ->pluck('medium');
+        });
+
+        $utmTerms = Cache::remember('contact_filters_utm_terms', now()->addMinutes(10), function () {
+            return Contact::query()
+                ->select('utm_term')
+                ->whereNotNull('utm_term')
+                ->where('utm_term', '!=', '')
+                ->where('utm_term', '!=', '-')
+                ->distinct()
+                ->orderBy('utm_term')
+                ->pluck('utm_term');
+        });
 
         return view('backend.pages.contact.index', compact(
             'contacts',
             'uniqueCourses',
             'sources',
             'media',
+            'utmTerms',
             'perPage'
         ));
     }
@@ -228,6 +247,28 @@ class ContactController extends Controller
     private function buildFilteredQuery(array $filters)
     {
         return Contact::query()
+            ->when($filters['search'] ?? null, function ($query, $search) {
+                $query->where(function ($subQuery) use ($search) {
+                    foreach ([
+                        'name',
+                        'email',
+                        'phone',
+                        'description',
+                        'country',
+                        'section',
+                        'ip',
+                        'ip_data',
+                        'w_countrycode',
+                        'w_phone',
+                        'services',
+                        'ref_url',
+                        'source_url',
+                        'url',
+                    ] as $column) {
+                        $subQuery->orWhere($column, 'like', '%' . $search . '%');
+                    }
+                });
+            })
             ->when($filters['course'] ?? null, function ($query, $course) {
                 $query->where('services', 'like', '%' . $course . '%');
             })
@@ -236,6 +277,9 @@ class ContactController extends Controller
             })
             ->when($filters['medium'] ?? null, function ($query, $medium) {
                 $query->where('medium', $medium);
+            })
+            ->when($filters['utm_term'] ?? null, function ($query, $utmTerm) {
+                $query->where('utm_term', $utmTerm);
             })
             ->when($filters['from_date'] ?? null, function ($query, $fromDate) {
                 $query->whereDate('created_at', '>=', $fromDate);
@@ -248,9 +292,11 @@ class ContactController extends Controller
     private function validatedFilters(Request $request): array
     {
         return $request->validate([
+            'search' => ['nullable', 'string', 'max:255'],
             'course' => ['nullable', 'string', 'max:255'],
             'source' => ['nullable', 'string', 'max:255'],
             'medium' => ['nullable', 'string', 'max:255'],
+            'utm_term' => ['nullable', 'string', 'max:255'],
             'from_date' => ['nullable', 'date'],
             'to_date' => ['nullable', 'date', 'after_or_equal:from_date'],
         ]);
@@ -282,7 +328,9 @@ class ContactController extends Controller
         return [
             'medium' => $mediumValue !== '' ? $mediumValue : 'Direct',
             'source' => $source,
-            'utm_term' => $this->resolveUtmTermForMedium($candidates, $matchedFrom, $mediumValue),
+            'utm_term' => should_store_utm_term_for_medium($mediumValue)
+                ? $this->resolveUtmTermForMedium($candidates, $matchedFrom, $mediumValue)
+                : '',
             'matched_from' => $matchedFrom,
         ];
     }
