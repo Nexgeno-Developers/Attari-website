@@ -385,7 +385,7 @@
                                 @php $i = 1; @endphp
 
                                 @if (!empty($syllabus))
-                                    <div class="accordion--container1 accordion_style1">
+                                    <div class="accordion--container1 accordion_style1 syllabus-accordion">
         
                                         @foreach ($syllabus as $row)
                                             <li class="accordion1 @if($i == 1) open @endif">

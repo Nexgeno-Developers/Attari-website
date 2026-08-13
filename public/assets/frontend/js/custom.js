@@ -210,15 +210,63 @@ $("li.accordion span").click(function() {
 		$(this).parent().addClass("open")
 	}
 });
-$("li.accordion1 span").click(function() {
-	if ($(this).parent().hasClass("open")) {
-		$("li.accordion1").removeClass("open");
-		$("li.accordion1 .contentsillabus_div").slideUp()
+function getAccordionStickyOffset() {
+	var extra = 16;
+	var stickyNav = document.getElementById("vm_nav");
+	if (stickyNav) {
+		var rect = stickyNav.getBoundingClientRect();
+		if (rect.height && rect.top < 10 && rect.bottom > 0) {
+			return Math.ceil(rect.bottom) + extra;
+		}
+	}
+	var nav = document.querySelector(".nav-sections");
+	if (nav) {
+		var navRect = nav.getBoundingClientRect();
+		if (navRect.height && navRect.top <= 10 && navRect.bottom > 0) {
+			return Math.ceil(navRect.bottom) + extra;
+		}
+	}
+	return extra;
+}
+
+$("li.accordion1 > span").on("click", function () {
+	var $item = $(this).parent();
+	var $header = $(this);
+	var $content = $item.children(".contentsillabus_div");
+	var $group = $item.closest(".accordion--container1").find("li.accordion1");
+	var duration = 300;
+
+	if ($item.hasClass("open")) {
+		$item.removeClass("open");
+		$content.stop(true, true).slideUp(duration);
+		return;
+	}
+
+	var $openItems = $group.filter(".open").not($item);
+	var $openContents = $openItems.children(".contentsillabus_div");
+
+	$openItems.removeClass("open");
+	$item.addClass("open");
+
+	function scrollModuleHeadingIntoView() {
+		var stickyOffset = getAccordionStickyOffset();
+		var headerTop = $header.offset().top - stickyOffset;
+		window.scrollTo({
+			top: Math.max(headerTop, 0),
+			behavior: "smooth"
+		});
+	}
+
+	function showOpenedModule() {
+		$content.stop(true, true).slideDown(duration);
+		scrollModuleHeadingIntoView();
+		setTimeout(scrollModuleHeadingIntoView, duration);
+	}
+
+	if ($openContents.length) {
+		$openContents.stop(true, true).slideUp(duration).promise().done(showOpenedModule);
 	} else {
-		$("li.accordion1 .contentsillabus_div").slideUp();
-		$(this).parent().children(".contentsillabus_div").slideDown();
-		$("li.accordion1").removeClass("open");
-		$(this).parent().addClass("open")
+		showOpenedModule();
 	}
 });
 

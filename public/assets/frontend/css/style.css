@@ -3888,12 +3888,8 @@ img.not_found_img {
   content: '-' !important;
 }
 
-.accordion--container1 .accordion1.open .contentsillabus_div {
-  display: block;
-}
-
-.accordion--container1 .contentsillabus_div {
-  display: none;
+#syllabus li.accordion1 > span {
+  scroll-margin-top: 90px;
 }
 
 .accordion--container1 .contentsillabus_div .txt {
