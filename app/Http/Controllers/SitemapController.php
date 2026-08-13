@@ -11,7 +11,7 @@ use DB;
 use App\Models\Syllabus;
 use App\Models\Course;
 
-class SiteMapController extends Controller
+class SitemapController extends Controller
 {
     
     public function newSitemap(Request $request, $page) {
