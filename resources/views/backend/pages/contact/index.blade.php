@@ -140,7 +140,7 @@
             <div class="contact-filter-panel">
                 <div class="row g-3 align-items-end">
                     <div class="col-12 col-md-6 col-xl-3">
-                        <label>Universal Search</label>
+                        <label>Advanced Search</label>
                         <input
                             type="text"
                             name="search"

@@ -49,4 +49,3 @@ class Course extends Model
     }
 }
 
-

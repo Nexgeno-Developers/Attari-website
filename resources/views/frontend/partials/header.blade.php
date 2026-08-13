@@ -91,18 +91,27 @@ $course = getcmsCourses();
                                                                         @break
                                                         
                                                                     @case('aws cloud')
+                                                                    @case('aws cloud with genai')
                                                                         fa-brands fa-amazon
                                                                         @break
                                                         
                                                                     @case('azure cloud')
+                                                                    @case('azure cloud with genai')
                                                                         fa-brands fa-microsoft
                                                                         @break
                                                         
+                                                        
+                                                         @case('windows server hybrid')
+                                                                        fa-solid fa-server
+                                                                        @break
+                                                                        
+                                                                        
                                                                     @case('mcse')
                                                                         fa-brands fa-windows
                                                                         @break
                                                         
                                                                     @case('ccna')
+                                                                    @case('ccna with automation')
                                                                         fa-solid fa-certificate
                                                                         @break
                                                         

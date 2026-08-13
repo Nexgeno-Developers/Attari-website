@@ -4,11 +4,6 @@
 /public/hot
 /public/storage
 /public/robots.txt
-/public/sitemap
-
-.htaccess
-
-/storage/app/public
 /storage/*.key
 /vendor
 .env
@@ -25,7 +20,3 @@ yarn-error.log
 /.vscode
 *.zip
 *.sql
-*.log
-
-app/Helpers/CommonHelper.php
-app/Helpers/helper_xy_xy.php

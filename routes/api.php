@@ -92,4 +92,4 @@ Route::get('/test2', function (Request $request) {
     return $response;
 });
 
-//URL::forceScheme('https');
+// URL::forceScheme('https');

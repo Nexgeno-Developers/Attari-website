@@ -230,7 +230,7 @@ li.menu_item i {
 
   .header .menu {
     position: fixed;
-    width: 200px;
+    width: 270px;
     background: #ffffff;
     /* box-shadow: 0 0 15px ; */
     left: 0;
@@ -5047,7 +5047,7 @@ background: #07d353;
         }
 
         .nx_trainer_box{
-                margin-top: 30px;
+                margin-top: 20px;
     background: rgb(255 255 255);
     backdrop-filter: blur(12px);
     border: 1px solid rgb(219 219 219 / 50%);
@@ -5056,7 +5056,7 @@ background: #07d353;
         }
 
         .nx_trainer_top{
-               padding: 45px 45px 38px;
+               padding: 25px 50px 30px;
     border-bottom: 1px solid #edf0f5;
         }
 
@@ -5080,7 +5080,7 @@ background: #07d353;
         }
 
         .nx_trainer_content{
-            padding:55px 60px;
+                padding: 30px 50px;
         }
 
         .nx_trainer_points{

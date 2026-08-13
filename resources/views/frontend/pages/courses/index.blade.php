@@ -155,6 +155,9 @@
                         <li class="menu-item">
                             <a class="menu-item-link" href="{{request()->url()}}/#batch_shedule" data-href="#batch_shedule">Batch Schedule</a>
                         </li>
+                        <li class="menu-item">
+                            <a class="menu-item-link" href="{{request()->url()}}/#trainer_profile" data-href="#trainer_profile">Trainer Profile</a>
+                        </li>
                         @if (!empty($faq) && $faq->count() > 0)
                         <li class="menu-item">
                             <a class="menu-item-link" href="{{request()->url()}}/#faqs" data-href="#faqs">FAQ</a>
@@ -418,21 +421,7 @@
 
 
          @php
-            $syllabusSections = [];
-            if (!empty($syllabus)) {
-                $s = 1;
-                foreach ($syllabus as $row) {
-                    $title = ReplaceKeyword($row->title, $cms->replace_keyword);
-                    $descRaw = schema_ReplaceKeyword($row->description, $cms->replace_keyword);
-                    $descText = trim(preg_replace('/\s+/', ' ', strip_tags(html_entity_decode($descRaw))));
-
-                    $syllabusSections[] = [
-                        'name' => "Module {$s}: {$title}",
-                        'description' => $descText,
-                    ];
-                    $s++;
-                }
-            }
+            $s = 1;    
         @endphp
         
         <script type="application/ld+json">
@@ -488,7 +477,17 @@
                     "ratingCount": {{ $detail->total_review }},
                     "bestRating": 5
                 },
-                    "syllabusSections": {!! json_encode($syllabusSections, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
+                    "syllabusSections": [
+                            @foreach ($syllabus as $row)
+                                @if($s <= 5)
+                                    {
+                                        "name": "Module {{ $s }}: {{ addslashes(ReplaceKeyword($row->title, $cms->replace_keyword)) }}",
+                                        "description": "{{ schema_ReplaceKeyword($row->description, $cms->replace_keyword) }}"
+                                    }@if($s < 5),@endif
+                                    @php $s++; @endphp
+                                @endif
+                            @endforeach
+                        ]
             }
          </script>
          
@@ -915,7 +914,7 @@
 
 @if(in_array($cId, [5, 7]))
                     
-                    <section class="nx_trainer_section gradiant_bg">
+                    <section id="trainer_profile" class="page-section nx_trainer_section gradiant_bg">
                           <div class="container">
                             <!-- Heading -->
                             <div class="text-center">
@@ -1085,7 +1084,7 @@
                              @else 
                              
                            
-                         <section class="nx_trainer_section gradiant_bg">
+                         <section id="trainer_profile" class="page-section nx_trainer_section gradiant_bg">
                           <div class="container">
                             <!-- Heading -->
                             <div class="text-center">
@@ -1288,32 +1287,32 @@
                             </div>
                     <!----================== Faq Schema ==================------------------->
                             @php
-                                $faqEntities = [];
-                                if (!empty($faq)) {
-                                    foreach ($faq as $row) {
-                                        $questionRaw = ReplaceKeyword($row->question, $cms->replace_keyword);
-                                        $answerRaw = ReplaceKeyword($row->answer, $cms->replace_keyword);
-
-                                        $questionText = trim(preg_replace('/\s+/', ' ', strip_tags(html_entity_decode($questionRaw))));
-                                        $answerText = trim(preg_replace('/\s+/', ' ', strip_tags(html_entity_decode($answerRaw))));
-
-                                        $faqEntities[] = [
-                                            '@type' => 'Question',
-                                            'name' => $questionText,
-                                            'acceptedAnswer' => [
-                                                '@type' => 'Answer',
-                                                'text' => $answerText,
-                                            ],
-                                        ];
-                                    }
-                                }
+                                $f = 1;
                             @endphp
                             
                             <script type="application/ld+json">
                             {
                                 "@context": "https://schema.org",
                                 "@type": "FAQPage",
-                                "mainEntity": {!! json_encode($faqEntities, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
+                                "mainEntity": [
+                                    @foreach ($faq as $row)
+                                        @if ($f <= 5)
+                                            {
+                                                "@type": "Question",
+                                                "name": "@php echo ReplaceKeyword($row->question, $cms->replace_keyword) @endphp",
+                                                "acceptedAnswer": {
+                                                    "@type": "Answer",
+                                                    "text": "@php echo ReplaceKeyword($row->answer, $cms->replace_keyword) @endphp"
+                                                }
+                                            }
+                                            @if ($f < 5),
+                                            @endif
+                                        @endif
+                                        @php
+                                            $f++;
+                                        @endphp
+                                    @endforeach
+                                ]
                             }
                             </script>
 
