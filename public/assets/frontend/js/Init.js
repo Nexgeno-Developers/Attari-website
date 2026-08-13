@@ -19,8 +19,9 @@ $(document).ready(function () {
 //     $("#getsyllabusModal").modal("show");
 // });
     
-$('#showFormBtnCurriculum2').click(function() {
-    
+$(document).on('click', '.showFormBtnCurriculum', function(e) {
+    e.preventDefault();
+
     // Create an XMLHttpRequest object
     var xhr = new XMLHttpRequest();
 

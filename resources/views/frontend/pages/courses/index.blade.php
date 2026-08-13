@@ -323,7 +323,7 @@
                         <style>
                             .online_css {
                                 display: inline-block;
-                                width: 530px;
+                                width: 100%;
                                 color: #fff;
                                 margin-top: -15px;
                                 padding-bottom: 0px;
@@ -347,7 +347,7 @@
                         <style>
                             .online_css {
                                 display: inline-block;
-                                width: 530px;
+                                width: 100%;
                                 color: #fff;
                                 margin-top: -15px;
                                 padding-bottom: 0px;
@@ -373,15 +373,7 @@
                                 session()->put('pagecourse', $cms->breadcrumb_title);
                             @endphp
                         
-                            <div class="download_carricullam float_right">
-                                <a id="showFormBtnCurriculum2">
                         
-                                   {{ explode(' ', trim($cms->menu_title ?? $cms->breadcrumb_title))[0] }} Syllabus on WhatsApp
-                        
-                                    <i class="fab fa-whatsapp get_whatsapp" aria-hidden="true" style="color:#07d353;"></i>
-                        
-                                </a>
-                            </div>
                         
                         @endif
                         
@@ -403,6 +395,12 @@
                                                     <div class="txt">
                                                         @php echo ReplaceKeyword($row->description, $cms->replace_keyword) @endphp
                                                     </div>
+                                                    @if(!empty($detail->curriculum_pdf))
+                                                        <a class="module_download_brochure showFormBtnCurriculum" href="javascript:void(0)">
+                                                            <i class="fa-solid fa-circle-down"></i>
+                                                            Download Brochure
+                                                        </a>
+                                                    @endif
                                                 </div>
                                             </li>
                                             @php $i++ @endphp

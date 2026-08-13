@@ -70,7 +70,7 @@
 <script src="/assets/frontend/js/lazysizes.min.js"></script>
 
 <!--Custom Js-->
-<script src="/assets/frontend/js/Init.js?1.0.9"></script>
+<script src="/assets/frontend/js/Init.js?1.1.0"></script>
 <script src="/assets/frontend/js/custom.js?1.1.9"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
 
