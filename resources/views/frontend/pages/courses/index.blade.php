@@ -397,8 +397,8 @@
                                                     </div>
                                                     @if(!empty($detail->curriculum_pdf))
                                                         <a class="module_download_brochure showFormBtnCurriculum" href="javascript:void(0)">
-                                                            <i class="fa-solid fa-circle-down"></i>
-                                                            Download Brochure
+                                                            <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                                                           {{ explode(' ', trim($cms->menu_title ?? $cms->breadcrumb_title))[0] }}   Syllabus on WhatsApp
                                                         </a>
                                                     @endif
                                                 </div>

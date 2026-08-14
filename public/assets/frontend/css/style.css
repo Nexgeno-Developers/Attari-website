@@ -3920,7 +3920,9 @@ img.not_found_img {
     border: none;
     line-height: 1.2;
 }
-
+.module_download_brochure i {
+    font-size: 22px;
+}
 .module_download_brochure__icon {
   display: inline-flex;
   align-items: center;
