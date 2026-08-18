@@ -1522,7 +1522,7 @@ use Illuminate\Support\Facades\Storage;
 
             if (! should_store_utm_term_for_medium($medium ?? $resolvedMedium)) {
                 session(['utm_term' => '-']);
-            } elseif (session('utm_term') === '' || session('utm_term') === null) {
+            } elseif (session('utm_term') === '' || session('utm_term') === null || session('utm_term') === '-') {
                 $fallbackUtmTerm = $extractUtmTerm($referrerUrl)
                     ?? $extractUtmTerm($postedSourceUrl)
                     ?? $extractUtmTerm($currentUrl)
