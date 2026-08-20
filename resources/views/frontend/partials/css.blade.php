@@ -1,6 +1,6 @@
 
 <link rel="shortcut icon" href="{{ asset('/assets/frontend/images/favicon.webp') }}">
-<link rel="stylesheet" href="/assets/frontend/css/style.css?v1.6.4" />
+<link rel="stylesheet" href="/assets/frontend/css/style.css?v1.6.5" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
  
 <link rel="stylesheet" href="/assets/frontend/css/responsive.css?v-1.3.7" />
@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="/assets/frontend/css/owl.theme.default.css" />
 <link rel="stylesheet" href="/assets/frontend/css/fancybox.min.css"/>
 <!--<link rel="stylesheet" href="/assets/frontend/css/robotfonts.css" >-->
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet"/>
 
 <!-- Google Tag Manager -->

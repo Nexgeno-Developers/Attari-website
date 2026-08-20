@@ -4,13 +4,20 @@
   box-sizing: border-box;
 }
 
+:root {
+  --bs-font-sans-serif: "Satoshi", sans-serif;
+}
+
+html,
+body {
+  font-family: "Satoshi", sans-serif !important;
+}
+
 body {
   line-height: 1.5;
   font-size: 15px;
   overflow-x: hidden;
   background: #fff;
-  /*font-family: 'Roboto', sans-serif !important;*/
-  font-family: "Open Sans", sans-serif !important;
 }
 
 p {
@@ -859,8 +866,7 @@ body p.gettouch{
 
 .footer_heading h4 {
   color: #012749;
-  /*font-family: roboto, Sans-serif;*/
- font-family: "Open Sans", sans-serif !important;
+  font-family: "Satoshi", sans-serif !important;
   font-size: 32px;
   font-weight: 700;
   line-height: 41px;
@@ -2920,8 +2926,7 @@ span.customSelect {
 
 .aboutpg_hed {
   color: #012749;
-  /*font-family: roboto, Sans-serif;*/
-  font-family: "Open Sans", sans-serif !important;
+  font-family: "Satoshi", sans-serif !important;
   font-size: 36px;
   font-weight: 300;
   line-height: 1.3em;
