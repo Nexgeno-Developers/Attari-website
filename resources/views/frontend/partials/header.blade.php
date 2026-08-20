@@ -45,12 +45,9 @@ $course = getcmsCourses();
 <!--        <div class=""><a target="_blank" href="https://whatsapp.com/channel/0029Va9JnmaHAdNWUTJFhc2O ">Join Attari Classes channel on <i aria-hidden="true" class="fab fa-whatsapp"></i></a></div>-->
 <!--    </div>-->
 <!--</div>-->
-    
-</div>
+
     <header class="header">
         <div class="container">
-            <div class="row">
-                <div class="col-12">
                     <div class="nav_row v_center">
                         <div class="header_item item_left">
                             <div class="logo">
@@ -139,13 +136,16 @@ $course = getcmsCourses();
                             </nav>
                         </div>
                         <div class="header_item item_right">
+                            <a href="tel:+917738375431" class="header_phone" aria-label="Call Attari Classes">
+                                <i class="fas fa-phone-alt" aria-hidden="true"></i>
+                                <span>+91 77383 75431</span>
+                            </a>
+                            <button type="button" class="header_demo_btn" onclick="formModal('{{ url(route('component.form')) }}?section=Header - Book Free Demo&title=Book a FREE Demo&current_page={{ urlencode(url()->current()) }}')">Book free demo</button>
                             <div class="mobile_menu_trigger">
                                 <span></span>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
         </div>
     </header>
 
