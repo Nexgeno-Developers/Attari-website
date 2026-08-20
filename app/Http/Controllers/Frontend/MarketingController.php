@@ -24,6 +24,33 @@ class MarketingController extends Controller
         
         $source_url = session('source_url') ?? '-';
         $source = session('source') ?? '-';
+        $extractUtmTerm = static function ($url): ?string {
+            $url = trim((string) $url);
+
+            if ($url === '' || $url === '-') {
+                return null;
+            }
+
+            $query = parse_url($url, PHP_URL_QUERY);
+
+            if (! is_string($query) || $query === '') {
+                return null;
+            }
+
+            parse_str($query, $parameters);
+            $value = $parameters['utm_term'] ?? null;
+
+            return is_scalar($value) && trim((string) $value) !== ''
+                ? trim((string) $value)
+                : null;
+        };
+        $utmTerm = session('utm_term');
+        if ($utmTerm === null || $utmTerm === '' || $utmTerm === '-') {
+            $utmTerm = $extractUtmTerm($request->input('url'))
+                ?? $extractUtmTerm($request->input('ref_url'))
+                ?? $extractUtmTerm($source_url)
+                ?? '-';
+        }
         
         // If course_name is empty, retrieve the value from pagecourse
         if(empty($course)){
@@ -72,6 +99,7 @@ class MarketingController extends Controller
                 'source' => $source,
                 
                 'medium' => $request->medium ?? '-',
+                'utm_term' => $utmTerm,
                 
                 'ip_data' => $ip_info,
                 'services' => $course,
@@ -85,6 +113,7 @@ class MarketingController extends Controller
         }else{
             $syllabus = Wati::where('id', $enquiry_id)
             ->update([
+                'utm_term' => $utmTerm,
                 'w_countrycode' => $countryCode,
                 'w_phone' => $phoneNumber,
                 'updated_at' => Carbon::now(),
