@@ -1,6 +1,6 @@
 
 <link rel="shortcut icon" href="{{ asset('/assets/frontend/images/favicon.webp') }}">
-<link rel="stylesheet" href="/assets/frontend/css/style.css?v1.6.7" />
+<link rel="stylesheet" href="/assets/frontend/css/style.css?v1.7.4" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
  
 <link rel="stylesheet" href="/assets/frontend/css/responsive.css?v-1.3.9" />
@@ -40,6 +40,120 @@
     padding-left: 15px;
     padding-right: 15px;
   }
+}
+section.vm_banner.course_hero {
+  background: #0f172a !important;
+}
+.course_hero_btn_primary {
+  background: #f97316 !important;
+  border-color: #f97316 !important;
+  color: #fff !important;
+}
+.course_hero_btn_outline {
+  background: transparent !important;
+  color: #fff !important;
+}
+.vm_nav.course_subnav .menu-item-link.active,
+.vm_nav.course_subnav nav ul li a.active {
+  background: #f97316 !important;
+  color: #fff !important;
+  border-bottom: 0 !important;
+}
+.vm_nav.course_subnav nav ul li a:hover {
+  color: #111 !important;
+  border-bottom: 0 !important;
+}
+.course_features .key_boxes i {
+  background: transparent !important;
+  color: #f97316 !important;
+}
+.course_overview {
+  background: #f8fafd !important;
+}
+.course_overview_heading {
+  text-align: left !important;
+}
+.course_projects {
+  background: #f8fafd !important;
+}
+.course_projects .projects_covered_box {
+  height: auto !important;
+  border: 0 !important;
+  border-radius: 20px !important;
+}
+.course_projects .owl-dots {
+  display: none !important;
+}
+.course_projects .owl-nav {
+  display: block !important;
+}
+.course_projects .owl-nav button.owl-prev,
+.course_projects .owl-nav button.owl-next {
+  position: absolute !important;
+  top: 50%;
+  width: 42px;
+  height: 42px;
+  border-radius: 50% !important;
+  background: #fff !important;
+  border: 1px solid #d1d5db !important;
+  color: #4b5563 !important;
+  right: auto !important;
+}
+.course_projects .owl-nav button.owl-prev { left: 0 !important; }
+.course_projects .owl-nav button.owl-next { right: 0 !important; }
+.course_certificates .owl-dots {
+  display: none !important;
+}
+.course_certificates .owl-nav {
+  display: block !important;
+}
+#certificate_section.course_certificates .owl-carousel .owl-item {
+  border: 0 !important;
+}
+.course_certificates .owl-nav button.owl-prev,
+.course_certificates .owl-nav button.owl-next {
+  position: absolute !important;
+  top: 50%;
+  width: 42px;
+  height: 42px;
+  border-radius: 50% !important;
+  background: #fff !important;
+  border: 1px solid #d1d5db !important;
+  color: #4b5563 !important;
+  right: auto !important;
+}
+.course_certificates .owl-nav button.owl-prev { left: 0 !important; }
+.course_certificates .owl-nav button.owl-next { right: 0 !important; }
+.course_testimonials {
+  background: #f8fafd !important;
+}
+.course_testimonials_heading,
+.course_testimonials .heading_title {
+  color: #0f172a !important;
+}
+.course_testimonials .owl-dots {
+  display: none !important;
+}
+.course_testimonials .owl-nav {
+  display: block !important;
+}
+.course_testimonials .owl-nav button.owl-prev,
+.course_testimonials .owl-nav button.owl-next {
+  position: absolute !important;
+  top: 50%;
+  width: 42px;
+  height: 42px;
+  border-radius: 50% !important;
+  background: #fff !important;
+  border: 1px solid #d1d5db !important;
+  color: #4b5563 !important;
+  right: auto !important;
+}
+.course_testimonials .owl-nav button.owl-prev { left: 0 !important; }
+.course_testimonials .owl-nav button.owl-next { right: 0 !important; }
+.course_batch_btn {
+  background: #f97316 !important;
+  color: #fff !important;
 }
 </style>
 

@@ -41,91 +41,79 @@
 @section('page.content')
 
     <!----------========== courses start ===============-------------------->
-    <section class="vm_banner pb-lg-4 pt-lg-4 pb-4 pt-4">
+    <section class="vm_banner course_hero">
         <div class="container">
-            <div class="row">
-                <div class="col-9 width70">
+            @php
+                $heroTitle = $cms->title;
+                if (preg_match('/^(.*?\bwith)\s+(.+)$/iu', $heroTitle, $heroTitleParts)) {
+                    $heroTitleHtml = e($heroTitleParts[1]) . ' <span class="course_hero_highlight">' . e($heroTitleParts[2]) . '</span>';
+                } else {
+                    $heroTitleHtml = e($heroTitle);
+                }
 
-                    <div class="col-12">
-                        <div class="breadcrums_section pb-4">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb mb-0">
-                                    <li class="breadcrumb-item"><a href="{{ url(route('index')) }}">Home</a></li>
-                                    <li class="breadcrumb-item"><a>»</a></li>
-                                    <li class="breadcrumb-item"><a><b>{{ $cms->breadcrumb_title }}</b></a></li>
-                                </ol>
-                            </nav>
-                        </div>
+                if (strpos($detail->url, 'embed/') === false) {
+                    $videoID = basename($detail->url);
+                    $youtube_url_detail = 'https://youtu.be/embed/' . $videoID;
+                } else {
+                    $youtube_url_detail = $detail->url;
+                }
+            @endphp
+            <div class="row align-items-center course_hero_row">
+                <div class="col-lg-7">
+                    <div class="breadcrums_section">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item"><a href="{{ url(route('index')) }}">Home</a></li>
+                                <li class="breadcrumb-item"><a>»</a></li>
+                                <li class="breadcrumb-item"><a><b>{{ $cms->breadcrumb_title }}</b></a></li>
+                            </ol>
+                        </nav>
                     </div>
 
+                    <h1 class="course_hero_title">{!! $heroTitleHtml !!}</h1>
 
-                    <div class="top_content_section">
-                        <h1>{{ $cms->title }}</h1>
-                        <p class="rating "> {{ $detail->rating }}
-                            <img class="star_icon rating_img" src="/assets/frontend/images/star_new_icon.png" alt="star icon">
-                            <img class="star_icon" src="/assets/frontend/images/star_new_icon.png" alt="star icon">
-                            <img class="star_icon" src="/assets/frontend/images/star_new_icon.png" alt="star icon">
-                            <img class="star_icon" src="/assets/frontend/images/star_new_icon.png" alt="star icon">
-                            <img class="star_icon" src="/assets/frontend/images/star_new_icon.png" alt="star icon">
-                            ({{ $detail->total_review }}) Rating
-                        </p>
-
-                        <div class="show_mobileview imagebox d-flex align-items-center justify-content-center">
-
-                    @php
-                        // Assuming $row->url contains the YouTube URL
-                        if (strpos($detail->url, 'embed/') === false) {
-                            $videoID = basename($detail->url);
-                            $youtube_url_detail = 'https://youtu.be/embed/' . $videoID; // Corrected the concatenation
-                        } else {
-                            $youtube_url_detail = $detail->url; // URL already in the correct format
-                        }
-                    @endphp
-
-
-                    <a href="{{ $youtube_url_detail }}" data-fancybox="gallery">
-                        <img src="{{ asset('storage/' . $detail->other_thumbnail) }}"
-                            class="img-fluid d-block w-100" alt="">
-                                
-                        <div class="pulse-button space_1"></div>
-                    </a>
-
-                </div>
-
-
-                        <div class="desc pe-lg-4 pe-0">
-                            @php echo ReplaceKeyword($cms->description, $cms->replace_keyword) @endphp
-                        </div>
+                    <div class="course_hero_desc desc">
+                        @php echo ReplaceKeyword($cms->description, $cms->replace_keyword) @endphp
                     </div>
-                    <button type="button" class="btn coursepg_enquiryform" onclick="formModal('{{ url(route('component.form')) }}?section=Enquire Form Top - course Page&title=Enquire Now&current_page={{ urlencode(url()->current()) }}&course_name={{$courseInputName}}')"> Enquire Now </button>
-                    <div class="check_carriculam"><a href="#syllabus" class="check_curriculum"> Check Curriculum </a></div>
+
+                    <p class="course_hero_rating">
+                        <span class="course_hero_stars" aria-hidden="true">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </span>
+                        <span>{{ $detail->rating }} ({{ $detail->total_review }}) ratings</span>
+                        <span class="course_hero_dot">8,000+ Students Trained</span>
+                    </p>
+
+                    <div class="course_hero_actions">
+                        <button type="button" class="course_hero_btn course_hero_btn_primary" onclick="formModal('{{ url(route('component.form')) }}?section=Enquire Form Top - course Page&title=Enquire Now&current_page={{ urlencode(url()->current()) }}&course_name={{$courseInputName}}')">Enquire now</button>
+                        <a href="#syllabus" class="course_hero_btn course_hero_btn_outline check_curriculum">Check curriculum</a>
+                    </div>
+
+                    <ul class="course_hero_points">
+                        <li><i class="fas fa-check" aria-hidden="true"></i> Free Demo Class</li>
+                        <li><i class="fas fa-check" aria-hidden="true"></i> Hands-on Practical Training</li>
+                        <li><i class="fas fa-check" aria-hidden="true"></i> LMS Access</li>
+                        <li><i class="fas fa-check" aria-hidden="true"></i> WhatsApp Support</li>
+                    </ul>
                 </div>
-                <div class="show_desktopview col-3 width30 imagebox d-flex align-items-center justify-content-center">
-
-                    @php
-                        // Assuming $row->url contains the YouTube URL
-                        if (strpos($detail->url, 'embed/') === false) {
-                            $videoID = basename($detail->url);
-                            $youtube_url_detail = 'https://youtu.be/embed/' . $videoID; // Corrected the concatenation
-                        } else {
-                            $youtube_url_detail = $detail->url; // URL already in the correct format
-                        }
-                    @endphp
-
-
-                    <a href="{{ $youtube_url_detail }}" data-fancybox="gallery">
-                        <img src="{{ asset('storage/' . $detail->other_thumbnail) }}"
-                            class="img-fluid d-block w-100" alt="">
-                        <div class="pulse-button space_1"></div>
-                    </a>
-
+                <div class="col-lg-5">
+                    <div class="course_hero_media">
+                        <a href="{{ $youtube_url_detail }}" data-fancybox="gallery" aria-label="Play course video">
+                            <img src="{{ asset('storage/' . $detail->other_thumbnail) }}" alt="{{ $cms->title }}" />
+                            <span class="course_hero_play"></span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
 
-    <section class="vm_nav" id="vm_nav">
+    <section class="vm_nav course_subnav" id="vm_nav">
         <div class="container">
             <div id="version" class="version highlight-bar">
                 <nav class="nav-sections">
@@ -175,77 +163,57 @@
     <!-----------------key features---------------------->
 
     <div class="page-sections">
-        <section id="key_features" class="page-section key_features py-5 position_relative zindex_1111111">
+        <section id="key_features" class="page-section key_features course_features py-5 position_relative zindex_1111111">
             <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <h2 class="section_heading pb-lg-3 pb-0 text-center textcolor_blck mb-3">{{ $detail->key_title }} Key
-                            Features
-                        </h2>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-6 mb-md-2">
-                        <div class="key_boxes">
-                            <div class="key_features_icon">
-                                <i class="fa-solid fa-chalkboard-user"></i>
-                            </div>
-                            <p> Instructor led live Training </p>
+                <h2 class="section_heading course_features_heading text-center textcolor_blck">{{ $detail->key_title }} Key Features</h2>
+                <div class="course_features_grid">
+                    <div class="key_boxes">
+                        <div class="key_features_icon">
+                            <i class="fa-solid fa-desktop"></i>
                         </div>
+                        <p>Instructor led live Training</p>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-6 mb-md-2">
-                        <div class="key_boxes">
-                            <div class="key_features_icon">
-                                <i class="fa fa-laptop" aria-hidden="true"></i>
-                            </div>
-                            <p> Hands-on Practical Training </p>
+                    <div class="key_boxes">
+                        <div class="key_features_icon">
+                            <i class="fa-solid fa-layer-group"></i>
                         </div>
+                        <p>Hands-on Practical Training</p>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-6 mb-md-2">
-                        <div class="key_boxes">
-                            <div class="key_features_icon">
-                                <i class="fa-solid fa-headset"></i>
-                            </div>
-                            <p> Trainer Support on WhatsApp </p>
+                    <div class="key_boxes">
+                        <div class="key_features_icon">
+                            <i class="fa-solid fa-comment-dots"></i>
                         </div>
+                        <p>Trainer Support on WhatsApp</p>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-6 mb-md-2">
-                        <div class="key_boxes">
-                            <div class="key_features_icon">
-                                <i class="fa fa-users" aria-hidden="true"></i>
-                            </div>
-                            <p> Recorded lectures on LMS </p>
+                    <div class="key_boxes">
+                        <div class="key_features_icon">
+                            <i class="fa-solid fa-circle-play"></i>
                         </div>
+                        <p>Recorded lectures on LMS</p>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-6 mb-md-2">
-                        <div class="key_boxes">
-                            <div class="key_features_icon">
-                                <i class="fa fa-book" aria-hidden="true"></i>
-                            </div>
-                            <p> Access to Learning Portal </p>
+                    <div class="key_boxes">
+                        <div class="key_features_icon">
+                            <i class="fa-solid fa-database"></i>
                         </div>
+                        <p>Access to Learning Portal</p>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-6 mb-md-2">
-                        <div class="key_boxes">
-                            <div class="key_features_icon">
-                               <i class="fa-solid fa-file"></i>
-                            </div>
-                            <p> Certificate from Attari classes </p>
+                    <div class="key_boxes">
+                        <div class="key_features_icon">
+                            <i class="fa-solid fa-award"></i>
                         </div>
+                        <p>Certificate from Attari classes</p>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-6 mb-md-2">
-                        <div class="key_boxes">
-                            <div class="key_features_icon">
-                                <i class="fa-solid fa-users-gear"></i>
-                            </div>
-                            <p> Access to forum for new Job Openings </p>
+                    <div class="key_boxes">
+                        <div class="key_features_icon">
+                            <i class="fa-solid fa-chart-line"></i>
                         </div>
+                        <p>Access to forum for new Job Openings</p>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-6 mb-md-2">
-                        <div class="key_boxes">
-                            <div class="key_features_icon">
-                                <i class="fa-solid fa-clock"></i>
-                            </div>
-                            <p> Support Desk for Student </p>
+                    <div class="key_boxes">
+                        <div class="key_features_icon">
+                            <i class="fa-solid fa-headphones"></i>
                         </div>
+                        <p>Support Desk for Student</p>
                     </div>
                 </div>
             </div>
@@ -253,54 +221,54 @@
 
         <!---------============== overviews ====================----------------------->
 
-        <section id="overviews" class="page-section overview py-5 position_relative zindex_111111 bg-white">
+        <section id="overviews" class="page-section overview course_overview py-5 position_relative zindex_111111">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-9 width70">
-                        <h2 class="section_heading pb-3 text-center textcolor_blck">
+                <div class="row align-items-start">
+                    <div class="col-lg-8">
+                        <h2 class="section_heading course_overview_heading textcolor_blck">
                             {{ $detail->overview_section_heading }}
                         </h2>
-                        <div>
+                        <div class="overview_content">
                             @php echo ReplaceKeyword($detail->course_overview, $cms->replace_keyword) @endphp
                         </div>
-
-                        @if (!empty($detail->faq))
-                            <div class="accordion--container1 accordion_style1">
-
-                                @php
-                                    $course_faq = json_decode($detail->faq);
-                                    $i = 1;
-                                @endphp
-
-                                @foreach ($course_faq as $faq1)
-                                    @foreach ($faq1 as $title => $description)
-                                        <li class="accordion1">
-                                            <span> @php echo ReplaceKeyword($title, $cms->replace_keyword) @endphp <i class="fa fa-angle-up"></i>
-                                            </span>
-                                            <div class="contentsillabus_div">
-                                                <div class="txt">
-                                                    @php echo ReplaceKeyword($description, $cms->replace_keyword) @endphp
-                                                </div>
-                                            </div>
-                                        </li>
-                                    @endforeach
-                                @endforeach
-
-                            </div>
-                        @endif
-
-
                     </div>
-                    <div class="col-md-3 width30 position_sticky">
-                        <div class="talktous_box">
-                            <i class="fa-sharp fa-solid fa-phone"></i>
-                            <p class="mb-3">Talk To Us</p> 
-                            <p>
-                                <a href="tel:+917738375431">+91 7738375431</a>
-                            </p>
-                            <p>
-                                <a href="mailto:info@attariclasses.in">info@attariclasses.in</a>
-                            </p>
+                    <div class="col-lg-4">
+                        <div class="overview_sidebar">
+                            @if (!empty($detail->faq))
+                                <div class="overview_faq accordion--container1 accordion_style1">
+                                    @php
+                                        $course_faq = json_decode($detail->faq);
+                                    @endphp
+                                    @foreach ($course_faq as $faq1)
+                                        @foreach ($faq1 as $title => $description)
+                                            <li class="accordion1">
+                                                <span> @php echo ReplaceKeyword($title, $cms->replace_keyword) @endphp <i class="fa fa-angle-up"></i>
+                                                </span>
+                                                <div class="contentsillabus_div">
+                                                    <div class="txt">
+                                                        @php echo ReplaceKeyword($description, $cms->replace_keyword) @endphp
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                    @endforeach
+                                </div>
+                            @endif
+
+                            <div class="overview_talk">
+                                <p class="overview_talk_title">Talk to us</p>
+                                <div class="overview_talk_row">
+                                    <a class="overview_talk_phone" href="tel:+917738375431">
+                                        <i class="fas fa-phone-alt" aria-hidden="true"></i>
+                                        <span>+91 77383 75431</span>
+                                    </a>
+                                    <a class="overview_talk_whatsapp" target="_blank" rel="noopener" href="https://api.whatsapp.com/send?phone=917738375431&text=Hi%2C+I+am+contacting+you+through+your+website">
+                                        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                                        <span>WhatsApp chat</span>
+                                    </a>
+                                    <button type="button" class="overview_talk_demo" onclick="formModal('{{ url(route('component.form')) }}?section=Overview - Book Free Demo&title=Book a FREE Demo&current_page={{ urlencode(url()->current()) }}&course_name={{$courseInputName}}')">Book a free demo</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -561,31 +529,23 @@
 
         <!--Projects Covered section -->
         @if (!empty($project_covered))
-            <section id="projects_covered" class="page-section prje_cove_section light_gray_bg pt-5 pb-5 position_relative zindex_1111">
+            <section id="projects_covered" class="page-section prje_cove_section course_projects pt-5 pb-5 position_relative zindex_1111">
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
-                            <h2 class="section_heading pb-3 text-center">{{ $detail->project_section_heading }}</h2>
+                            <h2 class="section_heading course_projects_heading text-center">{{ $detail->project_section_heading }}</h2>
                             <div class="owl-carousel owl-theme projects-covered">
 
                                 @foreach ($project_covered as $row)
                                     <div class="item">
                                         <div class="projects_covered_box">
                                             <div class="projects_covered__header">
-                                                <div class="row">
-                                                    <div class="col-lg-9 col-10">
-                                                        <div class="projects_covered__image">
-                                                            <span
-                                                                class="projects_covered__name">{{ $row->title }}</span>
-                                                        </div>
+                                                <span class="projects_covered__name">{{ $row->title }}</span>
+                                                @if (!empty($row->icon))
+                                                    <div class="projects_covered__icon">
+                                                        <img src="{{ asset('storage/' . $row->icon) }}" alt="" />
                                                     </div>
-                                                    <div class="col-lg-3 col-2">
-                                                        <div class="projects_covered__icon">
-                                                            <img src="{{ asset('storage/' . $row->icon) }}"
-                                                                />
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                @endif
                                             </div>
                                             <div class="projects_covered__content">
                                                 <div class="projects_covered__text">
@@ -593,6 +553,7 @@
                                                         @php echo ReplaceKeyword($row->description, $cms->replace_keyword) @endphp
                                                     </div>
                                                 </div>
+                                                <button type="button" class="projects_view_more">View More <i class="fa fa-chevron-down" aria-hidden="true"></i></button>
                                             </div>
                                         </div>
                                     </div>
@@ -606,26 +567,24 @@
         @endif
 
         @if (!empty($certificate))
-            <section id="certificate_section" class="page-section certificate_section pt-5 pb-5 bg-white position_relative zindex_111">
+            <section id="certificate_section" class="page-section certificate_section course_certificates pt-5 pb-5 position_relative zindex_111">
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
-                            <h2 class="section_heading pb-3 text-center">{{ $detail->certificate_section_heading }}</h2>
+                            <h2 class="section_heading course_certificates_heading text-center">{{ $detail->certificate_section_heading }}</h2>
                             <div class="owl-carousel owl-theme professional_students">
 
                                 @foreach ($certificate as $row)
                                     <div class="item">
-                                        <div class="cirtificate_img">
-                                        
-                                                <a href="{{ asset('storage/' . $row->image) }}" data-fancybox="gallery2">
-                        <img src="{{ asset('storage/' . $row->image) }}" data-src="{{ asset('storage/' . $row->image) }}" alt="{{ $row->alt_image }}"/>
-                    </a>
+                                        <div class="certificate_card">
+                                            <a href="{{ asset('storage/' . $row->image) }}" data-fancybox="gallery2">
+                                                <img src="{{ asset('storage/' . $row->image) }}" alt="{{ $row->alt_image }}"/>
+                                            </a>
                                         </div>
                                     </div>
                                 @endforeach
 
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -633,243 +592,173 @@
         @endif
 
 
-        <section id="testimonials" class="page-section testiminilas_sec gradiant_bg pt-5 pb-5 dot_clr_white position_relative zindex_11">
+        <section id="testimonials" class="page-section testiminilas_sec course_testimonials pt-5 pb-5 position_relative zindex_11">
             <div class="container">
-                <h2 class="heading_title text-center pddtop_0 pb-3 textcolor_wht">
+                <h2 class="section_heading course_testimonials_heading text-center">
                     {{ $detail->testimonials_section_heading }}
                 </h2>
 
                 @if (!empty($video_review))
-                    <div class="large-12 columns">
-                        <div class="owl-carousel owl-theme video_testiminials">
-
-                            @foreach ($video_review as $row)
-                                <div class="item">
-                                    <div class="testimonial_video">
-
-                                        @php
-                                            // Assuming $row->url contains the YouTube URL
-                                            if (strpos($row->url, 'embed/') === false) {
-                                                $videoID = basename($row->url);
-                                                $youtube_url = 'https://youtu.be/embed/' . $videoID; // Corrected the concatenation
-                                            } else {
-                                                $youtube_url = $row->url; // URL already in the correct format
-                                            }
-                                        @endphp
-
-                                        <a href="{{ $youtube_url }}" data-fancybox="gallery">
-                                            <div class="pulse-button"></div>
-                                            {{-- <img src="https://img.youtube.com/vi/{{ $videoId }}/hqdefault.jpg"
-                                                class="img-fluid d-block w-100" alt=""> --}}
-
-                                            <img src="{{ asset('storage/' . $row->image) }}"
-                                                class="img-fluid d-block w-100" alt="">
-
-                                        </a>
-                                    </div>
+                    <div class="owl-carousel owl-theme course_video_reviews">
+                        @foreach ($video_review as $row)
+                            <div class="item">
+                                <div class="course_review_video">
+                                    @php
+                                        if (strpos($row->url, 'embed/') === false) {
+                                            $videoID = basename($row->url);
+                                            $youtube_url = 'https://youtu.be/embed/' . $videoID;
+                                        } else {
+                                            $youtube_url = $row->url;
+                                        }
+                                    @endphp
+                                    <a href="{{ $youtube_url }}" data-fancybox="gallery" aria-label="Play student review video">
+                                        <img src="{{ asset('storage/' . $row->image) }}" alt="" />
+                                        <span class="course_review_play"></span>
+                                    </a>
                                 </div>
-                            @endforeach
-
-                        </div>
+                            </div>
+                        @endforeach
                     </div>
 
-                    <!--------------------- video Review -------------------------------------->
-
-                    @php 
+                    @php
                     echo str_replace(['[{meta_title}]','[{meta_desc}]','[{current_url}]'],[$meta_title,$meta_description,$meta_url], html_entity_decode($detail->video_section_schema));
                     @endphp
-
-                    <!--------------------- video Review -------------------------------------->
-
                 @endif
-
 
                 @if (!empty($text_review))
-                    <div class="large-12 columns mt-4 ">
-                        <div class="owl-carousel owl-theme slider_content_dots">
-
-                            @foreach ($text_review as $row)
-                                <div class="item">
-                                    <div class="testimonial_box">
-                                        <div class="testimonial__header">
-                                            <div class="row">
-                                                <div class="col-lg-6 col-10">
-                                                    <div class="testimonial__image">
-                                                        <img src="{{ asset('storage/' . $row->thumbnail) }}"
-                                                            class="img-fluid d-block w-100" alt="">
-                                                        <span class="testimonial__name">{{ $row->name }}</span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 col-2">
-                                                    <div class="testimonial__icon">
-                                                        @if ($row->type == 'google')
-                                                            <a href="{{ $row->url }}"><i aria-hidden="true" class="fab fa-google-plus"></i></a>
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="testimonial__content">
-                                            <div class="testimonial__text">
-                                                @php echo ReplaceKeyword($row->description, $cms->replace_keyword) @endphp
-                                            </div>
+                    <div class="owl-carousel owl-theme course_text_reviews">
+                        @foreach ($text_review as $row)
+                            @php
+                                $reviewInitial = strtoupper(substr(trim($row->name), 0, 1));
+                                $reviewRole = $row->profile ?: ($cms->menu_title . ' learner');
+                            @endphp
+                            <div class="item">
+                                <div class="course_review_card">
+                                    <div class="course_review_head">
+                                        <span class="course_review_avatar">{{ $reviewInitial }}</span>
+                                        <div class="course_review_meta">
+                                            <span class="course_review_name">{{ $row->name }}</span>
+                                            <span class="course_review_role">{{ $reviewRole }}</span>
                                         </div>
                                     </div>
+                                    <div class="course_review_stars" aria-label="5 star rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div class="course_review_text">
+                                        @php echo ReplaceKeyword($row->description, $cms->replace_keyword) @endphp
+                                    </div>
+                                    <button type="button" class="course_review_more">View More <i class="fa fa-chevron-down" aria-hidden="true"></i></button>
                                 </div>
-                            @endforeach
-
-                        </div>
+                            </div>
+                        @endforeach
                     </div>
 
-                    <!--------------------- Text Review -------------------------------------->
-
-                    @php 
+                    @php
                     echo str_replace(['[{meta_title}]','[{meta_desc}]','[{current_url}]'],[$meta_title,$meta_description,$meta_url], html_entity_decode($detail->testimonials_section_schema));
                     @endphp
-
-                    <!--------------------- Text Review -------------------------------------->
-
                 @endif
-
-
-
             </div>
         </section>
 
         @if (!empty($batch))
-            <section id="batch_shedule" class="page-section prje_cove_section light_gray_bg pt-5 pb-5">
+            @php
+                $paced_pointer = json_decode($batch->paced_pointer_list) ?: [];
+                $oc_pointer = json_decode($batch->oc_pointer_list) ?: [];
+                $corp_pointer = json_decode($batch->corp_pointer_list) ?: [];
+                $batch_detail = json_decode($batch->batch_detail, true) ?: [];
+                $batch_dates = array_column($batch_detail, 'date');
+                $batch_start_times = array_column($batch_detail, 'start_time');
+                $batch_end_times = array_column($batch_detail, 'end_time');
+                $batch_startTime1 = $batch_start_times[0] ?? null;
+                $batch_startTime2 = $batch_start_times[1] ?? null;
+                $batch_endTime1 = $batch_end_times[0] ?? null;
+                $batch_endTime2 = $batch_end_times[1] ?? null;
+                $batch_start_date = !empty($batch_dates[0]) ? date("Y-m-d", strtotime($batch_dates[0])) : null;
+                $batch_start_date2 = !empty($batch_dates[1]) ? date("Y-m-d", strtotime($batch_dates[1])) : null;
+                $batch_end_date = !empty($batch_start_date) ? date('Y-m-d', strtotime($batch_start_date . ' +6 weeks')) : null;
+                $batch_end_date2 = !empty($batch_start_date2) ? date('Y-m-d', strtotime($batch_start_date2 . ' +6 weeks')) : null;
+                $selectedBatchIndex = 0;
+                foreach ($batch_detail as $i => $slot) {
+                    $remarkText = strtolower(strip_tags(html_entity_decode($slot['remark'] ?? '')));
+                    if (strpos($remarkText, 'started') === false) {
+                        $selectedBatchIndex = $i;
+                        break;
+                    }
+                }
+            @endphp
+            <section id="batch_shedule" class="page-section course_batch pt-5 pb-5">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <h2 class="section_heading pb-3 text-center"> {{ $detail->batch_section_heading }}</h2>
+                    <h2 class="section_heading course_batch_heading text-center">{{ $detail->batch_section_heading }}</h2>
+
+                    <div class="course_batch_card">
+                        <div class="course_batch_copy">
+                            <h3 class="course_batch_title">{{ $batch->paced_title }}</h3>
+                            <ul class="course_batch_points">
+                                @foreach ($paced_pointer as $row)
+                                    <li><i class="fas fa-check" aria-hidden="true"></i> @php echo html_entity_decode($row) @endphp</li>
+                                @endforeach
+                            </ul>
                         </div>
+                        <a class="course_batch_btn" href="https://lms.attariclasses.in/" target="_blank">Visit Video Portal</a>
+                    </div>
 
-                        <div class="batch_shedule_box">
-                            <div class="row align-items-center">
-                                <div class="col-md-9">
-                                    <h3 class="batch_subhed">{{ $batch->paced_title }}</h3>
-                                    @php $paced_pointer = json_decode($batch->paced_pointer_list) @endphp
-                                    <ul>
-                                        @foreach ($paced_pointer as $row)
-                                            <li><i aria-hidden="true" class="far fa-check-circle"></i> @php echo html_entity_decode($row) @endphp
-                                            </li>
-                                        @endforeach
-                                    </ul>
+                    <div class="course_batch_card course_batch_card_online">
+                        <div class="course_batch_copy">
+                            <h3 class="course_batch_title">{{ $batch->oc_title }} <span class="course_batch_badge">Preferred</span></h3>
+                            <ul class="course_batch_points">
+                                @foreach ($oc_pointer as $row)
+                                    <li><i class="fas fa-check" aria-hidden="true"></i> @php echo html_entity_decode($row) @endphp</li>
+                                @endforeach
+                            </ul>
+                            @if (!empty($batch_detail))
+                                <div class="course_batch_slots">
+                                    @foreach ($batch_detail as $i => $row)
+                                        @php
+                                            $remarkHtml = html_entity_decode($row['remark'] ?? '');
+                                            $remarkPlain = strtolower(strip_tags($remarkHtml));
+                                            $isStarted = strpos($remarkPlain, 'started') !== false;
+                                            $isSelected = $i === $selectedBatchIndex;
+                                        @endphp
+                                        <div class="course_batch_slot {{ $isSelected ? 'is-selected' : '' }} {{ $isStarted ? 'is-started' : '' }}">
+                                            <div class="course_batch_slot_title">@php echo html_entity_decode($row['schedule']) @endphp</div>
+                                            @if (!empty($row['remark']))
+                                                <div class="course_batch_slot_note">@php echo $remarkHtml @endphp</div>
+                                            @endif
+                                            <div class="course_batch_meta">
+                                                <span><i class="far fa-calendar-alt" aria-hidden="true"></i> {{ formatDate($row['date']) }}</span>
+                                                @if (!empty($row['start_time']) && !empty($row['end_time']))
+                                                    <span><i class="far fa-clock" aria-hidden="true"></i> {{ date('g:i A', strtotime($row['start_time'])) }} to {{ date('g:i A', strtotime($row['end_time'])) }} (IST)</span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    @endforeach
                                 </div>
-
-                                <div class="col-md-3">
-                                    <div class="button_main mt-2 mt-lg-0">
-                                        <a href="https://lms.attariclasses.in/" target="_blank">Visit Video Portal</a>
-                                    </div>
-                                </div>
-                            </div>
+                            @endif
                         </div>
-
-                        <div class="batch_shedule_box">
-                            <div class="row align-items-center">
-                                <div class="col-md-9">
-                                    <h3 class="batch_subhed">{{ $batch->oc_title }} <span>Preferred</span>
-                                    </h3>
-                                    @php $oc_pointer = json_decode($batch->oc_pointer_list) @endphp
-                                    <ul>
-                                        @foreach ($oc_pointer as $row)
-                                            <li><i aria-hidden="true" class="far fa-check-circle"></i> @php echo html_entity_decode($row) @endphp
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                    @php                                   
-
-                                        $batch_detail = json_decode($batch->batch_detail, true);
-                                        $batch_dates = array_column($batch_detail, 'date');
-                                        
-                                        $batch_start_times = array_column($batch_detail, 'start_time');
-                                        $batch_end_times = array_column($batch_detail, 'end_time');
-
-                                        // Set start times
-                                        $batch_startTime1 = isset($batch_start_times[0]) ? $batch_start_times[0] : null; 
-                                        $batch_startTime2 = isset($batch_start_times[1]) ? $batch_start_times[1] : null; 
-                                        
-                                        // Set end times
-                                        $batch_endTime1 = isset($batch_end_times[0]) ? $batch_end_times[0] : null;
-                                        $batch_endTime2 = isset($batch_end_times[1]) ? $batch_end_times[1] : null;
-                                        
-                                        // Get the start and end dates
-                                        $batch_start_date = isset($batch_dates[0]) ? date("Y-m-d", strtotime($batch_dates[0])) : null; // Get the first date
-                                        $batch_start_date2 = isset($batch_dates[1]) ? date("Y-m-d", strtotime($batch_dates[1])) : null; // Get the last date
-
-                                        $batch_start_date = !empty($batch_start_date) ? date("Y-m-d", strtotime($batch_start_date)) : null; 
-                                        $batch_start_date2 = !empty($batch_start_date2) ? date("Y-m-d", strtotime($batch_start_date2)) : null;
-                                    
-                                        $batch_end_date = !empty($batch_start_date) ? date('Y-m-d', strtotime($batch_start_date . ' +6 weeks')) : null;
-                                        $batch_end_date2 = !empty($batch_start_date2) ? date('Y-m-d', strtotime($batch_start_date2 . ' +6 weeks')) : null;
-
-                                    @endphp 
-
-                                    @if (!empty($batch_detail))
-                                        <table class="batch_table table">
-                                            <tbody>
-                                                <tr class="pdd_14">
-                                                    <td><div class="">DATE</div></td>
-                                                    <td><div class="">SCHEDULE </div></td>
-                                                    <td><div class="">TIME </div></td>
-                                                </tr>
-                                                @foreach ($batch_detail as $row)
-                                                    <tr class="pdd_19">
-                                                        <td ><div class="">{{ formatDate($row['date']) }}</div></td>
-                                                        <td ><div class="">@php echo html_entity_decode($row['schedule']) @endphp<span
-                                                                class="text_red">@php echo html_entity_decode($row['remark']) @endphp</span></div></td>
-                                                        <td>
-                                                            <div>
-                                                            @php
-                                                            if (isset($row['start_time']) && isset($row['end_time'])) {
-                                                                    echo date('g:i A', strtotime($row['start_time'])) . ' to ' . date('g:i A', strtotime($row['end_time'])). ' (IST) ';
-                                                            }
-                                                            @endphp
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    @endif
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="button_main getin_touch_bx">
-                                        <p class="pb-2">Get In Touch to Avail <span>{{ $batch->off_percentage }} OFF</span></p>
-
-                                        <a onclick="formModal('{{ url(route('component.form')) }}?section=Online / Classroom - course Page&title=Book a Demo&current_page={{ urlencode(url()->current()) }}&course_name={{$courseInputName}}')">Book a Demo</a>
-                                     
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="course_batch_offer">
+                            <p>Get In Touch to Avail</p>
+                            <strong>{{ $batch->off_percentage }} OFF</strong>
+                            <button type="button" class="course_batch_btn" onclick="formModal('{{ url(route('component.form')) }}?section=Online / Classroom - course Page&title=Book a Demo&current_page={{ urlencode(url()->current()) }}&course_name={{$courseInputName}}')">Book a Demo</button>
                         </div>
+                    </div>
 
-                        <div class="batch_shedule_box">
-                            <div class="row align-items-center">
-                                <div class="col-md-9">
-                                    <h3 class="batch_subhed">{{ $batch->corp_title }}</h3>
-                                    @php $corp_pointer = json_decode($batch->corp_pointer_list) @endphp
-                                    <ul>
-                                        @foreach ($corp_pointer as $row)
-                                            <li>
-                                                <i aria-hidden="true" class="far fa-check-circle"></i> @php echo html_entity_decode($row) @endphp
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="button_main">
-                                        <a onclick="formModal('{{ url(route('component.form')) }}?section={{$batch->corp_title. ' - course Page'}}&current_page={{ urlencode(url()->current()) }}&title=Enquire Now&course_name={{$courseInputName}}')">Enquire Now</a>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="course_batch_card">
+                        <div class="course_batch_copy">
+                            <h3 class="course_batch_title">{{ $batch->corp_title }}</h3>
+                            <ul class="course_batch_points">
+                                @foreach ($corp_pointer as $row)
+                                    <li><i class="fas fa-check" aria-hidden="true"></i> @php echo html_entity_decode($row) @endphp</li>
+                                @endforeach
+                            </ul>
                         </div>
-
+                        <button type="button" class="course_batch_btn" onclick="formModal('{{ url(route('component.form')) }}?section={{$batch->corp_title. ' - course Page'}}&current_page={{ urlencode(url()->current()) }}&title=Enquire Now&course_name={{$courseInputName}}')">Enquire Now</button>
                     </div>
                 </div>
-    </section>
+            </section>
 
     <!-----------------================== Batch Schema =========================------------------------------>
 
@@ -1806,6 +1695,54 @@ window.scrollTo(0, 0);
                     description.classList.toggle("d-none");
                 });
             }
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll("#projects_covered .projects_covered_box").forEach(function (box) {
+                var items = box.querySelectorAll(".proj-cov li");
+                var btn = box.querySelector(".projects_view_more");
+                if (!btn) {
+                    return;
+                }
+                if (items.length <= 4) {
+                    btn.style.display = "none";
+                    return;
+                }
+                btn.addEventListener("click", function () {
+                    var expanded = box.classList.toggle("is-expanded");
+                    btn.innerHTML = expanded
+                        ? 'View Less <i class="fa fa-chevron-up" aria-hidden="true"></i>'
+                        : 'View More <i class="fa fa-chevron-down" aria-hidden="true"></i>';
+                    if (window.jQuery && jQuery(".projects-covered").length) {
+                        jQuery(".projects-covered").trigger("refresh.owl.carousel");
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll("#testimonials .course_review_card").forEach(function (card) {
+                var text = card.querySelector(".course_review_text");
+                var btn = card.querySelector(".course_review_more");
+                if (!text || !btn) {
+                    return;
+                }
+                if (text.scrollHeight <= text.clientHeight + 8) {
+                    btn.style.display = "none";
+                    return;
+                }
+                btn.addEventListener("click", function () {
+                    var expanded = card.classList.toggle("is-expanded");
+                    btn.innerHTML = expanded
+                        ? 'View Less <i class="fa fa-chevron-up" aria-hidden="true"></i>'
+                        : 'View More <i class="fa fa-chevron-down" aria-hidden="true"></i>';
+                    if (window.jQuery && jQuery(".course_text_reviews").length) {
+                        jQuery(".course_text_reviews").trigger("refresh.owl.carousel");
+                    }
+                });
+            });
         });
     </script>
     

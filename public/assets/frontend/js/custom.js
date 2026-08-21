@@ -330,21 +330,20 @@ $(".blog_video_testiminials").owlCarousel({
 	},
 });
 $(".projects-covered").owlCarousel({
-	loop: !0,
-	margin: 10,
-	autoplay: !0,
+	loop: true,
+	margin: 22,
+	autoplay: true,
 	autoplayTimeout: 2000,
-	nav: !0,
-	navText: ['<i class="fa fa-caret-left"></i>', '<i class="fa fa-caret-right"></i>', ],
+	autoplayHoverPause: true,
+	nav: true,
+	dots: false,
+	navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
 	responsive: {
 		0: {
-			items: 1.1,
+			items: 1,
 		},
 		768: {
-			items: 2.1,
-		},
-		960: {
-			items: 3,
+			items: 2,
 		},
 		1200: {
 			items: 3,
@@ -360,24 +359,44 @@ $('[data-fancybox="gallery2"]').fancybox({
 });
 
 $(".professional_students").owlCarousel({
-    loop: true, // Set loop to false to close the loop
-    margin: 10,
-    autoplay: true, // You can also change !0 to true for readability
+    loop: true,
+    margin: 22,
+    autoplay: true,
     autoplayTimeout: 5000,
+    autoplayHoverPause: true,
     nav: true,
-    navText: ['<i class="fa fa-caret-left"></i>', '<i class="fa fa-caret-right"></i>'],
+    dots: false,
+    navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
     responsive: {
         0: {
-            items: 1.1,
+            items: 1,
         },
         768: {
             items: 2,
         },
-        960: {
+        1200: {
+            items: 3,
+        },
+    },
+});
+$(".course_video_reviews, .course_text_reviews").owlCarousel({
+    loop: true,
+    margin: 22,
+    autoplay: true,
+    autoplayTimeout: 5000,
+    autoplayHoverPause: true,
+    nav: true,
+    dots: false,
+    navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+    responsive: {
+        0: {
+            items: 1,
+        },
+        768: {
             items: 2,
         },
         1200: {
-            items: 2,
+            items: 3,
         },
     },
 });
