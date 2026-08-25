@@ -2,123 +2,52 @@
 @include('frontend.component.marketingform2')
 
 
-<section class="channel_section">
+<section class="footer site_footer">
     <div class="container">
-   <div class="whatsapp-channel">
-      <a target="_blank" href="https://whatsapp.com/channel/0029Va9JnmaHAdNWUTJFhc2O ">Join Attari Classes channel on <i aria-hidden="true" class="fab fa-whatsapp"></i> 
-</a>
-</div>
-</div>
-</section>
+        <div class="site_footer_channel">
+            <a target="_blank" rel="noopener" href="https://whatsapp.com/channel/0029Va9JnmaHAdNWUTJFhc2O">
+                Join Attari Classes channel on
+                <span class="site_footer_channel_icon"><i aria-hidden="true" class="fab fa-whatsapp"></i></span>
+            </a>
+        </div>
 
 
-<section class="footer pt-5 pb-5">
-    <div class="container">
-        {{-- <div class="row">
-            <div class="col-12 footer_heading text-center">
-                <h4>
-                    Subscribe to newsletter & <br />
-                    Latest Update
-                </h4>
-            </div>
-            <div class="col-12 mt-md-5 mt-2 d-flex justify-content-center">
-                <div class="footer_search">
-
-                    <form id="add_newsletter_form" action="{{ url(route('newsletter.create')) }}" method="post"
-                        enctype="multipart/form-data">
-                        @csrf
-                        
-                        <div class="row">
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                    <select aria-label="services" name="services" class="form-select form-control" required>
-                                        <option value="">--Select Course-</option>
-                                            @php
-                                              $coursesData = DB::table('courses')->get();
-                                            @endphp
-                                            @foreach($coursesData as $row)
-                                            <option value="{{$row->alias2}}">{{$row->alias3}}</option>
-                                            @endforeach
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                     <input type="email" class="form-control" name="email" placeholder="Enter you Email"
-                                required />
-                                </div>
-                            </div>
-
-                             <div class="col-md-2">
-                                <div class="form-group">
-                                     <button type="submit">SUBSCRIBE</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-
-                </div>
-            </div>
-        </div>--}}
-        <div class="row footer_links_container">
+        <div class="row footer_links_container site_footer_grid">
             <div class="col-lg-4 col-md-6">
-                <div class="logo">
-                    <a href="index.php" aria-label="Logo Link">
-                        <img src="/assets/frontend/images/cropped-header-logo-1.webp" width="180" height="50"
-                            alt="Footer Logo" />
-                    </a>
-                </div>
+                <a class="site_footer_brand" href="{{ url(route('index')) }}" aria-label="Attari Classes">
+                    <span class="site_footer_brand_icon" aria-hidden="true"><i class="fas fa-cloud"></i></span>
+                    <span class="site_footer_brand_text"><strong>Attari</strong>Classes</span>
+                </a>
                 <p class="footer_para">Attari Classes is an IT training institute for VMware vSphere, AWS Cloud, Azure Cloud, Windows Server Hybrid and CCNA course. We provide Instructor led Live Online
                     training to candidates across the globe & Classroom Training in
-                    Mumbai, we also have self paced training options (Video Learning)
-                    <!--<a class="footer_read" href="about-us">Read More</a>-->
-                    .</p>
-
+                    Mumbai, we also have self paced training options (Video Learning).</p>
 
                 <div class="social_icon">
-                    <a target="_blank" href="https://www.facebook.com/AttariClass" rel="nofollow" aria-label="Facebook Link"><i class="fab fa-facebook-square" aria-hidden="true"></i></a>
-                    <a target="_blank" href="https://twitter.com/i/flow/login?redirect_after_login=%2FAttariClasses" rel="nofollow" aria-label="Twitter Link"><i class="fab fa-twitter" aria-hidden="true"></i></a>
-                    <a target="_blank" href="https://www.instagram.com/attari.classes/" rel="nofollow" aria-label="Instagram Link"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-                    <a target="_blank" href="https://www.linkedin.com/company/attari-classes-vmware-aws-azure-mcsa-ccna-training-in-mumbai/" rel="nofollow" aria-label="Linkedin Link"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+                    <a target="_blank" href="https://www.facebook.com/AttariClass" rel="nofollow" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                    <a target="_blank" href="https://twitter.com/i/flow/login?redirect_after_login=%2FAttariClasses" rel="nofollow" aria-label="X"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                    <a target="_blank" href="https://www.instagram.com/attari.classes/" rel="nofollow" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                    <a target="_blank" href="https://www.linkedin.com/company/attari-classes-vmware-aws-azure-mcsa-ccna-training-in-mumbai/" rel="nofollow" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
                 </div>
             </div>
             <div class="col-lg-2 col-md-3 col-6">
-                <div class="footer_links_heading"><b>Courses</b></div>
-                {{-- <ul class="footer_links">
-                    <li><a href="/vmware-training-certification-online/">VMware</a></li>
-                    <li><a href="/aws-certification-training-online/">AWS Cloud</a></li>
-                    <li><a href="/microsoft-azure-certification-training-online/">Azure
-                            Cloud</a></li>
-                    <li><a href="/mcsa-mcse-windows-server-training-online/">MCSE</a></li>
-                    <li><a href="/ccna-training-certification-online/">CCNA</a></li>
-                    <li><a target="_blank" href="https://lms.attariclasses.in/">Self Paced Video (LMS)</a></li>
-                </ul> --}}
+                <div class="footer_links_heading">Courses</div>
                 <ul class="footer_links">
                     @php
                     $course = getcmsCourses();
-                    
                     @endphp
                     @foreach ($course as $item)
                         @php
-                            $slug = $item->slug === 'mcsa-mcse-windows-server-training-online' 
-                                ? 'windows-server-hybrid-training-certification-online' 
+                            $slug = $item->slug === 'mcsa-mcse-windows-server-training-online'
+                                ? 'windows-server-hybrid-training-certification-online'
                                 : $item->slug;
                         @endphp
                         <li><a href="{{ url(route('course.detail', ['slug' => $slug] )) }}">{{ $item->menu_title }}</a></li>
                     @endforeach
-                    {{-- <li><a href="/vmware-training-certification-online/">VMware</a></li>
-                    <li><a href="/aws-certification-training-online/">AWS Cloud</a></li>
-                    <li><a href="/microsoft-azure-certification-training-online/">Azure
-                            Cloud</a></li>
-                    <li><a href="/mcsa-mcse-windows-server-training-online/">MCSE</a></li>
-                    <li><a href="/ccna-training-certification-online/">CCNA</a></li> --}}
-
                     <li><a target="_blank" href="https://lms.attariclasses.in/">Self Paced Video (LMS)</a></li>
                 </ul>
             </div>
             <div class="col-lg-2 col-md-3 col-6">
-                <div class="footer_links_heading"><b>Quick Links</b></div>
+                <div class="footer_links_heading">Quick Links</div>
                 <ul class="footer_links">
                     <li><a href="{{ url(route('training-option')) }}">Training</a></li>
                     <li><a href="{{ url(route('batch')) }}">Batch Schedule</a></li>
@@ -131,12 +60,12 @@
                 </ul>
             </div>
             <div class="col-lg-4 col-md-12">
+                <div class="footer_links_heading">Contact</div>
                 <div class="footer_info">
                     <div class="footer_info_icon">
-                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
                     </div>
                     <div class="footer_info_text">
-                        <div><b>Address:</b></div>
                         <p>
                             Attari Classes, Kanakia Zillion, F wing, 4th Floor, 438, LBS
                             Marg-CST Road Junction Kurla (West), Mumbai-400070 (Entry from
@@ -146,66 +75,62 @@
                 </div>
                 <div class="footer_info">
                     <div class="footer_info_icon">
-                        <i class="fa fa-mobile" aria-hidden="true"></i>
-
+                        <i class="fas fa-phone-alt" aria-hidden="true"></i>
                     </div>
                     <div class="footer_info_text">
-                        <div><b>Mobile:</b></div>
-                        <!--<p class="mb-0"><a href="tel:+91 7304287233">+91 7304287233</a></p>-->
-                        <p class="mb-0"><a href="tel:+91 7738375431">+91 7738375431</a></p>
-                        <p><a href="tel:+91 9987088551"> +91 9987088551</a></p>
+                        <p class="mb-0"><a href="tel:+917738375431">+91 77383 75431</a></p>
+                        <p><a href="tel:+919987088551">+91 99870 88551</a></p>
                     </div>
                 </div>
                 <div class="footer_info">
                     <div class="footer_info_icon">
-                        <i class="fa fa-envelope" aria-hidden="true"></i>
-
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
                     </div>
                     <div class="footer_info_text">
-                        <div><b>Email:</b></div>
                         <p><a href="mailto:info@attariclasses.in">info@attariclasses.in</a></p>
+                    </div>
+                </div>
+                <div class="footer_info">
+                    <div class="footer_info_icon">
+                        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                    </div>
+                    <div class="footer_info_text">
+                        <p><a id="footer-whatsapp-link" target="_blank" rel="noopener" href="https://api.whatsapp.com/send?phone=917738375431&text=Hi%2C+I+am+contacting+you+through+your+website">WhatsApp chat</a></p>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-6 col-md-5">
-                <p class="copyright">
-    © {{ date('Y') }} Attari Classes. All Rights Reserved
-</p>
-            </div>
-            <div class="col-lg-6 col-md-7 text-end footer_privacy">
-                <ul>
-                    <li><a href="{{ url(route('refund-policy')) }}" class="text-secondary">Refunds & Cancellations</a>
-                    </li>
-                    <li><a href="{{ url(route('terms')) }}" class="text-secondary">Terms of Service</a></li>
-                    <li><a href="{{ url(route('privacy-policy')) }}" class="text-secondary">Privacy Policy</a></li>
-                </ul>
-            </div>
+        <div class="site_footer_bottom">
+            <p class="copyright">© {{ date('Y') }} Attari Classes. All Rights Reserved</p>
+            <ul class="site_footer_legal">
+                <li><a href="{{ url(route('privacy-policy')) }}">Privacy Policy</a></li>
+                <li><a href="{{ url(route('terms')) }}">Terms of Service</a></li>
+                <li><a href="{{ url(route('refund-policy')) }}">Refunds & Cancellations</a></li>
+            </ul>
         </div>
     </div>
 </section>
 
-{{--
-<div class="whatsappdesktop">
+
+<!-- <div class="whatsappdesktop">
 <a target="_blank" href="https://api.whatsapp.com/send?phone=+917738375431&amp;text=Hi,%20I%20am%20contacting%20you%20through%20your%20website%20from%20desktop%20view%20https://attariclasses.in/">
 <i aria-hidden="true" class="fab fa-whatsapp"></i>
 </a>
-</div>
---}}
+</div> -->
 
-<div class="whatsappdesktop">
+
+<!-- <div class="whatsappdesktop">
   <a id="whatsapp-link" target="_blank">
     <i aria-hidden="true" class="fab fa-whatsapp"></i>  Chat on WhatsApp
   </a>
-</div>
+</div> -->
 
 
 <button id="combo" aria-label="back-to-top" class="back-to-top" type="button"><i class="fas fa-chevron-up" aria-hidden="true"></i></button>
 
 <!-- ---------------fix footer---------------- -->
 
-<section class="fix_footer d-none d-lg-block d-md-block">
+<section class="fix_footer d-none">
     <div class="container">
         <div class="row">
             
@@ -509,5 +434,9 @@
 
   document.getElementById('whatsapp-link').setAttribute('href', whatsappURL_desktop);
   document.getElementById('whatsapp-link-mobile').setAttribute('href', whatsappURL_mobile);
+  const footerWhatsapp = document.getElementById('footer-whatsapp-link');
+  if (footerWhatsapp) {
+    footerWhatsapp.setAttribute('href', whatsappURL_desktop);
+  }
 </script>
 

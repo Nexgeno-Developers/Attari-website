@@ -1,6 +1,6 @@
 
 <link rel="shortcut icon" href="{{ asset('/assets/frontend/images/favicon.webp') }}">
-<link rel="stylesheet" href="/assets/frontend/css/style.css?v1.7.4" />
+<link rel="stylesheet" href="/assets/frontend/css/style.css?v1.8.1" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
  
 <link rel="stylesheet" href="/assets/frontend/css/responsive.css?v-1.3.9" />
@@ -26,8 +26,8 @@
   max-width: 1600px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 24px;
-  padding-right: 24px;
+  padding-left: 40px;
+  padding-right: 40px;
 }
 @media (max-width: 767px) {
   .container,
@@ -76,8 +76,20 @@ section.vm_banner.course_hero {
 .course_projects {
   background: #f8fafd !important;
 }
+.course_projects .owl-stage {
+  display: flex;
+  align-items: stretch;
+}
+.course_projects .owl-item {
+  display: flex;
+}
+.course_projects .owl-item .item {
+  width: 100%;
+  display: flex;
+}
 .course_projects .projects_covered_box {
   height: auto !important;
+  flex: 1 1 auto;
   border: 0 !important;
   border-radius: 20px !important;
 }

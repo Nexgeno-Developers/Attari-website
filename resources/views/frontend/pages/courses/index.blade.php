@@ -163,7 +163,7 @@
     <!-----------------key features---------------------->
 
     <div class="page-sections">
-        <section id="key_features" class="page-section key_features course_features py-5 position_relative zindex_1111111">
+        <section id="key_features" class="page-section key_features course_features paddingt_80 paddinb_80 position_relative zindex_1111111">
             <div class="container">
                 <h2 class="section_heading course_features_heading text-center textcolor_blck">{{ $detail->key_title }} Key Features</h2>
                 <div class="course_features_grid">
@@ -221,7 +221,7 @@
 
         <!---------============== overviews ====================----------------------->
 
-        <section id="overviews" class="page-section overview course_overview py-5 position_relative zindex_111111">
+        <section id="overviews" class="page-section overview course_overview paddingt_80 paddinb_80 position_relative zindex_111111">
             <div class="container">
                 <div class="row align-items-start">
                     <div class="col-lg-8">
@@ -280,7 +280,7 @@
     <!---------===================== syllabas section ==================-------------------------------->
 
 
-        <section id="syllabus" class="page-section syllabus_section gradiant_bg pt-5 pb-5 position_relative zindex_11111">
+        <section id="syllabus" class="page-section syllabus_section gradiant_bg paddingt_80 paddinb_80 position_relative zindex_11111">
             <div class="container">
                 <div class="row">
                     <div class="col-md-9 width70">
@@ -529,7 +529,7 @@
 
         <!--Projects Covered section -->
         @if (!empty($project_covered))
-            <section id="projects_covered" class="page-section prje_cove_section course_projects pt-5 pb-5 position_relative zindex_1111">
+            <section id="projects_covered" class="page-section prje_cove_section course_projects paddingt_80 paddinb_80 position_relative zindex_1111">
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
@@ -567,7 +567,7 @@
         @endif
 
         @if (!empty($certificate))
-            <section id="certificate_section" class="page-section certificate_section course_certificates pt-5 pb-5 position_relative zindex_111">
+            <section id="certificate_section" class="page-section certificate_section course_certificates paddingt_80 paddinb_80 position_relative zindex_111">
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
@@ -592,7 +592,7 @@
         @endif
 
 
-        <section id="testimonials" class="page-section testiminilas_sec course_testimonials pt-5 pb-5 position_relative zindex_11">
+        <section id="testimonials" class="page-section testiminilas_sec course_testimonials paddingt_80 paddinb_80 position_relative zindex_11">
             <div class="container">
                 <h2 class="section_heading course_testimonials_heading text-center">
                     {{ $detail->testimonials_section_heading }}
@@ -690,7 +690,7 @@
                     }
                 }
             @endphp
-            <section id="batch_shedule" class="page-section course_batch pt-5 pb-5">
+            <section id="batch_shedule" class="page-section course_batch paddingt_80 paddinb_80">
                 <div class="container">
                     <h2 class="section_heading course_batch_heading text-center">{{ $detail->batch_section_heading }}</h2>
 
@@ -775,25 +775,126 @@
 @php
     $trainerHeading = 'Meet Our Expert Trainer';
     $trainerDesc = 'Learn from Industry Expert Trainer';
+    $skillsHeading = 'Services and skills you will master';
+    $demoCtaTitle = 'Attend a free demo class this week';
+    $demoCtaText = 'Sit through a live session, meet the trainer, see the labs — then decide.';
+    $skillTags = [
+        'Hands-on Labs',
+        'Real-Time Projects',
+        'Interview Preparation',
+        'Architecture Design',
+        'Troubleshooting',
+        'Certification Guidance',
+    ];
 
     if ($cId == 5) {
         $trainerHeading = 'VMware';
         $trainerDesc = 'Learn VMware vSphere Server Virtualization from Industry Expert Trainer';
+        $demoCtaTitle = 'Attend a free VMware demo class this week';
+        $skillTags = [
+            'ESXi & vCenter',
+            'vMotion & DRS',
+            'HA & Fault Tolerance',
+            'vSwitch & Networking',
+            'Datastores & Storage',
+            'Snapshots & Clones',
+            'Resource Pools',
+            'vSAN Basics',
+            'VM Management',
+            'Troubleshooting',
+            'Architecture Design',
+            'Hands-on Labs',
+        ];
     } elseif ($cId == 7) {
         $trainerHeading = 'AWS';
         $trainerDesc = 'Learn AWS Cloud Computing from Industry Expert Trainer';
+        $demoCtaTitle = 'Attend a free AWS demo class this week';
+        $skillTags = [
+            'EC2 & Auto Scaling',
+            'VPC & Subnetting',
+            'Lambda & Serverless',
+            'IAM & Security',
+            'S3 & CloudFront',
+            'RDS & DynamoDB',
+            'CloudWatch & CloudTrail',
+            'Route 53 & ELB',
+            'Systems Manager',
+            'Cost Optimization',
+            'Architecture Design',
+            'Hands-on Labs',
+        ];
     } elseif ($cId == 8) {
         $trainerHeading = 'Azure';
         $trainerDesc = 'Learn Microsoft Azure Cloud Computing from Industry Expert Trainer';
+        $demoCtaTitle = 'Attend a free Azure demo class this week';
+        $skillTags = [
+            'Virtual Machines',
+            'Virtual Networks',
+            'Entra ID & IAM',
+            'Storage Accounts',
+            'NSG & Security',
+            'Azure Backup',
+            'Load Balancer',
+            'Azure Monitor',
+            'Resource Manager',
+            'Hybrid Identity',
+            'Architecture Design',
+            'Hands-on Labs',
+        ];
     } elseif ($cId == 11) {
         $trainerHeading = 'Windows Server';
         $trainerDesc = 'Learn Windows Server Hybrid Administration from Industry Expert Trainer';
+        $demoCtaTitle = 'Attend a free Windows Server demo class this week';
+        $skillTags = [
+            'Active Directory',
+            'DNS & DHCP',
+            'Group Policy',
+            'Hyper-V',
+            'File Services',
+            'Failover Clustering',
+            'Windows Admin Center',
+            'Hybrid Azure AD',
+            'WSUS & Patching',
+            'Identity Management',
+            'Troubleshooting',
+            'Hands-on Labs',
+        ];
     } elseif ($cId == 10) {
         $trainerHeading = 'CCNA';
         $trainerDesc = 'Learn CCNA Networking from Industry Expert Trainer';
+        $demoCtaTitle = 'Attend a free CCNA demo class this week';
+        $skillTags = [
+            'IP Addressing & Subnetting',
+            'VLANs & Trunking',
+            'Routing Protocols',
+            'OSPF',
+            'STP & EtherChannel',
+            'ACLs & NAT',
+            'DHCP & DNS',
+            'Wireless Basics',
+            'Network Security',
+            'Troubleshooting',
+            'Packet Tracer Labs',
+            'Hands-on Labs',
+        ];
     } elseif ($cId == 9) {
         $trainerHeading = 'Windows Server';
         $trainerDesc = 'Learn Windows Server Hybrid Administration from Industry Expert Trainer';
+        $demoCtaTitle = 'Attend a free Windows Server demo class this week';
+        $skillTags = [
+            'Active Directory',
+            'DNS & DHCP',
+            'Group Policy',
+            'Hyper-V',
+            'File Services',
+            'Failover Clustering',
+            'Windows Admin Center',
+            'Hybrid Azure AD',
+            'WSUS & Patching',
+            'Identity Management',
+            'Troubleshooting',
+            'Hands-on Labs',
+        ];
     }
 @endphp
 
@@ -801,76 +902,33 @@
 
 @if(in_array($cId, [5, 7]))
                     
-                    <section id="trainer_profile" class="page-section nx_trainer_section gradiant_bg">
+                    <section id="trainer_profile" class="page-section nx_trainer_section">
                           <div class="container">
-                            <!-- Heading -->
                             <div class="text-center">
-                            
-                              <h2 class="nx_trainer_heading"> Meet Our <span>Expert Trainer</span>
-                              </h2>
-                              <p class="nx_trainer_desc"> {{ $trainerDesc }} </p>
+                              <h2 class="nx_trainer_heading">Meet Our <span>Expert Trainer</span></h2>
+                              <p class="nx_trainer_desc">{{ $trainerDesc }}</p>
                             </div>
-                            <!-- Trainer Card -->
-                            <div class="nx_trainer_box d-lg-block d-none">
-                              <!-- Top -->
+                            <div class="nx_trainer_box">
                                <div class="nx_trainer_top">
-                              <div class="row align-items-center">
-                                  <div class="col-md-8">
-                                      
-                                        <h3 class="nx_trainer_name"> Mr. Maqsood Sheikha </h3>
-                                        <div class="nx_trainer_role"> VMware & AWS Cloud Trainer </div>
-                                      
+                                  <div class="nx_trainer_identity">
+                                        <h3 class="nx_trainer_name">Mr. Maqsood Sheikha</h3>
+                                        <div class="nx_trainer_role">VMware & AWS Cloud Trainer</div>
                                   </div>
-                                  <div class="col-md-4">
-                                      <div class="nx_trainer_btn_wrap">
-                                     
-                                      <button type="button" class="trainer-btn nx_trainer_btn" data-modal="maqsoodModal"> View Full Profile </button>
-                                    </div>
+                                  <div class="nx_trainer_btn_wrap">
+                                      <button type="button" class="trainer-btn nx_trainer_btn" data-modal="maqsoodModal">View Full Profile</button>
                                   </div>
                               </div>
-                              </div>
-                             
-                              <!-- Content -->
                               <div class="nx_trainer_content">
-                                <div class="row align-items-center">
-                                  <!-- Left -->
-                                  <div class="col-lg-12">
                                     <ul class="nx_trainer_points">
-                                      <li> Training Since 2011 </li>
-                                      <li> 10,000+ Students Trained </li>
-                                      <li> VMware vSphere & AWS Cloud Specialist </li>
-                                      <li> Enterprise IT Infrastructure Project Experience </li>
-                                      <li> Students Across India, Gulf Countries & North America </li>
-                                      <li> Hands-on Real Time Project Training </li>
+                                      <li>Training Since 2011</li>
+                                      <li>10,000+ Students Trained</li>
+                                      <li>VMware vSphere & AWS Cloud Specialist</li>
+                                      <li>Enterprise IT Infrastructure Project Experience</li>
+                                      <li>Students Across India, Gulf Countries & North America</li>
+                                      <li>Hands-on Real Time Project Training</li>
                                     </ul>
-                                  </div>
-                                  <!-- Right -->
-                                 
-                                </div>
                               </div>
                             </div>
-                            
-                            <div class="trainer-grid d-lg-none d-block">
-                                   <!-- Trainer 1 -->
-                                   <div class="trainer-card">
-                                     <div class="trainer-label-box">
-                                       <div class="mobile_tr_name">Mr. Maqsood Sheikha</div>
-                                       <p class="trainer-designation"> VMware & AWS Cloud Trainer </p>
-                                     </div>
-                                     <div class="trainer-content">
-                                       <ul>
-                                         <li>Training Since 2011</li>
-                                         <li>10,000+ Students Trained</li>
-                                         <li>VMware vSphere & AWS Cloud Specialist</li>
-                                         <li>Enterprise IT Infrastructure Project Experience</li>
-                                         <li>Students Across India, Gulf Countries & North America</li>
-                                       </ul>
-                                       <button type="button" class="trainer-btn" data-modal="maqsoodModal"> View Full Profile </button>
-                                     </div>
-                                   </div>
-                                 </div>
-                                 
-                                 
                           </div>
                         </section>
 
@@ -971,75 +1029,33 @@
                              @else 
                              
                            
-                         <section id="trainer_profile" class="page-section nx_trainer_section gradiant_bg">
+                         <section id="trainer_profile" class="page-section nx_trainer_section">
                           <div class="container">
-                            <!-- Heading -->
                             <div class="text-center">
-                            
-                              <h2 class="nx_trainer_heading"> Meet Our <span>Expert Trainer</span>
-                              </h2>
-                              <p class="nx_trainer_desc"> {{ $trainerDesc }} </p>
+                              <h2 class="nx_trainer_heading">Meet Our <span>Expert Trainer</span></h2>
+                              <p class="nx_trainer_desc">{{ $trainerDesc }}</p>
                             </div>
-                            <!-- Trainer Card -->
-                            <div class="nx_trainer_box d-lg-block d-none">
-                              <!-- Top -->
+                            <div class="nx_trainer_box">
                                <div class="nx_trainer_top">
-                              <div class="row align-items-center">
-                                  <div class="col-md-8">
-                                      
-                                        <h3 class="nx_trainer_name"> Mr. Zameer Momin</h3>
-                                        <div class="nx_trainer_role">Microsoft Azure, Windows Server Hybrid & Networking Trainer </div>
-                                      
+                                  <div class="nx_trainer_identity">
+                                        <h3 class="nx_trainer_name">Mr. Zameer Momin</h3>
+                                        <div class="nx_trainer_role">Microsoft Azure, Windows Server Hybrid & Networking Trainer</div>
                                   </div>
-                                  <div class="col-md-4">
-                                      <div class="nx_trainer_btn_wrap">
-                                     
-                                      <button type="button" class="trainer-btn nx_trainer_btn" data-modal="zamirModal"> View Full Profile </button>
-                                    </div>
+                                  <div class="nx_trainer_btn_wrap">
+                                      <button type="button" class="trainer-btn nx_trainer_btn" data-modal="zamirModal">View Full Profile</button>
                                   </div>
                               </div>
-                              </div>
-                             
-                              <!-- Content -->
                               <div class="nx_trainer_content">
-                                <div class="row align-items-center">
-                                  <!-- Left -->
-                                  <div class="col-lg-12">
                                     <ul class="nx_trainer_points">
                                       <li>Training Since 2017</li>
-                                         <li>8,000+ Students Trained</li>
-                                         <li>Azure, Windows Server Hybrid & CCNA Networking</li>
-                                         <li>Enterprise Infrastructure Experience</li>
-                                         <li>Students Across India, Gulf Countries & North America</li>
+                                      <li>8,000+ Students Trained</li>
+                                      <li>Azure, Windows Server Hybrid & CCNA Networking</li>
+                                      <li>Enterprise Infrastructure Experience</li>
+                                      <li>Students Across India, Gulf Countries & North America</li>
+                                      <li>Hands-on Real Time Project Training</li>
                                     </ul>
-                                  </div>
-                                  <!-- Right -->
-                                 
-                                </div>
                               </div>
                             </div>
-                            
-                            <div class="trainer-grid d-lg-none d-block">
-                                   <!-- Trainer 1 -->
-                                   <div class="trainer-card">
-                                     <div class="trainer-label-box">
-                                       <div class="mobile_tr_name"> Mr. Zameer Momin</div>
-                                       <p class="trainer-designation"> Microsoft Azure, Windows Server Hybrid & CCNA  </p>
-                                     </div>
-                                     <div class="trainer-content">
-                                       <ul>
-                                         <li>Training Since 2017</li>
-                                         <li>8,000+ Students Trained</li>
-                                         <li>Azure, Windows Server Hybrid & CCNA Networking</li>
-                                         <li>Enterprise Infrastructure Experience</li>
-                                         <li>Students Across India, Gulf Countries & North America</li>
-                                       </ul>
-                                       <button type="button" class="trainer-btn" data-modal="zamirModal"> View Full Profile </button>
-                                     </div>
-                                   </div>
-                                 </div>
-                                 
-                                 
                           </div>
                         </section>
 
@@ -1139,39 +1155,56 @@
 
 
                     @endif
-                    
+
+        <section id="skills_master" class="paddingt_80 paddinb_80 page-section course_skills_section">
+            <div class="container">
+                <h2 class="course_skills_heading">{{ $skillsHeading }}</h2>
+                <div class="course_skills_tags">
+                    @foreach ($skillTags as $skillTag)
+                        <span>{{ $skillTag }}</span>
+                    @endforeach
+                </div>
+
+                <div class="course_skills_cta">
+                    <div class="course_skills_cta_copy">
+                        <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+                        <h3>{{ $demoCtaTitle }}</h3>
+                        <p>{{ $demoCtaText }}</p>
+                    </div>
+                    <div class="course_skills_cta_actions">
+                        <button type="button" class="course_skills_cta_demo" onclick="formModal('{{ url(route('component.form')) }}?section=Skills - Book Free Demo&title=Book a FREE Demo&current_page={{ urlencode(url()->current()) }}&course_name={{$courseInputName}}')">Book free demo</button>
+                        <a class="course_skills_cta_whatsapp" target="_blank" rel="noopener" href="https://api.whatsapp.com/send?phone=917738375431&text=Hi%2C+I+am+contacting+you+through+your+website">Chat on WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
     <!--Faq section-->
 
-        <section id="faqs" class="page-section overview py-5">
+        <section id="faqs" class="page-section course_faq_section">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-9 width70">
-                    @if (!empty($faq) && $faq->count() > 0)
-                        <h2 class="section_heading pb-3 text-center textcolor_blck"> {{ $detail->faq_section_heading }} </h2>
-                    @endif
-  
-                        @if (!empty($faq))
-                            <div class="accordion--container accordion_style_one">
-                            
-                                @foreach ($faq as $row)
-                                    <div class="accordionone">
-                            
-                                        <h3>
-                                            @php echo ReplaceKeyword($row->question, $cms->replace_keyword) @endphp
-                                            <i class="fa fa-angle-up"></i>
-                                        </h3>
-                            
-                                        <div class="contentsillabus_div1">
-                                            <div class="txt">
-                                                @php echo ReplaceKeyword($row->answer, $cms->replace_keyword) @endphp
-                                            </div>
+                @if (!empty($faq) && $faq->count() > 0)
+                    <h2 class="course_faq_heading">{{ $detail->faq_section_heading }}</h2>
+                @endif
+
+                <div class="course_faq_layout">
+                    @if (!empty($faq))
+                        <div class="course_faq_list accordion--container accordion_style_one">
+                            @foreach ($faq as $row)
+                                <div class="accordionone">
+                                    <h3>
+                                        @php echo ReplaceKeyword($row->question, $cms->replace_keyword) @endphp
+                                        <i class="fa fa-angle-up"></i>
+                                    </h3>
+                                    <div class="contentsillabus_div1">
+                                        <div class="txt">
+                                            @php echo ReplaceKeyword($row->answer, $cms->replace_keyword) @endphp
                                         </div>
-                            
                                     </div>
-                                @endforeach
-                            
-                            </div>
+                                </div>
+                            @endforeach
+                        </div>
+
                     <!----================== Faq Schema ==================------------------->
                             @php
                                 $f = 1;
@@ -1202,38 +1235,19 @@
                                 ]
                             }
                             </script>
-
                     <!----================== Faq Schema ==================------------------->
+                    @endif
 
-                        @endif
-
-                        <div class="gradiant_bg bookdemofreeform_course course_buttom_form mt-4">
-                            <p class="text-center textcolor_wht pb-2 fs-24">Book a <b>FREE</b> Demo</p>
-                            @include('frontend.component.common_form', [
-                                'section' => 'Book a FREE Demo - Course Page',
-                                'title'  => '',  
-                                'course_name' => $courseInputName,
-                                'msgfield' => '0',
-                                'param1' => NULL,
-                                'param2' => NULL,
-                                'param3' => NULL,
-                            ])
+                    <aside class="course_faq_talk">
+                        <div class="course_faq_talk_icon">
+                            <i class="fas fa-phone-alt" aria-hidden="true"></i>
                         </div>
-
-
-                    </div>
-                    <div class="col-md-3 width30 position_sticky">
-                        <div class="talktous_box margin-top55">
-                            <i class="fa-sharp fa-solid fa-phone"></i>
-                            <p class="mb-3">Talk To Us</p>
-                            <p>
-                                <a href="tel:+917738375431">+91 7738375431</a>
-                            </p>
-                            <p>
-                                <a href="mailto:info@attariclasses.in">info@attariclasses.in</a>
-                            </p>
-                        </div>
-                    </div>
+                        <h3>Talk To Us</h3>
+                        <p>Call or chat on WhatsApp — a trainer will help you pick the right batch.</p>
+                        <a class="course_faq_talk_phone" href="tel:+917738375431">+91 77383 75431</a>
+                        <a class="course_faq_talk_whatsapp" target="_blank" rel="noopener" href="https://api.whatsapp.com/send?phone=917738375431&text=Hi%2C+I+am+contacting+you+through+your+website">Chat on WhatsApp</a>
+                        <button type="button" class="course_faq_talk_demo" onclick="formModal('{{ url(route('component.form')) }}?section=FAQ - Book Free Demo&title=Book a FREE Demo&current_page={{ urlencode(url()->current()) }}&course_name={{$courseInputName}}')">Book a free demo</button>
+                    </aside>
                 </div>
             </div>
         </section>
@@ -1277,215 +1291,175 @@
             ->where('cms.status', 1)
             ->where('cms.zone', 0)
             ->where('cms.id', '!=', $cms->id)
-            ->get(['cms.course_id', 'cms.slug', 'courses.thumbnail']);
+            ->get(['cms.course_id', 'cms.slug', 'cms.menu_title', 'courses.thumbnail']);
             
         $course_wsh  = $cms_courses->firstWhere('course_id', 11);
         
         if (!$course_wsh) {
-            // If not found, fetch course_id = 11 directly
             $cms_courses_temp = DB::table('cms')
                 ->join('courses', 'cms.course_id', '=', 'courses.id')
                 ->where('cms.status', 1)
                 ->where('cms.zone', 0)
                 ->where('cms.course_id', 11)
-                ->get(['cms.course_id', 'cms.slug', 'courses.thumbnail']);
+                ->get(['cms.course_id', 'cms.slug', 'cms.menu_title', 'courses.thumbnail']);
         
             $course_wsh = $cms_courses_temp->first();
         }
-        
+
+        $otherCourseMeta = [
+            5 => [
+                'category' => 'VMWARE',
+                'title' => 'VMware vSphere',
+                'icon' => 'fas fa-server',
+                'image' => '/assets/frontend/images/vmware-vsphere-e1627535142798.jpg',
+            ],
+            7 => [
+                'category' => 'AWS',
+                'title' => 'AWS Cloud Architect',
+                'icon' => 'fas fa-cloud',
+                'image' => '/assets/frontend/images/cloud1.jpg',
+            ],
+            8 => [
+                'category' => 'AZURE',
+                'title' => 'Azure Cloud Administrator',
+                'icon' => 'fas fa-cloud',
+                'image' => '/assets/frontend/images/Azure-1.jpg',
+            ],
+            9 => [
+                'category' => 'MICROSOFT',
+                'title' => 'Windows Server Hybrid',
+                'icon' => 'fas fa-layer-group',
+                'image' => '/assets/frontend/images/microsft.jpg',
+            ],
+            11 => [
+                'category' => 'MICROSOFT',
+                'title' => 'Windows Server Hybrid',
+                'icon' => 'fas fa-layer-group',
+                'image' => '/assets/frontend/images/microsft.jpg',
+            ],
+            10 => [
+                'category' => 'CISCO',
+                'title' => 'Cisco Networking CCNA',
+                'icon' => 'fas fa-globe',
+                'image' => '/assets/frontend/images/ccna.jpg',
+            ],
+        ];
+
+        $otherCourses = [];
+        $seenCourseIds = [];
+        foreach ($cms_courses as $row) {
+            if ($row->course_id == 9 && $course_wsh) {
+                $row = $course_wsh;
+            }
+            if ($row->course_id == $cId || isset($seenCourseIds[$row->course_id])) {
+                continue;
+            }
+            if (!isset($otherCourseMeta[$row->course_id])) {
+                continue;
+            }
+            $seenCourseIds[$row->course_id] = true;
+            $otherCourses[] = $row;
+        }
     @endphp
     
-    <section class="other_courses light_gray_bg pt-5 pb-5">
+    <section class="other_courses course_other_section">
         <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h2 class="section_heading pb-3 text-center"> Other Courses <strong>We Offer</strong></h2>
-                    <div class="owl-carousel owl-theme other_courses_slider">
-    
-                        @foreach ($cms_courses as $row)
-                            @php 
-                                $row = $row->course_id == 9 && $course_wsh ? $course_wsh : $row;
-                            @endphp
-                            <div class="item">
-                                <div class="other_crs_box">
-                                    <a href="{{ url(route('course.detail', ['slug' => $row->slug] )) }}">
-                                        <img src="{{ asset('storage/' . $row->thumbnail) }}" alt="">
-                                    </a>
-                                </div>
-                            </div> 
-                        @endforeach
-    
-                    </div>
-                </div>
+            <h2 class="course_other_heading">Other Courses We Offer</h2>
+            <div class="course_other_grid">
+                @foreach ($otherCourses as $row)
+                    @php
+                        $meta = $otherCourseMeta[$row->course_id];
+                        $cardImage = $meta['image'];
+                    @endphp
+                    <a class="course_other_card" href="{{ url(route('course.detail', ['slug' => $row->slug] )) }}" style="background-image: url('{{ $cardImage }}');">
+                        <span class="course_other_card_icon" aria-hidden="true"><i class="{{ $meta['icon'] }}"></i></span>
+                        <span class="course_other_card_cat">{{ $meta['category'] }}</span>
+                        <h3 class="course_other_card_title">{{ $meta['title'] }}</h3>
+                        <span class="course_other_card_pill">{{ $meta['category'] }}</span>
+                    </a>
+                @endforeach
             </div>
         </div>
     </section>
     
 
-    <section class="location_section pt-5">
+    <section class="location_section course_location_section">
         <div class="container">
-            <div class="row">
-                <div class="col-12">
- @php
- $course_name = $courseInputName;
+            @php
+                $course_name = $courseInputName;
                 session()->put('course_name', $course_name);
+                $cms_alias_city = DB::table('cms')->where('status', 1)->where('zone', 1)->where('course_id', $cms->course_id)->whereNot('id', $cms->id)->get(['alias', 'slug']);
+                $cms_alias_country = DB::table('cms')->where('status', 1)->where('zone', 2)->where('course_id', $cms->course_id)->whereNot('id', $cms->id)->get(['alias', 'slug']);
             @endphp
 
-            <h2>Find {{ $course_name }} by Location</h2>
-                    <div class="location_box">
-                        @php
+            <p class="course_location_label">Find by Location</p>
+            <h2 class="course_location_heading">Find {{ $course_name }} by Location</h2>
 
-                            /*if($cms->course_id == '5'){
-                                $course_name = 'VMware Training ';
-                            } elseif ($cms->course_id == '7') {
-                                $course_name = 'AWS Training';
-                            } elseif ($cms->course_id == '8') {
-                                $course_name = 'Microsoft Azure Training';
-                            } elseif ($cms->course_id == '9') {
-                                $course_name = 'MCSE / MCSA Training';
-                            } else {
-                                $course_name = 'CCNA Training';
-                            }*/
-                            
-                            $course_name = $courseInputName;
-                            session()->put('course_name', $course_name);
-                        @endphp
-
-                        <h3>
-                        {{ $course_name }} in other Cities
-                        </h3>
-
-                        @php
-                            $cms_alias_city = DB::table('cms')->where('status', 1)->where('zone', 1)->where('course_id', $cms->course_id)->whereNot('id', $cms->id)->get(['alias', 'slug']);
-                        @endphp
-
-                        <ul class="elementor-icon-list-items list-container">
-                            @foreach ($cms_alias_city as $index => $row)
-                                <li class="list-item" data-index="{{ $index }}">
-                                    <a href="{{ url(route('course.detail', ['slug' => $row->slug] )) }}">
-                                        <span>{{ $row->alias }}</span>
-                                    </a>
-                                </li>
-                            @endforeach
-
-                        </ul>
-                        <button class="load-more-btns">Load More</button> 
+            @if($cms_alias_city->isNotEmpty())
+                <div class="course_location_card">
+                    <div class="course_location_card_head">
+                        <span class="course_location_card_icon" aria-hidden="true"><i class="fas fa-map-marker-alt"></i></span>
+                        <h3>{{ $course_name }} in other Cities</h3>
                     </div>
-                    
+                    <ul class="course_location_pills list-container">
+                        @foreach ($cms_alias_city as $index => $row)
+                            <li class="list-item" data-index="{{ $index }}">
+                                <a href="{{ url(route('course.detail', ['slug' => $row->slug] )) }}">{{ $row->alias }}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                    <button type="button" class="load-more-btns">Load More</button>
+                </div>
+            @endif
 
-                    <div class="row" >
-                        @php
-                            $cms_alias_country = DB::table('cms')->where('status', 1)->where('zone', 2)->where('course_id', $cms->course_id)->whereNot('id', $cms->id)->get(['alias', 'slug']);
-                        @endphp
-
-                        @if(!empty($cms_alias_country))
-
-
-                            @if($cms_alias_country->isNotEmpty())
-                                <div class="location_box">
-                                    <h3>
-                                      {{ $course_name }} in other Countries
-                                    </h3>
-                                    <ul class="elementor-icon-list-items list-container">
-                                        @foreach ($cms_alias_country as $index => $row)
-                                            <li class="list-item" data-index="{{ $index }}">
-                                                <a href="{{ url(route('course.detail', ['slug' => $row->slug])) }}">
-                                                    <span>{{ $row->alias }}</span>
-                                                </a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                    <button class="load-more-btns">Load More</button>  
-                                </div>
-                                
-                            @endif
-                        @endif
+            @if($cms_alias_country->isNotEmpty())
+                <div class="course_location_card">
+                    <div class="course_location_card_head">
+                        <span class="course_location_card_icon" aria-hidden="true"><i class="fas fa-globe"></i></span>
+                        <h3>{{ $course_name }} in other Countries</h3>
                     </div>
-                    
-                    
-                 <div class="row">
-
-    @if(!empty($detail->seo_label) && !empty($detail->seo_description))
-        @php 
-            $seo_label = ReplaceKeyword($detail->seo_label, $cms->replace_keyword); 
-            $seo_description = ReplaceKeyword($detail->seo_description, $cms->replace_keyword);
-        @endphp
-
-        <div class="location_box text-center">
-
-            <h2 
-                class="course-info-heading"
-                role="button"
-                tabindex="0"
-                aria-expanded="false"
-                aria-controls="courseInfoContent"
-            >
-                <span>{{ $seo_label }}</span>
-                <span class="course-info-icon">+</span>
-            </h2>
-
-            <div id="courseInfoContent" class="course-info-content">
-                <div class="course-info-inner">
-                    @php echo html_entity_decode($seo_description) @endphp
+                    <ul class="course_location_pills list-container">
+                        @foreach ($cms_alias_country as $index => $row)
+                            <li class="list-item" data-index="{{ $index }}">
+                                <a href="{{ url(route('course.detail', ['slug' => $row->slug])) }}">{{ $row->alias }}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                    <button type="button" class="load-more-btns">Load More</button>
                 </div>
-            </div>
+            @endif
 
-        </div>
-    @endif
-
-</div>
-
+            @if(!empty($detail->seo_label) && !empty($detail->seo_description))
+                @php
+                    $seo_label = ReplaceKeyword($detail->seo_label, $cms->replace_keyword);
+                    $seo_description = ReplaceKeyword($detail->seo_description, $cms->replace_keyword);
+                @endphp
+                <div class="course_location_seo">
+                    <h2
+                        class="course-info-heading"
+                        role="button"
+                        tabindex="0"
+                        aria-expanded="false"
+                        aria-controls="courseInfoContent"
+                    >
+                        <span class="course-info-icon">+</span>
+                        <span>{{ $seo_label }}</span>
+                    </h2>
+                    <div id="courseInfoContent" class="course-info-content">
+                        <div class="course-info-inner">
+                            @php echo html_entity_decode($seo_description) @endphp
+                        </div>
+                    </div>
                 </div>
-            </div>
+            @endif
         </div>
     </section>
 
     <style>
-    .course-info-heading {
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 12px;
-}
-
-.course-info-icon {
-    font-size: 26px;
-    font-weight: 700;
-    line-height: 1;
-}
-
-.course-info-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.35s ease;
-    text-align: left;
-}
-
-.course-info-inner {
-    padding-top: 15px;
-}
-
 	.hidden_classes {
 		display: none;
 	}
-	.load-more-btns {
-		border: 0;
-		background: transparent;
-		color: #13aff0;
-		font-size: 15px;
-		position: relative;
-		top: -4px;
-		font-weight: 500;
-	}
-	@media(max-width:767px)
-	{
-	    .location_box ul {
-    display: inline-block;
-}
-	}
-</style>
+    </style>
 
     <!-------------=============== courses end =============== --------------------> 
     <script>
@@ -1526,7 +1500,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener("DOMContentLoaded", function () {
         function updateVisibleItems() {
             let screenWidth = window.innerWidth;
-            let initialCount = screenWidth <= 767 ? 15 : 25; // Show 10 on mobile, 28 on desktop
+            let initialCount = screenWidth <= 767 ? 8 : 14;
 
             document.querySelectorAll(".list-container").forEach((listContainer) => {
                 let listItems = listContainer.querySelectorAll(".list-item");
