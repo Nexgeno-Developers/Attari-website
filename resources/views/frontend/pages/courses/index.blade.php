@@ -529,6 +529,47 @@
 
         <!--Projects Covered section -->
         @if (!empty($project_covered))
+            @php
+                $projectIconClass = function ($title) {
+                    $normalizedTitle = strtolower(strip_tags(html_entity_decode($title)));
+                    $iconRules = [
+                        ['words' => ['license', 'licensing'], 'icon' => 'fa-solid fa-key'],
+                        ['words' => ['vcenter'], 'icon' => 'fa-solid fa-server'],
+                        ['words' => ['vm', 'virtual machine'], 'icon' => 'fa-solid fa-desktop'],
+                        ['words' => ['clone', 'template'], 'icon' => 'fa-solid fa-copy'],
+                        ['words' => ['content library'], 'icon' => 'fa-solid fa-folder-open'],
+                        ['words' => ['snapshot'], 'icon' => 'fa-solid fa-camera'],
+                        ['words' => ['security', 'acl', 'ssh', 'vpn'], 'icon' => 'fa-solid fa-shield-alt'],
+                        ['words' => ['host profile'], 'icon' => 'fa-solid fa-id-card'],
+                        ['words' => ['network', 'vpc', 'vnet', 'vlan', 'routing', 'route', 'nat', 'etherchannel', 'switch'], 'icon' => 'fa-solid fa-network-wired'],
+                        ['words' => ['storage', 'san', 'nas', 'ebs', 's3', 'bucket', 'file server'], 'icon' => 'fa-solid fa-hard-drive'],
+                        ['words' => ['motion', 'svmotion', 'peering'], 'icon' => 'fa-solid fa-right-left'],
+                        ['words' => ['ha', 'drs', 'fault tolerance', 'failover', 'highly available'], 'icon' => 'fa-solid fa-sync-alt'],
+                        ['words' => ['ec2', 'compute', 'server'], 'icon' => 'fa-solid fa-server'],
+                        ['words' => ['load balancer', 'loadbalancer', 'balancing'], 'icon' => 'fa-solid fa-scale-balanced'],
+                        ['words' => ['autoscaling', 'scale set'], 'icon' => 'fa-solid fa-chart-line'],
+                        ['words' => ['backup', 'restore', 'disaster recovery', 'site recovery'], 'icon' => 'fa-solid fa-clock-rotate-left'],
+                        ['words' => ['rds', 'database', 'dynamo'], 'icon' => 'fa-solid fa-database'],
+                        ['words' => ['route53', 'dns', 'domain naming'], 'icon' => 'fa-solid fa-globe'],
+                        ['words' => ['hybrid', 'connector', 'entra', 'active directory', 'domain controller', 'user', 'group', 'ou'], 'icon' => 'fa-solid fa-users-gear'],
+                        ['words' => ['cloud formation'], 'icon' => 'fa-solid fa-cloud'],
+                        ['words' => ['ios', 'router'], 'icon' => 'fa-solid fa-route'],
+                        ['words' => ['spanning tree', 'loop free'], 'icon' => 'fa-solid fa-diagram-project'],
+                        ['words' => ['dhcp'], 'icon' => 'fa-solid fa-sitemap'],
+                        ['words' => ['wireless'], 'icon' => 'fa-solid fa-wifi'],
+                    ];
+
+                    foreach ($iconRules as $rule) {
+                        foreach ($rule['words'] as $word) {
+                            if (strpos($normalizedTitle, $word) !== false) {
+                                return $rule['icon'];
+                            }
+                        }
+                    }
+
+                    return 'fa-solid fa-layer-group';
+                };
+            @endphp
             <section id="projects_covered" class="page-section prje_cove_section course_projects paddingt_80 paddinb_80 position_relative zindex_1111">
                 <div class="container">
                     <div class="row">
@@ -541,11 +582,9 @@
                                         <div class="projects_covered_box">
                                             <div class="projects_covered__header">
                                                 <span class="projects_covered__name">{{ $row->title }}</span>
-                                                @if (!empty($row->icon))
-                                                    <div class="projects_covered__icon">
-                                                        <img src="{{ asset('storage/' . $row->icon) }}" alt="" />
-                                                    </div>
-                                                @endif
+                                                <div class="projects_covered__icon">
+                                                    <i class="{{ $projectIconClass($row->title) }}" aria-hidden="true"></i>
+                                                </div>
                                             </div>
                                             <div class="projects_covered__content">
                                                 <div class="projects_covered__text">

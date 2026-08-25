@@ -6197,6 +6197,12 @@ section.vm_banner.course_hero {
   object-fit: contain;
 }
 
+.course_projects .projects_covered__icon i {
+  color: #0f172a;
+  font-size: 18px;
+  line-height: 1;
+}
+
 .course_projects .projects_covered__content {
   display: flex;
   flex-direction: column;
