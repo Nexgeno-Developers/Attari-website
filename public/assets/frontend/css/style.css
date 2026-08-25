@@ -6219,7 +6219,7 @@ section.vm_banner.course_hero {
   padding-left: 16px;
   margin-bottom: 10px;
   color: #4b5563 !important;
-  font-size: 14px !important;
+  font-size: 16px !important;
   line-height: 1.55 !important;
 }
 
@@ -6684,7 +6684,7 @@ section.vm_banner.course_hero {
   align-items: flex-start;
   gap: 8px;
   color: #374151;
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.4;
   font-weight: 500;
 }
@@ -6734,6 +6734,9 @@ section.vm_banner.course_hero {
 
 .course_batch_slot.is-selected {
   border-color: #f97316;
+  border-color: #f97316;
+    background: #fffbf7;
+
 }
 
 .course_batch_slot.is-selected::before {
@@ -6759,16 +6762,18 @@ section.vm_banner.course_hero {
 }
 
 .course_batch_slot_title {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
   color: #0f172a;
+text-align: center;
   margin-bottom: 4px;
 }
 
 .course_batch_slot_note {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   color: #ef4444;
+  text-align: center;
   margin-bottom: 12px;
 }
 
@@ -6790,8 +6795,12 @@ section.vm_banner.course_hero {
   border-radius: 8px;
   padding: 8px 10px;
   color: #111;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
+}
+
+.course_batch_slot.is-selected .course_batch_meta span {
+  background: #fff;
 }
 
 .course_batch_meta i {
