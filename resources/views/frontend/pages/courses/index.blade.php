@@ -59,7 +59,7 @@
                 }
             @endphp
             <div class="row align-items-center course_hero_row">
-                <div class="col-lg-7">
+                <div class="col-lg-8">
                     <div class="breadcrums_section">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb mb-0">
@@ -100,7 +100,7 @@
                         <li><i class="fas fa-check" aria-hidden="true"></i> WhatsApp Support</li>
                     </ul>
                 </div>
-                <div class="col-lg-5">
+                <div class="col-lg-4">
                     <div class="course_hero_media">
                         <a href="{{ $youtube_url_detail }}" data-fancybox="gallery" aria-label="Play course video">
                             <img src="{{ asset('storage/' . $detail->other_thumbnail) }}" alt="{{ $cms->title }}" />

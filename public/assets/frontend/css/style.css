@@ -5090,7 +5090,7 @@ background: #07d353;
 
         .trainer-modal-header .header-title {
             margin: 0 0 0px;
-            font-size: 20px;
+            font-size: 22px;
                 color: #012749;
             font-weight: 700;
             padding-right: 35px;
@@ -5098,7 +5098,7 @@ background: #07d353;
 
         .trainer-modal-header p {
             margin: 0;
-            color: #009ff5;
+            color: #f97316;
             font-size: 13px !important;
             font-weight: 600;
         }
@@ -5141,7 +5141,7 @@ background: #07d353;
 }
 
         .trainer-modal-body p {
-            font-size: 14px !important;
+            font-size: 16px !important;
             color: #000;
             line-height: 1.8 !important;
             margin: 0 0 16px;
@@ -5153,7 +5153,7 @@ background: #07d353;
         }
 
         .trainer-modal-body li {
-            font-size: 14px;
+            font-size: 16px;
             color: #000;
             line-height: 1.6;
             margin-bottom: 8px;
@@ -5302,7 +5302,7 @@ background: #07d353;
 
         .nx_trainer_name{
             font-size:32px;
-            font-weight:800;
+            font-weight:700;
             margin:0 0 12px;
             color:#0f172a;
             line-height:1.2;
@@ -5380,7 +5380,7 @@ background: #07d353;
             align-items:center;
             justify-content:center;
             gap:8px;
-            background:linear-gradient(90deg, #f5a524 0%, #f8c056 100%) !important;
+                background: #f97316;
             color:#fff !important;
             padding:13px 28px !important;
             border-radius:50px;
@@ -5502,7 +5502,7 @@ background: #07d353;
 
 /* ----------------- course page hero ----------------- */
 section.vm_banner.course_hero {
-  background: #0f172a !important;
+  background: #1c2746  !important;
   color: #fff;
   padding: 48px 0 56px !important;
 }
@@ -6628,7 +6628,7 @@ section.vm_banner.course_hero {
   background: #fff;
   border-radius: 16px;
   box-shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
-  padding: 24px 28px;
+  padding: 40px 35px;
   margin-bottom: 20px;
   display: flex;
   align-items: center;
