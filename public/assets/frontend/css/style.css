@@ -7415,7 +7415,7 @@ text-align: center;
 
 .course_location_label {
   font-family: "Satoshi", sans-serif;
-  font-size: 12px;
+  font-size: 12px !important;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -7426,7 +7426,7 @@ text-align: center;
 .course_location_section .course_location_heading {
   font-family: "Satoshi", sans-serif;
   font-size: 32px;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.25;
   color: #0f172a;
   text-align: left;
@@ -8026,6 +8026,19 @@ text-align: center;
   white-space: nowrap;
 }
 
+.course_syllabus_modern .syllabus-accordion .accordion1 > .syllabus_module_header .syllabus_module_duration {
+  background: transparent;
+  color: #64748b;
+  cursor: inherit;
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  padding: 0;
+  position: static;
+  white-space: nowrap;
+}
+
 .course_syllabus_modern .syllabus-accordion .accordion1 > .syllabus_module_header span::after {
   content: none !important;
   display: none !important;
@@ -8066,7 +8079,7 @@ text-align: center;
   display: grid;
   font-size: 15px;
   gap: 8px 10px;
-  grid-template-columns: 20px minmax(0, 1fr) 28px;
+  grid-template-columns: 20px minmax(0, 1fr);
   line-height: 1.45;
   margin: 0;
   min-height: 34px;
@@ -8089,21 +8102,8 @@ text-align: center;
 }
 
 .course_syllabus_modern .contentsillabus_div .txt li::after {
-  align-items: center;
-  background: #ff8200;
-  border-radius: 50%;
-  box-shadow: 0 5px 12px rgba(255, 130, 0, 0.22);
-  color: #fff;
-  content: '\f04b';
-  display: inline-flex;
-  font-family: "Font Awesome 6 Free", "Font Awesome 5 Free", FontAwesome, sans-serif;
-  font-size: 8px;
-  font-weight: 900;
-  height: 23px;
-  justify-content: center;
-  justify-self: end;
-  padding-left: 2px;
-  width: 23px;
+  content: none;
+  display: none;
 }
 
 .course_syllabus_modern .contentsillabus_div .txt li p {
@@ -8123,6 +8123,14 @@ text-align: center;
   width: 100%;
 }
 
+.course_syllabus_modern .syllabus_module_actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+  margin-top: 21px;
+}
+
 .course_syllabus_modern .module_download_brochure {
  background: #ff8200;
     border: 0;
@@ -8133,13 +8141,42 @@ text-align: center;
     font-weight: 700;
     gap: 7px;
     line-height: 1.2;
-    margin: 21px 0 0;
+    margin: 0;
     padding: 11px 22px;
     text-decoration: none !important;
 }
 
 .course_syllabus_modern .module_download_brochure i {
   font-size: 14px;
+}
+
+.course_syllabus_modern .module_watch_video {
+  align-items: center;
+  background: #fff;
+  border: 1px solid #ff8200;
+  border-radius: 50px;
+  color: #ff8200 !important;
+  display: inline-flex;
+  font-size: 15px;
+  font-weight: 700;
+  gap: 8px;
+  line-height: 1.2;
+  margin: 0;
+  padding: 10px 20px;
+  text-decoration: none !important;
+}
+
+.course_syllabus_modern .module_watch_video i {
+  align-items: center;
+  background: #ff8200;
+  border-radius: 50%;
+  color: #fff;
+  display: inline-flex;
+  font-size: 8px;
+  height: 20px;
+  justify-content: center;
+  padding-left: 2px;
+  width: 20px;
 }
 
 .course_syllabus_modern .course_syllabus_form_col {
@@ -8271,6 +8308,6 @@ text-align: center;
   }
 
   .course_syllabus_modern .contentsillabus_div .txt li {
-    grid-template-columns: 20px minmax(0, 1fr) 27px;
+    grid-template-columns: 20px minmax(0, 1fr);
   }
 }

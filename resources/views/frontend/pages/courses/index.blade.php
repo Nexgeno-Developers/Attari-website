@@ -362,24 +362,39 @@
                                     <div class="accordion--container1 accordion_style1 syllabus-accordion">
         
                                         @foreach ($syllabus as $row)
+                                            @php
+                                                $moduleDescription = ReplaceKeyword($row->description, $cms->replace_keyword);
+                                                $moduleLessonCount = preg_match_all('/<li\b/i', (string) $moduleDescription, $moduleMatches);
+                                                $moduleDurationSeconds = max(25, ($moduleLessonCount * 4) + 8) * 60;
+                                                $moduleDuration = gmdate('H:i:s', $moduleDurationSeconds);
+                                            @endphp
                                             <li class="accordion1 @if($i == 1) open @endif">
                                                 <span class="syllabus_module_header">
                                                     <span class="syllabus_module_title">Module {{ $i }}:- @php echo ReplaceKeyword($row->title, $cms->replace_keyword) @endphp</span>
                                                     <span class="syllabus_module_meta">
                                                         <span class="syllabus_preview_badge">Preview</span>
+                                                        <span class="syllabus_module_duration">{{ $moduleDuration }}</span>
                                                     </span>
                                                     <i class="fa fa-angle-up"></i>
                                                 </span>
                                                 <div class="contentsillabus_div" style="@if($i == 1) display:block; @endif">
                                                     <div class="txt">
-                                                        @php echo ReplaceKeyword($row->description, $cms->replace_keyword) @endphp
+                                                        @php echo $moduleDescription @endphp
                                                     </div>
-                                                    @if(!empty($detail->curriculum_pdf))
-                                                        <a class="module_download_brochure showFormBtnCurriculum" href="javascript:void(0)">
-                                                            <i class="fab fa-whatsapp" aria-hidden="true"></i>
-                                                           {{ explode(' ', trim($cms->menu_title ?? $cms->breadcrumb_title))[0] }}   Syllabus on WhatsApp
-                                                        </a>
-                                                    @endif
+                                                    <div class="syllabus_module_actions">
+                                                        @if(!empty($detail->curriculum_pdf))
+                                                            <a class="module_download_brochure showFormBtnCurriculum" href="javascript:void(0)">
+                                                                <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                                                               {{ explode(' ', trim($cms->menu_title ?? $cms->breadcrumb_title))[0] }}   Syllabus on WhatsApp
+                                                            </a>
+                                                        @endif
+                                                        @if(!empty($detail->url))
+                                                            <a class="module_watch_video" href="{{ $youtube_url_detail }}" data-fancybox="gallery">
+                                                                <i class="fas fa-play" aria-hidden="true"></i>
+                                                                <span>Watch Video</span>
+                                                            </a>
+                                                        @endif
+                                                    </div>
                                                 </div>
                                             </li>
                                             @php $i++ @endphp
