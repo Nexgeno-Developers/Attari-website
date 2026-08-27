@@ -280,11 +280,11 @@
     <!---------===================== syllabas section ==================-------------------------------->
 
 
-        <section id="syllabus" class="page-section syllabus_section gradiant_bg paddingt_80 paddinb_80 position_relative zindex_11111">
+        <section id="syllabus" class="page-section syllabus_section course_syllabus_modern gradiant_bg paddingt_80 paddinb_80 position_relative zindex_11111">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-9 width70">
-                        <h2 class="section_heading pb-3 textcolor_wht float_left"> {{ $detail->syllabus_section_heading }}
+                    <div class="col-md-9 width70 course_syllabus_content">
+                        <h2 class="section_heading pb-3 textcolor_wht float_left course_syllabus_title"> {{ $detail->syllabus_section_heading }}
                         </h2>
                         
                      @if(request()->is('aws-certification-training-online'))
@@ -305,7 +305,7 @@
                             }
                         </style>
                     
-                        <p class="online_css">
+                        <p class="online_css course_syllabus_intro">
                             Looking for the latest SAA-C03 detailed syllabus? You can view the full curriculum below or download the complete AWS Solution Architect syllabus PDF for offline reference.
                         </p>
                     @endif
@@ -329,8 +329,14 @@
                             }
                         </style>
                     
-                        <p class="online_css">
+                        <p class="online_css course_syllabus_intro">
                            Looking for the latest VMware vSphere detailed syllabus or VCP certification syllabus? You can view the complete module-wise VMware course content below or download the VMware syllabus PDF for offline reference.
+                        </p>
+                    @endif
+
+                    @if(!request()->is('aws-certification-training-online') && !request()->is('vmware-training-certification-online'))
+                        <p class="course_syllabus_intro">
+                            View the complete module-wise curriculum below or request the full syllabus PDF on WhatsApp for offline reference.
                         </p>
                     @endif
                     
@@ -357,7 +363,12 @@
         
                                         @foreach ($syllabus as $row)
                                             <li class="accordion1 @if($i == 1) open @endif">
-                                                <span> Module {{ $i }}:- @php echo ReplaceKeyword($row->title, $cms->replace_keyword) @endphp <i class="fa fa-angle-up"></i>
+                                                <span class="syllabus_module_header">
+                                                    <span class="syllabus_module_title">Module {{ $i }}:- @php echo ReplaceKeyword($row->title, $cms->replace_keyword) @endphp</span>
+                                                    <span class="syllabus_module_meta">
+                                                        <span class="syllabus_preview_badge">Preview</span>
+                                                    </span>
+                                                    <i class="fa fa-angle-up"></i>
                                                 </span>
                                                 <div class="contentsillabus_div" style="@if($i == 1) display:block; @endif">
                                                     <div class="txt">
@@ -507,8 +518,8 @@
             <!----=============================== Syllabus Schema ==============------------------------------->  
 
 
-                    <div class="col-md-3 width30 position_sticky">
-                        <div class="bookdemofreeform_course gray_bgg1 margin-top55">
+                    <div class="col-md-3 width30 position_sticky course_syllabus_form_col">
+                        <div class="bookdemofreeform_course gray_bgg1 margin-top55 syllabus_demo_card">
                             <p class="text-center fs-24">Book a <b>FREE</b> Demo</p>
 
                             @include('frontend.component.common_form', [
