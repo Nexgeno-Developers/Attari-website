@@ -1437,10 +1437,7 @@
                         $cardImage = $meta['image'];
                     @endphp
                     <a class="course_other_card" href="{{ url(route('course.detail', ['slug' => $row->slug] )) }}" style="background-image: url('{{ $cardImage }}');">
-                        <span class="course_other_card_icon" aria-hidden="true"><i class="{{ $meta['icon'] }}"></i></span>
-                        <span class="course_other_card_cat">{{ $meta['category'] }}</span>
-                        <h3 class="course_other_card_title">{{ $meta['title'] }}</h3>
-                        <span class="course_other_card_pill">{{ $meta['category'] }}</span>
+                       
                     </a>
                 @endforeach
             </div>

@@ -7278,7 +7278,7 @@ text-align: center;
 .course_other_heading {
   font-family: "Satoshi", sans-serif;
   font-size: 32px;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.25;
   color: #0f172a;
   text-align: center;
@@ -7292,81 +7292,13 @@ text-align: center;
 }
 
 .course_other_card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  min-height: 280px;
-  padding: 22px 20px 20px;
-  border-radius: 16px;
-  overflow: hidden;
-  background-color: #0f172a;
-  background-size: cover;
-  background-position: center;
-  text-decoration: none;
-  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.12);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+     min-height: 250px;
+    border-radius: 35px;
+    overflow: hidden;
+    background-size: cover;
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.12);
 }
 
-.course_other_card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(8, 15, 30, 0.42) 0%, rgba(8, 15, 30, 0.82) 100%);
-}
-
-.course_other_card > * {
-  position: relative;
-  z-index: 1;
-}
-
-.course_other_card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.18);
-  text-decoration: none;
-}
-
-.course_other_card_icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: #f97316;
-  font-size: 22px;
-  margin-bottom: 12px;
-  line-height: 1;
-}
-
-.course_other_card_cat {
-  display: block;
-  color: rgba(255, 255, 255, 0.78);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  margin-bottom: 8px;
-}
-
-.course_other_card_title {
-  font-family: "Satoshi", sans-serif;
-  font-size: 22px;
-  font-weight: 800;
-  color: #fff;
-  margin: 0;
-  line-height: 1.25;
-}
-
-.course_other_card_pill {
-  display: inline-flex;
-  align-items: center;
-  margin-top: auto;
-  background: #fff;
-  color: #0f172a;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  padding: 6px 12px;
-  border-radius: 50px;
-  line-height: 1;
-}
 
 @media screen and (max-width: 991px) {
   .course_other_section {
@@ -7435,7 +7367,7 @@ text-align: center;
   border: 1px solid #e6edf3;
   border-radius: 18px;
   padding: 24px 26px 20px;
-  margin: 0 0 18px;
+  margin: 0 0 30px;
 }
 
 .course_location_card_head {
@@ -7461,7 +7393,7 @@ text-align: center;
 .course_location_card_head h3 {
   font-family: "Satoshi", sans-serif;
   font-size: 18px;
-  font-weight: 800;
+  font-weight: 700;
   color: #0f172a;
   margin: 0;
   line-height: 1.3;
@@ -7486,16 +7418,16 @@ text-align: center;
 }
 
 .course_location_pills .list-item a {
-  display: inline-flex;
-  align-items: center;
-  background: #eef3f8;
-  color: #0f172a;
-  font-size: 14px;
-  font-weight: 600;
-  text-decoration: none;
-  padding: 8px 16px;
-  border-radius: 50px;
-  line-height: 1.3;
+      display: inline-flex;
+    align-items: center;
+    background: #eef3f8;
+    color: #0f172a;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 5px 12px;
+    border-radius: 50px;
+    line-height: 1.3;
 }
 
 .course_location_pills .list-item a:hover {
