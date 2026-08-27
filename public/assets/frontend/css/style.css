@@ -5335,16 +5335,16 @@ background: #07d353;
         }
 
         .nx_trainer_points li{
-            position:relative;
-            padding:16px 22px 16px 48px;
-            background:#f3f7fb;
-            border:1px solid #e4edf5;
-            border-radius:16px;
-            margin-bottom:0;
-            font-size:15px;
-            font-weight:500;
-            color:#334155;
-            line-height:1.5;
+                position: relative;
+    padding: 11px 22px 11px 48px;
+    background: #f3f7fb;
+    border: 1px solid #e4edf5;
+    border-radius: 46px;
+    margin-bottom: 0;
+    font-size: 15px;
+    font-weight: 500;
+    color: #000;
+    line-height: 1.5;
         }
 
         .nx_trainer_points li:hover{
@@ -5393,11 +5393,7 @@ background: #07d353;
             transition:0.25s ease;
         }
 
-        .nx_trainer_section .nx_trainer_btn:hover{
-            background:linear-gradient(90deg, #e69514 0%, #f5a524 100%) !important;
-            color:#fff !important;
-            transform:translateY(-1px);
-        }
+        
 
         .nx_trainer_btn span{
             font-size:20px;
@@ -6534,7 +6530,7 @@ section.vm_banner.course_hero {
 
 .course_review_text {
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 6;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
