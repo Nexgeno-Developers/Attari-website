@@ -388,12 +388,12 @@
                                                                {{ explode(' ', trim($cms->menu_title ?? $cms->breadcrumb_title))[0] }}   Syllabus on WhatsApp
                                                             </a>
                                                         @endif
-                                                        @if(!empty($detail->url))
-                                                            <a class="module_watch_video" href="{{ $youtube_url_detail }}" data-fancybox="gallery">
-                                                                <i class="fas fa-play" aria-hidden="true"></i>
-                                                                <span>Watch Video</span>
+                                                      
+                                                            <a class="module_watch_video">
+                                                                <i class="fas fa-play" aria-hidden="true"></i> Watch Video
+                                                              
                                                             </a>
-                                                        @endif
+                                                        
                                                     </div>
                                                 </div>
                                             </li>

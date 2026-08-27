@@ -5773,9 +5773,9 @@ section.vm_banner.course_hero {
 .vm_nav.course_subnav .menu-item-link {
   color: #111;
   font-family: "Satoshi", sans-serif;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
-  padding: 8px 16px;
+  padding: 5px 16px;
   border-radius: 50px;
   border-bottom: 0 !important;
   background: transparent;
@@ -7964,9 +7964,9 @@ text-align: center;
 .course_syllabus_modern .syllabus-accordion .accordion1 > .syllabus_module_header::after {
   align-items: center;
   background: #f3f8fd;
-  border: 1px solid #9aacbf;
+  border: 1px solid #555;
   border-radius: 50%;
-  color: #2f4c67;
+  color: #555;
   content: '+';
   display: inline-flex;
   font-size: 14px;
@@ -7985,7 +7985,7 @@ text-align: center;
 .course_syllabus_modern .syllabus-accordion .accordion1.open > .syllabus_module_header::after {
   content: '-';
   font-size: 16px;
-  padding-bottom: 2px;
+  padding-bottom: 3px;
 }
 
 .course_syllabus_modern .syllabus-accordion .accordion1 > .syllabus_module_header .syllabus_module_title {
@@ -8147,7 +8147,7 @@ text-align: center;
 }
 
 .course_syllabus_modern .module_download_brochure i {
-  font-size: 14px;
+  font-size: 18px;
 }
 
 .course_syllabus_modern .module_watch_video {
