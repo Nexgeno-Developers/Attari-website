@@ -3664,7 +3664,7 @@ b.text_blue a {
 }
 
 section#overviews ul li {
-  font-size: 15px !important;
+  font-size: 16px !important;
   line-height: 28px !important;
 }
 
@@ -7292,7 +7292,7 @@ text-align: center;
 }
 
 .course_other_card {
-     min-height: 250px;
+     min-height: 230px;
     border-radius: 35px;
     overflow: hidden;
     background-size: cover;
@@ -7846,7 +7846,7 @@ text-align: center;
 
 .course_syllabus_modern .course_syllabus_intro,
 .course_syllabus_modern .online_css {
-  color: #52627a !important;
+  color: #4b5563  !important;
   display: block;
   font-size: 13px;
   line-height: 1.55;

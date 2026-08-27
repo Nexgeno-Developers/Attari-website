@@ -703,7 +703,7 @@
                                         <span class="course_review_avatar">{{ $reviewInitial }}</span>
                                         <div class="course_review_meta">
                                             <span class="course_review_name">{{ $row->name }}</span>
-                                            <span class="course_review_role">{{ $reviewRole }}</span>
+                                            <!-- <span class="course_review_role">{{ $reviewRole }}</span> -->
                                         </div>
                                     </div>
                                     <div class="course_review_stars" aria-label="5 star rating">
