@@ -66,22 +66,23 @@ $course = getcmsCourses();
                                     <div class="mobile_menu_close">&times;</div>
                                 </div>
                                 <ul class="manu_main">
-                                    <li class="menu_item_has_children">
+                                    <li class="menu_item_has_children course_dropdown">
                                         <span class="course_heds">Courses
                                             <i class="nav-arrow fa fa-angle-down" aria-hidden="true" role="img"></i>
                                         </span>
-                                        <div class="sub_menu single_column_menu">
-                                            <ul>
+                                        <div class="sub_menu single_column_menu course_dropdown_menu">
+                                            <ul class="course_dropdown_list">
                                                 @foreach ($course as $row)
                                                         @php
                                                             $slug = $row->slug === 'mcsa-mcse-windows-server-training-online' 
                                                                 ? 'windows-server-hybrid-training-certification-online' 
                                                                 : $row->slug;
+                                                            $isActiveCourse = request()->is($slug);
                                                         @endphp
                                                     <li>
-                                                        <a href="{{ url(route('course.detail', ['slug' => $slug] )) }}">
+                                                        <a class="course_dropdown_link{{ $isActiveCourse ? ' active' : '' }}" href="{{ url(route('course.detail', ['slug' => $slug] )) }}">
                                                             <span class="icon_text">
-                                                                <i class="fa
+                                                                <i class="course_dropdown_icon fa
                                                                 @switch(strtolower($row->menu_title))
                                                                     @case('vmware')
                                                                         fa-laptop
@@ -148,4 +149,3 @@ $course = getcmsCourses();
                     </div>
         </div>
     </header>
-
