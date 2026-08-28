@@ -44,8 +44,12 @@ class MarketingController extends Controller
                 ? trim((string) $value)
                 : null;
         };
+        $mediumForUtm = $request->input('medium') ?: get_medium('value') ?: session('medium');
         $utmTerm = session('utm_term');
-        if ($utmTerm === null || $utmTerm === '' || $utmTerm === '-') {
+
+        if (! should_store_utm_term_for_medium($mediumForUtm)) {
+            $utmTerm = '-';
+        } elseif ($utmTerm === null || $utmTerm === '' || $utmTerm === '-') {
             $utmTerm = $extractUtmTerm($request->input('url'))
                 ?? $extractUtmTerm($request->input('ref_url'))
                 ?? $extractUtmTerm($source_url)

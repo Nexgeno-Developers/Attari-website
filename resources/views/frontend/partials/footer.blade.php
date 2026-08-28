@@ -488,13 +488,52 @@
 
 @php
   $mediumKey = get_medium('key') ?? '';
+  $mediumValue = get_medium('value') ?? $mediumKey;
+  $sourceUrl = session('source_url') ?? '';
+  $refUrl = url()->previous();
+  $currentUrl = url()->current() . (request()->getQueryString() ? '?' . request()->getQueryString() : '');
+  $extractUtmTerm = static function ($url): ?string {
+      $url = trim((string) $url);
+
+      if ($url === '' || $url === '-') {
+          return null;
+      }
+
+      $query = parse_url($url, PHP_URL_QUERY);
+
+      if (! is_string($query) || $query === '') {
+          return null;
+      }
+
+      parse_str($query, $parameters);
+      $value = $parameters['utm_term'] ?? null;
+
+      return is_scalar($value) && trim((string) $value) !== ''
+          ? trim((string) $value)
+          : null;
+  };
+
+  $utmTerm = session('utm_term') ?? '';
+
+  if (($utmTerm === '' || $utmTerm === '-' || $utmTerm === null) && should_store_utm_term_for_medium($mediumValue)) {
+      $utmTerm = $extractUtmTerm($currentUrl)
+          ?? $extractUtmTerm($refUrl)
+          ?? $extractUtmTerm($sourceUrl)
+          ?? '';
+  }
+
+  if (! should_store_utm_term_for_medium($mediumValue)) {
+      $utmTerm = '';
+  }
 @endphp
 <script>
   const medium = @json($mediumKey);
+  const utmTerm = @json($utmTerm);
   const customQuery = medium ? `?${encodeURIComponent(medium)}` : '';
+  const searchTermText = utmTerm && utmTerm !== '-' ? ` regarding "${utmTerm}"` : '';
 
-  let baseMessage_desktop = `Hi, I am contacting you through your website from desktop view https://attariclasses.in/${customQuery}`;
-  let baseMessage_mobile = `Hi, I am contacting you through your website from mobile view https://attariclasses.in/${customQuery}`;
+  let baseMessage_desktop = `Hi, I am contacting you through your website${searchTermText} from desktop view https://attariclasses.in/${customQuery}`;
+  let baseMessage_mobile = `Hi, I am contacting you through your website${searchTermText} from mobile view https://attariclasses.in/${customQuery}`;
 
   const stripHtml = (str) => str.replace(/<\/?[^>]+(>|$)/g, '');
   baseMessage_desktop = stripHtml(baseMessage_desktop);
@@ -505,7 +544,7 @@
 
   const phone = '+917738375431';
   const whatsappURL_desktop = `https://api.whatsapp.com/send?phone=${phone}&text=${encodedMessage_desktop}`;
-  const whatsappURL_mobile = `https://api.whatsapp.com/send?phone=${phone}&text=${encodedMessage_mobile}`; 
+  const whatsappURL_mobile = `https://api.whatsapp.com/send?phone=${phone}&text=${encodedMessage_mobile}`;
 
   document.getElementById('whatsapp-link').setAttribute('href', whatsappURL_desktop);
   document.getElementById('whatsapp-link-mobile').setAttribute('href', whatsappURL_mobile);

@@ -817,6 +817,8 @@ use Illuminate\Support\Facades\Storage;
                 $mediumValue = trim((string) $medium);
             }
 
+            $normalizedMedium = strtolower($mediumValue);
+
             return in_array($mediumValue, [
                 'Google Group (GG)',
                 'Google Ads Display (GAD)',
@@ -824,6 +826,9 @@ use Illuminate\Support\Facades\Storage;
                 'Google Ads YouTube (GAY)',
                 'Google Ads (GA)',
                 'Google (G)',
+            ], true) || in_array($normalizedMedium, [
+                'google',
+                'www.google.com',
             ], true);
         }
     }

@@ -339,12 +339,43 @@ class IndexController extends Controller
         }
 
         $contactData['honeypot_value'] = $honeypotValue !== '' ? $honeypotValue : null;
-        
-        
         // set source_url and source from session
         $contactData['source_url'] = session('source_url') ?? '-';
         $contactData['source'] = session('source') ?? '-';
-        $contactData['utm_term'] = session('utm_term') ?? '-';
+        $extractUtmTerm = static function ($url): ?string {
+            $url = trim((string) $url);
+
+            if ($url === '' || $url === '-') {
+                return null;
+            }
+
+            $query = parse_url($url, PHP_URL_QUERY);
+
+            if (! is_string($query) || $query === '') {
+                return null;
+            }
+
+            parse_str($query, $parameters);
+            $value = $parameters['utm_term'] ?? null;
+
+            return is_scalar($value) && trim((string) $value) !== ''
+                ? trim((string) $value)
+                : null;
+        };
+
+        $mediumForUtm = $request->input('medium') ?: get_medium('value') ?: session('medium');
+        $sessionUtmTerm = session('utm_term');
+
+        if (! should_store_utm_term_for_medium($mediumForUtm)) {
+            $sessionUtmTerm = '-';
+        } elseif ($sessionUtmTerm === null || $sessionUtmTerm === '' || $sessionUtmTerm === '-') {
+            $sessionUtmTerm = $extractUtmTerm($request->input('url'))
+                ?? $extractUtmTerm($request->input('ref_url'))
+                ?? $extractUtmTerm(session('source_url'))
+                ?? '-';
+        }
+
+        $contactData['utm_term'] = $sessionUtmTerm;
         
         // Create the contact record
         $contact = Contact::create($contactData);
