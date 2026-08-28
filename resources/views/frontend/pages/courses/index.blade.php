@@ -97,7 +97,7 @@
                             @php echo ReplaceKeyword($cms->description, $cms->replace_keyword) @endphp
                         </div>
                     </div>
-                    <button type="button" class="btn coursepg_enquiryform" onclick="formModal('{{ url(route('component.form')) }}?section=Enquire Form Top - course Page&title=Enquire Now&current_page={{ urlencode(url()->current()) }}&course_name={{$courseInputName}}')"> Enquire Now </button>
+                    <button type="button" class="btn coursepg_enquiryform" onclick="formModal('{{ url(route('component.form')) }}?section=Enquire Form Top - course Page&title=Enquire Now&current_page={{ urlencode(url()->current()) }}&course_name={{ rawurlencode($courseInputName) }}')"> Enquire Now </button>
                     <div class="check_carriculam"><a href="#syllabus" class="check_curriculum"> Check Curriculum </a></div>
                 </div>
                 <div class="show_desktopview col-3 width30 imagebox d-flex align-items-center justify-content-center">
@@ -838,7 +838,7 @@
                                     <div class="button_main getin_touch_bx">
                                         <p class="pb-2">Get In Touch to Avail <span>{{ $batch->off_percentage }} OFF</span></p>
 
-                                        <a onclick="formModal('{{ url(route('component.form')) }}?section=Online / Classroom - course Page&title=Book a Demo&current_page={{ urlencode(url()->current()) }}&course_name={{$courseInputName}}')">Book a Demo</a>
+                                        <a onclick="formModal('{{ url(route('component.form')) }}?section=Online / Classroom - course Page&title=Book a Demo&current_page={{ urlencode(url()->current()) }}&course_name={{ rawurlencode($courseInputName) }}')">Book a Demo</a>
                                      
                                     </div>
                                 </div>
@@ -861,7 +861,7 @@
 
                                 <div class="col-md-3">
                                     <div class="button_main">
-                                        <a onclick="formModal('{{ url(route('component.form')) }}?section={{$batch->corp_title. ' - course Page'}}&current_page={{ urlencode(url()->current()) }}&title=Enquire Now&course_name={{$courseInputName}}')">Enquire Now</a>
+                                        <a onclick="formModal('{{ url(route('component.form')) }}?section={{$batch->corp_title. ' - course Page'}}&current_page={{ urlencode(url()->current()) }}&title=Enquire Now&course_name={{ rawurlencode($courseInputName) }}')">Enquire Now</a>
                                     </div>
                                 </div>
                             </div>
