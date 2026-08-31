@@ -5651,8 +5651,6 @@ section.vm_banner.course_hero {
   list-style: none;
     padding: 0;
     margin: 6px 0 22px;
-    display: flex;
-    gap: 27px;
     align-items: center;
 }
 
@@ -6098,6 +6096,7 @@ section.vm_banner.course_hero {
   top: 72px;
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
   gap: 18px;
 }
 
@@ -6161,69 +6160,153 @@ section.vm_banner.course_hero {
 }
 
 .overview_talk {
-  background: #fff6eb;
-  border: 1px solid #f3d7b5;
-  border-radius: 16px;
-  padding: 18px 20px;
+  width: 100%;
+  max-width: 380px;
+  margin-left: auto;
+  background: #fff;
+  border-top: 3px solid #f97316;
+  border-radius: 6px;
+  box-shadow: 0 2px 14px rgba(15, 23, 42, 0.12);
+  overflow: hidden;
+}
+
+.overview_talk_header {
+  min-height: 108px;
+  padding: 28px 26px;
+  background:
+    linear-gradient(90deg, rgba(15, 23, 42, 0.96) 0%, rgba(15, 23, 42, 0.86) 48%, rgba(15, 23, 42, 0.2) 100%),
+    url("/assets/frontend/images/Contact-us-1.jpg") center right / cover no-repeat;
 }
 
 .overview_talk_title {
   font-family: "Satoshi", sans-serif;
-  font-size: 16px !important;
+  font-size: 22px !important;
   font-weight: 700 !important;
-  color: #0f172a !important;
-  margin: 0 0 12px !important;
-  line-height: 1.3 !important;
+  color: #fff !important;
+  margin: 0 0 6px !important;
+  line-height: 1.15 !important;
 }
 
-.overview_talk_row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 14px 18px;
-}
-
-.overview_talk_row a,
-.overview_talk_demo {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  text-decoration: none;
-  font-size: 14px !important;
-  font-weight: 600;
-  line-height: 1.2 !important;
-  background: none;
-  border: 0;
-  padding: 0;
-  cursor: pointer;
-  font-family: "Satoshi", sans-serif;
+.overview_talk_subtitle {
+  color: #facc15 !important;
+  font-size: 13px !important;
+  font-weight: 700;
+  line-height: 1.35 !important;
+  margin: 0 !important;
 }
 
 .overview_talk_phone {
-  color: #111 !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 26px;
+  width: 100%;
+  min-height: 88px;
+  padding: 28px 26px;
+  color: #1f2937 !important;
+  font-family: "Satoshi", sans-serif;
+  font-size: 19px !important;
+  font-weight: 700;
+  line-height: 1.2 !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid #edf0f3;
 }
 
-.overview_talk_phone i {
+.overview_talk_flag {
+  position: relative;
+  flex: 0 0 25px;
+  width: 25px;
+  height: 16px;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.08);
+  background: linear-gradient(to bottom, #ff9933 0 33.33%, #fff 33.33% 66.66%, #138808 66.66% 100%);
+}
+
+.overview_talk_flag::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  border: 1px solid #1a48a6;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.overview_talk_quote {
+  position: relative;
+  padding: 72px 26px 26px;
+  background: linear-gradient(#f4f6f9 0 44px, #fff 44px 100%);
+}
+
+.overview_talk_quote_mark {
+  position: absolute;
+  top: 24px;
+  left: 24px;
   color: #f97316;
-  font-size: 14px;
-  transform: rotate(90deg);
+  font-family: Georgia, serif;
+  font-size: 82px;
+  line-height: 0.8;
+  font-weight: 700;
+}
+
+.overview_talk_quote p {
+  color: #374151 !important;
+  font-size: 14px !important;
+  line-height: 1.85 !important;
+  font-weight: 600;
+  margin: 0 0 6px !important;
+}
+
+.overview_talk_quote .overview_talk_quote_author {
+  color: #4b5563 !important;
+  font-weight: 400;
+  margin: 0 !important;
+}
+
+.overview_talk_actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  padding: 0 26px 28px;
+}
+
+.overview_talk_whatsapp,
+.overview_talk_demo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  width: 100%;
+  border-radius: 5px;
+  text-decoration: none !important;
+  font-family: "Satoshi", sans-serif;
+  font-size: 14px !important;
+  font-weight: 700;
+  line-height: 1.2 !important;
+  cursor: pointer;
 }
 
 .overview_talk_whatsapp {
-  color: #111 !important;
+  color: #fff !important;
+  background: #16a34a;
+  border: 1px solid #16a34a;
 }
 
 .overview_talk_whatsapp i {
-  color: #22c55e;
-  font-size: 18px;
+  font-size: 17px;
 }
 
 .overview_talk_demo {
   color: #f97316 !important;
+  background: #fff;
+  border: 1px solid #f97316;
 }
 
 .overview_talk_demo:hover {
-  color: #ea6a0c !important;
+  color: #fff !important;
+  background: #f97316;
 }
 
 @media screen and (max-width: 991px) {
@@ -6234,13 +6317,36 @@ section.vm_banner.course_hero {
 
   .overview_sidebar {
     position: static;
+    align-items: stretch;
     margin-top: 28px;
   }
 
-  .overview_talk_row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
+  .overview_talk {
+    max-width: 100%;
+    margin-left: 0;
+  }
+
+  .overview_talk_header {
+    min-height: 96px;
+    padding: 24px 22px;
+  }
+
+  .overview_talk_phone {
+    gap: 18px;
+    padding: 24px 22px;
+    font-size: 17px !important;
+  }
+
+  .overview_talk_quote {
+    padding: 68px 22px 24px;
+  }
+
+  .overview_talk_quote_mark {
+    left: 20px;
+  }
+
+  .overview_talk_actions {
+    padding: 0 22px 24px;
   }
 }
 

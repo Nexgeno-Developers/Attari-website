@@ -227,7 +227,7 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="overview_sidebar">
-                            @if (!empty($detail->faq))
+                            <!-- @if (!empty($detail->faq))
                                 <div class="overview_faq accordion--container1 accordion_style1">
                                     @php
                                         $course_faq = json_decode($detail->faq);
@@ -246,15 +246,26 @@
                                         @endforeach
                                     @endforeach
                                 </div>
-                            @endif
+                            @endif -->
 
                             <div class="overview_talk">
-                                <p class="overview_talk_title">Talk to us</p>
-                                <div class="overview_talk_row">
-                                    <a class="overview_talk_phone" href="tel:+917738375431">
-                                        <i class="fas fa-phone-alt" aria-hidden="true"></i>
-                                        <span>+91 77383 75431</span>
-                                    </a>
+                                <div class="overview_talk_header">
+                                    <p class="overview_talk_title">Talk To Us</p>
+                                    <p class="overview_talk_subtitle">We are happy to help you 24/7</p>
+                                </div>
+
+                                <a class="overview_talk_phone" href="tel:+917738375431">
+                                    <span class="overview_talk_flag" aria-hidden="true"></span>
+                                    <span>+91-7738375431</span>
+                                </a>
+
+                                <div class="overview_talk_quote">
+                                    <div class="overview_talk_quote_mark" aria-hidden="true">&ldquo;</div>
+                                    <p>Build your cloud skills with live trainer guidance, hands-on labs, and support whenever you need help.</p>
+                                    <p class="overview_talk_quote_author">- Attari Classes</p>
+                                </div>
+
+                                <div class="overview_talk_actions">
                                     <a class="overview_talk_whatsapp" target="_blank" rel="noopener" href="https://api.whatsapp.com/send?phone=917738375431&text=Hi%2C+I+am+contacting+you+through+your+website">
                                         <i class="fab fa-whatsapp" aria-hidden="true"></i>
                                         <span>WhatsApp chat</span>
