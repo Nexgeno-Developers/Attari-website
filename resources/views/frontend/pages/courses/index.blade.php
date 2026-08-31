@@ -92,13 +92,6 @@
                         <button type="button" class="course_hero_btn course_hero_btn_primary" onclick="formModal('{{ url(route('component.form')) }}?section=Enquire Form Top - course Page&title=Enquire Now&current_page={{ urlencode(url()->current()) }}&course_name={{$courseInputName}}')">Enquire now</button>
                         <a href="#syllabus" class="course_hero_btn course_hero_btn_outline check_curriculum">Check curriculum</a>
                     </div>
-
-                    <ul class="course_hero_points">
-                        <li><i class="fas fa-check" aria-hidden="true"></i> Free Demo Class</li>
-                        <li><i class="fas fa-check" aria-hidden="true"></i> Hands-on Practical Training</li>
-                        <li><i class="fas fa-check" aria-hidden="true"></i> LMS Access</li>
-                        <li><i class="fas fa-check" aria-hidden="true"></i> WhatsApp Support</li>
-                    </ul>
                 </div>
                 <div class="col-lg-4">
                     <div class="course_hero_media">
@@ -207,7 +200,7 @@
                         <div class="key_features_icon">
                             <i class="fa-solid fa-chart-line"></i>
                         </div>
-                        <p>Access to forum for new Job Openings</p>
+                        <p>New Job Openings Forum</p>
                     </div>
                     <div class="key_boxes">
                         <div class="key_features_icon">

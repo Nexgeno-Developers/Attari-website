@@ -5647,6 +5647,37 @@ section.vm_banner.course_hero {
   margin-bottom: 18px;
 }
 
+.course_hero_desc ul {
+  list-style: none;
+    padding: 0;
+    margin: 6px 0 22px;
+    display: flex;
+    gap: 27px;
+    align-items: center;
+}
+
+.course_hero_desc ul li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 8px;
+  color: #e2e8f0 !important;
+  font-size: 16px !important;
+  line-height: 1.5 !important;
+  font-weight: 400;
+}
+
+.course_hero_desc ul li::before {
+  content: "\f00c";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  position: absolute;
+  left: 0;
+  top: 5px;
+  color: #20b30a;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
 .course_hero_rating {
   display: flex;
   flex-wrap: wrap;
