@@ -217,7 +217,7 @@
         <section id="overviews" class="page-section overview course_overview paddingt_80 paddinb_80 position_relative zindex_111111">
             <div class="container">
                 <div class="row align-items-start">
-                    <div class="col-lg-8">
+                    <div class="col-md-9 width70">
                         <h2 class="section_heading course_overview_heading textcolor_blck">
                             {{ $detail->overview_section_heading }}
                         </h2>
@@ -225,7 +225,7 @@
                             @php echo ReplaceKeyword($detail->course_overview, $cms->replace_keyword) @endphp
                         </div>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-md-3 width30">
                         <div class="overview_sidebar">
                             <!-- @if (!empty($detail->faq))
                                 <div class="overview_faq accordion--container1 accordion_style1">
