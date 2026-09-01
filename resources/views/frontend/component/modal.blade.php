@@ -1,8 +1,8 @@
 <!-- Modal -->
 <div class="modal fade enquiry_modal" id="formModal" tabindex="-1" aria-labelledby="formModal-label" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
-  <div class="modal-dialog modal-md">
+  <div class="modal-dialog modal-md modal-dialog-centered">
     <div class="modal-content">
-      <button type="button" class="btn-close close_button" data-bs-dismiss="modal" aria-label="Close"></button>
+      <button type="button" class="enquiry_modal_close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
       <div class="modal-body">
         Loading...
       </div>

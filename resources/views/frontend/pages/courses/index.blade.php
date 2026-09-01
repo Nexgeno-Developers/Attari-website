@@ -769,7 +769,9 @@
                                 @endforeach
                             </ul>
                         </div>
-                        <a class="course_batch_btn" href="https://lms.attariclasses.in/" target="_blank">Visit Video Portal</a>
+                        <div class="course_batch_action">
+                            <a class="course_batch_btn" href="https://lms.attariclasses.in/" target="_blank">Visit Video Portal</a>
+                        </div>
                     </div>
 
                     <div class="course_batch_card course_batch_card_online">
@@ -821,7 +823,9 @@
                                 @endforeach
                             </ul>
                         </div>
-                        <button type="button" class="course_batch_btn" onclick="formModal('{{ url(route('component.form')) }}?section={{$batch->corp_title. ' - course Page'}}&current_page={{ urlencode(url()->current()) }}&title=Enquire Now&course_name={{$courseInputName}}')">Enquire Now</button>
+                        <div class="course_batch_action">
+                            <button type="button" class="course_batch_btn" onclick="formModal('{{ url(route('component.form')) }}?section={{$batch->corp_title. ' - course Page'}}&current_page={{ urlencode(url()->current()) }}&title=Enquire Now&course_name={{$courseInputName}}')">Enquire Now</button>
+                        </div>
                     </div>
                 </div>
             </section>

@@ -26,10 +26,10 @@ $honeypotFieldName = 'website_' . strtolower(\Illuminate\Support\Str::random(12)
     }
 </style>
 
-<form class="{{$class}}" action="{{url(route('contact.create'))}}" method="post" enctype="multipart/form-data">
+<form class="{{$class}} enquiry_form" action="{{url(route('contact.create'))}}" method="post" enctype="multipart/form-data">
     @csrf
 
-    <p class="text-center {{ isset($Headingclassname) ? $Headingclassname : '' }}">{!! isset($title) ? $title : '' !!}</p>
+    <p class="enquiry_form_title text-center {{ isset($Headingclassname) ? $Headingclassname : '' }}">{!! isset($title) ? $title : '' !!}</p>
 
     <input type="hidden" name="section" value="{{$section}}" data-aos-once="true" data-aos="fade-up" />
     <input type="hidden" name="url" value="{{ request()->fullUrl() }}" data-aos-once="true" data-aos="fade-up" />
@@ -72,7 +72,7 @@ $honeypotFieldName = 'website_' . strtolower(\Illuminate\Support\Str::random(12)
 
     @if(!empty($course_name))
         <div class="form-group">
-            <input type="text" class="form-control" name="services" value="{{$course_name}}" placeholder="{{$course_name}} *" readonly="">
+            <input type="text" class="form-control enquiry_form_course" name="services" value="{{$course_name}}" placeholder="{{$course_name}} *" readonly="">
         </div>
     @else
         <div class="form-group">

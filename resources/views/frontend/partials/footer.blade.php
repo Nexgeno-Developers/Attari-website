@@ -208,7 +208,7 @@
  <div class="modal fade enquiry_modal" id="enquiry_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<button type="button" class="btn-close close_button" data-bs-dismiss="modal" aria-label="Close"></button>
+			<button type="button" class="enquiry_modal_close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
 			<div class="modal-body">
 			     @include('frontend.component.common_form', [
                 'section' => 'Footer - Bottom Section - Drop a Query Form on Mobile view',
