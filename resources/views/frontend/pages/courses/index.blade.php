@@ -977,8 +977,11 @@
                             <div class="nx_trainer_box">
                                <div class="nx_trainer_top">
                                   <div class="nx_trainer_identity">
-                                        <h3 class="nx_trainer_name">Mr. Maqsood Sheikha</h3>
-                                        <div class="nx_trainer_role">VMware & AWS Cloud Trainer</div>
+                                        
+                                        <div>
+                                            <h3 class="nx_trainer_name">Mr. Maqsood Sheikha</h3>
+                                            <div class="nx_trainer_role">VMware & AWS Cloud Trainer</div>
+                                        </div>
                                   </div>
                                   <div class="nx_trainer_btn_wrap">
                                       <button type="button" class="trainer-btn nx_trainer_btn" data-modal="maqsoodModal">View Full Profile</button>
@@ -1104,8 +1107,11 @@
                             <div class="nx_trainer_box">
                                <div class="nx_trainer_top">
                                   <div class="nx_trainer_identity">
-                                        <h3 class="nx_trainer_name">Mr. Zameer Momin</h3>
-                                        <div class="nx_trainer_role">Microsoft Azure, Windows Server Hybrid & Networking Trainer</div>
+                                       
+                                        <div>
+                                            <h3 class="nx_trainer_name">Mr. Zameer Momin</h3>
+                                            <div class="nx_trainer_role">Microsoft Azure, Windows Server Hybrid & Networking Trainer</div>
+                                        </div>
                                   </div>
                                   <div class="nx_trainer_btn_wrap">
                                       <button type="button" class="trainer-btn nx_trainer_btn" data-modal="zamirModal">View Full Profile</button>
