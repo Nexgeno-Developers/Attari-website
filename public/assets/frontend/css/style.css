@@ -8315,8 +8315,8 @@ text-align: center;
 }
 
 .course_syllabus_modern .syllabus_demo_card {
-  background: #fff !important;
-  border-radius: 18px;
+  background: #18223c !important;
+  border-radius: 20px;
   box-shadow: 0 20px 45px rgba(15, 23, 42, 0.09);
   display: block;
   margin-top: 0;
