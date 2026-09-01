@@ -2347,11 +2347,11 @@ p .home_breadcrumb a:hover {
     padding-bottom: 35px !important;
 }
 .width70 {
-  width: 69% !important;
+  width: 75% !important;
 }
 
 .width30 {
-  width: 31% !important;
+  width: 25% !important;
 }
 
 .margin-top55 {
@@ -8070,7 +8070,7 @@ text-align: center;
 }
 
 .course_syllabus_modern .course_syllabus_content {
-  padding-right: 38px;
+  padding-right: 25px;
 }
 
 .course_syllabus_modern .course_syllabus_title {
@@ -8381,7 +8381,7 @@ text-align: center;
   border-radius: 8px !important;
   box-shadow: none !important;
   color: #1b2744 !important;
-  font-size: 13px !important;
+  font-size: 14px !important;
   height: 44px !important;
   margin-bottom: 0 !important;
   padding: 10px 14px !important;
@@ -8395,8 +8395,6 @@ text-align: center;
 }
 
 .course_syllabus_modern .syllabus_demo_card input[readonly].form-control {
-  background: #f97316 !important;
-  color: #fff !important;
   font-weight: 700;
 }
 
