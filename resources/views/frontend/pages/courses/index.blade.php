@@ -531,8 +531,12 @@
 
 
                     <div class="col-md-3 width30 position_sticky course_syllabus_form_col">
-                        <div class="bookdemofreeform_course gray_bgg1 margin-top55 syllabus_demo_card">
-                            <p class="text-center fs-24">Book a <b>FREE</b> Demo</p>
+                        <div class="bookdemofreeform_course syllabus_demo_card">
+                            <div class="syllabus_demo_card_head">
+                                <span class="syllabus_demo_badge">Free demo class</span>
+                                <p class="syllabus_demo_title">Book a <b>FREE</b> Demo</p>
+                                <span class="syllabus_demo_card_sub">Share your details. A counsellor will call you back.</span>
+                            </div>
 
                             @include('frontend.component.common_form', [
                                 'section' => 'Book a FREE Demo - Course Page',

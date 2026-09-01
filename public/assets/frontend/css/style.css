@@ -8314,21 +8314,54 @@ text-align: center;
   top: 22px;
 }
 
+.course_syllabus_modern .bookdemofreeform_course.syllabus_demo_card,
 .course_syllabus_modern .syllabus_demo_card {
-  background: #18223c !important;
-  border-radius: 20px;
-  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.09);
+  background: #1c2746 !important;
+  border: 0;
+  border-radius: 16px !important;
+  box-shadow: 0 16px 36px rgba(28, 39, 70, 0.28);
   display: block;
-  margin-top: 0;
-  padding: 26px 24px 30px !important;
+  margin-top: 0 !important;
+  overflow: hidden;
+  padding: 22px 18px 20px !important;
 }
 
-.course_syllabus_modern .syllabus_demo_card > p.fs-24 {
-  color: #303030;
-  font-size: 20px !important;
-  font-weight: 500;
-  line-height: 1.25;
-  margin: 0 0 20px;
+.course_syllabus_modern .syllabus_demo_card_head {
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.course_syllabus_modern .syllabus_demo_badge {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  color: #fff;
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  text-transform: uppercase;
+}
+
+.course_syllabus_modern .syllabus_demo_card > p.fs-24,
+.course_syllabus_modern .syllabus_demo_title {
+  color: #fff !important;
+  font-size: 22px !important;
+  font-weight: 800;
+  line-height: 1.2;
+  margin: 0 0 6px;
+}
+
+.course_syllabus_modern .syllabus_demo_title b {
+  color: #f97316;
+}
+
+.course_syllabus_modern .syllabus_demo_card_sub {
+  color: rgba(255, 255, 255, 0.92);
+  display: block;
+  font-size: 12px;
+  line-height: 1.45;
 }
 
 .course_syllabus_modern .syllabus_demo_card form > p.text-center {
@@ -8336,55 +8369,69 @@ text-align: center;
 }
 
 .course_syllabus_modern .syllabus_demo_card .form-group {
-  margin-bottom: 12px;
+  margin-bottom: 9px;
 }
 
 .course_syllabus_modern .syllabus_demo_card .form-control,
 .course_syllabus_modern .syllabus_demo_card .form-select,
-.course_syllabus_modern .syllabus_demo_card input.form-control {
-  background: #fff;
-  border: 1px solid #d9dee7;
-  border-radius: 22px;
-  box-shadow: none;
-  color: #2f3948;
-  font-size: 12px;
-  height: 38px;
-  margin-bottom: 0;
-  padding: 9px 16px;
+.course_syllabus_modern .syllabus_demo_card input.form-control,
+.course_syllabus_modern .bookdemofreeform_course.syllabus_demo_card input {
+  background: #fff !important;
+  border: 0 !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  color: #1b2744 !important;
+  font-size: 13px !important;
+  height: 44px !important;
+  margin-bottom: 0 !important;
+  padding: 10px 14px !important;
   width: 100%;
 }
 
+.course_syllabus_modern .syllabus_demo_card .form-control:focus,
+.course_syllabus_modern .syllabus_demo_card .form-select:focus {
+  box-shadow: 0 0 0 2px #f97316 !important;
+  outline: none;
+}
+
 .course_syllabus_modern .syllabus_demo_card input[readonly].form-control {
-  background: #e9f1fa;
-  border-color: #e9f1fa;
-  color: #333;
+  background: #f97316 !important;
+  color: #fff !important;
   font-weight: 700;
 }
 
 .course_syllabus_modern .syllabus_demo_card textarea.form-control {
-  border-radius: 18px;
-  height: auto;
-  min-height: 86px;
-  padding-top: 13px;
+  border-radius: 8px !important;
+  height: auto !important;
+  min-height: 82px !important;
+  padding-top: 12px !important;
   resize: vertical;
 }
 
 .course_syllabus_modern .syllabus_demo_card .form-control::placeholder {
-  color: #9aa3b2;
+  color: #8a93a6;
   opacity: 1;
 }
 
 .course_syllabus_modern .syllabus_demo_card .submit_button {
-  background: linear-gradient(90deg, #ff9635 0%, #ff713b 100%) !important;
-  border: 0;
-  border-radius: 24px;
-  color: #fff;
-  font-size: 13px !important;
-  font-weight: 700;
-  height: 40px;
-  margin-top: 4px;
-  padding: 0;
+  background: #f97316 !important;
+  border: 0 !important;
+  border-radius: 8px !important;
+  color: #fff !important;
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  height: 46px !important;
+  letter-spacing: 0.04em;
+  margin-top: 4px !important;
+  padding: 0 !important;
+  text-transform: uppercase;
   width: 100%;
+}
+
+.course_syllabus_modern .syllabus_demo_card .submit_button:hover,
+.course_syllabus_modern .syllabus_demo_card .submit_button:focus {
+  background: #ea6a0c !important;
+  color: #fff !important;
 }
 
 .course_syllabus_modern .error {
