@@ -1312,7 +1312,7 @@
                             <i class="fas fa-phone-alt" aria-hidden="true"></i>
                         </div>
                         <h3>Talk To Us</h3>
-                        <p>Call or chat on WhatsApp — a trainer will help you pick the right batch.</p>
+                        <p>Call or chat on WhatsApp — Our career counsellor will help you pick the right batch.</p>
                         <a class="course_faq_talk_phone" href="tel:+917738375431">+91 77383 75431</a>
                         <a class="course_faq_talk_whatsapp" target="_blank" rel="noopener" href="https://api.whatsapp.com/send?phone=917738375431&text=Hi%2C+I+am+contacting+you+through+your+website">Chat on WhatsApp</a>
                         <button type="button" class="course_faq_talk_demo" onclick="formModal('{{ url(route('component.form')) }}?section=FAQ - Book Free Demo&title=Book a FREE Demo&current_page={{ urlencode(url()->current()) }}&course_name={{$courseInputName}}')">Book a free demo</button>
