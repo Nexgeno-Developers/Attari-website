@@ -251,7 +251,7 @@
                             <div class="overview_talk">
                                 <div class="overview_talk_header">
                                     <p class="overview_talk_title">Talk To Us</p>
-                                    <p class="overview_talk_subtitle">We are happy to help you 24/7</p>
+                                    <p class="overview_talk_subtitle">We are happy to help you</p>
                                 </div>
 
                                 <a class="overview_talk_phone" href="tel:+917738375431">

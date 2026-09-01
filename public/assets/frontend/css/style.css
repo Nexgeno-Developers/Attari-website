@@ -5652,6 +5652,8 @@ section.vm_banner.course_hero {
     padding: 0;
     margin: 6px 0 22px;
     align-items: center;
+    display: flex;
+    gap: 20px;
 }
 
 .course_hero_desc ul li {
