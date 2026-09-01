@@ -351,12 +351,6 @@ $(".projects-covered").owlCarousel({
 	},
 });
 
-$('[data-fancybox="gallery2"]').fancybox({
-    arrows: false, // Disable left and right arrows
-    afterClose: function () {
-        $('.professional_students').trigger('refresh.owl.carousel'); // Refresh carousel after closing Fancybox
-    },
-});
 
 $(".professional_students").owlCarousel({
     loop: true,
@@ -441,9 +435,6 @@ $(document).ready(function() {
 	});
 	$(".owl-prev").html('<i class="fa fa-chevron-left"></i>');
 	$(".owl-next").html('<i class="fa fa-chevron-right"></i>')
-});
-$(document).ready(function() {
-	$('[data-fancybox="gallery"]').fancybox()
 });
 $(".moreinfo_button").on("click", function() {
 	$(".moreinfo_box").slideToggle("slow")
@@ -604,20 +595,12 @@ function loadSuccessStories(callback = null) {
                 `;
                 $('#image-container').append(imgElement);
 
-                // Add to FancyBox only if it's a new image
-                newImageElements.push({
-                    src: imageUrl,
-                    opts: { caption: image.caption || "" }
-                });
-
-                // Track the image URL as added
                 addedImageUrls.push(imageUrl);
             }
         });
 
-        // Initialize FancyBox for newly added images
         if (typeof callback === 'function') {
-            callback(); // Reinitialize FancyBox for all new images
+            callback();
         }
 
         if (data.next_page_url) {
@@ -635,40 +618,111 @@ function loadSuccessStories(callback = null) {
     });
 }
 
-// Handle FancyBox logic after opening
-function initFancybox() {
-    $('[data-fancybox="review"]').fancybox({
-        beforeShow: function(instance, current) {
-            // Check if user is on the second-to-last slide
-            if (current.index === instance.group.length - 1 && !success_stories_loading) {
-                // Load more images and update FancyBox
-                loadSuccessStories(() => {
-                    // Reopen FancyBox with newly loaded images
-                    $.fancybox.getInstance().addContent(newImageElements);
-                });
-            }
-        }
-    });
-}
-
 function handleScroll() {
     if ($(window).scrollTop() + $(window).height() >= $(document).height() - 400) {
-        loadSuccessStories(initFancybox); // Load more stories and reinitialize FancyBox
+        loadSuccessStories();
     }
 }
 
 $(document).ready(function() {
-    loadSuccessStories(initFancybox);
+    loadSuccessStories();
 
     if (isMobile) {
-        // Show Load More button for mobile and disable scroll event
         $('#load-more-btn').show().on('click', function() {
-            loadSuccessStories(initFancybox);
+            loadSuccessStories();
         });
-        $(window).off('scroll', handleScroll); // Disable auto-scroll for mobile
+        $(window).off('scroll', handleScroll);
     } else {
-        // Auto-scroll for larger screens
         $(window).on('scroll', handleScroll);
     }
 });
+
+(function () {
+    function youtubeId(url) {
+        if (!url) {
+            return null;
+        }
+        var match = String(url).match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/(?:embed\/)?)([A-Za-z0-9_-]{6,11})/i);
+        return match ? match[1] : null;
+    }
+
+    function isImageUrl(url) {
+        return /\.(jpe?g|png|gif|webp|bmp|svg)(\?|#|$)/i.test(url || '');
+    }
+
+    function ensurePopup() {
+        var popup = document.getElementById('mediaPopup');
+        if (popup) {
+            return popup;
+        }
+        popup = document.createElement('div');
+        popup.id = 'mediaPopup';
+        popup.className = 'media_popup';
+        popup.setAttribute('role', 'dialog');
+        popup.setAttribute('aria-modal', 'true');
+        popup.innerHTML = '<div class="media_popup_dialog"><button type="button" class="media_popup_close" aria-label="Close">&times;</button><div class="media_popup_body"></div></div>';
+        document.body.appendChild(popup);
+        return popup;
+    }
+
+    function closeMediaPopup() {
+        var popup = document.getElementById('mediaPopup');
+        if (!popup) {
+            return;
+        }
+        popup.classList.remove('is-open');
+        document.body.classList.remove('media_popup_open');
+        var body = popup.querySelector('.media_popup_body');
+        if (body) {
+            body.innerHTML = '';
+        }
+        if (window.jQuery) {
+            jQuery('.professional_students').trigger('refresh.owl.carousel');
+        }
+    }
+
+    function openMediaPopup(url) {
+        var popup = ensurePopup();
+        var body = popup.querySelector('.media_popup_body');
+        var videoId = youtubeId(url);
+        body.innerHTML = '';
+        if (videoId) {
+            body.innerHTML = '<div class="media_popup_video"><iframe src="https://www.youtube.com/embed/' + videoId + '?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>';
+        } else if (isImageUrl(url) || url) {
+            body.innerHTML = '<img src="' + url + '" alt="">';
+        }
+        popup.classList.add('is-open');
+        document.body.classList.add('media_popup_open');
+    }
+
+    document.addEventListener('click', function (event) {
+        var link = event.target.closest('[data-fancybox]');
+        if (!link) {
+            return;
+        }
+        var href = link.getAttribute('href');
+        if (!href || href === '#') {
+            return;
+        }
+        event.preventDefault();
+        event.stopPropagation();
+        openMediaPopup(href);
+    }, true);
+
+    document.addEventListener('click', function (event) {
+        var popup = document.getElementById('mediaPopup');
+        if (!popup || !popup.classList.contains('is-open')) {
+            return;
+        }
+        if (event.target === popup || event.target.closest('.media_popup_close')) {
+            closeMediaPopup();
+        }
+    });
+
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+            closeMediaPopup();
+        }
+    });
+})();
 
