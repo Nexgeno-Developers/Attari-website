@@ -1255,20 +1255,27 @@
 
                 <div class="course_faq_layout">
                     @if (!empty($faq))
-                        <div class="course_faq_list accordion--container accordion_style_one">
-                            @foreach ($faq as $row)
-                                <div class="accordionone">
-                                    <h3>
-                                        @php echo ReplaceKeyword($row->question, $cms->replace_keyword) @endphp
-                                        <i class="fa fa-angle-up"></i>
-                                    </h3>
-                                    <div class="contentsillabus_div1">
-                                        <div class="txt">
-                                            @php echo ReplaceKeyword($row->answer, $cms->replace_keyword) @endphp
+                        <div class="course_faq_list_wrap">
+                            <div class="course_faq_list accordion--container accordion_style_one">
+                                @foreach ($faq as $row)
+                                    <div class="accordionone{{ $loop->index >= 10 ? ' faq_extra' : '' }}">
+                                        <h3>
+                                            @php echo ReplaceKeyword($row->question, $cms->replace_keyword) @endphp
+                                            <i class="fa fa-angle-up"></i>
+                                        </h3>
+                                        <div class="contentsillabus_div1">
+                                            <div class="txt">
+                                                @php echo ReplaceKeyword($row->answer, $cms->replace_keyword) @endphp
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            @endforeach
+                                @endforeach
+                            </div>
+                            @if ($faq->count() > 10)
+                                <button type="button" class="course_faq_toggle" aria-expanded="false">
+                                    View More <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                                </button>
+                            @endif
                         </div>
 
                     <!----================== Faq Schema ==================------------------->
@@ -1777,6 +1784,33 @@ window.scrollTo(0, 0);
                         : 'View More <i class="fa fa-chevron-down" aria-hidden="true"></i>';
                     if (window.jQuery && jQuery(".course_text_reviews").length) {
                         jQuery(".course_text_reviews").trigger("refresh.owl.carousel");
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll("#faqs .course_faq_list_wrap").forEach(function (wrap) {
+                var list = wrap.querySelector(".course_faq_list");
+                var btn = wrap.querySelector(".course_faq_toggle");
+                if (!list || !btn) {
+                    return;
+                }
+                btn.addEventListener("click", function () {
+                    var expanded = list.classList.toggle("is-expanded");
+                    btn.setAttribute("aria-expanded", expanded ? "true" : "false");
+                    btn.innerHTML = expanded
+                        ? 'View Less <i class="fa fa-chevron-up" aria-hidden="true"></i>'
+                        : 'View More <i class="fa fa-chevron-down" aria-hidden="true"></i>';
+                    if (!expanded) {
+                        list.querySelectorAll(".faq_extra.open").forEach(function (item) {
+                            item.classList.remove("open");
+                            var panel = item.querySelector(".contentsillabus_div1");
+                            if (panel) {
+                                panel.style.display = "none";
+                            }
+                        });
                     }
                 });
             });

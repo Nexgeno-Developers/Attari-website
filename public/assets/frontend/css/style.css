@@ -7144,6 +7144,34 @@ text-align: center;
   padding: 10px 28px;
 }
 
+.course_faq_list:not(.is-expanded) .accordionone.faq_extra {
+  display: none;
+}
+
+.course_faq_list:not(.is-expanded) .accordionone:nth-child(10) {
+  border-bottom: 0;
+}
+
+.course_faq_toggle {
+  margin: 14px auto 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #f97316;
+  font-family: "Satoshi", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.course_faq_toggle i {
+  font-size: 12px;
+}
+
 .course_faq_section .accordion_style_one .accordionone {
   list-style: none;
   border-bottom: 1px solid #d5dde8;
@@ -7291,8 +7319,8 @@ text-align: center;
 }
 
 .course_faq_talk_whatsapp {
-  background: #f97316;
-  color: #fff !important;
+  background: #25d366;
+  color: #000 !important;
   margin-bottom: 10px;
 }
 
