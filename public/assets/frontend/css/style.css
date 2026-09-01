@@ -7615,11 +7615,88 @@ text-align: center;
 }
 
 .course_other_card {
-     min-height: 230px;
-    border-radius: 35px;
-    overflow: hidden;
-    background-size: cover;
-    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.12);
+  min-height: 220px;
+  border-radius: 22px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 22px 20px 20px;
+  position: relative;
+  text-decoration: none !important;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, background-size 0.45s ease;
+}
+
+.course_other_card::before {
+  background: linear-gradient(180deg, rgba(4, 10, 24, 0.72) 0%, rgba(4, 10, 24, 0.92) 100%);
+  content: "";
+  inset: 0;
+  position: absolute;
+  transition: background 0.35s ease;
+}
+
+.course_other_card:hover {
+  background-size: 118%;
+  box-shadow: 0 18px 36px rgba(8, 16, 36, 0.28);
+  transform: translateY(-6px);
+}
+
+.course_other_card:hover::before {
+  background: linear-gradient(180deg, rgba(4, 10, 24, 0.42) 0%, rgba(4, 10, 24, 0.82) 100%);
+}
+
+.course_other_card_icon,
+.course_other_card_brand,
+.course_other_card_title,
+.course_other_card_badge {
+  position: relative;
+  z-index: 1;
+}
+
+.course_other_card_icon {
+  color: #f97316;
+  font-size: 22px;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.course_other_card_brand {
+  color: rgba(255, 255, 255, 0.92);
+  font-family: "Satoshi", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  margin-bottom: 8px;
+}
+
+.course_other_card_title {
+  color: #fff !important;
+  font-family: "Satoshi", sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.course_other_card_badge {
+  background: #fff;
+  border-radius: 999px;
+  color: #111827;
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  margin-top: auto;
+  padding: 6px 12px;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.course_other_card:hover .course_other_card_badge {
+  background: #f97316;
+  color: #fff;
 }
 
 

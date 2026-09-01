@@ -1390,37 +1390,37 @@
                 'category' => 'VMWARE',
                 'title' => 'VMware vSphere',
                 'icon' => 'fas fa-server',
-                'image' => '/assets/frontend/images/vmware-vsphere-e1627535142798.jpg',
+                'image' => '/assets/frontend/images/other-course-vmware.jpg',
             ],
             7 => [
                 'category' => 'AWS',
                 'title' => 'AWS Cloud Architect',
                 'icon' => 'fas fa-cloud',
-                'image' => '/assets/frontend/images/cloud1.jpg',
+                'image' => '/assets/frontend/images/other-course-azure.jpg',
             ],
             8 => [
                 'category' => 'AZURE',
                 'title' => 'Azure Cloud Administrator',
                 'icon' => 'fas fa-cloud',
-                'image' => '/assets/frontend/images/Azure-1.jpg',
+                'image' => '/assets/frontend/images/other-course-azure.jpg',
             ],
             9 => [
                 'category' => 'MICROSOFT',
                 'title' => 'Windows Server Hybrid',
                 'icon' => 'fas fa-layer-group',
-                'image' => '/assets/frontend/images/microsft.jpg',
+                'image' => '/assets/frontend/images/other-course-windows.jpg',
             ],
             11 => [
                 'category' => 'MICROSOFT',
                 'title' => 'Windows Server Hybrid',
                 'icon' => 'fas fa-layer-group',
-                'image' => '/assets/frontend/images/microsft.jpg',
+                'image' => '/assets/frontend/images/other-course-windows.jpg',
             ],
             10 => [
                 'category' => 'CISCO',
                 'title' => 'Cisco Networking CCNA',
                 'icon' => 'fas fa-globe',
-                'image' => '/assets/frontend/images/ccna.jpg',
+                'image' => '/assets/frontend/images/other-course-cisco.jpg',
             ],
         ];
 
@@ -1451,7 +1451,10 @@
                         $cardImage = $meta['image'];
                     @endphp
                     <a class="course_other_card" href="{{ url(route('course.detail', ['slug' => $row->slug] )) }}" style="background-image: url('{{ $cardImage }}');">
-                       
+                        <span class="course_other_card_icon" aria-hidden="true"><i class="{{ $meta['icon'] }}"></i></span>
+                        <span class="course_other_card_brand">{{ $meta['category'] }}</span>
+                        <span class="course_other_card_title">{{ $meta['title'] }}</span>
+                        <span class="course_other_card_badge">{{ $meta['category'] }}</span>
                     </a>
                 @endforeach
             </div>
