@@ -1458,17 +1458,22 @@
     </section>
     
 
-    <section class="location_section course_location_section">
-        <div class="container">
             @php
                 $course_name = $courseInputName;
                 session()->put('course_name', $course_name);
                 $cms_alias_city = DB::table('cms')->where('status', 1)->where('zone', 1)->where('course_id', $cms->course_id)->whereNot('id', $cms->id)->get(['alias', 'slug']);
                 $cms_alias_country = DB::table('cms')->where('status', 1)->where('zone', 2)->where('course_id', $cms->course_id)->whereNot('id', $cms->id)->get(['alias', 'slug']);
+                $hasLocationContent = $cms_alias_city->isNotEmpty() || $cms_alias_country->isNotEmpty();
+                $hasSeoContent = !empty($detail->seo_label) && !empty($detail->seo_description);
             @endphp
 
+            @if($hasLocationContent || $hasSeoContent)
+    <section class="location_section course_location_section">
+        <div class="container">
+            @if($hasLocationContent)
             <p class="course_location_label">Find by Location</p>
             <h2 class="course_location_heading">Find {{ $course_name }} by Location</h2>
+            @endif
 
             @if($cms_alias_city->isNotEmpty())
                 <div class="course_location_card">
@@ -1529,6 +1534,7 @@
             @endif
         </div>
     </section>
+            @endif
 
     <style>
 	.hidden_classes {
