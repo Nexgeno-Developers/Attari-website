@@ -8170,43 +8170,6 @@ text-align: center;
   position: static;
 }
 
-.course_syllabus_modern .syllabus-accordion .accordion1 > .syllabus_module_header .syllabus_module_meta {
-  align-items: center;
-  background: transparent;
-  cursor: inherit;
-  display: inline-flex;
-  flex: 0 0 auto;
-  gap: 12px;
-  padding: 0;
-  position: static;
-}
-
-.course_syllabus_modern .syllabus-accordion .accordion1 > .syllabus_module_header .syllabus_preview_badge {
-  background: transparent;
-  color: #ff7b00;
-  cursor: inherit;
-  display: inline-block;
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 1;
-  padding: 0;
-  position: static;
-  white-space: nowrap;
-}
-
-.course_syllabus_modern .syllabus-accordion .accordion1 > .syllabus_module_header .syllabus_module_duration {
-  background: transparent;
-  color: #64748b;
-  cursor: inherit;
-  display: inline-block;
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 1;
-  padding: 0;
-  position: static;
-  white-space: nowrap;
-}
-
 .course_syllabus_modern .syllabus-accordion .accordion1 > .syllabus_module_header span::after {
   content: none !important;
   display: none !important;

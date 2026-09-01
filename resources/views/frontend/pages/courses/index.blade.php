@@ -368,17 +368,10 @@
                                         @foreach ($syllabus as $row)
                                             @php
                                                 $moduleDescription = ReplaceKeyword($row->description, $cms->replace_keyword);
-                                                $moduleLessonCount = preg_match_all('/<li\b/i', (string) $moduleDescription, $moduleMatches);
-                                                $moduleDurationSeconds = max(25, ($moduleLessonCount * 4) + 8) * 60;
-                                                $moduleDuration = gmdate('H:i:s', $moduleDurationSeconds);
                                             @endphp
                                             <li class="accordion1 @if($i == 1) open @endif">
                                                 <span class="syllabus_module_header">
                                                     <span class="syllabus_module_title">Module {{ $i }}:- @php echo ReplaceKeyword($row->title, $cms->replace_keyword) @endphp</span>
-                                                    <span class="syllabus_module_meta">
-                                                        <span class="syllabus_preview_badge">Preview</span>
-                                                        <span class="syllabus_module_duration">{{ $moduleDuration }}</span>
-                                                    </span>
                                                     <i class="fa fa-angle-up"></i>
                                                 </span>
                                                 <div class="contentsillabus_div" style="@if($i == 1) display:block; @endif">
