@@ -6614,6 +6614,10 @@ section.vm_banner.course_hero {
   margin-bottom: 36px;
 }
 
+.course_certificates .container {
+  overflow: hidden;
+}
+
 .course_certificates .owl-carousel {
   padding: 0 48px 12px;
 }
@@ -6624,7 +6628,7 @@ section.vm_banner.course_hero {
 }
 
 .course_certificates .owl-carousel .owl-stage-outer {
-  overflow: visible;
+  overflow: hidden;
   padding-bottom: 18px;
 }
 
@@ -6829,7 +6833,7 @@ section.vm_banner.course_hero {
 
 .course_review_text {
   display: -webkit-box;
-  -webkit-line-clamp: 6;
+  -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
