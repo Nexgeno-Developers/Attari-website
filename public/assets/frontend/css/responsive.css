@@ -590,7 +590,7 @@ div#getsyllabusModal .modal-dialog.modal-dialog-centered {
     width: 95% !important;
 }
 div#getsyllabusModal .modal-body {
-    padding: 40px 20px !important;
+    padding: 0 !important;
 }
 form#getsyllabus h5.text-center {
     font-size: 22px;

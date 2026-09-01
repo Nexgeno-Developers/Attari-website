@@ -1,31 +1,13 @@
-<!-- Modal -->
-<style>
-    
-.select2-container--default .select2-selection--single .select2-selection__rendered {
-    line-height: initial;
-    padding: 7px 7px 7px 7px;
-}
-
-.select2-container--default .select2-selection--single {
-    border: 1px solid #d7d7d7;
-		height: auto;
-}
-
-.select2-container {
-    margin-bottom: 15px;
-}
-</style>
-<div class="modal fade" id="getsyllabusModal2" aria-labelledby="getsyllabusModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+<div class="modal fade syllabus_modal" id="getsyllabusModal2" aria-labelledby="getsyllabusModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-        <button type="button" class="btn-close close_button" data-bs-dismiss="modal" aria-label="Close"></button>
+      <button type="button" class="enquiry_modal_close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
       <div class="modal-body">
         @php
             session()->forget('enquiry_id');
             session()->forget('course_name');
         @endphp
-        <!-- Form -->
-        <form id="getsyllabus2" action="{{url(route('getsyllabusonwhatsapp'))}}" method="post" enctype="multipart/form-data">
+        <form id="getsyllabus2" class="syllabus_form" action="{{url(route('getsyllabusonwhatsapp'))}}" method="post" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="ref_url" value="{{ url()->previous() }}" data-aos-once="true" data-aos="fade-up" />
             
@@ -38,8 +20,7 @@
                          <input type="hidden" name="course" value="{{isset($courseInputName) ? $courseInputName : session('course_name')}}">
                         <input type="hidden" name="enquiry_id" value="">                
             
-                                <p class="text-center">Get Syllabus and Fee Detail <br> on <i class="fab fa-whatsapp get_whatsapp" aria-hidden="true"></i>
-<span style="color: #07d353;">WhatsApp</span> Now</p>
+    <p class="syllabus_form_title text-center">Get Syllabus and Fee Detail <br> on <i class="fab fa-whatsapp get_whatsapp" aria-hidden="true"></i><span>WhatsApp</span> Now</p>
             @php
                 $countries_json_path = public_path('/assets/frontend/country.json');
                 $countries_json = file_get_contents($countries_json_path);
