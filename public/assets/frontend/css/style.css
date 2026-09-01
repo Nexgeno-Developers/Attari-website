@@ -6322,7 +6322,7 @@ section.vm_banner.course_hero {
   gap: 8px;
   min-height: 42px;
   width: 100%;
-  border-radius: 5px;
+  border-radius: 50px;
   text-decoration: none !important;
   font-family: "Satoshi", sans-serif;
   font-size: 14px !important;
