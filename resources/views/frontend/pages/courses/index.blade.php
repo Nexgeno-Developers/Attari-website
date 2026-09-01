@@ -839,12 +839,98 @@
 
 
 @php
+    $courseId = (int) ($cms->course_id ?? $detail->id);
+    $cId = $courseId;
+    $courseMenuName = $cms->menu_title ?: 'demo';
     $trainerHeading = 'Meet Our Expert Trainer';
     $trainerDesc = 'Learn from Industry Expert Trainer';
     $skillsHeading = 'Services and skills you will master';
-    $demoCtaTitle = 'Attend a free demo class this week';
+    $demoCtaTitle = 'Attend a free ' . $courseMenuName . ' demo class this week';
     $demoCtaText = 'Sit through a live session, meet the trainer, see the labs — then decide.';
-    $skillTags = [
+
+    $skillsByCourse = [
+        5 => [ // VMware vSphere + vSAN
+            'ESXi & vCenter',
+            'vSphere Clustering',
+            'vSAN Basics',
+            'vMotion & DRS',
+            'HA & Fault Tolerance',
+            'vSwitch & Networking',
+            'Datastores & Storage',
+            'Snapshots & Clones',
+            'Resource Pools',
+            'VM Management',
+            'Troubleshooting',
+            'Hands-on Labs',
+        ],
+        7 => [ // AWS Cloud with GenAI
+            'EC2 & Auto Scaling',
+            'VPC & Subnetting',
+            'IAM & Security',
+            'S3 & CloudFront',
+            'RDS & DynamoDB',
+            'Lambda & Serverless',
+            'CloudWatch & CloudTrail',
+            'Route 53 & ELB',
+            'GenAI on AWS',
+            'Bedrock & AI Services',
+            'AI-assisted Scripting',
+            'Hands-on Labs',
+        ],
+        8 => [ // AZURE Cloud with GenAI
+            'Virtual Machines',
+            'Virtual Networks',
+            'Entra ID & IAM',
+            'Storage Accounts',
+            'Azure OpenAI',
+            'Azure AI Services',
+            'NSG & Security',
+            'Azure Monitor',
+            'Hybrid Identity',
+            'Architecture Design',
+            'Hands-on Labs',
+        ],
+        10 => [ // CCNA with Automation
+            'IP Addressing & Subnetting',
+            'VLANs & Trunking',
+            'Routing Protocols',
+            'OSPF',
+            'STP & EtherChannel',
+            'ACLs & NAT',
+            'Network Automation',
+            'Python for Networking',
+            'Packet Tracer Labs',
+            'Hands-on Labs',
+        ],
+        11 => [ // Windows Server Hybrid
+            'Active Directory',
+            'DNS & DHCP',
+            'Group Policy',
+            'Hyper-V',
+            'File Services',
+            'Failover Clustering',
+            'Windows Admin Center',
+            'Hybrid Azure AD',
+            'WSUS & Patching',
+            'Identity Management',
+            'Troubleshooting',
+            'Hands-on Labs',
+        ],
+        9 => [ // MCSE
+            'Active Directory',
+            'DNS & DHCP',
+            'Group Policy',
+            'File & Print Services',
+            'IIS Web Server',
+            'RAID & Storage',
+            'Backup & Restore',
+            'User Management',
+            'Troubleshooting',
+            'Hands-on Labs',
+        ],
+    ];
+
+    $skillTags = $skillsByCourse[$courseId] ?? [
         'Hands-on Labs',
         'Real-Time Projects',
         'Interview Preparation',
@@ -853,114 +939,24 @@
         'Certification Guidance',
     ];
 
-    if ($cId == 5) {
+    if ($courseId == 5) {
         $trainerHeading = 'VMware';
         $trainerDesc = 'Learn VMware vSphere Server Virtualization from Industry Expert Trainer';
-        $demoCtaTitle = 'Attend a free VMware demo class this week';
-        $skillTags = [
-            'ESXi & vCenter',
-            'vMotion & DRS',
-            'HA & Fault Tolerance',
-            'vSwitch & Networking',
-            'Datastores & Storage',
-            'Snapshots & Clones',
-            'Resource Pools',
-            'vSAN Basics',
-            'VM Management',
-            'Troubleshooting',
-            'Architecture Design',
-            'Hands-on Labs',
-        ];
-    } elseif ($cId == 7) {
+    } elseif ($courseId == 7) {
         $trainerHeading = 'AWS';
         $trainerDesc = 'Learn AWS Cloud Computing from Industry Expert Trainer';
-        $demoCtaTitle = 'Attend a free AWS demo class this week';
-        $skillTags = [
-            'EC2 & Auto Scaling',
-            'VPC & Subnetting',
-            'Lambda & Serverless',
-            'IAM & Security',
-            'S3 & CloudFront',
-            'RDS & DynamoDB',
-            'CloudWatch & CloudTrail',
-            'Route 53 & ELB',
-            'Systems Manager',
-            'Cost Optimization',
-            'Architecture Design',
-            'Hands-on Labs',
-        ];
-    } elseif ($cId == 8) {
+    } elseif ($courseId == 8) {
         $trainerHeading = 'Azure';
         $trainerDesc = 'Learn Microsoft Azure Cloud Computing from Industry Expert Trainer';
-        $demoCtaTitle = 'Attend a free Azure demo class this week';
-        $skillTags = [
-            'Virtual Machines',
-            'Virtual Networks',
-            'Entra ID & IAM',
-            'Storage Accounts',
-            'NSG & Security',
-            'Azure Backup',
-            'Load Balancer',
-            'Azure Monitor',
-            'Resource Manager',
-            'Hybrid Identity',
-            'Architecture Design',
-            'Hands-on Labs',
-        ];
-    } elseif ($cId == 11) {
+    } elseif ($courseId == 11) {
         $trainerHeading = 'Windows Server';
         $trainerDesc = 'Learn Windows Server Hybrid Administration from Industry Expert Trainer';
-        $demoCtaTitle = 'Attend a free Windows Server demo class this week';
-        $skillTags = [
-            'Active Directory',
-            'DNS & DHCP',
-            'Group Policy',
-            'Hyper-V',
-            'File Services',
-            'Failover Clustering',
-            'Windows Admin Center',
-            'Hybrid Azure AD',
-            'WSUS & Patching',
-            'Identity Management',
-            'Troubleshooting',
-            'Hands-on Labs',
-        ];
-    } elseif ($cId == 10) {
+    } elseif ($courseId == 10) {
         $trainerHeading = 'CCNA';
         $trainerDesc = 'Learn CCNA Networking from Industry Expert Trainer';
-        $demoCtaTitle = 'Attend a free CCNA demo class this week';
-        $skillTags = [
-            'IP Addressing & Subnetting',
-            'VLANs & Trunking',
-            'Routing Protocols',
-            'OSPF',
-            'STP & EtherChannel',
-            'ACLs & NAT',
-            'DHCP & DNS',
-            'Wireless Basics',
-            'Network Security',
-            'Troubleshooting',
-            'Packet Tracer Labs',
-            'Hands-on Labs',
-        ];
-    } elseif ($cId == 9) {
+    } elseif ($courseId == 9) {
         $trainerHeading = 'Windows Server';
-        $trainerDesc = 'Learn Windows Server Hybrid Administration from Industry Expert Trainer';
-        $demoCtaTitle = 'Attend a free Windows Server demo class this week';
-        $skillTags = [
-            'Active Directory',
-            'DNS & DHCP',
-            'Group Policy',
-            'Hyper-V',
-            'File Services',
-            'Failover Clustering',
-            'Windows Admin Center',
-            'Hybrid Azure AD',
-            'WSUS & Patching',
-            'Identity Management',
-            'Troubleshooting',
-            'Hands-on Labs',
-        ];
+        $trainerDesc = 'Learn Windows Server Administration from Industry Expert Trainer';
     }
 @endphp
 
