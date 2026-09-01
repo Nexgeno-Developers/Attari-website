@@ -8603,7 +8603,8 @@ text-align: center;
 
 .media_popup {
   align-items: center;
-  background: rgba(15, 23, 42, 0.88);
+  
+    background: rgb(0 0 0 / 96%);
   display: none;
   inset: 0;
   justify-content: center;
