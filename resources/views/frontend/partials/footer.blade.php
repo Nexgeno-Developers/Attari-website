@@ -130,7 +130,7 @@
 
 <!-- ---------------fix footer---------------- -->
 
-<section class="fix_footer d-none">
+<section class="fix_footer d-none d-lg-block d-md-block">
     <div class="container">
         <div class="row">
             

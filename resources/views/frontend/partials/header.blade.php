@@ -136,7 +136,7 @@ $course = getcmsCourses();
                                 </ul>
                             </nav>
                         </div>
-                        <div class="header_item item_right">
+                        <!-- <div class="header_item item_right">
                             <a href="tel:+917738375431" class="header_phone" aria-label="Call Attari Classes">
                                 <i class="fas fa-phone-alt" aria-hidden="true"></i>
                                 <span>+91 77383 75431</span>
@@ -145,7 +145,7 @@ $course = getcmsCourses();
                             <div class="mobile_menu_trigger">
                                 <span></span>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
         </div>
     </header>

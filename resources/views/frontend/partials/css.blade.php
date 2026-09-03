@@ -1,6 +1,6 @@
 
 <link rel="shortcut icon" href="{{ asset('/assets/frontend/images/favicon.webp') }}">
-<link rel="stylesheet" href="/assets/frontend/css/style.css?v1.9.21" />
+<link rel="stylesheet" href="/assets/frontend/css/style.css?v1.9.23" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
  
 <link rel="stylesheet" href="/assets/frontend/css/responsive.css?v-1.3.9" />
@@ -26,8 +26,8 @@
   max-width: 1600px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 40px;
-  padding-right: 40px;
+  padding-left: 70px;
+  padding-right: 70px;
 }
 @media (max-width: 767px) {
   .container,

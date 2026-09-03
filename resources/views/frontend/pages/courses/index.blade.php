@@ -386,10 +386,10 @@
                                                             </a>
                                                         @endif
                                                       
-                                                            <a class="module_watch_video">
+                                                            <!-- <a class="module_watch_video">
                                                                 <i class="fas fa-play" aria-hidden="true"></i> Watch Video
                                                               
-                                                            </a>
+                                                            </a> -->
                                                         
                                                     </div>
                                                 </div>
