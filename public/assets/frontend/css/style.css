@@ -6351,7 +6351,7 @@ section.vm_banner.course_hero {
 }
 
 .overview_content {
-  padding-right: 0;
+  padding-right: 25px;
 }
 
 .overview_content ul {
@@ -6614,15 +6614,6 @@ section.vm_banner.course_hero {
   background: #f97316;
 }
 
-.course_overview_talk_section {
-  background: #fff;
-  padding: 0 0 80px;
-}
-
-.course_overview_talk_section .overview_talk {
-  max-width: 380px;
-}
-
 @media screen and (max-width: 991px) {
   .course_overview .width70,
   .course_overview .width30 {
@@ -6630,15 +6621,7 @@ section.vm_banner.course_hero {
   }
 
   .overview_content {
-    padding-right: 0;
-  }
-
-  .course_overview_talk_section {
-    padding: 0 0 50px;
-  }
-
-  .course_overview_talk_section .overview_talk {
-    max-width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * .5);
   }
 
   .course_overview_heading {
