@@ -1598,40 +1598,82 @@ document.addEventListener("DOMContentLoaded", function () {
 
     <script>
     document.addEventListener("DOMContentLoaded", function () {
-        function updateVisibleItems() {
-            let screenWidth = window.innerWidth;
-            let initialCount = screenWidth <= 767 ? 8 : 14;
+        function setupLocationList(listContainer) {
+            const listItems = Array.from(listContainer.querySelectorAll(".list-item"));
+            const loadMoreBtn = listContainer.nextElementSibling;
 
-            document.querySelectorAll(".list-container").forEach((listContainer) => {
-                let listItems = listContainer.querySelectorAll(".list-item");
-                let loadMoreBtn = listContainer.nextElementSibling; // Find Load More button
+            if (!listItems.length || !loadMoreBtn || !loadMoreBtn.classList.contains("load-more-btns")) {
+                return;
+            }
 
-                // Hide items beyond the initial limit
-                listItems.forEach((item, index) => {
-                    if (index < initialCount) {
-                        item.classList.remove("hidden_classes");
-                    } else {
-                        item.classList.add("hidden_classes");
-                    }
+            let visibleRows = 1;
+
+            function applyVisibleRows() {
+                listItems.forEach(function (item) {
+                    item.classList.add("hidden_classes");
                 });
 
-                // Show/hide "Load More" button
-                if (listItems.length > initialCount) {
-                    loadMoreBtn.style.display = "block"; // Show button if more items exist
-                } else {
-                    loadMoreBtn.style.display = "none"; // Hide if all items fit
+                if (!listItems.length) {
+                    loadMoreBtn.style.display = "none";
+                    return;
                 }
 
-                // Click event for Load More button
-                loadMoreBtn.addEventListener("click", function () {
-                    listItems.forEach(item => item.classList.remove("hidden_classes")); // Show all items
-                    loadMoreBtn.style.display = "none"; // Hide button after clicking
+                let rowsSeen = 0;
+                let currentTop = null;
+
+                for (let i = 0; i < listItems.length; i++) {
+                    listItems[i].classList.remove("hidden_classes");
+                    const top = listItems[i].offsetTop;
+
+                    if (currentTop === null) {
+                        currentTop = top;
+                        rowsSeen = 1;
+                    } else if (top !== currentTop) {
+                        rowsSeen += 1;
+                        currentTop = top;
+
+                        if (rowsSeen > visibleRows) {
+                            for (let j = i; j < listItems.length; j++) {
+                                listItems[j].classList.add("hidden_classes");
+                            }
+                            break;
+                        }
+                    }
+                }
+
+                const hasHidden = listItems.some(function (item) {
+                    return item.classList.contains("hidden_classes");
                 });
+                loadMoreBtn.style.display = hasHidden ? "inline-block" : "none";
+            }
+
+            loadMoreBtn.addEventListener("click", function () {
+                visibleRows += 1;
+                applyVisibleRows();
             });
+
+            listContainer._resetLocationRows = function () {
+                visibleRows = 1;
+                applyVisibleRows();
+            };
+
+            applyVisibleRows();
         }
 
-        updateVisibleItems(); // Run on page load
-        window.addEventListener("resize", updateVisibleItems); // Run on screen resize
+        const locationLists = document.querySelectorAll(".course_location_section .list-container");
+        locationLists.forEach(setupLocationList);
+
+        let resizeTimer = null;
+        window.addEventListener("resize", function () {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function () {
+                locationLists.forEach(function (listContainer) {
+                    if (typeof listContainer._resetLocationRows === "function") {
+                        listContainer._resetLocationRows();
+                    }
+                });
+            }, 150);
+        });
     });
 </script>
 
