@@ -7274,6 +7274,8 @@ section.vm_banner.course_hero {
   flex-shrink: 0;
   display: flex;
   align-items: center;
+  justify-content: center;
+  min-width: 210px;
 }
 
 .course_batch_btn {
@@ -7416,7 +7418,7 @@ section.vm_banner.course_hero {
   justify-content: center;
   text-align: center;
   min-width: 210px;
-  padding: 8px 8px 8px 18px;
+  padding: 8px;
 }
 
 .course_batch_offer p {
@@ -7450,13 +7452,14 @@ section.vm_banner.course_hero {
   .course_batch_action,
   .course_batch_offer {
     width: 100%;
-    align-items: stretch;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     padding: 8px 0 0;
   }
 
   .course_batch_btn {
-    width: 100%;
+    width: auto;
   }
 
   .course_batch_heading {
@@ -8338,7 +8341,7 @@ section.vm_banner.course_hero {
 .site_footer .footer_para {
   margin-top: 12px;
   margin-bottom: 22px;
-  color: #94a3b8;
+  color: #cbd5e1;
   font-size: 14px;
   line-height: 1.7;
   max-width: 340px;
