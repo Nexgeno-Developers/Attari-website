@@ -1,6 +1,6 @@
 
 <link rel="shortcut icon" href="{{ asset('/assets/frontend/images/favicon.webp') }}">
-<link rel="stylesheet" href="/assets/frontend/css/style.css?v1.9.28" />
+<link rel="stylesheet" href="/assets/frontend/css/style.css?v1.9.29" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
  
 <link rel="stylesheet" href="/assets/frontend/css/responsive.css?v-1.3.9" />
@@ -136,9 +136,7 @@ section.vm_banner.course_hero {
 }
 .course_certificates .owl-nav button.owl-prev { left: 0 !important; }
 .course_certificates .owl-nav button.owl-next { right: 0 !important; }
-.course_testimonials {
-  background: #f8fafd !important;
-}
+
 .course_testimonials_heading,
 .course_testimonials .heading_title {
   color: #0f172a !important;
