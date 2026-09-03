@@ -943,35 +943,119 @@
     ];
 
     $skillIconFor = function ($skillLabel) {
+        $exact = [
+            // AWS
+            'EC2 & Auto Scaling' => 'ec2.svg',
+            'VPC & Subnetting' => 'vpc.svg',
+            'IAM & Security' => 'iam.svg',
+            'S3 & CloudFront' => 's3.svg',
+            'RDS & DynamoDB' => 'database.svg',
+            'Lambda & Serverless' => 'lambda.svg',
+            'CloudWatch & CloudTrail' => 'monitor.svg',
+            'Route 53 & ELB' => 'dns.svg',
+            'GenAI on AWS' => 'genai.svg',
+            'Bedrock & AI Services' => 'bedrock.svg',
+            'AI-assisted Scripting' => 'scripting.svg',
+            // Azure
+            'Virtual Machines' => 'ec2.svg',
+            'Virtual Networks' => 'vpc.svg',
+            'Entra ID & IAM' => 'identity.svg',
+            'Storage Accounts' => 's3.svg',
+            'Azure OpenAI' => 'openai.svg',
+            'Azure AI Services' => 'azureai.svg',
+            'NSG & Security' => 'iam.svg',
+            'Azure Monitor' => 'monitor.svg',
+            'Hybrid Identity' => 'identity.svg',
+            'Architecture Design' => 'architecture.svg',
+            // VMware
+            'ESXi & vCenter' => 'esxi.svg',
+            'vSphere Clustering' => 'cluster.svg',
+            'vSAN Basics' => 'vsan.svg',
+            'vMotion & DRS' => 'vmotion.svg',
+            'HA & Fault Tolerance' => 'ha.svg',
+            'vSwitch & Networking' => 'vpc.svg',
+            'Datastores & Storage' => 's3.svg',
+            'Snapshots & Clones' => 'snapshot.svg',
+            'Resource Pools' => 'resource.svg',
+            'VM Management' => 'vm.svg',
+            // CCNA
+            'IP Addressing & Subnetting' => 'vpc.svg',
+            'VLANs & Trunking' => 'vlan.svg',
+            'Routing Protocols' => 'routing.svg',
+            'OSPF' => 'routing.svg',
+            'STP & EtherChannel' => 'vlan.svg',
+            'ACLs & NAT' => 'acl.svg',
+            'Network Automation' => 'scripting.svg',
+            'Python for Networking' => 'python.svg',
+            'Packet Tracer Labs' => 'packet.svg',
+            // Windows / MCSE
+            'Active Directory' => 'identity.svg',
+            'DNS & DHCP' => 'dns.svg',
+            'Group Policy' => 'gpo.svg',
+            'Hyper-V' => 'hyperv.svg',
+            'File Services' => 's3.svg',
+            'File & Print Services' => 's3.svg',
+            'Failover Clustering' => 'cluster.svg',
+            'Windows Admin Center' => 'server.svg',
+            'Hybrid Azure AD' => 'identity.svg',
+            'WSUS & Patching' => 'server.svg',
+            'Identity Management' => 'identity.svg',
+            'IIS Web Server' => 'iis.svg',
+            'RAID & Storage' => 's3.svg',
+            'Backup & Restore' => 'backup.svg',
+            'User Management' => 'identity.svg',
+            // Shared / fallback list
+            'Hands-on Labs' => 'labs.svg',
+            'Troubleshooting' => 'troubleshoot.svg',
+            'Real-Time Projects' => 'project.svg',
+            'Interview Preparation' => 'interview.svg',
+            'Certification Guidance' => 'cert.svg',
+        ];
+
+        if (isset($exact[$skillLabel])) {
+            return '/assets/frontend/images/skills/' . $exact[$skillLabel];
+        }
+
         $label = strtolower($skillLabel);
-        // More specific keywords first so each skill gets its own logo
         $rules = [
+            ['words' => ['bedrock'], 'icon' => 'bedrock.svg'],
+            ['words' => ['openai'], 'icon' => 'openai.svg'],
+            ['words' => ['genai', 'gen ai'], 'icon' => 'genai.svg'],
+            ['words' => ['ai-assisted', 'script', 'automation'], 'icon' => 'scripting.svg'],
+            ['words' => ['python'], 'icon' => 'python.svg'],
+            ['words' => ['packet tracer'], 'icon' => 'packet.svg'],
+            ['words' => ['azure ai'], 'icon' => 'azureai.svg'],
             ['words' => ['esxi', 'vcenter'], 'icon' => 'esxi.svg'],
-            ['words' => ['cluster'], 'icon' => 'cluster.svg'],
             ['words' => ['vsan'], 'icon' => 'vsan.svg'],
             ['words' => ['vmotion', 'drs'], 'icon' => 'vmotion.svg'],
-            ['words' => ['fault tolerance', ' ha ', 'ha &'], 'icon' => 'ha.svg'],
+            ['words' => ['fault tolerance'], 'icon' => 'ha.svg'],
             ['words' => ['snapshot', 'clone'], 'icon' => 'snapshot.svg'],
             ['words' => ['resource pool'], 'icon' => 'resource.svg'],
-            ['words' => ['vm management'], 'icon' => 'vm.svg'],
-            ['words' => ['vswitch', 'vpc', 'subnet', 'virtual network', 'vlan', 'routing', 'ospf', 'stp', 'etherchannel', 'ip addressing', 'networking'], 'icon' => 'vpc.svg'],
-            ['words' => ['datastore', 's3', 'cloudfront', 'storage', 'raid', 'file'], 'icon' => 's3.svg'],
-            ['words' => ['ec2', 'auto scaling', 'virtual machine', 'hyper-v'], 'icon' => 'ec2.svg'],
-            ['words' => ['iam', 'security', 'acl', 'nsg', 'entra'], 'icon' => 'iam.svg'],
+            ['words' => ['vlan', 'trunk', 'stp', 'etherchannel'], 'icon' => 'vlan.svg'],
+            ['words' => ['ospf', 'routing'], 'icon' => 'routing.svg'],
+            ['words' => ['acl', 'nat'], 'icon' => 'acl.svg'],
+            ['words' => ['group policy'], 'icon' => 'gpo.svg'],
+            ['words' => ['hyper-v'], 'icon' => 'hyperv.svg'],
+            ['words' => ['iis'], 'icon' => 'iis.svg'],
+            ['words' => ['backup'], 'icon' => 'backup.svg'],
+            ['words' => ['cluster'], 'icon' => 'cluster.svg'],
+            ['words' => ['active directory', 'entra', 'identity', 'user management'], 'icon' => 'identity.svg'],
+            ['words' => ['ec2', 'virtual machine'], 'icon' => 'ec2.svg'],
+            ['words' => ['vpc', 'subnet', 'vswitch', 'virtual network', 'ip addressing', 'networking'], 'icon' => 'vpc.svg'],
+            ['words' => ['iam', 'security', 'nsg'], 'icon' => 'iam.svg'],
+            ['words' => ['s3', 'cloudfront', 'storage', 'datastore', 'raid', 'file'], 'icon' => 's3.svg'],
             ['words' => ['rds', 'dynamo', 'database'], 'icon' => 'database.svg'],
             ['words' => ['lambda', 'serverless'], 'icon' => 'lambda.svg'],
-            ['words' => ['cloudwatch', 'cloudtrail', 'monitor', 'azure monitor'], 'icon' => 'monitor.svg'],
+            ['words' => ['cloudwatch', 'cloudtrail', 'monitor'], 'icon' => 'monitor.svg'],
             ['words' => ['route 53', 'elb', 'dns', 'dhcp'], 'icon' => 'dns.svg'],
-            ['words' => ['genai', 'openai', 'ai services', 'ai-assisted'], 'icon' => 'genai.svg'],
-            ['words' => ['bedrock'], 'icon' => 'bedrock.svg'],
-            ['words' => ['script', 'python', 'automation', 'packet tracer'], 'icon' => 'scripting.svg'],
-            ['words' => ['lab', 'project'], 'icon' => 'labs.svg'],
-            ['words' => ['active directory', 'group policy', 'identity', 'user management', 'hybrid azure'], 'icon' => 'identity.svg'],
-            ['words' => ['architecture', 'interview'], 'icon' => 'architecture.svg'],
+            ['words' => ['lab'], 'icon' => 'labs.svg'],
+            ['words' => ['project'], 'icon' => 'project.svg'],
+            ['words' => ['interview'], 'icon' => 'interview.svg'],
+            ['words' => ['architecture'], 'icon' => 'architecture.svg'],
             ['words' => ['certification', 'certificate'], 'icon' => 'cert.svg'],
             ['words' => ['troubleshoot'], 'icon' => 'troubleshoot.svg'],
-            ['words' => ['vsphere', 'vmware'], 'icon' => 'vmware.svg'],
-            ['words' => ['server', 'iis', 'wsus', 'windows admin', 'backup'], 'icon' => 'server.svg'],
+            ['words' => ['server', 'wsus', 'windows admin'], 'icon' => 'server.svg'],
+            ['words' => ['vm management', 'vmware', 'vsphere'], 'icon' => 'vm.svg'],
         ];
 
         foreach ($rules as $rule) {
@@ -982,7 +1066,6 @@
             }
         }
 
-        // "HA & Fault Tolerance" — label starts with HA
         if (preg_match('/\bha\b/', $label)) {
             return '/assets/frontend/images/skills/ha.svg';
         }
