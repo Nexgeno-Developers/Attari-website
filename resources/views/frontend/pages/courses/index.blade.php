@@ -1609,42 +1609,67 @@
     .lms-topic-preview-trigger {
         display: inline-flex;
         align-items: center;
-        gap: 10px;
-        margin: 6px 0 6px 12px;
-        padding: 9px 18px;
-        border: 1px solid #d5c2ff;
+        gap: 7px;
+        margin: 6px 6px 2px 0;
+        padding: 5px 14px;
+        border: 1px solid #7c3aed40;
         border-radius: 999px;
-        background: #f3ebff;
-        color: #2c2f4a;
-        font-size: 15px;
+        background: #f6f0ff;
+        color: #6d28d9;
+        font-size: 14px;
         font-weight: 500;
-        line-height: 1;
+        line-height: 1.4;
         text-decoration: none;
         vertical-align: middle;
-        transition: background-color 0.2s ease, border-color 0.2s ease;
+        transition: all 0.2s ease;
+    }
+    .txt .lms-topic-preview-trigger,
+    .txt li .lms-topic-preview-trigger {
+        list-style: none;
+        white-space: nowrap;
+        position: relative;
+        top: -1px;
     }
     .lms-topic-preview-trigger:hover,
     .lms-topic-preview-trigger:focus {
-        background: #eadcff;
-        border-color: #bea0ff;
-        color: #2c2f4a;
+        background: #efe4ff;
+        color: #5b21b6;
         text-decoration: none;
+        box-shadow: 0 4px 14px rgba(109, 40, 217, 0.14);
     }
     .lms-topic-preview-icon {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 30px;
-        height: 30px;
+        width: 24px;
+        height: 24px;
         border-radius: 50%;
-        background: #1b2236;
-        color: #ffffff;
+        background: #1f2937;
+        color: #fff;
         flex-shrink: 0;
+    }
+    .lms-topic-preview-trigger .lms-topic-preview-icon::before,
+    .lms-topic-preview-trigger .lms-topic-preview-text::before,
+    .lms-topic-preview-trigger .lms-topic-preview-text::after,
+    .lms-topic-preview-trigger::before,
+    .lms-topic-preview-trigger::after {
+        content: none !important;
+        display: none !important;
     }
     .lms-topic-preview-icon .fa {
         color: #ffffff;
+        font-family: "Font Awesome 6 Free" !important;
         font-size: 12px;
-        margin-left: 2px;
+        line-height: 1;
+        margin: 0;
+        display: block;
+        font-style: normal;
+        font-weight: 900;
+    }
+    .lms-topic-preview-text {
+        display: inline-flex;
+        align-items: center;
+        line-height: 1.2;
     }
     .lms-topic-video-modal {
         position: fixed;
@@ -1704,8 +1729,8 @@
     }
     @media(max-width:767px) {
         .lms-topic-preview-trigger {
-            margin-left: 8px;
-            padding: 8px 15px;
+            margin: 6px 6px 2px 0;
+            padding: 5px 12px;
             font-size: 14px;
         }
         .lms-topic-video-modal {

@@ -495,7 +495,7 @@ use Illuminate\Support\Facades\Storage;
                 return $content;
             }
 
-            $pattern = '#//(?:\s|&nbsp;|<[^>]+>)*\{(?:\s|&nbsp;|<[^>]+>)*v(?:\s|&nbsp;|<[^>]+>)*=(?:\s|&nbsp;|<[^>]+>)*([A-Za-z0-9_-]{6,})(?:\s|&nbsp;|<[^>]+>)*\}(?:\s|&nbsp;|<[^>]+>)*//#i';
+            $pattern = '#(?:\/\/|\/\*)(?:\s|&nbsp;|<[^>]+>)*\{(?:\s|&nbsp;|<[^>]+>)*v(?:\s|&nbsp;|<[^>]+>)*=(?:\s|&nbsp;|<[^>]+>)*([A-Za-z0-9_-]{6,})(?:\s|&nbsp;|<[^>]+>)*\}(?:\s|&nbsp;|<[^>]+>)*(?:\/\/|\*\/)#i';
 
             return preg_replace_callback($pattern, static function ($matches) {
                 $videoId = trim((string) ($matches[1] ?? ''));
@@ -503,7 +503,7 @@ use Illuminate\Support\Facades\Storage;
                     return '';
                 }
 
-                return ' <a href="javascript:void(0)" class="lms-topic-preview-trigger" data-video-id="' . e($videoId) . '" aria-label="Preview video"><span class="lms-topic-preview-icon"><i class="fa fa-play"></i></span><span class="lms-topic-preview-text">Preview</span></a>';
+                return ' <a href="javascript:void(0)" class="lms-topic-preview-trigger" data-video-id="' . e($videoId) . '" aria-label="Preview video"><span class="lms-topic-preview-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></span><span class="lms-topic-preview-text">Preview</span></a>';
             }, $content);
         }
     }
@@ -518,6 +518,13 @@ use Illuminate\Support\Facades\Storage;
             $content = html_entity_decode($content);
             $content = preg_replace('/\s+(?:style|class|face)="[^"]*"/i', '', $content);
             $content = preg_replace("/\s+(?:style|class|face)='[^']*'/i", '', $content);
+            $content = preg_replace('#</?(?:font|span)\b[^>]*>#i', '', $content);
+            $content = preg_replace('#<p>\s*(?:<br\s*/?>|\xc2\xa0|&nbsp;|\s)*</p>#i', '', $content);
+            $content = preg_replace('#<li>\s*(?:<br\s*/?>|\xc2\xa0|&nbsp;|\s)*</li>#i', '', $content);
+            $content = preg_replace('#<a([^>]*)>\s*</a>#i', '', $content);
+            $content = preg_replace('#\s+</li>#i', '</li>', $content);
+            $content = preg_replace('#<li>\s+#i', '<li>', $content);
+            $content = preg_replace('/(?:\r\n|\r|\n){2,}/', "\n", $content);
 
             return $content;
         }
@@ -531,7 +538,7 @@ use Illuminate\Support\Facades\Storage;
             }
 
             $patterns = [
-                '#//(?:\s|&nbsp;|<[^>]+>)*\{(?:\s|&nbsp;|<[^>]+>)*v(?:\s|&nbsp;|<[^>]+>)*=(?:\s|&nbsp;|<[^>]+>)*[A-Za-z0-9_-]{6,}(?:\s|&nbsp;|<[^>]+>)*\}(?:\s|&nbsp;|<[^>]+>)*//#i',
+                '#(?:\/\/|\/\*)(?:\s|&nbsp;|<[^>]+>)*\{(?:\s|&nbsp;|<[^>]+>)*v(?:\s|&nbsp;|<[^>]+>)*=(?:\s|&nbsp;|<[^>]+>)*[A-Za-z0-9_-]{6,}(?:\s|&nbsp;|<[^>]+>)*\}(?:\s|&nbsp;|<[^>]+>)*(?:\/\/|\*\/)#i',
                 '#/\*(?:\s|&nbsp;|<[^>]+>)*\{.*?\}(?:\s|&nbsp;|<[^>]+>)*\*/#is',
             ];
 
