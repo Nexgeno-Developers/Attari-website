@@ -134,7 +134,31 @@ class SyllabusController extends Controller
         // $all_courses = Course::all(); 
         $all_courses = getCourses();
         
+        $usesLmsSyllabus = false;
         $courseSyllabus = Syllabus::where('course_id', $courseId)->where('status', 1)->orderBy('title_no', 'ASC')->get();
+
+        if (!empty($course->lms_course_id)) {
+            $lmsSyllabusResponse = lms_topics_by_course_id_api((int) $course->lms_course_id);
+
+            if (!empty($lmsSyllabusResponse['success']) && !empty($lmsSyllabusResponse['data']) && is_array($lmsSyllabusResponse['data'])) {
+                $usesLmsSyllabus = true;
+                $courseSyllabus = collect($lmsSyllabusResponse['data'])
+                    ->sort(function ($firstTopic, $secondTopic) {
+                        return strnatcmp((string) ($firstTopic['lecture_no'] ?? ''), (string) ($secondTopic['lecture_no'] ?? ''));
+                    })
+                    ->values()
+                    ->map(function ($topic, $index) use ($courseId) {
+                        return (object) [
+                            'id' => null,
+                            'course_id' => $courseId,
+                            'title_no' => (string) ($topic['lecture_no'] ?? (string) ($index + 1)),
+                            'title' => trim((string) ($topic['topic_name'] ?? '')),
+                            'description' => (string) ($topic['description'] ?? ''),
+                            'status' => 1,
+                        ];
+                    });
+            }
+        }
         
         // Initialize mPDF
         $mpdf = new \Mpdf\Mpdf([
@@ -289,8 +313,11 @@ class SyllabusController extends Controller
         
         // Loop through the syllabus and add modules dynamically
         foreach ($courseSyllabus as $index => $module) {
-            $html .= '<div class="margin30" style="page-break-inside: avoid; margin-bottom:10px; background-color:#78d692; color:#fff; font-size:20px; font-weight:900; padding:7px 15px; border-radius:10px; display: block;"><strong>Module ' . ($index + 1) . ': ' . htmlspecialchars($module->title) . '<br></strong></div>';
-            $html .= '<div class="discription_list" style="margin-bottom:22px;">' . $module->description . '</div>';
+            $moduleTitle = ReplaceKeyword($module->title, $course->replace_keyword ?? '[]');
+            $moduleDescription = render_course_syllabus_pdf_content($module->description, $course->replace_keyword ?? '[]', $usesLmsSyllabus);
+
+            $html .= '<div class="margin30" style="page-break-inside: avoid; margin-bottom:10px; background-color:#78d692; color:#fff; font-size:20px; font-weight:900; padding:7px 15px; border-radius:10px; display: block;"><strong>Module ' . ($index + 1) . ': ' . htmlspecialchars($moduleTitle) . '<br></strong></div>';
+            $html .= '<div class="discription_list" style="margin-bottom:22px;">' . $moduleDescription . '</div>';
         }
     
         $html .= '</div></body></html>';

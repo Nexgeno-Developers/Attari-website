@@ -1,3 +1,7 @@
+@php
+    $lmsCoursesResponse = lms_publish_courses_api();
+    $lmsCourses = $lmsCoursesResponse['success'] ? $lmsCoursesResponse['data'] : [];
+@endphp
 <!-----==================== Edit Course ==========----------------------->
 
 <div class="card">
@@ -18,6 +22,21 @@
                         <div class="form-group mb-3">
                             <label>Name</label>
                             <input type="text" class="form-control" name="name" value="{{ $course->name }}" required>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="form-group mb-3">
+                            <label>Lms course sync</label>
+                            <select class="form-control select2" name="lms_course_id">
+                                <option value="">Select LMS course</option>
+                                @foreach($lmsCourses as $lmsCourse)
+                                    <option value="{{ $lmsCourse['id'] }}" @selected((string) $course->lms_course_id === (string) $lmsCourse['id'])>{{ $lmsCourse['name'] }}</option>
+                                @endforeach
+                            </select>
+                            @if(!$lmsCoursesResponse['success'])
+                                <small class="text-danger d-block mt-1">{{ $lmsCoursesResponse['error'] ?? 'Unable to load LMS courses' }}</small>
+                            @endif
                         </div>
                     </div>
 
@@ -300,3 +319,5 @@
         });
     </script>
 @endsection    
+
+

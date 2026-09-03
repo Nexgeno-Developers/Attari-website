@@ -38,6 +38,7 @@ class CourseController extends Controller
             'slug_url' => 'required|unique:courses',
             'meta_title' => 'required',
             'meta_description' => 'required',
+            'lms_course_id' => 'nullable|integer',
         ]);
 
         if ($validator->fails()) {
@@ -102,6 +103,7 @@ class CourseController extends Controller
             'slug_url' => $slug_url,
             'meta_title' => $request->input('meta_title'),
             'meta_description' => $request->input('meta_description'),
+            'lms_course_id' => $request->filled('lms_course_id') ? (int) $request->input('lms_course_id') : null,
         ]);
 
         store_log($sentence = 'Create a New Course Page by');
@@ -168,6 +170,7 @@ class CourseController extends Controller
             'slug_url' => 'required',
             'meta_title' => 'required',
             'meta_description' => 'required',
+            'lms_course_id' => 'nullable|integer',
         ]);
 
         if ($validator->fails()) {
@@ -260,6 +263,7 @@ class CourseController extends Controller
         $course->slug_url = $slug_url;
         $course->meta_title = $request->input('meta_title');
         $course->meta_description = $request->input('meta_description');
+        $course->lms_course_id = $request->filled('lms_course_id') ? (int) $request->input('lms_course_id') : null;
 
         $course->save();
 
@@ -402,3 +406,10 @@ class CourseController extends Controller
 
 
 }
+
+
+
+
+
+
+

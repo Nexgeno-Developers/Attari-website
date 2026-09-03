@@ -39,6 +39,7 @@ class Course extends Model
         'slug_url',
         'meta_title',
         'meta_description',
+        'lms_course_id',
 
         'status'
     ];
@@ -48,4 +49,5 @@ class Course extends Model
         return $this->hasMany(Faq::class, 'course_id');
     }
 }
+
 

@@ -488,6 +488,96 @@ use Illuminate\Support\Facades\Storage;
         }
     }
 
+    if (!function_exists('replace_lms_video_preview_markers')) {
+        function replace_lms_video_preview_markers($content)
+        {
+            if (!is_string($content) || trim($content) === '') {
+                return $content;
+            }
+
+            $pattern = '#//(?:\s|&nbsp;|<[^>]+>)*\{(?:\s|&nbsp;|<[^>]+>)*v(?:\s|&nbsp;|<[^>]+>)*=(?:\s|&nbsp;|<[^>]+>)*([A-Za-z0-9_-]{6,})(?:\s|&nbsp;|<[^>]+>)*\}(?:\s|&nbsp;|<[^>]+>)*//#i';
+
+            return preg_replace_callback($pattern, static function ($matches) {
+                $videoId = trim((string) ($matches[1] ?? ''));
+                if ($videoId === '') {
+                    return '';
+                }
+
+                return ' <a href="javascript:void(0)" class="lms-topic-preview-trigger" data-video-id="' . e($videoId) . '" aria-label="Preview video"><span class="lms-topic-preview-icon"><i class="fa fa-play"></i></span><span class="lms-topic-preview-text">Preview</span></a>';
+            }, $content);
+        }
+    }
+
+    if (!function_exists('sanitize_lms_syllabus_html')) {
+        function sanitize_lms_syllabus_html($content)
+        {
+            if (!is_string($content) || trim($content) === '') {
+                return $content;
+            }
+
+            $content = html_entity_decode($content);
+            $content = preg_replace('/\s+(?:style|class|face)="[^"]*"/i', '', $content);
+            $content = preg_replace("/\s+(?:style|class|face)='[^']*'/i", '', $content);
+
+            return $content;
+        }
+    }
+
+    if (!function_exists('strip_lms_video_markers')) {
+        function strip_lms_video_markers($content)
+        {
+            if (!is_string($content) || trim($content) === '') {
+                return $content;
+            }
+
+            $patterns = [
+                '#//(?:\s|&nbsp;|<[^>]+>)*\{(?:\s|&nbsp;|<[^>]+>)*v(?:\s|&nbsp;|<[^>]+>)*=(?:\s|&nbsp;|<[^>]+>)*[A-Za-z0-9_-]{6,}(?:\s|&nbsp;|<[^>]+>)*\}(?:\s|&nbsp;|<[^>]+>)*//#i',
+                '#/\*(?:\s|&nbsp;|<[^>]+>)*\{.*?\}(?:\s|&nbsp;|<[^>]+>)*\*/#is',
+            ];
+
+            return preg_replace($patterns, '', $content);
+        }
+    }
+
+    if (!function_exists('render_course_syllabus_content')) {
+        function render_course_syllabus_content($sentence, $replaceKeywordJson, $isLmsSyllabus = false)
+        {
+            $content = ReplaceKeyword($sentence, $replaceKeywordJson);
+
+            if ($isLmsSyllabus) {
+                $content = sanitize_lms_syllabus_html($content);
+            }
+
+            return replace_lms_video_preview_markers($content);
+        }
+    }
+
+    if (!function_exists('schema_course_syllabus_description')) {
+        function schema_course_syllabus_description($sentence, $replaceKeywordJson)
+        {
+            $content = schema_ReplaceKeyword($sentence, $replaceKeywordJson);
+            $content = strip_lms_video_markers((string) $content);
+            $content = html_entity_decode((string) $content);
+            $content = trim(preg_replace('/\s+/', ' ', strip_tags($content)));
+
+            return $content;
+        }
+    }
+
+    if (!function_exists('render_course_syllabus_pdf_content')) {
+        function render_course_syllabus_pdf_content($sentence, $replaceKeywordJson, $isLmsSyllabus = false)
+        {
+            $content = ReplaceKeyword($sentence, $replaceKeywordJson);
+            $content = strip_lms_video_markers((string) $content);
+
+            if ($isLmsSyllabus) {
+                $content = sanitize_lms_syllabus_html($content);
+            }
+
+            return $content;
+        }
+    }
+
 
 
     if (!function_exists('SendinBlueContact')) {
@@ -1550,4 +1640,223 @@ use Illuminate\Support\Facades\Storage;
             ];
         }
     }
-    
+
+if (!function_exists('lms_api_parse_response')) {
+    function lms_api_parse_response($responseBody, int $statusCode)
+    {
+        $decoded = json_decode($responseBody, true);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            $errorMessage = 'Invalid LMS API response';
+            if ($statusCode > 0) {
+                $errorMessage = 'LMS API returned HTTP ' . $statusCode . ' with a non-JSON response';
+            }
+
+            return [
+                'success' => false,
+                'status' => $statusCode,
+                'error' => $errorMessage,
+                'raw' => $responseBody,
+            ];
+        }
+
+        return [
+            'success' => ($statusCode >= 200 && $statusCode < 300) && !empty($decoded['success']),
+            'status' => $statusCode,
+            'data' => $decoded['data'] ?? [],
+            'error' => $decoded['error'] ?? null,
+            'response' => $decoded,
+        ];
+    }
+}
+
+if (!function_exists('lms_api_is_cloudflare_challenge')) {
+    function lms_api_is_cloudflare_challenge($responseBody, int $statusCode): bool
+    {
+        if ($statusCode !== 403 || !is_string($responseBody) || $responseBody === '') {
+            return false;
+        }
+
+        $body = strtolower($responseBody);
+
+        return str_contains($body, 'just a moment')
+            || str_contains($body, 'challenges.cloudflare.com')
+            || str_contains($body, 'enable javascript and cookies to continue');
+    }
+}
+
+if (!function_exists('lms_api_use_system_curl_fallback')) {
+    function lms_api_use_system_curl_fallback(): bool
+    {
+        $configured = env('LMS_API_USE_SYSTEM_CURL');
+        if ($configured !== null) {
+            return filter_var($configured, FILTER_VALIDATE_BOOLEAN);
+        }
+
+        return PHP_OS_FAMILY === 'Windows' && app()->environment('local');
+    }
+}
+
+if (!function_exists('lms_api_request_via_system_curl')) {
+    function lms_api_request_via_system_curl(string $url, string $token, string $origin, int $timeout): array
+    {
+        $commandParts = [
+            'curl.exe',
+            '-sS',
+            '-L',
+            '--max-time',
+            (string) $timeout,
+            '-A',
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36',
+            '-H',
+            'Accept: application/json,text/plain,*/*',
+            '-H',
+            'Accept-Language: en-US,en;q=0.9',
+            '-H',
+            'Cache-Control: no-cache',
+            '-H',
+            'Pragma: no-cache',
+            '-H',
+            'Authorization: ' . $token,
+            '-H',
+            'Origin: ' . $origin,
+            '-H',
+            'Referer: ' . rtrim($origin, '/') . '/',
+            $url,
+            '-w',
+            '\n__LMS_HTTP_CODE__:%{http_code}',
+        ];
+
+        $escapedCommand = implode(' ', array_map('escapeshellarg', $commandParts)) . ' 2>&1';
+        $output = shell_exec($escapedCommand);
+
+        if (!is_string($output) || trim($output) === '') {
+            return [
+                'success' => false,
+                'status' => 0,
+                'error' => 'System curl fallback returned an empty response'
+            ];
+        }
+
+        if (!preg_match('/__LMS_HTTP_CODE__:(\\d{3})\\s*$/', $output, $matches)) {
+            $responseBody = preg_replace('/\\R__LMS_HTTP_CODE__:\s*\{http_code\}\s*$/', '', $output);
+            $fallbackResponse = lms_api_parse_response(trim($responseBody), 200);
+
+            if (array_key_exists('response', $fallbackResponse)) {
+                return $fallbackResponse;
+            }
+
+            return [
+                'success' => false,
+                'status' => 0,
+                'error' => 'Unable to detect LMS API status from system curl fallback',
+                'raw' => $output,
+            ];
+        }
+
+        $statusCode = (int) $matches[1];
+        $responseBody = preg_replace('/\\n__LMS_HTTP_CODE__:\\d{3}\\s*$/', '', $output);
+
+        return lms_api_parse_response($responseBody, $statusCode);
+    }
+}
+
+if (!function_exists('lms_api_request')) {
+    function lms_api_request(string $endpoint, array $query = [])
+    {
+        $baseUrl = rtrim((string) env('LMS_API_BASE_URL', 'https://lms.attariclasses.in'), '/');
+        $token = trim((string) env('LMS_API_TOKEN', ''));
+        $origin = trim((string) env('LMS_API_ORIGIN', config('app.url')));
+        $timeout = (int) env('LMS_API_TIMEOUT', 20);
+
+        if ($baseUrl === '' || $token === '') {
+            return [
+                'success' => false,
+                'status' => 500,
+                'error' => 'LMS API configuration is missing'
+            ];
+        }
+
+        $url = $baseUrl . '/api/' . ltrim($endpoint, '/');
+        if (!empty($query)) {
+            $url .= '?' . http_build_query($query);
+        }
+
+        $ch = curl_init($url);
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_TIMEOUT => $timeout,
+            CURLOPT_HTTPGET => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_USERAGENT => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36',
+            CURLOPT_HTTPHEADER => [
+                'Accept: application/json,text/plain,*/*',
+                'Accept-Language: en-US,en;q=0.9',
+                'Cache-Control: no-cache',
+                'Pragma: no-cache',
+                'Authorization: ' . $token,
+                'Origin: ' . $origin,
+                'Referer: ' . rtrim($origin, '/') . '/',
+            ],
+        ]);
+
+        $responseBody = curl_exec($ch);
+        $curlError = curl_error($ch);
+        $statusCode = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        if ($responseBody === false) {
+            return [
+                'success' => false,
+                'status' => 0,
+                'error' => $curlError !== '' ? $curlError : 'Unable to connect to LMS API'
+            ];
+        }
+
+        if (lms_api_is_cloudflare_challenge($responseBody, $statusCode) && lms_api_use_system_curl_fallback()) {
+            return lms_api_request_via_system_curl($url, $token, $origin, $timeout);
+        }
+
+        return lms_api_parse_response($responseBody, $statusCode);
+    }
+}
+
+if (!function_exists('lms_publish_courses_api')) {
+    function lms_publish_courses_api()
+    {
+        $cacheKey = 'lms_publish_courses_api_response';
+
+        if (Cache::has($cacheKey)) {
+            return Cache::get($cacheKey);
+        }
+
+        $response = lms_api_request('lms_publish_course');
+
+        if (!empty($response['success'])) {
+            Cache::put($cacheKey, $response, now()->addDay());
+        }
+
+        return $response;
+    }
+}
+
+if (!function_exists('lms_topics_by_course_id_api')) {
+    function lms_topics_by_course_id_api(int $courseId)
+    {
+        if ($courseId <= 0) {
+            return [
+                'success' => false,
+                'status' => 422,
+                'error' => 'Valid course ID is required'
+            ];
+        }
+
+        return lms_api_request('lms_topic_as_course_id', [
+            'course_id' => $courseId,
+        ]);
+    }
+}
+
+
+
+

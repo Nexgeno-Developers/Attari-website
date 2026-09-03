@@ -389,11 +389,11 @@
         
                                         @foreach ($syllabus as $row)
                                             <li class="accordion1 @if($i == 1) open @endif">
-                                                <span> Module {{ $i }}:- @php echo ReplaceKeyword($row->title, $cms->replace_keyword) @endphp <i class="fa fa-angle-up"></i>
+                                                <span>@if($usesLmsSyllabus)@php echo ReplaceKeyword($row->title, $cms->replace_keyword) @endphp @else Module {{ $i }}:- @php echo ReplaceKeyword($row->title, $cms->replace_keyword) @endphp @endif <i class="fa fa-angle-up"></i>
                                                 </span>
                                                 <div class="contentsillabus_div" style="@if($i == 1) display:block; @endif">
                                                     <div class="txt">
-                                                        @php echo ReplaceKeyword($row->description, $cms->replace_keyword) @endphp
+                                                        @php echo render_course_syllabus_content($row->description, $cms->replace_keyword, $usesLmsSyllabus) @endphp
                                                     </div>
                                                     @if(!empty($detail->curriculum_pdf))
                                                         <a class="module_download_brochure showFormBtnCurriculum" href="javascript:void(0)">
@@ -480,7 +480,7 @@
                                 @if($s <= 5)
                                     {
                                         "name": "Module {{ $s }}: {{ addslashes(ReplaceKeyword($row->title, $cms->replace_keyword)) }}",
-                                        "description": "{{ schema_ReplaceKeyword($row->description, $cms->replace_keyword) }}"
+                                        "description": "{{ addslashes(schema_course_syllabus_description($row->description, $cms->replace_keyword)) }}"
                                     }@if($s < 5),@endif
                                     @php $s++; @endphp
                                 @endif
@@ -1551,6 +1551,22 @@
         </div>
     </section>
 
+    <div class="lms-topic-video-modal" id="lmsTopicVideoModal" aria-hidden="true">
+        <div class="lms-topic-video-dialog" role="dialog" aria-modal="true" aria-labelledby="lmsTopicVideoTitle">
+            <button type="button" class="lms-topic-video-close" id="lmsTopicVideoClose" aria-label="Close video popup">&times;</button>
+            <h3 class="lms-topic-video-title" id="lmsTopicVideoTitle">Preview</h3>
+            <div class="lms-topic-video-frame-wrap">
+                <iframe
+                    id="lmsTopicVideoFrame"
+                    src=""
+                    title="Course preview video"
+                    allow="autoplay; encrypted-media; picture-in-picture"
+                    allowfullscreen
+                ></iframe>
+            </div>
+        </div>
+    </div>
+
     <style>
     .course-info-heading {
     cursor: pointer;
@@ -1590,6 +1606,118 @@
 		top: -4px;
 		font-weight: 500;
 	}
+    .lms-topic-preview-trigger {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin: 6px 0 6px 12px;
+        padding: 9px 18px;
+        border: 1px solid #d5c2ff;
+        border-radius: 999px;
+        background: #f3ebff;
+        color: #2c2f4a;
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 1;
+        text-decoration: none;
+        vertical-align: middle;
+        transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+    .lms-topic-preview-trigger:hover,
+    .lms-topic-preview-trigger:focus {
+        background: #eadcff;
+        border-color: #bea0ff;
+        color: #2c2f4a;
+        text-decoration: none;
+    }
+    .lms-topic-preview-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: #1b2236;
+        color: #ffffff;
+        flex-shrink: 0;
+    }
+    .lms-topic-preview-icon .fa {
+        color: #ffffff;
+        font-size: 12px;
+        margin-left: 2px;
+    }
+    .lms-topic-video-modal {
+        position: fixed;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background: rgba(12, 18, 31, 0.88);
+        z-index: 99999;
+    }
+    .lms-topic-video-modal.is-open {
+        display: flex;
+    }
+    .lms-topic-video-dialog {
+        position: relative;
+        width: min(920px, 100%);
+        padding: 22px 22px 18px;
+        border-radius: 18px;
+        background: #0f1728;
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+    }
+    .lms-topic-video-title {
+        margin: 0 52px 16px 0;
+        color: #ffffff;
+        font-size: 22px;
+        font-weight: 600;
+    }
+    .lms-topic-video-close {
+        position: absolute;
+        top: 12px;
+        right: 14px;
+        width: 38px;
+        height: 38px;
+        border: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.12);
+        color: #ffffff;
+        font-size: 28px;
+        line-height: 1;
+        cursor: pointer;
+    }
+    .lms-topic-video-frame-wrap {
+        position: relative;
+        width: 100%;
+        padding-top: 56.25%;
+        overflow: hidden;
+        border-radius: 14px;
+        background: #000000;
+    }
+    .lms-topic-video-frame-wrap iframe {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+    }
+    @media(max-width:767px) {
+        .lms-topic-preview-trigger {
+            margin-left: 8px;
+            padding: 8px 15px;
+            font-size: 14px;
+        }
+        .lms-topic-video-modal {
+            padding: 16px;
+        }
+        .lms-topic-video-dialog {
+            padding: 18px 18px 14px;
+        }
+        .lms-topic-video-title {
+            font-size: 18px;
+        }
+    }
 	@media(max-width:767px)
 	{
 	    .location_box ul {
@@ -1599,7 +1727,7 @@
 </style>
 
     <!-------------=============== courses end =============== --------------------> 
-    <script>
+<script>
 document.addEventListener("DOMContentLoaded", function () {
     const headings = document.querySelectorAll(".course-info-heading");
 
@@ -1632,6 +1760,50 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 </script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const modal = document.getElementById("lmsTopicVideoModal");
+        const frame = document.getElementById("lmsTopicVideoFrame");
+        const closeButton = document.getElementById("lmsTopicVideoClose");
+
+        if (!modal || !frame || !closeButton) {
+            return;
+        }
+
+        const closeModal = function () {
+            modal.classList.remove("is-open");
+            modal.setAttribute("aria-hidden", "true");
+            frame.setAttribute("src", "");
+        };
+
+        document.addEventListener("click", function (event) {
+            const trigger = event.target.closest(".lms-topic-preview-trigger");
+            if (!trigger) {
+                return;
+            }
+
+            event.preventDefault();
+
+            const videoId = (trigger.getAttribute("data-video-id") || "").trim();
+            if (!videoId) {
+                return;
+            }
+
+            frame.setAttribute("src", "https://www.youtube.com/embed/" + encodeURIComponent(videoId) + "?autoplay=1&rel=0");
+            modal.classList.add("is-open");
+            modal.setAttribute("aria-hidden", "false");
+        });
+
+        closeButton.addEventListener("click", closeModal);
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape" && modal.classList.contains("is-open")) {
+                closeModal();
+            }
+        });
+    });
+    </script>
 
     <script>
     document.addEventListener("DOMContentLoaded", function () {

@@ -1108,11 +1108,35 @@ class IndexController extends Controller
         ->orderBy('title_no', 'ASC')        
         ->get();
 
+        $usesLmsSyllabus = false;
         $syllabus = Syllabus::where('course_id', $cms->course_id)->where('status', 1)->orderBy('title_no', 'ASC')->get();
+
+        if (!empty($detail->lms_course_id)) {
+            $lmsSyllabusResponse = lms_topics_by_course_id_api((int) $detail->lms_course_id);
+
+            if (!empty($lmsSyllabusResponse['success']) && !empty($lmsSyllabusResponse['data']) && is_array($lmsSyllabusResponse['data'])) {
+                $usesLmsSyllabus = true;
+                $syllabus = collect($lmsSyllabusResponse['data'])
+                    ->sort(function ($firstTopic, $secondTopic) {
+                        return strnatcmp((string) ($firstTopic['lecture_no'] ?? ''), (string) ($secondTopic['lecture_no'] ?? ''));
+                    })
+                    ->values()
+                    ->map(function ($topic, $index) use ($detail) {
+                        return (object) [
+                            'id' => null,
+                            'course_id' => $detail->id,
+                            'title_no' => (string) ($topic['lecture_no'] ?? (string) ($index + 1)),
+                            'title' => trim((string) ($topic['topic_name'] ?? '')),
+                            'description' => (string) ($topic['description'] ?? ''),
+                            'status' => 1,
+                        ];
+                    });
+            }
+        }
         $project_covered = ProjectCovered::where('course_id', $cms->course_id)->where('status', 1)->orderBy('title_no', 'ASC')->get();
         $certificate = Certificate::where('course_id', $cms->course_id)->where('status', 1)->orderBy('id', 'DESC')->get();
 
-        return view('frontend.pages.courses.index', compact('cms','detail','batch','text_review','video_review','faq','syllabus','project_covered','certificate'));
+        return view('frontend.pages.courses.index', compact('cms','detail','batch','text_review','video_review','faq','syllabus','usesLmsSyllabus','project_covered','certificate'));
     }
 
     public function success_stories(){

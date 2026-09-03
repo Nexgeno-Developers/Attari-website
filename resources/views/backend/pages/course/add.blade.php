@@ -1,3 +1,7 @@
+@php
+    $lmsCoursesResponse = lms_publish_courses_api();
+    $lmsCourses = $lmsCoursesResponse['success'] ? $lmsCoursesResponse['data'] : [];
+@endphp
 <section>
     <form id="add_course_form" action="{{url(route('course.create'))}}" method="post" enctype="multipart/form-data">
         @csrf
@@ -10,6 +14,22 @@
                     <input type="text" class="form-control" name="name" value="" required>
                 </div>
             </div>
+
+            <div class="col-sm-4">
+                <div class="form-group mb-3">
+                    <label>Lms course sync</label>
+                    <select class="form-control select2" name="lms_course_id">
+                        <option value="">Select LMS course</option>
+                        @foreach($lmsCourses as $lmsCourse)
+                            <option value="{{ $lmsCourse['id'] }}">{{ $lmsCourse['name'] }}</option>
+                        @endforeach
+                    </select>
+                    @if(!$lmsCoursesResponse['success'])
+                        <small class="text-danger d-block mt-1">{{ $lmsCoursesResponse['error'] ?? 'Unable to load LMS courses' }}</small>
+                    @endif
+                </div>
+            </div>
+
 
             <div class="col-sm-4">
                 <div class="form-group mb-3">
@@ -177,3 +197,5 @@ $("#add_faq").on("click", function() {
 });
 
 </script>
+
+
