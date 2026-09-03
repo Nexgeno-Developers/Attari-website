@@ -657,7 +657,7 @@
         @endif
 
 
-        <section id="testimonials" class="page-section testiminilas_sec course_testimonials paddingt_80 paddinb_80 position_relative zindex_11">
+        <section id="testimonials" class="page-section testiminilas_sec course_testimonials paddinb_80 position_relative zindex_11">
             <div class="container">
                 <h2 class="section_heading course_testimonials_heading text-center">
                     {{ $detail->testimonials_section_heading }}

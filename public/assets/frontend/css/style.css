@@ -7011,7 +7011,7 @@ section.vm_banner.course_hero {
 
 /* ----------------- course testimonials ----------------- */
 .course_testimonials {
-  background: #f8fafd;
+  background: #fff;
 }
 
 .course_testimonials_heading {
@@ -7083,6 +7083,7 @@ section.vm_banner.course_hero {
   padding: 20px 22px 16px;
   height: 100%;
   display: flex;
+      border: 1px solid #f4f4f4;
   flex-direction: column;
 }
 
