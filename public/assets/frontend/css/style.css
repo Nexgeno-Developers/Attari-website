@@ -9024,9 +9024,14 @@ section.vm_banner.course_hero {
 
 .media_popup_dialog {
   max-height: 90vh;
-  max-width: min(960px, 100%);
+  max-width: min(960px, calc(100vw - 48px));
   position: relative;
   width: 100%;
+}
+
+.media_popup.is-image .media_popup_dialog {
+  width: fit-content;
+  max-width: min(960px, calc(100vw - 48px));
 }
 
 .media_popup_close {
@@ -9046,21 +9051,32 @@ section.vm_banner.course_hero {
   z-index: 2;
 }
 
+.media_popup.is-image .media_popup_close {
+  right: 10px;
+  top: 10px;
+}
+
 .media_popup_body {
   background: #fff;
   border-radius: 12px;
   overflow: hidden;
+  line-height: 0;
+}
+
+.media_popup.is-image .media_popup_body {
+  background: transparent;
+  border-radius: 0;
 }
 
 .media_popup_body img {
   display: block;
   height: auto;
   max-height: 86vh;
-  margin: 0 auto;
+  margin: 0;
   width: auto;
-  max-width: 100%;
+  max-width: min(960px, calc(100vw - 48px));
   object-fit: contain;
-  background: #fff;
+  background: transparent;
 }
 
 .media_popup_video {

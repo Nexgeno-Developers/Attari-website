@@ -705,8 +705,12 @@ $(document).ready(function() {
         var videoId = youtubeId(url);
         body.innerHTML = '';
         if (videoId) {
+            popup.classList.add('is-video');
+            popup.classList.remove('is-image');
             body.innerHTML = '<div class="media_popup_video"><iframe src="https://www.youtube.com/embed/' + videoId + '?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>';
         } else if (isImageUrl(url) || url) {
+            popup.classList.add('is-image');
+            popup.classList.remove('is-video');
             body.innerHTML = '<img src="' + url + '" alt="">';
         }
         popup.classList.add('is-open');
