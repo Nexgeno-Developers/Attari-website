@@ -95,7 +95,7 @@
                         <i class="fab fa-whatsapp" aria-hidden="true"></i>
                     </div>
                     <div class="footer_info_text">
-                        <p><a id="footer-whatsapp-link" target="_blank" rel="noopener" href="https://api.whatsapp.com/send?phone=917738375431&text=Hi%2C+I+am+contacting+you+through+your+website">WhatsApp chat</a></p>
+                        <p><a id="footer-whatsapp-link" target="_blank" rel="noopener" href="https://api.whatsapp.com/send?phone=917738375431&text=Hi%2C+I+am+contacting+you+through+your+website">Chat on WhatsApp</a></p>
                     </div>
                 </div>
             </div>

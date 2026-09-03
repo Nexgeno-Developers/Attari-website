@@ -5598,7 +5598,7 @@ background: #07d353;
         .nx_trainer_desc{
             max-width:720px;
             margin:auto;
-            color:#64748b;
+            color:#000;
             font-size:16px;
             line-height:1.6;
         }
@@ -5687,7 +5687,7 @@ background: #07d353;
     margin-bottom: 0;
     font-size: 15px;
     font-weight: 500;
-    color: #1c2746;
+    color: #000;
     line-height: 1.5;
         }
 
@@ -6351,7 +6351,7 @@ section.vm_banner.course_hero {
 }
 
 .overview_content {
-  padding-right: 25px;
+  padding-right: 0;
 }
 
 .overview_content ul {
@@ -6364,7 +6364,7 @@ section.vm_banner.course_hero {
   position: relative;
   padding-left: 38px;
   margin-bottom: 18px;
-  color: #4b5563 !important;
+  color: #000 !important;
   font-size: 16px !important;
   line-height: 1.7 !important;
   font-weight: 400;
@@ -6614,6 +6614,15 @@ section.vm_banner.course_hero {
   background: #f97316;
 }
 
+.course_overview_talk_section {
+  background: #fff;
+  padding: 0 0 80px;
+}
+
+.course_overview_talk_section .overview_talk {
+  max-width: 380px;
+}
+
 @media screen and (max-width: 991px) {
   .course_overview .width70,
   .course_overview .width30 {
@@ -6621,7 +6630,15 @@ section.vm_banner.course_hero {
   }
 
   .overview_content {
-    padding-right: calc(var(--bs-gutter-x) * .5);
+    padding-right: 0;
+  }
+
+  .course_overview_talk_section {
+    padding: 0 0 50px;
+  }
+
+  .course_overview_talk_section .overview_talk {
+    max-width: 100%;
   }
 
   .course_overview_heading {
@@ -6772,7 +6789,7 @@ section.vm_banner.course_hero {
   position: relative;
   padding-left: 16px;
   margin-bottom: 10px;
-  color: #4b5563 !important;
+  color: #000 !important;
   font-size: 16px !important;
   line-height: 1.55 !important;
 }
@@ -7087,7 +7104,7 @@ section.vm_banner.course_hero {
 
 .course_review_text,
 .course_review_text p {
-  color: #4b5563 !important;
+  color: #000 !important;
   font-size: 16px !important;
   line-height: 1.6 !important;
   margin-bottom: 0;
@@ -7251,7 +7268,7 @@ section.vm_banner.course_hero {
   display: inline-flex;
   align-items: flex-start;
   gap: 8px;
-  color: #334155;
+  color: #000;
   font-size: 15px;
   line-height: 1.45;
   font-weight: 500;
@@ -7467,7 +7484,7 @@ section.vm_banner.course_hero {
 /* ----------------- course FAQ ----------------- */
 .course_faq_section {
   background: #fff;
-  padding: 60px 0 80px;
+  padding: 60px 0 40px;
 }
 
 .course_faq_heading {
@@ -7595,7 +7612,7 @@ section.vm_banner.course_hero {
 .course_faq_section .contentsillabus_div1 li {
   padding: 0;
   margin: 0 0 8px;
-  color: #4b5563;
+  color: #000;
   font-size: 14px;
   line-height: 1.7;
 }
@@ -7699,7 +7716,7 @@ section.vm_banner.course_hero {
 
 @media screen and (max-width: 991px) {
   .course_faq_section {
-    padding: 40px 0 50px;
+    padding: 40px 0 28px;
   }
 
   .course_faq_heading {
@@ -8562,7 +8579,7 @@ section.vm_banner.course_hero {
 
 .course_syllabus_modern .course_syllabus_intro,
 .course_syllabus_modern .online_css {
-  color: #4b5563  !important;
+  color: #000  !important;
   display: block;
   font-size: 13px;
   line-height: 1.55;
@@ -8682,7 +8699,7 @@ section.vm_banner.course_hero {
 
 .course_syllabus_modern .contentsillabus_div .txt li {
   align-items: center;
-  color: #16243b;
+  color: #000;
   display: grid;
   font-size: 15px;
   gap: 8px 10px;

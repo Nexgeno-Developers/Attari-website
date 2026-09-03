@@ -268,7 +268,7 @@
                                 <div class="overview_talk_actions">
                                     <a class="overview_talk_whatsapp" target="_blank" rel="noopener" href="https://api.whatsapp.com/send?phone=917738375431&text=Hi%2C+I+am+contacting+you+through+your+website">
                                         <i class="fab fa-whatsapp" aria-hidden="true"></i>
-                                        <span>WhatsApp chat</span>
+                                        <span>Chat on WhatsApp</span>
                                     </a>
                                     <button type="button" class="overview_talk_demo" onclick="formModal('{{ url(route('component.form')) }}?section=Overview - Book Free Demo&title=Book a FREE Demo&current_page={{ urlencode(url()->current()) }}&course_name={{$courseInputName}}')">Book a free demo</button>
                                 </div>
@@ -533,7 +533,6 @@
                     <div class="col-md-3 width30 position_sticky course_syllabus_form_col">
                         <div class="bookdemofreeform_course syllabus_demo_card">
                             <div class="syllabus_demo_card_head">
-                                <span class="syllabus_demo_badge">Free demo class</span>
                                 <p class="syllabus_demo_title">Book a <b>FREE</b> Demo</p>
                                 <span class="syllabus_demo_card_sub">Share your details. A counsellor will call you back.</span>
                             </div>
@@ -1317,16 +1316,32 @@
                     <!----================== Faq Schema ==================------------------->
                     @endif
 
-                    <aside class="course_faq_talk">
-                        <div class="course_faq_talk_icon">
-                            <i class="fas fa-phone-alt" aria-hidden="true"></i>
-                        </div>
-                        <h3>Talk To Us</h3>
-                        <p>Call or chat on WhatsApp — Our career counsellor will help you pick the right batch.</p>
-                        <a class="course_faq_talk_phone" href="tel:+917738375431">+91 77383 75431</a>
-                        <a class="course_faq_talk_whatsapp" target="_blank" rel="noopener" href="https://api.whatsapp.com/send?phone=917738375431&text=Hi%2C+I+am+contacting+you+through+your+website">Chat on WhatsApp</a>
-                        <button type="button" class="course_faq_talk_demo" onclick="formModal('{{ url(route('component.form')) }}?section=FAQ - Book Free Demo&title=Book a FREE Demo&current_page={{ urlencode(url()->current()) }}&course_name={{$courseInputName}}')">Book a free demo</button>
-                    </aside>
+                    <div class="overview_talk">
+                                <div class="overview_talk_header">
+                                    <p class="overview_talk_title">Talk To Us</p>
+                                    <p class="overview_talk_subtitle">We are happy to help you</p>
+                                </div>
+
+                                <a class="overview_talk_phone" href="tel:+917738375431">
+                                    <span class="overview_talk_flag" aria-hidden="true"></span>
+                                    <span>+91-7738375431</span>
+                                </a>
+
+                                <div class="overview_talk_quote">
+                                    <div class="overview_talk_quote_mark" aria-hidden="true">&ldquo;</div>
+                                    <p>Build your cloud skills with live trainer guidance, hands-on labs, and support whenever you need help.</p>
+                                    <p class="overview_talk_quote_author">- Attari Classes</p>
+                                </div>
+
+                                <div class="overview_talk_actions">
+                                    <a class="overview_talk_whatsapp" target="_blank" rel="noopener" href="https://api.whatsapp.com/send?phone=917738375431&text=Hi%2C+I+am+contacting+you+through+your+website">
+                                        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                                        <span>Chat on WhatsApp</span>
+                                    </a>
+                                    <button type="button" class="overview_talk_demo" onclick="formModal('{{ url(route('component.form')) }}?section=Overview - Book Free Demo&title=Book a FREE Demo&current_page={{ urlencode(url()->current()) }}&course_name={{$courseInputName}}')">Book a free demo</button>
+                                </div>
+                            </div>
+                    
                 </div>
             </div>
         </section>
