@@ -135,33 +135,49 @@ $(document).ready(function() {
 const menu1 = document.querySelector(".menu");
 const menuMain = document.querySelector(".manu_main");
 const closeMenu = document.querySelector(".mobile_menu_close");
-const goBack = menu1.querySelector(".go_back");
+const goBack = menu1 ? menu1.querySelector(".go_back") : null;
 const menuTrigger = document.querySelector(".mobile_menu_trigger");
-menuMain.addEventListener("click", (e) => {
-	if (!menu1.classList.contains("active")) {
-		return
-	}
-	if (e.target.closest(".menu_item_has_children")) {
-		const hasChildren = e.target.closest(".menu_item_has_children");
-		showSubMenu(hasChildren)
-	}
-});
-goBack.addEventListener("click", () => {
-	hideSubMenu()
-});
-menuTrigger.addEventListener("click", () => {
-	toggleMenu()
-});
-closeMenu.addEventListener("click", () => {
-	toggleMenu()
-});
-document.querySelector(".menu_overlay").addEventListener("click", () => {
-	toggleMenu()
-});
+const menuOverlay = document.querySelector(".menu_overlay");
+if (menuMain && menu1) {
+	menuMain.addEventListener("click", (e) => {
+		if (!menu1.classList.contains("active")) {
+			return
+		}
+		if (e.target.closest(".menu_item_has_children")) {
+			const hasChildren = e.target.closest(".menu_item_has_children");
+			showSubMenu(hasChildren)
+		}
+	});
+}
+if (goBack) {
+	goBack.addEventListener("click", () => {
+		hideSubMenu()
+	});
+}
+if (menuTrigger) {
+	menuTrigger.addEventListener("click", () => {
+		toggleMenu()
+	});
+}
+if (closeMenu) {
+	closeMenu.addEventListener("click", () => {
+		toggleMenu()
+	});
+}
+if (menuOverlay) {
+	menuOverlay.addEventListener("click", () => {
+		toggleMenu()
+	});
+}
 
 function toggleMenu() {
+	if (!menu1) {
+		return
+	}
 	menu1.classList.toggle("active");
-	document.querySelector(".menu_overlay").classList.toggle("active")
+	if (menuOverlay) {
+		menuOverlay.classList.toggle("active")
+	}
 }
 
 function showSubMenu(hasChildren) {
@@ -183,7 +199,7 @@ function hideSubMenu() {
 }
 window.onresize = function() {
 	if (this.innerWidth > 991) {
-		if (menu1.classList.contains("active")) {
+		if (menu1 && menu1.classList.contains("active")) {
 			toggleMenu()
 		}
 	}
@@ -196,9 +212,11 @@ faqs.forEach((faq) => {
 });
 const query = document.querySelector(".query_heading");
 const box = document.querySelector(".query_form");
-query.addEventListener("click", () => {
-	box.classList.toggle("active")
-});
+if (query && box) {
+	query.addEventListener("click", () => {
+		box.classList.toggle("active")
+	});
+}
 $("li.accordion span").click(function() {
 	if ($(this).parent().hasClass("open")) {
 		$("li.accordion").removeClass("open");
