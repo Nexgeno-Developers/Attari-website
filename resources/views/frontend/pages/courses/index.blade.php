@@ -759,7 +759,7 @@
                 <div class="container">
                     <h2 class="section_heading course_batch_heading text-center">{{ $detail->batch_section_heading }}</h2>
 
-                    <div class="course_batch_card">
+                    <div class="course_batch_card course_batch_card_secondary">
                         <div class="course_batch_copy">
                             <h3 class="course_batch_title">{{ $batch->paced_title }}</h3>
                             <ul class="course_batch_points">
@@ -769,7 +769,7 @@
                             </ul>
                         </div>
                         <div class="course_batch_action">
-                            <a class="course_batch_btn" href="https://lms.attariclasses.in/" target="_blank">Visit Video Portal</a>
+                            <a class="course_batch_btn course_batch_btn_outline" href="https://lms.attariclasses.in/" target="_blank">Visit Video Portal</a>
                         </div>
                     </div>
 
@@ -807,13 +807,15 @@
                             @endif
                         </div>
                         <div class="course_batch_offer">
-                            <p>Get In Touch to Avail</p>
-                            <strong>{{ $batch->off_percentage }} OFF</strong>
-                            <button type="button" class="course_batch_btn" onclick="formModal('{{ url(route('component.form')) }}?section=Online / Classroom - course Page&title=Book a Demo&current_page={{ urlencode(url()->current()) }}&course_name={{$courseInputName}}')">Book a Demo</button>
+                            <div class="course_batch_offer_panel">
+                                <p>Get In Touch to Avail</p>
+                                <strong>{{ $batch->off_percentage }} OFF</strong>
+                                <button type="button" class="course_batch_btn" onclick="formModal('{{ url(route('component.form')) }}?section=Online / Classroom - course Page&title=Book a Demo&current_page={{ urlencode(url()->current()) }}&course_name={{$courseInputName}}')">Book a Demo</button>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="course_batch_card">
+                    <div class="course_batch_card course_batch_card_secondary">
                         <div class="course_batch_copy">
                             <h3 class="course_batch_title">{{ $batch->corp_title }}</h3>
                             <ul class="course_batch_points">
@@ -823,7 +825,7 @@
                             </ul>
                         </div>
                         <div class="course_batch_action">
-                            <button type="button" class="course_batch_btn" onclick="formModal('{{ url(route('component.form')) }}?section={{$batch->corp_title. ' - course Page'}}&current_page={{ urlencode(url()->current()) }}&title=Enquire Now&course_name={{$courseInputName}}')">Enquire Now</button>
+                            <button type="button" class="course_batch_btn course_batch_btn_outline" onclick="formModal('{{ url(route('component.form')) }}?section={{$batch->corp_title. ' - course Page'}}&current_page={{ urlencode(url()->current()) }}&title=Enquire Now&course_name={{$courseInputName}}')">Enquire Now</button>
                         </div>
                     </div>
                 </div>
