@@ -42,7 +42,7 @@
   }
 }
 section.vm_banner.course_hero {
-  background: #0f172a !important;
+  background: #1c2746  !important;
 }
 .course_hero_btn_primary {
   background: #f97316 !important;
