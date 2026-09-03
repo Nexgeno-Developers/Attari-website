@@ -1428,7 +1428,7 @@ body p.gettouch{
 /*  --------------------------fix footer------------- */
 
 .fix_footer {
-  background: #333333;
+  background: #0f172a;
   color: white !important;
   position: fixed !important;
   bottom: 0;
@@ -1443,7 +1443,7 @@ body p.gettouch{
   bottom: 0;
   right: 5rem;
   width:290px !important;
-  background: #13aff0;
+  background: #f97316;
   padding: 10px 0 0 0;
   padding-left: 0 !important;
   padding-right: 0 !important;
@@ -1451,7 +1451,7 @@ body p.gettouch{
 }
 
 .query_heading {
-  padding: 0px 10px 10px 10px;
+      padding: 2px 20px 8px 20px;
   cursor: pointer;
 }
 
