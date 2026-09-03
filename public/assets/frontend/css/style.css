@@ -1476,46 +1476,91 @@ body p.gettouch{
   transform: rotate(90deg);
 }
 
-.query_form input {
-  font-size: 15px;
-  height: 40px;
-  margin-bottom: 8px;
+/* Drop a Query fields + button — match course demo form */
+.query_form .form-group {
+  margin-bottom: 9px;
 }
 
-.query_form textarea {
-  font-size: 15px;
-  margin-bottom: 8px;
+.query_form .form-group.text-center {
+  margin-bottom: 0;
+  margin-top: 4px;
 }
 
-.query_form select {
-  font-size: 15px;
-  height: 40px;
-  margin-bottom: 8px;
+.query_form input,
+.query_form textarea,
+.query_form select,
+.query_form .form-control,
+.query_form .form-select {
+  font-size: 14px !important;
+  height: 44px !important;
+  margin-bottom: 0 !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  background: #f8fafc !important;
+  color: #1b2744 !important;
+  box-shadow: none !important;
+  padding: 10px 14px !important;
+  width: 100%;
 }
 
-.query_form form button {
- display: inline-block;
-    font-family: inherit;
-    background-color: #1c2746;
-    color: #fff;
-    font-size: 16px !important;
-    font-weight: 600;
-    text-transform: capitalize;
-    margin: 0;
-    padding: 10px 20px;
-    border: 0;
-    border-radius: 50px;
-    cursor: pointer;
-    text-align: center;
-    letter-spacing: 0.1em;
-    line-height: 1;
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -ms-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-    width: fit-content;
-    margin: 0 auto;
+.query_form textarea,
+.query_form textarea.form-control {
+  height: auto !important;
+  min-height: 82px !important;
+  padding-top: 12px !important;
+  resize: vertical;
+}
+
+.query_form input:focus,
+.query_form textarea:focus,
+.query_form select:focus,
+.query_form .form-control:focus,
+.query_form .form-select:focus {
+  background: #fff !important;
+  border-color: #f97316 !important;
+  box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.2) !important;
+  outline: none;
+}
+
+.query_form .form-control::placeholder,
+.query_form textarea::placeholder {
+  color: #8a93a6;
+  opacity: 1;
+}
+
+.query_form form button,
+.query_form .submit_button,
+.query_form .btn.btn-primary {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 100% !important;
+  height: 46px !important;
+  font-family: "Satoshi", sans-serif;
+  background: #f97316 !important;
+  background-color: #f97316 !important;
+  color: #fff !important;
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 4px 0 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 8px !important;
+  cursor: pointer;
+  text-align: center;
+  line-height: 1;
+  box-shadow: none !important;
+  transition: background 0.2s ease;
+}
+
+.query_form form button:hover,
+.query_form .submit_button:hover,
+.query_form .btn.btn-primary:hover {
+  background: #ea6a0c !important;
+  background-color: #ea6a0c !important;
+  color: #fff !important;
 }
 
 .button_main .view_coursebtn {
@@ -7753,10 +7798,8 @@ section.vm_banner.course_hero {
 
 /* ----------------- course skills + demo CTA ----------------- */
 .course_skills_section {
-  background: #fff;
+  background: linear-gradient(180deg, #f8fafd 0%, #ffffff 100%);
 }
-
-
 
 .course_skills_heading {
   font-family: "Satoshi", sans-serif;
@@ -7765,30 +7808,65 @@ section.vm_banner.course_hero {
   line-height: 1.25;
   color: #0f172a;
   text-align: center;
-  margin: 0 0 28px;
+  margin: 0 0 36px;
 }
 
-.course_skills_tags {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px 14px;
+.course_skills_grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 16px;
   margin: 0 0 48px;
 }
 
-.course_skills_tags span {
-  display: inline-flex;
-  align-items: center;
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 50px;
-  padding: 10px 20px;
+.course_skill_card {
+     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 148px;
+    padding: 25px 20px 25px;
+    background: #fff;
+    border: 1px solid #e8eef5;
+    border-radius: 18px;
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.05);
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.course_skill_card:hover {
+  transform: translateY(-4px);
+  border-color: #fdba74;
+  box-shadow: 0 16px 34px rgba(249, 115, 22, 0.14);
+}
+
+.course_skill_name {
   font-family: "Satoshi", sans-serif;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.35;
   color: #0f172a;
-  line-height: 1.3;
-  white-space: nowrap;
+  margin: 0;
+}
+
+.course_skill_logo {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.course_skill_logo img {
+  width: 56px;
+  height: 56px;
+  display: block;
+  object-fit: contain;
+}
+
+.course_skills_tags {
+  display: none;
 }
 
 .course_skills_cta {
@@ -7885,15 +7963,27 @@ section.vm_banner.course_hero {
     margin-bottom: 20px;
   }
 
-  .course_skills_tags {
-    gap: 10px;
-    margin-bottom: 28px;
+  .course_skills_grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 32px;
   }
 
-  .course_skills_tags span {
+  .course_skill_card {
+    min-height: 132px;
+    padding: 16px 12px 14px;
+    border-radius: 14px;
+    gap: 12px;
+  }
+
+  .course_skill_name {
     font-size: 13px;
-    padding: 8px 16px;
-    white-space: normal;
+  }
+
+  .course_skill_logo,
+  .course_skill_logo img {
+    width: 48px;
+    height: 48px;
   }
 
   .course_skills_cta {
@@ -7915,6 +8005,28 @@ section.vm_banner.course_hero {
   .course_skills_cta_demo,
   .course_skills_cta_whatsapp {
     width: 100%;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .course_skills_grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .course_skill_card {
+    min-height: 120px;
+    padding: 14px 10px 12px;
+  }
+
+  .course_skill_name {
+    font-size: 12px;
+  }
+
+  .course_skill_logo,
+  .course_skill_logo img {
+    width: 42px;
+    height: 42px;
   }
 }
 
@@ -8466,6 +8578,7 @@ section.vm_banner.course_hero {
   border-top: 1px solid #1e293b;
   padding-top: 18px;
   margin-top: 10px;
+  padding-bottom:25px;
 }
 
 .site_footer .copyright {

@@ -942,6 +942,48 @@
         'Certification Guidance',
     ];
 
+    $skillIconFor = function ($skillLabel) {
+        $label = strtolower($skillLabel);
+        $rules = [
+            ['words' => ['ec2', 'auto scaling', 'virtual machine', 'hyper-v', 'esxi', 'vm management'], 'icon' => 'ec2.svg'],
+            ['words' => ['vpc', 'subnet', 'virtual network', 'vswitch', 'vlan', 'routing', 'ospf', 'stp', 'etherchannel', 'ip addressing'], 'icon' => 'vpc.svg'],
+            ['words' => ['iam', 'security', 'acl', 'nsg', 'entra'], 'icon' => 'iam.svg'],
+            ['words' => ['s3', 'cloudfront', 'storage', 'datastore', 'raid', 'file'], 'icon' => 's3.svg'],
+            ['words' => ['rds', 'dynamo', 'database'], 'icon' => 'database.svg'],
+            ['words' => ['lambda', 'serverless'], 'icon' => 'lambda.svg'],
+            ['words' => ['cloudwatch', 'cloudtrail', 'monitor', 'azure monitor'], 'icon' => 'monitor.svg'],
+            ['words' => ['route 53', 'elb', 'dns', 'dhcp'], 'icon' => 'dns.svg'],
+            ['words' => ['genai', 'openai', 'ai services', 'ai-assisted'], 'icon' => 'genai.svg'],
+            ['words' => ['bedrock'], 'icon' => 'bedrock.svg'],
+            ['words' => ['script', 'python', 'automation', 'packet tracer'], 'icon' => 'scripting.svg'],
+            ['words' => ['lab', 'project'], 'icon' => 'labs.svg'],
+            ['words' => ['active directory', 'group policy', 'identity', 'user management', 'hybrid azure'], 'icon' => 'identity.svg'],
+            ['words' => ['architecture', 'interview'], 'icon' => 'architecture.svg'],
+            ['words' => ['certification', 'certificate'], 'icon' => 'cert.svg'],
+            ['words' => ['troubleshoot'], 'icon' => 'troubleshoot.svg'],
+            ['words' => ['vsphere', 'vsan', 'vmotion', 'drs', 'fault tolerance', 'resource pool', 'snapshot', 'clone', 'cluster'], 'icon' => 'vmware.svg'],
+            ['words' => ['server', 'iis', 'wsus', 'windows admin', 'backup'], 'icon' => 'server.svg'],
+        ];
+
+        foreach ($rules as $rule) {
+            foreach ($rule['words'] as $word) {
+                if (strpos($label, $word) !== false) {
+                    return '/assets/frontend/images/skills/' . $rule['icon'];
+                }
+            }
+        }
+
+        return '/assets/frontend/images/skills/architecture.svg';
+    };
+
+    $skillItems = [];
+    foreach ($skillTags as $skillTag) {
+        $skillItems[] = [
+            'label' => $skillTag,
+            'icon' => $skillIconFor($skillTag),
+        ];
+    }
+
     if ($courseId == 5) {
         $trainerHeading = 'VMware';
         $trainerDesc = 'Learn VMware vSphere Server Virtualization from Industry Expert Trainer';
@@ -1230,9 +1272,14 @@
         <section id="skills_master" class="paddingt_80 paddinb_80 page-section course_skills_section">
             <div class="container">
                 <h2 class="course_skills_heading">{{ $skillsHeading }}</h2>
-                <div class="course_skills_tags">
-                    @foreach ($skillTags as $skillTag)
-                        <span>{{ $skillTag }}</span>
+                <div class="course_skills_grid">
+                    @foreach ($skillItems as $skillItem)
+                        <article class="course_skill_card">
+                            <h3 class="course_skill_name">{{ $skillItem['label'] }}</h3>
+                            <div class="course_skill_logo">
+                                <img src="{{ $skillItem['icon'] }}" alt="{{ $skillItem['label'] }} logo" loading="lazy" width="56" height="56">
+                            </div>
+                        </article>
                     @endforeach
                 </div>
 
