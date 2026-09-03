@@ -944,11 +944,20 @@
 
     $skillIconFor = function ($skillLabel) {
         $label = strtolower($skillLabel);
+        // More specific keywords first so each skill gets its own logo
         $rules = [
-            ['words' => ['ec2', 'auto scaling', 'virtual machine', 'hyper-v', 'esxi', 'vm management'], 'icon' => 'ec2.svg'],
-            ['words' => ['vpc', 'subnet', 'virtual network', 'vswitch', 'vlan', 'routing', 'ospf', 'stp', 'etherchannel', 'ip addressing'], 'icon' => 'vpc.svg'],
+            ['words' => ['esxi', 'vcenter'], 'icon' => 'esxi.svg'],
+            ['words' => ['cluster'], 'icon' => 'cluster.svg'],
+            ['words' => ['vsan'], 'icon' => 'vsan.svg'],
+            ['words' => ['vmotion', 'drs'], 'icon' => 'vmotion.svg'],
+            ['words' => ['fault tolerance', ' ha ', 'ha &'], 'icon' => 'ha.svg'],
+            ['words' => ['snapshot', 'clone'], 'icon' => 'snapshot.svg'],
+            ['words' => ['resource pool'], 'icon' => 'resource.svg'],
+            ['words' => ['vm management'], 'icon' => 'vm.svg'],
+            ['words' => ['vswitch', 'vpc', 'subnet', 'virtual network', 'vlan', 'routing', 'ospf', 'stp', 'etherchannel', 'ip addressing', 'networking'], 'icon' => 'vpc.svg'],
+            ['words' => ['datastore', 's3', 'cloudfront', 'storage', 'raid', 'file'], 'icon' => 's3.svg'],
+            ['words' => ['ec2', 'auto scaling', 'virtual machine', 'hyper-v'], 'icon' => 'ec2.svg'],
             ['words' => ['iam', 'security', 'acl', 'nsg', 'entra'], 'icon' => 'iam.svg'],
-            ['words' => ['s3', 'cloudfront', 'storage', 'datastore', 'raid', 'file'], 'icon' => 's3.svg'],
             ['words' => ['rds', 'dynamo', 'database'], 'icon' => 'database.svg'],
             ['words' => ['lambda', 'serverless'], 'icon' => 'lambda.svg'],
             ['words' => ['cloudwatch', 'cloudtrail', 'monitor', 'azure monitor'], 'icon' => 'monitor.svg'],
@@ -961,7 +970,7 @@
             ['words' => ['architecture', 'interview'], 'icon' => 'architecture.svg'],
             ['words' => ['certification', 'certificate'], 'icon' => 'cert.svg'],
             ['words' => ['troubleshoot'], 'icon' => 'troubleshoot.svg'],
-            ['words' => ['vsphere', 'vsan', 'vmotion', 'drs', 'fault tolerance', 'resource pool', 'snapshot', 'clone', 'cluster'], 'icon' => 'vmware.svg'],
+            ['words' => ['vsphere', 'vmware'], 'icon' => 'vmware.svg'],
             ['words' => ['server', 'iis', 'wsus', 'windows admin', 'backup'], 'icon' => 'server.svg'],
         ];
 
@@ -971,6 +980,11 @@
                     return '/assets/frontend/images/skills/' . $rule['icon'];
                 }
             }
+        }
+
+        // "HA & Fault Tolerance" — label starts with HA
+        if (preg_match('/\bha\b/', $label)) {
+            return '/assets/frontend/images/skills/ha.svg';
         }
 
         return '/assets/frontend/images/skills/architecture.svg';
