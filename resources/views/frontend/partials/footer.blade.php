@@ -15,8 +15,7 @@
         <div class="row footer_links_container site_footer_grid">
             <div class="col-lg-4 col-md-6">
                 <a class="site_footer_brand" href="{{ url(route('index')) }}" aria-label="Attari Classes">
-                    <span class="site_footer_brand_icon" aria-hidden="true"><i class="fas fa-cloud"></i></span>
-                    <span class="site_footer_brand_text"><strong>Attari</strong>Classes</span>
+                  <img class="sm-logo-size footer_logo" src="/assets/frontend/images/footer_logo.webp" alt="Logo" />
                 </a>
                 <p class="footer_para">Attari Classes is an IT training institute for VMware vSphere, AWS Cloud, Azure Cloud, Windows Server Hybrid and CCNA course. We provide Instructor led Live Online
                     training to candidates across the globe & Classroom Training in

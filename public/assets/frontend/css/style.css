@@ -8304,6 +8304,9 @@ section.vm_banner.course_hero {
   font-size: 22px;
   flex-shrink: 0;
 }
+.footer_logo {
+    width: 180px;
+}
 
 .site_footer_brand {
   display: inline-flex;
