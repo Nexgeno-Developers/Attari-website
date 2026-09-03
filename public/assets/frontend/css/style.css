@@ -7227,7 +7227,7 @@ section.vm_banner.course_hero {
 
 /* ----------------- course batch schedule ----------------- */
 .course_batch {
-  background: linear-gradient(180deg, #f5f8fc 0%, #eef3f9 100%);
+          background: linear-gradient(180deg, #f5f8fc 0%, #eef3f9 100%);
 }
 
 .course_batch_heading {
@@ -8093,7 +8093,7 @@ section.vm_banner.course_hero {
 
 /* ----------------- other courses ----------------- */
 .course_other_section {
-  background: #f4f7f9;
+      background: linear-gradient(180deg, #f5f8fc 0%, #eef3f9 100%);
   padding: 60px 0 70px;
 }
 
