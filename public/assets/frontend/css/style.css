@@ -6937,7 +6937,7 @@ section.vm_banner.course_hero {
 
 .course_certificates .owl-carousel .owl-stage-outer {
   overflow: hidden;
-  padding-bottom: 18px;
+  padding-bottom: 0px;
 }
 
 .course_certificates .certificate_card {
