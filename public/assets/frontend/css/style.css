@@ -6223,7 +6223,7 @@ section.vm_banner.course_hero {
 
 /* ----------------- course page subnav + key features ----------------- */
 .vm_nav.course_subnav {
-  background: #f4f5f7;
+ background: linear-gradient(180deg, #f5f8fc 0%, #eef3f9 100%);
   box-shadow: 0 1px 0 #e8eaed;
   padding: 12px 0;
 }
