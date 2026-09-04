@@ -402,10 +402,12 @@ $(".course_video_reviews, .course_text_reviews").owlCarousel({
     navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
     responsive: {
         0: {
-            items: 1.3,
+            items: 1.1,
+			margin: 10,
         },
         768: {
             items: 2.3,
+			
         },
         1200: {
             items: 3,
