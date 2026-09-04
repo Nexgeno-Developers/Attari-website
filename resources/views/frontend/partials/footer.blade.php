@@ -118,11 +118,11 @@
 </div> -->
 
 
-<!-- <div class="whatsappdesktop">
+<div class="whatsappdesktop">
   <a id="whatsapp-link" target="_blank">
     <i aria-hidden="true" class="fab fa-whatsapp"></i>  Chat on WhatsApp
   </a>
-</div> -->
+</div>
 
 
 <button id="combo" aria-label="back-to-top" class="back-to-top" type="button"><i class="fas fa-chevron-up" aria-hidden="true"></i></button>
