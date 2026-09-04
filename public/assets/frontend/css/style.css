@@ -4620,6 +4620,59 @@ button.owl-next i {
     color: #333;
     font-size: 21px !important;
 }
+
+@media screen and (max-width: 767px) {
+  .owl-prev,
+  .owl-next,
+  button.owl-prev,
+  button.owl-next,
+  .owl-carousel .owl-nav button.owl-prev,
+  .owl-carousel .owl-nav button.owl-next {
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px !important;
+    padding: 0 !important;
+    line-height: 1 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 10px !important;
+  }
+
+  .course_testimonials .owl-nav button.owl-prev {
+    left: -10px !important;
+}
+.course_testimonials .owl-nav button.owl-next {
+    right: -10px !important;
+}
+.course_certificates .owl-nav button.owl-next {
+    right: -10px !important;
+}
+.course_certificates .owl-nav button.owl-prev {
+    left: -10px !important;
+}
+.course_projects .owl-nav button.owl-prev {
+    left: -10px !important;
+}
+.course_projects .owl-nav button.owl-next {
+    right: -10px !important;
+}
+  button.owl-prev i,
+  button.owl-next i,
+  .owl-carousel .owl-nav button i,
+  .prje_cove_section button.owl-prev i,
+  .prje_cove_section button.owl-next i,
+  .certificate_section button.owl-prev i,
+  .certificate_section button.owl-next i,
+  .video_testiminials button.owl-prev i,
+  .video_testiminials button.owl-next i,
+  .course_projects .owl-nav button i,
+  .course_certificates .owl-nav button i,
+  .course_testimonials .owl-nav button i {
+    font-size: 10px !important;
+    line-height: 1 !important;
+  }
+}
 .location_box li a:hover {
     color: #13aff0;
 }

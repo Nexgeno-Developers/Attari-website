@@ -1,6 +1,6 @@
 
 <link rel="shortcut icon" href="{{ asset('/assets/frontend/images/favicon.webp') }}">
-<link rel="stylesheet" href="/assets/frontend/css/style.css?v1.9.36" />
+<link rel="stylesheet" href="/assets/frontend/css/style.css?v1.9.39" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
  
 <link rel="stylesheet" href="/assets/frontend/css/responsive.css?v-1.4.13" />
@@ -164,6 +164,33 @@ section.vm_banner.course_hero {
 .course_batch_btn {
   background: #f97316 !important;
   color: #fff !important;
+}
+@media screen and (max-width: 767px) {
+  .owl-prev,
+  .owl-next,
+  button.owl-prev,
+  button.owl-next,
+  .owl-carousel .owl-nav button.owl-prev,
+  .owl-carousel .owl-nav button.owl-next {
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px !important;
+    padding: 0 !important;
+    line-height: 1 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 10px !important;
+  }
+  button.owl-prev i,
+  button.owl-next i,
+  .owl-carousel .owl-nav button i,
+  .course_projects .owl-nav button i,
+  .course_certificates .owl-nav button i,
+  .course_testimonials .owl-nav button i {
+    font-size: 10px !important;
+    line-height: 1 !important;
+  }
 }
 </style>
 
