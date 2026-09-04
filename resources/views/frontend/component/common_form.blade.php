@@ -29,7 +29,7 @@ $honeypotFieldName = 'website_' . strtolower(\Illuminate\Support\Str::random(12)
 <form class="{{$class}} enquiry_form" action="{{url(route('contact.create'))}}" method="post" enctype="multipart/form-data">
     @csrf
 
-    <!-- <p class="enquiry_form_title text-center {{ isset($Headingclassname) ? $Headingclassname : '' }}">{!! isset($title) ? $title : '' !!}</p> -->
+    <p class="enquiry_form_title text-center {{ isset($Headingclassname) ? $Headingclassname : '' }}">{!! isset($title) ? $title : '' !!}</p>
 
     <input type="hidden" name="section" value="{{$section}}" data-aos-once="true" data-aos="fade-up" />
     <input type="hidden" name="url" value="{{ request()->fullUrl() }}" data-aos-once="true" data-aos="fade-up" />
