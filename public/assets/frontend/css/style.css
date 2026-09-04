@@ -827,7 +827,7 @@ body p.gettouch{
 
 .training_btn a {
   padding: 12px 30px;
-  background: #13aff0 !important;
+  background: #f97316 !important;
   color: #fff !important;
   text-decoration: none;
   border-radius: 3px;
@@ -1329,7 +1329,7 @@ body p.gettouch{
 
 .footer_search button {
   border-radius: 50px;
-  background: #13aff0;
+  background: #f97316;
   padding: 8px 15px 5px 15px;
   border: none;
   color: white;
@@ -1371,7 +1371,7 @@ body p.gettouch{
 }
 
 .footer_read {
-  color: #13aff0;
+  color: #f97316;
   text-decoration: none;
   font-weight: 600;
   font-size: 15px;
@@ -1414,7 +1414,7 @@ body p.gettouch{
 }
 
 .footer_info_icon i {
-  color: #13aff0;
+  color: #f97316;
 }
 
 .footer_privacy p a {
@@ -1924,8 +1924,8 @@ p .home_breadcrumb a:hover {
 }
 
 .contact_form .form_container form button {
-      border: 2px solid #13aff0;
-    background-color: #13aff0;
+      border: 2px solid #f97316;
+    background-color: #f97316;
     color: #fff;
        font-size: 16px !important;
     padding: 5px 23px;
@@ -1937,7 +1937,7 @@ p .home_breadcrumb a:hover {
 }
 
 .contact_form .form_container form button:hover {
-  background-color: #13aff0;
+  background-color: #f97316;
   color: white;
 }
 
@@ -2110,7 +2110,7 @@ p .home_breadcrumb a:hover {
 }
 
 .reviews_google .comment_box .comment::-webkit-scrollbar-thumb {
-  background: #13aff0;
+  background: #f97316;
 }
 
 .reviews_google .comment_box .profile {
@@ -2230,7 +2230,7 @@ p .home_breadcrumb a:hover {
 
 .vm_banner .training_btn {
   padding: 9px 29px;
-  background: #13aff0 !important;
+  background: #f97316 !important;
   color: #fff;
   text-decoration: none;
   border-radius: 3px;
@@ -2285,8 +2285,8 @@ p .home_breadcrumb a:hover {
 }
 
 .vm_nav nav ul li a:hover {
-  color: #13AFF0;
-  border-bottom: 2px solid #13AFF0;
+  color: #f97316;
+  border-bottom: 2px solid #f97316;
 }
 
 .sticky {
@@ -2588,7 +2588,7 @@ p .home_breadcrumb a:hover {
 }
 
 .projects_covered__icon i {
-  color: #13aff0;
+  color: #f97316;
 }
 
 .prje_cove_section .owl-dots.disabled {
@@ -2726,8 +2726,8 @@ section.testiminilas_sec .owl-nav.disabled {
 
 .testimonial_box::-webkit-scrollbar-thumb {
   border-radius: 0;
-  -webkit-box-shadow: inset 0 0 6px #13aff0;
-  background: #13aff0;
+  -webkit-box-shadow: inset 0 0 6px #f97316;
+  background: #f97316;
 }
 
 .testimonial_box::-webkit-scrollbar-track {
@@ -2811,7 +2811,7 @@ section.testiminilas_sec .owl-nav.disabled {
 
 .button_main a {
   padding: 10px 36px;
-  background: #13aff0 !important;
+  background: #f97316 !important;
   color: #fff !important;
   text-decoration: none;
   font-size: 18px;
@@ -2867,7 +2867,7 @@ table.batch_table.table tr:nth-child(2) td {
 }
 
 table.batch_table.table tr:nth-child(3) td span {
-  color: #13aff0;
+  color: #f97316;
 }
 
 tr.pdd_19 td:nth-child(2) div {
@@ -2908,7 +2908,7 @@ tr.pdd_14 td div {
 }
 
 .text_blue {
-  color: #13aff0;
+  color: #f97316;
 }
 
 .batch_table .table>tbody {
@@ -2941,7 +2941,7 @@ tr.pdd_14 td div {
 
 .getin_touch_bx p span {
   display: block;
-  color: #13aff0;
+  color: #f97316;
 }
 
 .batch_space ul li {
@@ -2969,7 +2969,7 @@ tr.pdd_14 td div {
   color: #333;
   border-width: 0 0 0 3px;
   border-style: solid;
-  border-color: #13aff0;
+  border-color: #f97316;
   letter-spacing: 1px;
   padding-left: 15px;
   margin: 0 0 20px;
@@ -3281,7 +3281,7 @@ select.form-select.form-control {
 }
 
 .owl-theme .owl-nav [class*='owl-']:hover {
-  color: #13aff0 !important;
+  color: #f97316 !important;
 }
 
 span.customSelect.form-select.form-control {
@@ -3316,10 +3316,10 @@ span.customSelect {
 .loadmore_button {
   margin-top: 15px !important;
   margin-bottom: 0px !important;
-  background: #13aff0 !important;
+  background: #f97316 !important;
   color: #fff !important;
   text-shadow: none !important;
-  border: 2px solid #13aff0 !important;
+  border: 2px solid #f97316 !important;
   border-radius: 50px !important;
   padding: 6px 37px 5px 37px !important;
   font-weight: 500 !important;
@@ -3336,10 +3336,10 @@ span.customSelect {
 .booka_demo_button {
   margin-top: 15px !important;
   margin-bottom: 0px !important;
-  background: #13aff0 !important;
+  background: #f97316 !important;
   color: #fff !important;
   text-shadow: none !important;
-  border: 2px solid #13aff0 !important;
+  border: 2px solid #f97316 !important;
   border-radius: 50px !important;
   padding: 6px 37px 5px 37px !important;
   font-weight: 500 !important;
@@ -3424,7 +3424,7 @@ span.customSelect {
 
 .bookfreedemo_button {
   padding: 8px 0px !important;
-  background: #13aff0 !important;
+  background: #f97316 !important;
   color: #fff !important;
   text-decoration: none !important;
   font-size: 20px !important;
@@ -3560,12 +3560,12 @@ button.owl-dot.active span {
 
 .coursepg_enquiryform {
   padding: 9px 45px !important;
-  background: #13aff0 !important;
+  background: #f97316 !important;
   color: #fff !important;
   text-decoration: none !important;
   font-size: 16px !important;
   border-radius: 50px !important;
-  border: 2px solid #13aff0 !important;
+  border: 2px solid #f97316 !important;
 }
 
 .paddtb80 {
@@ -3774,7 +3774,7 @@ b.text_blue a {
 }
 
 .nav-sections .menu-item-link.active {
-  color: #13AFF0;
+  color: #f97316;
 }
 
 .active-line {
@@ -3783,7 +3783,7 @@ b.text_blue a {
   left: 0;
   height: 80%;
   border-radius: 4px;
-  background-color: #13AFF0;
+  background-color: #f97316;
   opacity: 0.1;
   transition: width cubic-bezier(0.23, 1, 0.32, 1) 350ms, transform cubic-bezier(0.23, 1, 0.32, 1) 350ms;
 }
@@ -3938,7 +3938,7 @@ b.text_blue a {
 }
 
 .backhomebutton {
-  background: #13aff0;
+  background: #f97316;
   padding: 10px 20px;
   color: #fff !important;
   text-decoration: none;
@@ -4555,8 +4555,20 @@ img.not_found_img {
  .whatsappdesktop {
                 position: fixed;
                 bottom: 62px;
-                z-index: 9;
-                left: 20px
+                z-index: 99;
+                left: 20px;
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                transform: translateY(12px);
+                transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease;
+            }
+
+            .whatsappdesktop.show {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+                transform: translateY(0);
             }
 
             .whatsappdesktop i {
@@ -4681,7 +4693,7 @@ button.owl-next i {
   }
 }
 .location_box li a:hover {
-    color: #13aff0;
+    color: #f97316;
 }
 .owl-dots {
     display: none;
@@ -5366,7 +5378,7 @@ background: #07d353;
         .trainer-label-box p {
             margin: 0;
             font-size: 13px !important;
-            color: #009ff5;
+            color: #f97316;
             font-weight: 600;
         }
 
@@ -5382,7 +5394,7 @@ background: #07d353;
         }
 
         .trainer-designation {
-            color: #009ff5;
+            color: #f97316;
             font-size: 14px;
             font-weight: 600;
             margin: 0 0 16px;
@@ -5401,7 +5413,7 @@ background: #07d353;
         }
 
         .trainer-content li::marker {
-            color: #00aeef;
+            color: #f97316;
         }
 
         .trainer-btn {
@@ -5410,7 +5422,7 @@ background: #07d353;
     padding: 12px 30px !important;
     text-decoration: none;
     border-radius: 50px;
-    background: #13aff0;
+    background: #f97316;
     font-weight: 600;
     text-align: left;
     margin: 0;
@@ -5864,7 +5876,7 @@ background: #07d353;
 .trainer_newcls
 {
     padding: 10px 36px;
-    background: #13aff0 !important;
+    background: #f97316 !important;
     color: #fff !important;
     text-decoration: none;
     font-size: 18px;

@@ -563,13 +563,14 @@ if(document.querySelector('.menu') && document.querySelector('.nav-sections')){
 var amountScrolled = 200;
 var amountScrolledNav = 25;
 
-$(window).scroll(function () {
-  if ($(window).scrollTop() > amountScrolled) {
-    $("button.back-to-top").addClass("show");
-  } else {
-    $("button.back-to-top").removeClass("show");
-  }
-});
+function toggleScrollWidgets() {
+  var scrolled = $(window).scrollTop() > amountScrolled;
+  $("button.back-to-top").toggleClass("show", scrolled);
+  $(".whatsappdesktop").toggleClass("show", scrolled);
+}
+
+$(window).scroll(toggleScrollWidgets);
+toggleScrollWidgets();
 
 $("button.back-to-top").click(function () {
   $("html, body").animate(
