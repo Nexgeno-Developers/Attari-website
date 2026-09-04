@@ -71,6 +71,6 @@
 
 <!--Custom Js-->
 <script src="/assets/frontend/js/Init.js?1.1.0"></script>
-<script src="/assets/frontend/js/custom.js?1.2.7"></script>
+<script src="/assets/frontend/js/custom.js?1.2.91"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
 
