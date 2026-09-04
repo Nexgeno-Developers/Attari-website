@@ -273,6 +273,12 @@ li.menu_item i {
   color: #012749;
 }
 
+.header .menu>ul>li>a.active,
+.header .menu>ul>li.course_dropdown.is-active > .course_heds,
+.header .menu>ul>li.course_dropdown.is-active > .course_heds .nav-arrow {
+  color: #ff7b00;
+}
+
 .icon_text {
   display: flex;
   align-items: center;
@@ -282,13 +288,13 @@ li.menu_item i {
 /* Header courses dropdown */
 .header .menu>ul>li.course_dropdown>.course_heds {
   align-items: center;
-  color: #ff7b00;
+  color: #222;
   display: inline-flex;
   gap: 5px;
 }
 
 .header .menu>ul>li.course_dropdown>.course_heds .nav-arrow {
-  color: #ff7b00;
+  color: inherit;
   font-size: 10px;
   margin-left: 0;
   transition: transform 0.25s ease;
@@ -9297,7 +9303,13 @@ section.vm_banner.course_hero {
   }
 
   .header .menu>ul>li.course_dropdown>.course_heds .nav-arrow {
-    color: #555;
+    color: inherit;
+  }
+
+  .header .menu>ul>li>a.active,
+  .header .menu>ul>li.course_dropdown.is-active > .course_heds,
+  .header .menu>ul>li.course_dropdown.is-active > .course_heds .nav-arrow {
+    color: #ff7b00;
   }
 
   .header .menu>ul>li.course_dropdown .course_dropdown_menu {

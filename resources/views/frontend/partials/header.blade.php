@@ -66,7 +66,7 @@ $course = getcmsCourses();
                                     <div class="mobile_menu_close">&times;</div>
                                 </div>
                                 <ul class="manu_main">
-                                    <li class="menu_item_has_children course_dropdown">
+                                    <li class="menu_item_has_children course_dropdown{{ request()->routeIs('course.detail') ? ' is-active' : '' }}">
                                         <span class="course_heds">Courses
                                             <i class="nav-arrow fa fa-angle-down" aria-hidden="true" role="img"></i>
                                         </span>
@@ -125,13 +125,13 @@ $course = getcmsCourses();
                                             </ul>
                                         </div>
                                     </li>
-                                    <li><a href="{{ url(route('training-option')) }}">Training Options</a></li>
-                                    <li><a href="{{ url(route('batch')) }}">Batch Schedule</a></li>
-                                    <li><a href="{{ url(route('about')) }}">About Us</a></li>
-                                    <li><a href="{{ url(route('reviews')) }}">Reviews</a></li>
-                                    <li><a href="{{ url(route('success-stories')) }}">Success Stories</a></li>
-                                    <li><a href="{{ url(route('blog')) }}">Blog</a></li>
-                                    <li><a href="{{ url(route('contact')) }}">Contact Us</a></li>
+                                    <li><a class="{{ request()->routeIs('training-option') ? 'active' : '' }}" href="{{ url(route('training-option')) }}">Training Options</a></li>
+                                    <li><a class="{{ request()->routeIs('batch') ? 'active' : '' }}" href="{{ url(route('batch')) }}">Batch Schedule</a></li>
+                                    <li><a class="{{ request()->routeIs('about') ? 'active' : '' }}" href="{{ url(route('about')) }}">About Us</a></li>
+                                    <li><a class="{{ request()->routeIs('reviews') ? 'active' : '' }}" href="{{ url(route('reviews')) }}">Reviews</a></li>
+                                    <li><a class="{{ request()->routeIs('success-stories') ? 'active' : '' }}" href="{{ url(route('success-stories')) }}">Success Stories</a></li>
+                                    <li><a class="{{ request()->routeIs('blog', 'blog-course-view', 'blog.detail') ? 'active' : '' }}" href="{{ url(route('blog')) }}">Blog</a></li>
+                                    <li><a class="{{ request()->routeIs('contact') ? 'active' : '' }}" href="{{ url(route('contact')) }}">Contact Us</a></li>
 
                                 </ul>
                             </nav>
