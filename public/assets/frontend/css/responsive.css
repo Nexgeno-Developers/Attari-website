@@ -841,6 +841,9 @@ form#getsyllabus h5.text-center {
         margin-right: auto;
         display: block;
     }
+    .course_hero_desc ul {
+    display: block;
+}
 
     .key_boxes p {
         padding-left: 0;
@@ -924,13 +927,15 @@ form#getsyllabus h5.text-center {
     }
 
     section#batch_shedule {
-        padding: 0px 10px;
+        padding: 30px 0px;
     }
 
     .batch_shedule_box {
         margin-bottom: 20px;
     }
-
+.course_batch_btn {
+    padding: 9px 26px;
+}
     .batch_shedule_box:last-child {
         margin-bottom: 0;
     }
@@ -1224,6 +1229,13 @@ form#getsyllabus h5.text-center {
 }
 .fix_mobile_footer .call_now i {
     font-size: 15px !important;
+}
+
+.course_syllabus_modern .syllabus-accordion .accordion1 > .syllabus_module_header .syllabus_module_title {
+ 
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 22px;
 }
 }
 

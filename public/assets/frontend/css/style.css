@@ -6198,8 +6198,9 @@ section.vm_banner.course_hero {
   }
 
   .course_hero_actions {
-    flex-direction: column;
-    align-items: stretch;
+    flex-direction: row;
+        align-items: stretch;
+        flex-wrap: nowrap;
   }
 
   .course_hero_btn {
@@ -6350,19 +6351,44 @@ section.vm_banner.course_hero {
 }
 
 @media screen and (max-width: 767px) {
-  .course_features_grid {
-    grid-template-columns: 1fr;
-  }
+ 
+.course_features .key_boxes {
+    text-align: center;
+}
+.course_features .key_boxes p {
+        text-align: center !important;
+        padding-top: 10px !important;
+    }
 
   .course_features_heading {
-    font-size: 22px !important;
+    font-size: 24px !important;
     margin-bottom: 22px;
   }
 
+  .course_features .key_boxes p {
+    font-size: 14px !important;
+}
+
+.course_features .key_boxes {
+    display: block;
+}
   .course_features .key_boxes {
     padding: 16px 16px;
   }
-
+  .paddingt_80 {
+    padding-top: 30px;
+}
+.course_features .key_boxes i {
+    font-size: 12px;
+    height: 30px;
+    width: 30px;
+}
+.course_features_grid {
+    gap: 10px;
+}
+.paddinb_80 {
+    padding-bottom: 30px;
+}
   .course_features .key_boxes i {
     float: none;
     margin: 0;
@@ -7815,7 +7841,7 @@ section.vm_banner.course_hero {
 
 @media screen and (max-width: 991px) {
   .course_faq_section {
-    padding: 40px 0 28px;
+    padding: 20px 0 30px;
   }
 
   .course_faq_heading {
@@ -8016,7 +8042,7 @@ section.vm_banner.course_hero {
 
 @media screen and (max-width: 991px) {
   .course_skills_section {
-    padding: 10px 0 50px;
+    padding: 30px 0px;
   }
 
   .course_skills_heading {
@@ -8076,8 +8102,8 @@ section.vm_banner.course_hero {
   }
 
   .course_skill_card {
-    min-height: 120px;
-    padding: 14px 10px 12px;
+    min-height: 100px;
+    padding: 25px 10px 25px;
   }
 
   .course_skill_name {
@@ -8408,10 +8434,12 @@ section.vm_banner.course_hero {
   }
 
   .course_location_section .course_location_heading {
-    font-size: 24px;
+    font-size: 20px;
     margin-bottom: 20px;
   }
-
+.course_location_label {
+    font-size: 10px !important;
+}
   .course_location_card {
     padding: 18px 16px 16px;
     border-radius: 14px;
@@ -9128,8 +9156,8 @@ section.vm_banner.course_hero {
 
 @media screen and (max-width: 575px) {
   .course_syllabus_modern {
-    padding-top: 44px;
-    padding-bottom: 52px;
+    padding-top: 30px;
+    padding-bottom: 30px;
   }
 
   .course_syllabus_modern .course_syllabus_title {
