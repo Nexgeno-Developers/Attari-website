@@ -7662,9 +7662,7 @@ section.vm_banner.course_hero {
     grid-template-columns: 1fr;
   }
 
-  .course_batch_slots {
-    grid-template-columns: 1fr;
-  }
+ 
 
   .course_batch_action,
   .course_batch_offer {

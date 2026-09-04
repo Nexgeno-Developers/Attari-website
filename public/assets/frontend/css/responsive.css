@@ -858,7 +858,9 @@ form#getsyllabus h5.text-center {
     line-height: 1.6 !important;
     margin-bottom: 0;
 }
-
+ .course_batch_slots {
+    grid-template-columns: 1fr;
+  }
     .key_features .col-6 {
         margin-bottom: 0;
     }
