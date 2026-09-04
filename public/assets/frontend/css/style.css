@@ -4637,6 +4637,7 @@ button.owl-next i {
     align-items: center !important;
     justify-content: center !important;
     font-size: 10px !important;
+    display: none;
   }
 
   .course_testimonials .owl-nav button.owl-prev {

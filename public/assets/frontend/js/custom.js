@@ -358,7 +358,8 @@ $(".projects-covered").owlCarousel({
 	navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
 	responsive: {
 		0: {
-			items: 1,
+			items: 1.1,
+			 margin: 10,
 		},
 		768: {
 			items: 2,
@@ -381,7 +382,8 @@ $(".professional_students").owlCarousel({
     navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
     responsive: {
         0: {
-            items: 1,
+            items: 1.2,
+			 margin: 10,
         },
         768: {
             items: 2,
