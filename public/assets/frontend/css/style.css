@@ -6953,9 +6953,14 @@ section.vm_banner.course_hero {
   }
 
   .course_projects .owl-carousel {
-    padding: 0 36px;
+    padding: 0 0px;
   }
-
+.course_projects .proj-cov li {
+    font-size: 14px !important;
+}
+.course_projects .projects_covered__name {
+    font-size: 16px;
+}
   .course_projects .projects_covered_box {
     height: auto !important;
   }
