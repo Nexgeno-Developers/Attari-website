@@ -181,6 +181,7 @@ section.vm_banner.course_hero {
     align-items: center !important;
     justify-content: center !important;
     font-size: 10px !important;
+    display: none !important;
   }
   button.owl-prev i,
   button.owl-next i,
