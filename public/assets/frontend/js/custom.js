@@ -143,8 +143,12 @@ if (menuMain && menu1) {
 		if (!menu1.classList.contains("active")) {
 			return
 		}
+		if (e.target.closest(".sub_menu")) {
+			return
+		}
 		if (e.target.closest(".menu_item_has_children")) {
 			const hasChildren = e.target.closest(".menu_item_has_children");
+			e.preventDefault()
 			showSubMenu(hasChildren)
 		}
 	});

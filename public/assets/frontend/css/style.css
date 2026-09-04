@@ -494,6 +494,10 @@ li.menu_item i {
     display: block;
   }
 
+  .header .menu>ul>li.menu_item_has_children {
+    position: static;
+  }
+
   .header .menu>ul>li>a,
   .header .menu>ul>li>.course_heds {
     line-height: 50px;
@@ -572,17 +576,19 @@ li.menu_item i {
     position: absolute;
     box-shadow: none;
     margin: 0;
-    padding: 15px;
+    padding: 50px 0 0;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    padding-top: 65px;
     max-width: none;
     min-width: auto;
     display: none;
-    transform: translateX(0%);
+    transform: none;
+    overflow-x: hidden;
     overflow-y: auto;
+    background: #ffffff;
+    z-index: 500;
   }
 
   .header .menu>ul>li .sub_menu.active {
@@ -9289,10 +9295,15 @@ section.vm_banner.course_hero {
     left: 0;
     margin: 0;
     min-width: auto;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
     overflow-y: auto;
-    padding: 15px;
+    padding: 50px 0 0;
     top: 0;
     transform: none;
+    background: #ffffff;
+    z-index: 500;
   }
 
   .header .menu>ul>li.course_dropdown .course_dropdown_link {

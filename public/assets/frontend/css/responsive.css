@@ -92,11 +92,13 @@ form#getsyllabus .form-row.row {
 
     .header .menu>ul>li .sub_menu {
         margin: 0;
-        padding: 0px !important;
-}
+        padding: 50px 0 0 !important;
+        height: 100%;
+        background: #ffffff;
+    }
 
 .single_column_menu ul {
-    margin-top: 50px;
+    margin-top: 0;
 }
 .related_boxex1 {
     margin-bottom: 20px;
