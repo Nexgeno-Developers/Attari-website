@@ -408,7 +408,7 @@ $(".course_video_reviews, .course_text_reviews").owlCarousel({
 			margin: 10,
         },
         768: {
-            items: 2.3,
+            items: 2,
 			
         },
         1200: {
