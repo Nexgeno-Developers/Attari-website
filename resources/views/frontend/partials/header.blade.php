@@ -136,16 +136,16 @@ $course = getcmsCourses();
                                 </ul>
                             </nav>
                         </div>
-                        <!-- <div class="header_item item_right">
-                            <a href="tel:+917738375431" class="header_phone" aria-label="Call Attari Classes">
+                        <div class="header_item item_right">
+                            <!-- <a href="tel:+917738375431" class="header_phone" aria-label="Call Attari Classes">
                                 <i class="fas fa-phone-alt" aria-hidden="true"></i>
                                 <span>+91 77383 75431</span>
                             </a>
-                            <button type="button" class="header_demo_btn" onclick="formModal('{{ url(route('component.form')) }}?section=Header - Book Free Demo&title=Book a FREE Demo&current_page={{ urlencode(url()->current()) }}')">Book free demo</button>
-                            <div class="mobile_menu_trigger">
+                            <button type="button" class="header_demo_btn" onclick="formModal('{{ url(route('component.form')) }}?section=Header - Book Free Demo&title=Book a FREE Demo&current_page={{ urlencode(url()->current()) }}')">Book free demo</button> -->
+                            <button type="button" class="mobile_menu_trigger" aria-label="Open menu" aria-controls="nav-menu">
                                 <span></span>
-                            </div>
-                        </div> -->
+                            </button>
+                        </div>
                     </div>
         </div>
     </header>

@@ -852,7 +852,12 @@ form#getsyllabus h5.text-center {
         text-align: center;
         font-size: 14px !important;
     }
-
+.course_review_text, .course_review_text p {
+    color: #000 !important;
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+    margin-bottom: 0;
+}
 
     .key_features .col-6 {
         margin-bottom: 0;
